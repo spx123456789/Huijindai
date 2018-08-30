@@ -1,0 +1,44 @@
+//
+//  PrefixHeader.pch
+//  HuiJinDai
+//
+//  Created by 耿笑威 on 2018/8/30.
+//  Copyright © 2018年 shanpx. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import "TPKeyboardAvoidingScrollView.h"
+#import "Masonry.h"
+
+#pragma mark - 字体宏
+#define kFont9 [UIFont systemFontOfSize:9]
+#define kFont10 [UIFont systemFontOfSize:10]
+#define kFont12 [UIFont systemFontOfSize:12]
+#define kFont13 [UIFont systemFontOfSize:13]
+#define kFont14 [UIFont systemFontOfSize:14]
+#define kFont15 [UIFont systemFontOfSize:15]
+#define kFont16 [UIFont systemFontOfSize:16]
+#define kFont17 [UIFont systemFontOfSize:17]
+#define kFont18 [UIFont systemFontOfSize:18]
+#define kFont19 [UIFont systemFontOfSize:19]
+#define kFont20 [UIFont systemFontOfSize:20]
+#define kFont21 [UIFont systemFontOfSize:21]
+#define kFont22 [UIFont systemFontOfSize:22]
+
+#pragma mark - 颜色相关
+#define kRGB_Color(r, g, b) [UIColor colorWithRed:r / 255.f green:g / 255.f blue:b / 255.f alpha:1.f]
+#define kRGBA_Color(r, g, b, a) [UIColor colorWithRed:r / 255.f green:g / 255.f blue:b / 255.f alpha:a]
+#define kBlack [UIColor blackColor]
+#define kWithe [UIColor whiteColor]
+#define kGreen [UIColor greenColor]
+
+#pragma mark - 屏幕尺寸
+#define kScreenWidth [UIScreen mainScreen].bounds.size.width
+#define kScreenHeight [UIScreen mainScreen].bounds.size.height
+
+#endif /* PrefixHeader_pch */

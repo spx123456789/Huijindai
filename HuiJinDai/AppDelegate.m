@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "HJDRegisterViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:[[HJDRegisterViewController alloc] init]];
+    self.window.rootViewController = navi;
+    
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

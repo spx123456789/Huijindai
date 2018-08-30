@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		16C4E19421381BFC004268C4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E19321381BFC004268C4 /* AppDelegate.m */; };
-		16C4E19721381BFC004268C4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E19621381BFC004268C4 /* ViewController.m */; };
-		16C4E19A21381BFC004268C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16C4E19821381BFC004268C4 /* Main.storyboard */; };
 		16C4E19C21381BFD004268C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16C4E19B21381BFD004268C4 /* Assets.xcassets */; };
-		16C4E19F21381BFD004268C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16C4E19D21381BFD004268C4 /* LaunchScreen.storyboard */; };
 		16C4E1A221381BFD004268C4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E1A121381BFD004268C4 /* main.m */; };
 		16C4E1AC21381BFD004268C4 /* HuiJinDaiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E1AB21381BFD004268C4 /* HuiJinDaiTests.m */; };
 		16C4E1B721381BFE004268C4 /* HuiJinDaiUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E1B621381BFE004268C4 /* HuiJinDaiUITests.m */; };
+		16C4E1D52138255B004268C4 /* HJDRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E1D42138255B004268C4 /* HJDRegisterViewController.m */; };
+		16C4E1D8213826D0004268C4 /* HJDTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E1D7213826D0004268C4 /* HJDTextFieldView.m */; };
+		D6432F235E81DD89E31E1B21 /* libPods-HuiJinDai.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 758AEEDFDB9B291E6C91EBA5 /* libPods-HuiJinDai.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,11 +38,7 @@
 		16C4E18F21381BFC004268C4 /* HuiJinDai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HuiJinDai.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16C4E19221381BFC004268C4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		16C4E19321381BFC004268C4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		16C4E19521381BFC004268C4 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		16C4E19621381BFC004268C4 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		16C4E19921381BFC004268C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		16C4E19B21381BFD004268C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		16C4E19E21381BFD004268C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		16C4E1A021381BFD004268C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16C4E1A121381BFD004268C4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		16C4E1A721381BFD004268C4 /* HuiJinDaiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HuiJinDaiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,6 +47,14 @@
 		16C4E1B221381BFD004268C4 /* HuiJinDaiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HuiJinDaiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		16C4E1B621381BFE004268C4 /* HuiJinDaiUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HuiJinDaiUITests.m; sourceTree = "<group>"; };
 		16C4E1B821381BFE004268C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		16C4E1D32138255B004268C4 /* HJDRegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDRegisterViewController.h; sourceTree = "<group>"; };
+		16C4E1D42138255B004268C4 /* HJDRegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDRegisterViewController.m; sourceTree = "<group>"; };
+		16C4E1D6213826D0004268C4 /* HJDTextFieldView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDTextFieldView.h; sourceTree = "<group>"; };
+		16C4E1D7213826D0004268C4 /* HJDTextFieldView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDTextFieldView.m; sourceTree = "<group>"; };
+		16DD8DE621382A3400C5AA4E /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		3934C1A1D46330E827334147 /* Pods-HuiJinDai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuiJinDai.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HuiJinDai/Pods-HuiJinDai.debug.xcconfig"; sourceTree = "<group>"; };
+		716329259416E7FBB66B2DF9 /* Pods-HuiJinDai.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuiJinDai.release.xcconfig"; path = "Pods/Target Support Files/Pods-HuiJinDai/Pods-HuiJinDai.release.xcconfig"; sourceTree = "<group>"; };
+		758AEEDFDB9B291E6C91EBA5 /* libPods-HuiJinDai.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HuiJinDai.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6432F235E81DD89E31E1B21 /* libPods-HuiJinDai.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		12C8725CB0C83B214CB4AAE8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3934C1A1D46330E827334147 /* Pods-HuiJinDai.debug.xcconfig */,
+				716329259416E7FBB66B2DF9 /* Pods-HuiJinDai.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		16C4E18621381BFC004268C4 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +99,8 @@
 				16C4E1AA21381BFD004268C4 /* HuiJinDaiTests */,
 				16C4E1B521381BFE004268C4 /* HuiJinDaiUITests */,
 				16C4E19021381BFC004268C4 /* Products */,
+				12C8725CB0C83B214CB4AAE8 /* Pods */,
+				8F502DB94475AAC7D3EF2565 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,13 +122,10 @@
 				16C4E1C421381CCB004268C4 /* My */,
 				16C4E19221381BFC004268C4 /* AppDelegate.h */,
 				16C4E19321381BFC004268C4 /* AppDelegate.m */,
-				16C4E19521381BFC004268C4 /* ViewController.h */,
-				16C4E19621381BFC004268C4 /* ViewController.m */,
-				16C4E19821381BFC004268C4 /* Main.storyboard */,
 				16C4E19B21381BFD004268C4 /* Assets.xcassets */,
-				16C4E19D21381BFD004268C4 /* LaunchScreen.storyboard */,
 				16C4E1A021381BFD004268C4 /* Info.plist */,
 				16C4E1A121381BFD004268C4 /* main.m */,
+				16DD8DE621382A3400C5AA4E /* PrefixHeader.pch */,
 			);
 			path = HuiJinDai;
 			sourceTree = "<group>";
@@ -202,6 +215,8 @@
 		16C4E1CC21381CCB004268C4 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				16C4E1D32138255B004268C4 /* HJDRegisterViewController.h */,
+				16C4E1D42138255B004268C4 /* HJDRegisterViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -209,6 +224,8 @@
 		16C4E1CD21381CCB004268C4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				16C4E1D6213826D0004268C4 /* HJDTextFieldView.h */,
+				16C4E1D7213826D0004268C4 /* HJDTextFieldView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -252,6 +269,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		8F502DB94475AAC7D3EF2565 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				758AEEDFDB9B291E6C91EBA5 /* libPods-HuiJinDai.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -259,6 +284,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 16C4E1BB21381BFE004268C4 /* Build configuration list for PBXNativeTarget "HuiJinDai" */;
 			buildPhases = (
+				5D71077061FA6A08C66F8953 /* [CP] Check Pods Manifest.lock */,
 				16C4E18B21381BFC004268C4 /* Sources */,
 				16C4E18C21381BFC004268C4 /* Frameworks */,
 				16C4E18D21381BFC004268C4 /* Resources */,
@@ -355,9 +381,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16C4E19F21381BFD004268C4 /* LaunchScreen.storyboard in Resources */,
 				16C4E19C21381BFD004268C4 /* Assets.xcassets in Resources */,
-				16C4E19A21381BFC004268C4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,12 +401,34 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5D71077061FA6A08C66F8953 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HuiJinDai-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		16C4E18B21381BFC004268C4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16C4E19721381BFC004268C4 /* ViewController.m in Sources */,
+				16C4E1D8213826D0004268C4 /* HJDTextFieldView.m in Sources */,
+				16C4E1D52138255B004268C4 /* HJDRegisterViewController.m in Sources */,
 				16C4E1A221381BFD004268C4 /* main.m in Sources */,
 				16C4E19421381BFC004268C4 /* AppDelegate.m in Sources */,
 			);
@@ -418,25 +464,6 @@
 			targetProxy = 16C4E1B321381BFD004268C4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		16C4E19821381BFC004268C4 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				16C4E19921381BFC004268C4 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		16C4E19D21381BFD004268C4 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				16C4E19E21381BFD004268C4 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		16C4E1B921381BFE004268C4 /* Debug */ = {
@@ -551,9 +578,12 @@
 		};
 		16C4E1BC21381BFE004268C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3934C1A1D46330E827334147 /* Pods-HuiJinDai.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/HuiJinDai/PrefixHeader.pch";
 				INFOPLIST_FILE = HuiJinDai/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -567,9 +597,12 @@
 		};
 		16C4E1BD21381BFE004268C4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 716329259416E7FBB66B2DF9 /* Pods-HuiJinDai.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/HuiJinDai/PrefixHeader.pch";
 				INFOPLIST_FILE = HuiJinDai/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
