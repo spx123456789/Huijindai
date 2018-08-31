@@ -37,6 +37,7 @@
 #define kWithe [UIColor whiteColor]
 #define kGreen [UIColor greenColor]
 
+#define kImage(name) [UIImage imageNamed:name]
 #pragma mark - 屏幕尺寸
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height

@@ -12,3 +12,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame text:(NSString *)text filedPlaceholder:(NSString *)placeholder tag:(NSInteger)fieldTag;
 @end
+
+@interface HJDRegisterAgreementView : UIView
+@property(nonatomic, assign) BOOL selected;
+@end

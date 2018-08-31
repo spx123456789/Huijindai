@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16B6DEA2213987CF00CF8C8D /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 16B6DEA1213987CF00CF8C8D /* 2.png */; };
+		16B6DEA5213988BB00CF8C8D /* HJDCityPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B6DEA4213988BB00CF8C8D /* HJDCityPickerView.m */; };
 		16C4E19421381BFC004268C4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E19321381BFC004268C4 /* AppDelegate.m */; };
 		16C4E19C21381BFD004268C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16C4E19B21381BFD004268C4 /* Assets.xcassets */; };
 		16C4E1A221381BFD004268C4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E1A121381BFD004268C4 /* main.m */; };
@@ -14,6 +16,9 @@
 		16C4E1B721381BFE004268C4 /* HuiJinDaiUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E1B621381BFE004268C4 /* HuiJinDaiUITests.m */; };
 		16C4E1D52138255B004268C4 /* HJDRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E1D42138255B004268C4 /* HJDRegisterViewController.m */; };
 		16C4E1D8213826D0004268C4 /* HJDTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E1D7213826D0004268C4 /* HJDTextFieldView.m */; };
+		16FFC51621397373008BCABC /* HJDRegisterManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FFC51521397373008BCABC /* HJDRegisterManger.m */; };
+		16FFC519213973A2008BCABC /* HJDRegisterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FFC518213973A2008BCABC /* HJDRegisterModel.m */; };
+		16FFC51C21397FDD008BCABC /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 16FFC51B21397FDD008BCABC /* 1.png */; };
 		AAD24F6421394B3800298386 /* HKScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD24F6321394B3800298386 /* HKScrollView.m */; };
 		AAD24F6721394BA200298386 /* HJDHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD24F6621394BA200298386 /* HJDHomeViewController.m */; };
 		AAD24F6D21394D8400298386 /* HJDBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD24F6C21394D8400298386 /* HJDBaseViewController.m */; };
@@ -39,6 +44,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		16B6DEA1213987CF00CF8C8D /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
+		16B6DEA3213988BB00CF8C8D /* HJDCityPickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDCityPickerView.h; sourceTree = "<group>"; };
+		16B6DEA4213988BB00CF8C8D /* HJDCityPickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDCityPickerView.m; sourceTree = "<group>"; };
 		16C4E18F21381BFC004268C4 /* HuiJinDai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HuiJinDai.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16C4E19221381BFC004268C4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		16C4E19321381BFC004268C4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -56,6 +64,11 @@
 		16C4E1D6213826D0004268C4 /* HJDTextFieldView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDTextFieldView.h; sourceTree = "<group>"; };
 		16C4E1D7213826D0004268C4 /* HJDTextFieldView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDTextFieldView.m; sourceTree = "<group>"; };
 		16DD8DE621382A3400C5AA4E /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		16FFC51421397373008BCABC /* HJDRegisterManger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDRegisterManger.h; sourceTree = "<group>"; };
+		16FFC51521397373008BCABC /* HJDRegisterManger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDRegisterManger.m; sourceTree = "<group>"; };
+		16FFC517213973A2008BCABC /* HJDRegisterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDRegisterModel.h; sourceTree = "<group>"; };
+		16FFC518213973A2008BCABC /* HJDRegisterModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDRegisterModel.m; sourceTree = "<group>"; };
+		16FFC51B21397FDD008BCABC /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		3934C1A1D46330E827334147 /* Pods-HuiJinDai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuiJinDai.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HuiJinDai/Pods-HuiJinDai.debug.xcconfig"; sourceTree = "<group>"; };
 		716329259416E7FBB66B2DF9 /* Pods-HuiJinDai.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuiJinDai.release.xcconfig"; path = "Pods/Target Support Files/Pods-HuiJinDai/Pods-HuiJinDai.release.xcconfig"; sourceTree = "<group>"; };
 		758AEEDFDB9B291E6C91EBA5 /* libPods-HuiJinDai.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HuiJinDai.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,6 +142,7 @@
 		16C4E19121381BFC004268C4 /* HuiJinDai */ = {
 			isa = PBXGroup;
 			children = (
+				16FFC51A21397FCE008BCABC /* Images */,
 				AAD24F5E21394B1B00298386 /* Home */,
 				16C4E1C921381CCB004268C4 /* Login */,
 				16C4E1C421381CCB004268C4 /* My */,
@@ -202,6 +216,7 @@
 		16C4E1C921381CCB004268C4 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				16FFC51321397327008BCABC /* Models */,
 				16C4E1CA21381CCB004268C4 /* ViewModels */,
 				16C4E1CB21381CCB004268C4 /* Managers */,
 				16C4E1CC21381CCB004268C4 /* Controllers */,
@@ -220,6 +235,8 @@
 		16C4E1CB21381CCB004268C4 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				16FFC51421397373008BCABC /* HJDRegisterManger.h */,
+				16FFC51521397373008BCABC /* HJDRegisterManger.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -238,8 +255,28 @@
 			children = (
 				16C4E1D6213826D0004268C4 /* HJDTextFieldView.h */,
 				16C4E1D7213826D0004268C4 /* HJDTextFieldView.m */,
+				16B6DEA3213988BB00CF8C8D /* HJDCityPickerView.h */,
+				16B6DEA4213988BB00CF8C8D /* HJDCityPickerView.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		16FFC51321397327008BCABC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				16FFC517213973A2008BCABC /* HJDRegisterModel.h */,
+				16FFC518213973A2008BCABC /* HJDRegisterModel.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		16FFC51A21397FCE008BCABC /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				16B6DEA1213987CF00CF8C8D /* 2.png */,
+				16FFC51B21397FDD008BCABC /* 1.png */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 		8F502DB94475AAC7D3EF2565 /* Frameworks */ = {
@@ -393,7 +430,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16B6DEA2213987CF00CF8C8D /* 2.png in Resources */,
 				16C4E19C21381BFD004268C4 /* Assets.xcassets in Resources */,
+				16FFC51C21397FDD008BCABC /* 1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,10 +479,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				AAD24F6421394B3800298386 /* HKScrollView.m in Sources */,
+				16FFC51621397373008BCABC /* HJDRegisterManger.m in Sources */,
 				AAD24F6D21394D8400298386 /* HJDBaseViewController.m in Sources */,
+				16FFC519213973A2008BCABC /* HJDRegisterModel.m in Sources */,
 				AAD24F7021394EA900298386 /* UITableView+Imora.m in Sources */,
 				16C4E1D8213826D0004268C4 /* HJDTextFieldView.m in Sources */,
 				AAD24F6721394BA200298386 /* HJDHomeViewController.m in Sources */,
+				16B6DEA5213988BB00CF8C8D /* HJDCityPickerView.m in Sources */,
 				16C4E1D52138255B004268C4 /* HJDRegisterViewController.m in Sources */,
 				16C4E1A221381BFD004268C4 /* main.m in Sources */,
 				16C4E19421381BFC004268C4 /* AppDelegate.m in Sources */,

@@ -57,3 +57,60 @@
     return self;
 }
 @end
+
+@interface HJDRegisterAgreementView()
+@property(nonatomic, strong) UIButton *selectButton;
+@property(nonatomic, strong) UILabel *label;
+@end
+
+@implementation HJDRegisterAgreementView
+
+- (UILabel *)label {
+    if (!_label) {
+        _label = [[UILabel alloc] init];
+        _label.text = @"同意用户协议";
+        _label.textColor = kBlack;
+        _label.font = kFont12;
+    }
+    return _label;
+}
+
+- (UIButton *)selectButton {
+    if (!_selectButton) {
+        _selectButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_selectButton setImage:kImage(@"1.png") forState:UIControlStateNormal];
+        [_selectButton addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _selectButton;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self addSubview:self.selectButton];
+        [self addSubview:self.label];
+        
+        [self.selectButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self).offset(1);
+            make.centerY.equalTo(self);
+            make.width.equalTo(@25);
+            make.height.equalTo(@25);
+        }];
+        
+        [self.label mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.selectButton.mas_right).offset(1);
+            make.centerY.equalTo(self);
+            make.right.equalTo(self);
+            make.height.equalTo(@25);
+        }];
+    }
+    return self;
+}
+
+- (void)clickButton:(id)selector {
+    _selected = !self.selected;
+    UIImage *image = _selected ? kImage(@"1.png") : kImage(@"1.png");
+    [_selectButton setImage:image forState:UIControlStateNormal];
+}
+
+@end

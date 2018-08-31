@@ -16,7 +16,11 @@
 @property(nonatomic, strong) HJDTextFieldView *verifiCodeView;
 @property(nonatomic, strong) HJDTextFieldView *cityView;
 @property(nonatomic, strong) HJDTextFieldView *inviteCodeView;
+@property(nonatomic, strong) UIButton *verifiCodeButton;
+@property(nonatomic, strong) UIButton *cityNextButton;
 @property(nonatomic, strong) UIButton *registerButton;
+@property(nonatomic, strong) UIButton *loginButton;
+@property(nonatomic, strong) HJDRegisterAgreementView *agreementView;
 @end
 
 @implementation HJDRegisterViewController
@@ -26,6 +30,25 @@
         _bgView = [[TPKeyboardAvoidingScrollView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight)];
     }
     return _bgView;
+}
+
+- (UIButton *)verifiCodeButton {
+    if (!_verifiCodeButton) {
+        _verifiCodeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_verifiCodeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
+        [_verifiCodeButton setTitleColor:kGreen forState:UIControlStateNormal];
+        _verifiCodeButton.titleLabel.font = kFont12;
+    }
+    return _verifiCodeButton;
+}
+
+- (UIButton *)cityNextButton {
+    if (!_cityNextButton) {
+        _cityNextButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_cityNextButton setImage:kImage(@"2.png") forState:UIControlStateNormal];
+        [_cityNextButton addTarget:self action:@selector(selectCity:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _cityNextButton;
 }
 
 - (UIButton *)registerButton {
@@ -40,6 +63,18 @@
     return _registerButton;
 }
 
+- (UIButton *)loginButton {
+    if (!_loginButton) {
+        _loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_loginButton setTitle:@"已有账号，立即登录" forState:UIControlStateNormal];
+        [_loginButton setTitleColor:kBlack forState:UIControlStateNormal];
+        _loginButton.titleLabel.font = kFont12;
+    }
+    return _loginButton;
+}
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -53,16 +88,28 @@
     _phoneView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight + 40, kScreenWidth, 30) text:@"手机号码:" filedPlaceholder:@"请输入手机号码" tag:11];
     [self.bgView addSubview:_phoneView];
     
-    _verifiCodeView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight + 80, kScreenWidth - 10 - 60, 30) text:@"验证码:" filedPlaceholder:@"" tag:12];
+    _verifiCodeView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight + 80, kScreenWidth - 10 - 80, 30) text:@"验证码:" filedPlaceholder:@"" tag:12];
     [self.bgView addSubview:_verifiCodeView];
     
-    _cityView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight + 120, kScreenWidth - 10 - 25, 30) text:@"城市:" filedPlaceholder:@"" tag:13];
+    _cityView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight + 120, kScreenWidth - 10 - 30, 30) text:@"城市:" filedPlaceholder:@"" tag:13];
     [self.bgView addSubview:_cityView];
     
     _inviteCodeView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight + 160, kScreenWidth, 30) text:@"邀请码:" filedPlaceholder:@"请输入邀请码" tag:14];
     [self.bgView addSubview:_inviteCodeView];
     
-    self.registerButton.frame = CGRectMake(25, topHeight + 300, kScreenWidth - 50, 40);
+    _agreementView = [[HJDRegisterAgreementView alloc] initWithFrame:CGRectMake(10, topHeight + 210, 120, 35)];
+    [self.bgView addSubview:_agreementView];
+    
+    self.verifiCodeButton.frame = CGRectMake(kScreenWidth - 90, topHeight + 80, 80, 30);
+    [self.bgView addSubview:self.verifiCodeButton];
+    
+    self.cityNextButton.frame = CGRectMake(kScreenWidth - 40, topHeight + 120, 30, 30);
+    [self.bgView addSubview:self.cityNextButton];
+    
+    self.loginButton.frame = CGRectMake(kScreenWidth - 130, topHeight + 210, 120, 35);
+    [self.bgView addSubview:self.loginButton];
+    
+    self.registerButton.frame = CGRectMake(25, topHeight + 270, kScreenWidth - 50, 40);
     [self.bgView addSubview:self.registerButton];
 }
 
@@ -71,14 +118,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)selectCity:(id)selector {
+    
 }
-*/
 
 @end
