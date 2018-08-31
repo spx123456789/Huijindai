@@ -14,6 +14,10 @@
 		16C4E1B721381BFE004268C4 /* HuiJinDaiUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E1B621381BFE004268C4 /* HuiJinDaiUITests.m */; };
 		16C4E1D52138255B004268C4 /* HJDRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E1D42138255B004268C4 /* HJDRegisterViewController.m */; };
 		16C4E1D8213826D0004268C4 /* HJDTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E1D7213826D0004268C4 /* HJDTextFieldView.m */; };
+		AAD24F6421394B3800298386 /* HKScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD24F6321394B3800298386 /* HKScrollView.m */; };
+		AAD24F6721394BA200298386 /* HJDHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD24F6621394BA200298386 /* HJDHomeViewController.m */; };
+		AAD24F6D21394D8400298386 /* HJDBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD24F6C21394D8400298386 /* HJDBaseViewController.m */; };
+		AAD24F7021394EA900298386 /* UITableView+Imora.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD24F6F21394EA900298386 /* UITableView+Imora.m */; };
 		D6432F235E81DD89E31E1B21 /* libPods-HuiJinDai.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 758AEEDFDB9B291E6C91EBA5 /* libPods-HuiJinDai.a */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +59,14 @@
 		3934C1A1D46330E827334147 /* Pods-HuiJinDai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuiJinDai.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HuiJinDai/Pods-HuiJinDai.debug.xcconfig"; sourceTree = "<group>"; };
 		716329259416E7FBB66B2DF9 /* Pods-HuiJinDai.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuiJinDai.release.xcconfig"; path = "Pods/Target Support Files/Pods-HuiJinDai/Pods-HuiJinDai.release.xcconfig"; sourceTree = "<group>"; };
 		758AEEDFDB9B291E6C91EBA5 /* libPods-HuiJinDai.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HuiJinDai.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAD24F6221394B3800298386 /* HKScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKScrollView.h; sourceTree = "<group>"; };
+		AAD24F6321394B3800298386 /* HKScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKScrollView.m; sourceTree = "<group>"; };
+		AAD24F6521394BA200298386 /* HJDHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeViewController.h; sourceTree = "<group>"; };
+		AAD24F6621394BA200298386 /* HJDHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeViewController.m; sourceTree = "<group>"; };
+		AAD24F6B21394D8400298386 /* HJDBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDBaseViewController.h; sourceTree = "<group>"; };
+		AAD24F6C21394D8400298386 /* HJDBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDBaseViewController.m; sourceTree = "<group>"; };
+		AAD24F6E21394EA900298386 /* UITableView+Imora.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Imora.h"; sourceTree = "<group>"; };
+		AAD24F6F21394EA900298386 /* UITableView+Imora.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Imora.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,7 +129,7 @@
 		16C4E19121381BFC004268C4 /* HuiJinDai */ = {
 			isa = PBXGroup;
 			children = (
-				16C4E1CE21381CCB004268C4 /* Home */,
+				AAD24F5E21394B1B00298386 /* Home */,
 				16C4E1C921381CCB004268C4 /* Login */,
 				16C4E1C421381CCB004268C4 /* My */,
 				16C4E19221381BFC004268C4 /* AppDelegate.h */,
@@ -230,51 +242,51 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		16C4E1CE21381CCB004268C4 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				16C4E1CF21381CCB004268C4 /* ViewModels */,
-				16C4E1D021381CCB004268C4 /* Managers */,
-				16C4E1D121381CCB004268C4 /* Controllers */,
-				16C4E1D221381CCB004268C4 /* Views */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
-		16C4E1CF21381CCB004268C4 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		16C4E1D021381CCB004268C4 /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Managers;
-			sourceTree = "<group>";
-		};
-		16C4E1D121381CCB004268C4 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		16C4E1D221381CCB004268C4 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		8F502DB94475AAC7D3EF2565 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				758AEEDFDB9B291E6C91EBA5 /* libPods-HuiJinDai.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AAD24F5E21394B1B00298386 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				AAD24F5F21394B1B00298386 /* Models */,
+				AAD24F6021394B1B00298386 /* Viewcontrollers */,
+				AAD24F6121394B1B00298386 /* Views */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		AAD24F5F21394B1B00298386 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AAD24F6021394B1B00298386 /* Viewcontrollers */ = {
+			isa = PBXGroup;
+			children = (
+				AAD24F6521394BA200298386 /* HJDHomeViewController.h */,
+				AAD24F6621394BA200298386 /* HJDHomeViewController.m */,
+				AAD24F6B21394D8400298386 /* HJDBaseViewController.h */,
+				AAD24F6C21394D8400298386 /* HJDBaseViewController.m */,
+			);
+			path = Viewcontrollers;
+			sourceTree = "<group>";
+		};
+		AAD24F6121394B1B00298386 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AAD24F6E21394EA900298386 /* UITableView+Imora.h */,
+				AAD24F6F21394EA900298386 /* UITableView+Imora.m */,
+				AAD24F6221394B3800298386 /* HKScrollView.h */,
+				AAD24F6321394B3800298386 /* HKScrollView.m */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -427,7 +439,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAD24F6421394B3800298386 /* HKScrollView.m in Sources */,
+				AAD24F6D21394D8400298386 /* HJDBaseViewController.m in Sources */,
+				AAD24F7021394EA900298386 /* UITableView+Imora.m in Sources */,
 				16C4E1D8213826D0004268C4 /* HJDTextFieldView.m in Sources */,
+				AAD24F6721394BA200298386 /* HJDHomeViewController.m in Sources */,
 				16C4E1D52138255B004268C4 /* HJDRegisterViewController.m in Sources */,
 				16C4E1A221381BFD004268C4 /* main.m in Sources */,
 				16C4E19421381BFC004268C4 /* AppDelegate.m in Sources */,

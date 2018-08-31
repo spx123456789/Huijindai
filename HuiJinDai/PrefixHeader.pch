@@ -40,5 +40,10 @@
 #pragma mark - 屏幕尺寸
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
+#define kSafeAreaTopHeight (kScreenHeight == 812.0 ? 88 : 64)
+#define kStatusBarAddHight (kScreenHeight == 812.0 ? 24 : 0)
+#define kStatusBarHeight (kScreenHeight == 812.0 ? 44 : 20)
+#define kSafeAreaBottomHeight (kScreenHeight == 812.0 ? 34 : 0)
+#define kTabBarHeight 49
 
 #endif /* PrefixHeader_pch */
