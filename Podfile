@@ -6,4 +6,7 @@ pod 'ReactiveViewModel'
 pod 'Masonry'
 pod 'SDWebImage'
 pod 'TPKeyboardAvoiding'
+pod 'MJRefresh'
+pod 'MBProgressHUD'
+pod 'FMDB'
 end

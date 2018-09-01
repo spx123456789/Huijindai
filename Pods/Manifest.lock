@@ -14,7 +14,12 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
+  - FMDB (2.7.2):
+    - FMDB/standard (= 2.7.2)
+  - FMDB/standard (2.7.2)
   - Masonry (1.1.0)
+  - MBProgressHUD (1.1.0)
+  - MJRefresh (3.1.15.6)
   - ReactiveCocoa (2.5):
     - ReactiveCocoa/UI (= 2.5)
   - ReactiveCocoa/Core (2.5):
@@ -31,7 +36,10 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - FMDB
   - Masonry
+  - MBProgressHUD
+  - MJRefresh
   - ReactiveCocoa
   - ReactiveViewModel
   - SDWebImage
@@ -40,7 +48,10 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
+    - FMDB
     - Masonry
+    - MBProgressHUD
+    - MJRefresh
     - ReactiveCocoa
     - ReactiveViewModel
     - SDWebImage
@@ -48,12 +59,15 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  FMDB: 6198a90e7b6900cfc046e6bc0ef6ebb7be9236aa
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
+  MJRefresh: 0efa19656679d70a0f47cbe76e56c2271fe53a97
   ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
   ReactiveViewModel: 58918dcbcec2d3151195ab1ed9163c57a8163999
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
 
-PODFILE CHECKSUM: e624ef382ad8d1c181e8580fca6c3dde4e84b916
+PODFILE CHECKSUM: 0479e7cbeec115be770cca3fbd1e9c7969969e0b
 
 COCOAPODS: 1.5.3
