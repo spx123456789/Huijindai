@@ -20,7 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view addSubview:self.tableView];
+    //[self.view addSubview:self.tableView];
     NSArray *array = @[@"",@"",@""];
     CGFloat width = self.view.frame.size.width;
     CGFloat height = 304*width/720;
@@ -28,7 +28,7 @@
     self.netWorkScrollView.AutoScrollDelay = 2;
     self.netWorkScrollView.placeholderImage = [UIImage imageNamed:@"hk_timeline_image_loading"];
     self.netWorkScrollView.netDelagate = self;
-    self.tableView.tableHeaderView = self.netWorkScrollView;
+    //self.tableView.tableHeaderView = self.netWorkScrollView;
 //    @weakify(self);
 //    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
 //        @strongify(self);

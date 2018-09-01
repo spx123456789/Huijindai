@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "HJDRegisterViewController.h"
+#import "HJDHomeViewController.h"
+#import "HJDMyViewController.h"
 
 @interface AppDelegate ()
 
@@ -29,6 +31,20 @@
     return YES;
 }
 
+- (void)enterHomeController {
+    HJDHomeViewController *homeController = [[HJDHomeViewController alloc] init];
+    homeController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"首页" image:kImage(@"4.png") selectedImage:nil];
+    UINavigationController *nav1 = [[UINavigationController alloc] initWithRootViewController:homeController];
+    
+    HJDMyViewController *myController = [[HJDMyViewController alloc] init];
+    myController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"个人中心" image:kImage(@"5.png") selectedImage:nil];
+    UINavigationController *nav2 = [[UINavigationController alloc] initWithRootViewController:myController];
+    
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    tabBarController.viewControllers = @[ nav1, nav2 ];
+    
+    self.window.rootViewController = tabBarController;
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -9,6 +9,7 @@
 #import "HJDLoginViewController.h"
 #import "HJDRegisterViewController.h"
 #import "HJDTextFieldView.h"
+#import "AppDelegate.h"
 
 @interface HJDLoginViewController ()
 @property(nonatomic, strong) TPKeyboardAvoidingScrollView *bgView;
@@ -96,17 +97,12 @@
 
 - (void)registerButtonClick:(id)selector {
     HJDRegisterViewController *vc = [[HJDRegisterViewController alloc] init];
-//    NSArray *navControllers = self.navigationController.childViewControllers;
-//    for (UIViewController *controller in navControllers) {
-//        if ([controller isKindOfClass:[HJDRegisterViewController class]]) {
-//
-//        }
-//    }
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)loginButtonClick:(id)selector {
-    
+    AppDelegate *appDelagate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [appDelagate enterHomeController];
 }
 
 @end
