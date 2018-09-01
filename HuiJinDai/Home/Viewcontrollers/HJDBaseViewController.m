@@ -7,7 +7,7 @@
 //
 
 #import "HJDBaseViewController.h"
-#import "UITableView+Imora.h"
+#import "UITableView+HJD.h"
 
 @interface HJDBaseViewController ()
 
@@ -18,6 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.view.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)didReceiveMemoryWarning {

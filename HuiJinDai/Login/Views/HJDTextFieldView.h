@@ -10,9 +10,14 @@
 
 @interface HJDTextFieldView : UIView
 
-- (instancetype)initWithFrame:(CGRect)frame text:(NSString *)text filedPlaceholder:(NSString *)placeholder tag:(NSInteger)fieldTag;
+@property(nonatomic, strong) NSString *fieldText;
+- (instancetype)initWithFrame:(CGRect)frame text:(NSString *)text fieldPlaceholder:(NSString *)placeholder tag:(NSInteger)fieldTag;
 @end
 
 @interface HJDRegisterAgreementView : UIView
 @property(nonatomic, assign) BOOL selected;
+@end
+
+@interface HJDCustomerServiceView : UIView
+
 @end

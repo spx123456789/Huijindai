@@ -16,13 +16,15 @@
 		16C4E1B721381BFE004268C4 /* HuiJinDaiUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E1B621381BFE004268C4 /* HuiJinDaiUITests.m */; };
 		16C4E1D52138255B004268C4 /* HJDRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E1D42138255B004268C4 /* HJDRegisterViewController.m */; };
 		16C4E1D8213826D0004268C4 /* HJDTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E1D7213826D0004268C4 /* HJDTextFieldView.m */; };
+		16EDD2BF213AC4A000E21AB2 /* HJDLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD2BE213AC4A000E21AB2 /* HJDLoginViewController.m */; };
+		16EDD2C1213AD26C00E21AB2 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EDD2C0213AD26C00E21AB2 /* 3.png */; };
 		16FFC51621397373008BCABC /* HJDRegisterManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FFC51521397373008BCABC /* HJDRegisterManger.m */; };
 		16FFC519213973A2008BCABC /* HJDRegisterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FFC518213973A2008BCABC /* HJDRegisterModel.m */; };
 		16FFC51C21397FDD008BCABC /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 16FFC51B21397FDD008BCABC /* 1.png */; };
 		AAD24F6421394B3800298386 /* HKScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD24F6321394B3800298386 /* HKScrollView.m */; };
 		AAD24F6721394BA200298386 /* HJDHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD24F6621394BA200298386 /* HJDHomeViewController.m */; };
 		AAD24F6D21394D8400298386 /* HJDBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD24F6C21394D8400298386 /* HJDBaseViewController.m */; };
-		AAD24F7021394EA900298386 /* UITableView+Imora.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD24F6F21394EA900298386 /* UITableView+Imora.m */; };
+		AAD24F7021394EA900298386 /* UITableView+HJD.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD24F6F21394EA900298386 /* UITableView+HJD.m */; };
 		D6432F235E81DD89E31E1B21 /* libPods-HuiJinDai.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 758AEEDFDB9B291E6C91EBA5 /* libPods-HuiJinDai.a */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +66,9 @@
 		16C4E1D6213826D0004268C4 /* HJDTextFieldView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDTextFieldView.h; sourceTree = "<group>"; };
 		16C4E1D7213826D0004268C4 /* HJDTextFieldView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDTextFieldView.m; sourceTree = "<group>"; };
 		16DD8DE621382A3400C5AA4E /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		16EDD2BD213AC4A000E21AB2 /* HJDLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDLoginViewController.h; sourceTree = "<group>"; };
+		16EDD2BE213AC4A000E21AB2 /* HJDLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDLoginViewController.m; sourceTree = "<group>"; };
+		16EDD2C0213AD26C00E21AB2 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 		16FFC51421397373008BCABC /* HJDRegisterManger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDRegisterManger.h; sourceTree = "<group>"; };
 		16FFC51521397373008BCABC /* HJDRegisterManger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDRegisterManger.m; sourceTree = "<group>"; };
 		16FFC517213973A2008BCABC /* HJDRegisterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDRegisterModel.h; sourceTree = "<group>"; };
@@ -78,8 +83,8 @@
 		AAD24F6621394BA200298386 /* HJDHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeViewController.m; sourceTree = "<group>"; };
 		AAD24F6B21394D8400298386 /* HJDBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDBaseViewController.h; sourceTree = "<group>"; };
 		AAD24F6C21394D8400298386 /* HJDBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDBaseViewController.m; sourceTree = "<group>"; };
-		AAD24F6E21394EA900298386 /* UITableView+Imora.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Imora.h"; sourceTree = "<group>"; };
-		AAD24F6F21394EA900298386 /* UITableView+Imora.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Imora.m"; sourceTree = "<group>"; };
+		AAD24F6E21394EA900298386 /* UITableView+HJD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+HJD.h"; sourceTree = "<group>"; };
+		AAD24F6F21394EA900298386 /* UITableView+HJD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+HJD.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +251,8 @@
 			children = (
 				16C4E1D32138255B004268C4 /* HJDRegisterViewController.h */,
 				16C4E1D42138255B004268C4 /* HJDRegisterViewController.m */,
+				16EDD2BD213AC4A000E21AB2 /* HJDLoginViewController.h */,
+				16EDD2BE213AC4A000E21AB2 /* HJDLoginViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -273,6 +280,7 @@
 		16FFC51A21397FCE008BCABC /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				16EDD2C0213AD26C00E21AB2 /* 3.png */,
 				16B6DEA1213987CF00CF8C8D /* 2.png */,
 				16FFC51B21397FDD008BCABC /* 1.png */,
 			);
@@ -318,8 +326,8 @@
 		AAD24F6121394B1B00298386 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AAD24F6E21394EA900298386 /* UITableView+Imora.h */,
-				AAD24F6F21394EA900298386 /* UITableView+Imora.m */,
+				AAD24F6E21394EA900298386 /* UITableView+HJD.h */,
+				AAD24F6F21394EA900298386 /* UITableView+HJD.m */,
 				AAD24F6221394B3800298386 /* HKScrollView.h */,
 				AAD24F6321394B3800298386 /* HKScrollView.m */,
 			);
@@ -433,6 +441,7 @@
 				16B6DEA2213987CF00CF8C8D /* 2.png in Resources */,
 				16C4E19C21381BFD004268C4 /* Assets.xcassets in Resources */,
 				16FFC51C21397FDD008BCABC /* 1.png in Resources */,
+				16EDD2C1213AD26C00E21AB2 /* 3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,10 +488,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				AAD24F6421394B3800298386 /* HKScrollView.m in Sources */,
+				16EDD2BF213AC4A000E21AB2 /* HJDLoginViewController.m in Sources */,
 				16FFC51621397373008BCABC /* HJDRegisterManger.m in Sources */,
 				AAD24F6D21394D8400298386 /* HJDBaseViewController.m in Sources */,
 				16FFC519213973A2008BCABC /* HJDRegisterModel.m in Sources */,
-				AAD24F7021394EA900298386 /* UITableView+Imora.m in Sources */,
+				AAD24F7021394EA900298386 /* UITableView+HJD.m in Sources */,
 				16C4E1D8213826D0004268C4 /* HJDTextFieldView.m in Sources */,
 				AAD24F6721394BA200298386 /* HJDHomeViewController.m in Sources */,
 				16B6DEA5213988BB00CF8C8D /* HJDCityPickerView.m in Sources */,

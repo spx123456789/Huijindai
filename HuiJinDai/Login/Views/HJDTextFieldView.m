@@ -27,13 +27,13 @@
 - (UITextField *)textField {
     if (!_textField) {
         _textField = [[UITextField alloc] init];
-        _textField.font = [UIFont systemFontOfSize:13];
+        _textField.font = kFont13;
         _textField.borderStyle = UITextBorderStyleRoundedRect;
     }
     return _textField;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame text:(NSString *)text filedPlaceholder:(NSString *)placeholder tag:(NSInteger)fieldTag {
+- (instancetype)initWithFrame:(CGRect)frame text:(NSString *)text fieldPlaceholder:(NSString *)placeholder tag:(NSInteger)fieldTag {
     self = [super initWithFrame:frame];
     if (self) {
         [self addSubview:self.textLabel];
@@ -56,6 +56,11 @@
     }
     return self;
 }
+
+- (void)setFieldText:(NSString *)fieldText {
+    self.textField.text = fieldText;
+}
+
 @end
 
 @interface HJDRegisterAgreementView()
@@ -113,4 +118,49 @@
     [_selectButton setImage:image forState:UIControlStateNormal];
 }
 
+@end
+
+@interface HJDCustomerServiceView()
+@property(nonatomic, strong) UIImageView *imgView;
+@property(nonatomic, strong) UILabel *phoneLabel;
+@end
+
+@implementation HJDCustomerServiceView
+- (UIImageView *)imgView {
+    if (!_imgView) {
+        _imgView = [[UIImageView alloc] initWithImage:kImage(@"3.png")];
+    }
+    return _imgView;
+}
+
+- (UILabel *)phoneLabel {
+    if (!_phoneLabel) {
+        _phoneLabel = [[UILabel alloc] init];
+        _phoneLabel.text = @"400-250-1234";
+        _phoneLabel.textColor = kRGB_Color(0, 194, 157);
+        _phoneLabel.font = kFont14;
+    }
+    return _phoneLabel;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self addSubview:self.imgView];
+        [self addSubview:self.phoneLabel];
+        
+        [self.imgView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self);
+            make.centerY.equalTo(self);
+            make.size.mas_equalTo(CGSizeMake(44, 44));
+        }];
+        
+        [self.phoneLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.imgView.mas_right).offset(2);
+            make.centerY.equalTo(self);
+            make.size.mas_equalTo(CGSizeMake(100, 30));
+        }];
+    }
+    return self;
+}
 @end

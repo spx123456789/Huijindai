@@ -6,8 +6,8 @@
 //  Copyright © 2018年 shanpx. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "HJDBaseViewController.h"
 
-@interface HJDRegisterViewController : UIViewController
+@interface HJDRegisterViewController : HJDBaseViewController
 
 @end

@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HJDCityPickerView : UIView
+@protocol HJDCityPickerViewDelegate<NSObject>
+- (void)didSelectedCity:(NSString *)city;
+@end
 
+@interface HJDCityPickerView : UIView
+@property(nonatomic, weak) id<HJDCityPickerViewDelegate> delegate;
 @end
