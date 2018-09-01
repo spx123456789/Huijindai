@@ -8,7 +8,7 @@
 
 #import "HJDHomeViewController.h"
 #import "HKScrollView.h"
-@interface HJDHomeViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface HJDHomeViewController ()<UITableViewDelegate,UITableViewDataSource,HKScrollViewNetDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 
 @property (strong, nonatomic) NSMutableArray *dataSource;
@@ -20,7 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //[self.view addSubview:self.tableView];
+    [self.view addSubview:self.tableView];
     NSArray *array = @[@"",@"",@""];
     CGFloat width = self.view.frame.size.width;
     CGFloat height = 304*width/720;
@@ -28,12 +28,12 @@
     self.netWorkScrollView.AutoScrollDelay = 2;
     self.netWorkScrollView.placeholderImage = [UIImage imageNamed:@"hk_timeline_image_loading"];
     self.netWorkScrollView.netDelagate = self;
-    //self.tableView.tableHeaderView = self.netWorkScrollView;
-//    @weakify(self);
-//    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-//        @strongify(self);
-//        [self refreshDate];
-//    }];
+    self.tableView.tableHeaderView = self.netWorkScrollView;
+    @weakify(self);
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        @strongify(self);
+        [self refreshDate];
+    }];
     // Do any additional setup after loading the view.
 }
 
@@ -41,6 +41,48 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)refreshDate {
+    
+}
+
+#pragma mark - UITableView Datasource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.dataSource.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *cellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+    if(cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"Cell %d", indexPath.row];
+    
+    return cell;
+}
+
+#pragma mark - UITableView Delegate methods
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
+
+#pragma mark - HKScrollViewNetDelegate
+/** 点中网络滚动视图后触发*/
+-(void)didSelectedNetImageAtIndex:(NSInteger)index {
+    
+}
+
+
 #pragma mark - getters && setters
 
 - (NSMutableArray *)dataSource{

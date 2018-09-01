@@ -28,6 +28,8 @@
 		AAD24F6721394BA200298386 /* HJDHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD24F6621394BA200298386 /* HJDHomeViewController.m */; };
 		AAD24F6D21394D8400298386 /* HJDBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD24F6C21394D8400298386 /* HJDBaseViewController.m */; };
 		AAD24F7021394EA900298386 /* UITableView+HJD.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD24F6F21394EA900298386 /* UITableView+HJD.m */; };
+		AAD24F77213ADE3200298386 /* UIAlertController+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD24F76213ADE3200298386 /* UIAlertController+Blocks.m */; };
+		AAD24F79213AE0B000298386 /* hk_timeline_image_loading.png in Resources */ = {isa = PBXBuildFile; fileRef = AAD24F78213AE0AF00298386 /* hk_timeline_image_loading.png */; };
 		D6432F235E81DD89E31E1B21 /* libPods-HuiJinDai.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 758AEEDFDB9B291E6C91EBA5 /* libPods-HuiJinDai.a */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +94,9 @@
 		AAD24F6C21394D8400298386 /* HJDBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDBaseViewController.m; sourceTree = "<group>"; };
 		AAD24F6E21394EA900298386 /* UITableView+HJD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+HJD.h"; sourceTree = "<group>"; };
 		AAD24F6F21394EA900298386 /* UITableView+HJD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+HJD.m"; sourceTree = "<group>"; };
+		AAD24F75213ADE3200298386 /* UIAlertController+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+Blocks.h"; sourceTree = "<group>"; };
+		AAD24F76213ADE3200298386 /* UIAlertController+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+Blocks.m"; sourceTree = "<group>"; };
+		AAD24F78213AE0AF00298386 /* hk_timeline_image_loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hk_timeline_image_loading.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +159,7 @@
 		16C4E19121381BFC004268C4 /* HuiJinDai */ = {
 			isa = PBXGroup;
 			children = (
+				AAD24F71213ADDBD00298386 /* Componets */,
 				16FFC51A21397FCE008BCABC /* Images */,
 				AAD24F5E21394B1B00298386 /* Home */,
 				16C4E1C921381CCB004268C4 /* Login */,
@@ -289,6 +295,7 @@
 		16FFC51A21397FCE008BCABC /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				AAD24F78213AE0AF00298386 /* hk_timeline_image_loading.png */,
 				16EDD2C7213AD9EC00E21AB2 /* 5.png */,
 				16EDD2C5213AD9E800E21AB2 /* 4.png */,
 				16EDD2C0213AD26C00E21AB2 /* 3.png */,
@@ -328,8 +335,6 @@
 			children = (
 				AAD24F6521394BA200298386 /* HJDHomeViewController.h */,
 				AAD24F6621394BA200298386 /* HJDHomeViewController.m */,
-				AAD24F6B21394D8400298386 /* HJDBaseViewController.h */,
-				AAD24F6C21394D8400298386 /* HJDBaseViewController.m */,
 			);
 			path = Viewcontrollers;
 			sourceTree = "<group>";
@@ -337,12 +342,47 @@
 		AAD24F6121394B1B00298386 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AAD24F6E21394EA900298386 /* UITableView+HJD.h */,
-				AAD24F6F21394EA900298386 /* UITableView+HJD.m */,
 				AAD24F6221394B3800298386 /* HKScrollView.h */,
 				AAD24F6321394B3800298386 /* HKScrollView.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		AAD24F71213ADDBD00298386 /* Componets */ = {
+			isa = PBXGroup;
+			children = (
+				AAD24F74213ADE0900298386 /* Categories */,
+				AAD24F72213ADDBD00298386 /* BaseViewcontrollers */,
+				AAD24F73213ADDBD00298386 /* BaseViews */,
+			);
+			path = Componets;
+			sourceTree = "<group>";
+		};
+		AAD24F72213ADDBD00298386 /* BaseViewcontrollers */ = {
+			isa = PBXGroup;
+			children = (
+				AAD24F6B21394D8400298386 /* HJDBaseViewController.h */,
+				AAD24F6C21394D8400298386 /* HJDBaseViewController.m */,
+			);
+			path = BaseViewcontrollers;
+			sourceTree = "<group>";
+		};
+		AAD24F73213ADDBD00298386 /* BaseViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BaseViews;
+			sourceTree = "<group>";
+		};
+		AAD24F74213ADE0900298386 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				AAD24F75213ADE3200298386 /* UIAlertController+Blocks.h */,
+				AAD24F76213ADE3200298386 /* UIAlertController+Blocks.m */,
+				AAD24F6E21394EA900298386 /* UITableView+HJD.h */,
+				AAD24F6F21394EA900298386 /* UITableView+HJD.m */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -453,6 +493,7 @@
 				16B6DEA2213987CF00CF8C8D /* 2.png in Resources */,
 				16C4E19C21381BFD004268C4 /* Assets.xcassets in Resources */,
 				16FFC51C21397FDD008BCABC /* 1.png in Resources */,
+				AAD24F79213AE0B000298386 /* hk_timeline_image_loading.png in Resources */,
 				16EDD2C8213AD9EC00E21AB2 /* 5.png in Resources */,
 				16EDD2C6213AD9E800E21AB2 /* 4.png in Resources */,
 				16EDD2C1213AD26C00E21AB2 /* 3.png in Resources */,
@@ -499,15 +540,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-HuiJinDai/Pods-HuiJinDai-resources.sh",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 			);
@@ -523,6 +560,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAD24F77213ADE3200298386 /* UIAlertController+Blocks.m in Sources */,
 				AAD24F6421394B3800298386 /* HKScrollView.m in Sources */,
 				16EDD2BF213AC4A000E21AB2 /* HJDLoginViewController.m in Sources */,
 				16FFC51621397373008BCABC /* HJDRegisterManger.m in Sources */,
