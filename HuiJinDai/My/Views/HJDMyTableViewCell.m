@@ -41,7 +41,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.contentView.backgroundColor = kRGB_Color(242, 242, 242);
+        self.contentView.backgroundColor = kControllerBackgroundColor;
         [self.contentView addSubview:self.bgView];
         [self.bgView addSubview:self.imgView];
         [self.bgView addSubview:self.titleLabel];
@@ -115,7 +115,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = kRGB_Color(242, 242, 242);
+        self.backgroundColor = kControllerBackgroundColor;
         [self addSubview:self.bgView];
         [self.bgView addSubview:self.headImgView];
         [self.bgView addSubview:self.nameLabel];

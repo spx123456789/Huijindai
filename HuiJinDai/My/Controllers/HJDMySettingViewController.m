@@ -44,6 +44,7 @@
         [_logoutButton setTitle:@"退出登录" forState:UIControlStateNormal];
         [_logoutButton setTitleColor:kWithe forState:UIControlStateNormal];
         [_logoutButton setBackgroundColor:kRGB_Color(0, 194, 157)];
+        _logoutButton.titleLabel.font = kFont15;
         _logoutButton.layer.masksToBounds = YES;
         _logoutButton.layer.cornerRadius = 5.f;
         [_logoutButton addTarget:self action:@selector(logoutButtonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -59,27 +60,53 @@
     return _cityPickerView;
 }
 
+- (void)setUpUI {
+    [self.view addSubview:self.bgView];
+    
+    CGFloat topHeight = 10;
+    UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, topHeight, kScreenWidth, 40)];
+    topView.backgroundColor = kWithe;
+    [self.bgView addSubview:topView];
+    
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 120, 20)];
+    titleLabel.text = @"基本信息";
+    titleLabel.font = kFont15;
+    titleLabel.textColor = kRGB_Color(0, 194, 157);
+    [topView addSubview:titleLabel];
+    
+    topHeight += 40;
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, topHeight, kScreenWidth, 2)];
+    lineView.backgroundColor = kControllerBackgroundColor;
+    [self.bgView addSubview:lineView];
+    
+    topHeight += 2;
+    _nameView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight, kScreenWidth, 40) text:@"姓名:" fieldPlaceholder:@"李思然" tag:10];
+    _nameView.fieldCanEdit = NO;
+    [self.bgView addSubview:_nameView];
+    
+    topHeight += 40;
+    _phoneView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight, kScreenWidth, 40) text:@"手机号码:" fieldPlaceholder:@"13355668899" tag:11];
+    _phoneView.fieldCanEdit = NO;
+    [self.bgView addSubview:_phoneView];
+    
+    topHeight += 40;
+    _cityView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight, kScreenWidth - 10 - 30, 40) text:@"城市:" fieldPlaceholder:@"北京" tag:13];
+    _cityView.fieldCanEdit = NO;
+    [self.bgView addSubview:_cityView];
+    
+    self.cityNextButton.frame = CGRectMake(kScreenWidth - 40, topHeight, 40, 40);
+    [self.bgView addSubview:self.cityNextButton];
+    
+    topHeight += 130;
+    self.logoutButton.frame = CGRectMake(25, topHeight, kScreenWidth - 50, 40);
+    [self.bgView addSubview:self.logoutButton];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.title = @"我的信息";
-    [self.view addSubview:self.bgView];
-    
-    CGFloat topHeight = 20;
-    _nameView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight, kScreenWidth, 30) text:@"姓名:" fieldPlaceholder:@"李思然" tag:10];
-    [self.bgView addSubview:_nameView];
-    
-    _phoneView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight + 40, kScreenWidth, 30) text:@"手机号码:" fieldPlaceholder:@"13355668899" tag:11];
-    [self.bgView addSubview:_phoneView];
-    
-    _cityView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight + 80, kScreenWidth - 10 - 30, 30) text:@"城市:" fieldPlaceholder:@"北京" tag:13];
-    [self.bgView addSubview:_cityView];
-    
-    self.cityNextButton.frame = CGRectMake(kScreenWidth - 40, topHeight + 80, 30, 30);
-    [self.bgView addSubview:self.cityNextButton];
-    
-    self.logoutButton.frame = CGRectMake(25, topHeight + 200, kScreenWidth - 50, 40);
-    [self.bgView addSubview:self.logoutButton];
+    [self setUpUI];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -98,7 +125,7 @@
 
 #pragma mark - HJDCityPickerViewDelegate
 - (void)didSelectedCity:(NSString *)city {
-    self.cityView.fieldText = city;
+    self.cityView.fieldPlaceholder = city;
 }
 
 @end

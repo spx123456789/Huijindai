@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface HJDTextFieldView : UIView
-
 @property(nonatomic, copy) NSString *fieldText;
+@property(nonatomic, copy) NSString *fieldPlaceholder;
+@property(nonatomic, assign) BOOL fieldCanEdit;
+
 - (instancetype)initWithFrame:(CGRect)frame text:(NSString *)text fieldPlaceholder:(NSString *)placeholder tag:(NSInteger)fieldTag;
 @end
 

@@ -103,6 +103,7 @@
     [self.bgView addSubview:_verifiCodeView];
     
     _cityView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight + 120, kScreenWidth - 10 - 30, 30) text:@"城市:" fieldPlaceholder:@"" tag:13];
+    _cityView.fieldCanEdit = NO;
     [self.bgView addSubview:_cityView];
     
     _inviteCodeView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight + 160, kScreenWidth, 30) text:@"邀请码:" fieldPlaceholder:@"请输入邀请码" tag:14];

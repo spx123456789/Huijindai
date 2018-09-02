@@ -20,7 +20,7 @@
     // Do any additional setup after loading the view.
     
     self.navigationController.navigationBar.translucent = NO;
-    self.view.backgroundColor = kRGB_Color(242, 242, 242);
+    self.view.backgroundColor = kControllerBackgroundColor;
     
     [self setBackBarButton];
 }

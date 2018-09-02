@@ -8,7 +8,7 @@
 
 #import "HJDTextFieldView.h"
 
-@interface HJDTextFieldView()
+@interface HJDTextFieldView()<UITextFieldDelegate>
 @property(nonatomic, strong) UILabel *textLabel;
 @property(nonatomic, strong) UITextField *textField;
 @end
@@ -18,7 +18,7 @@
 - (UILabel *)textLabel {
     if (!_textLabel) {
         _textLabel = [[UILabel alloc] init];
-        _textLabel.font = kFont16;
+        _textLabel.font = kFont14;
         _textLabel.textColor = kBlack;
     }
     return _textLabel;
@@ -27,8 +27,9 @@
 - (UITextField *)textField {
     if (!_textField) {
         _textField = [[UITextField alloc] init];
-        _textField.font = kFont13;
-        _textField.borderStyle = UITextBorderStyleRoundedRect;
+        _textField.font = kFont14;
+        _textField.delegate = self;
+        //_textField.borderStyle = UITextBorderStyleRoundedRect;
     }
     return _textField;
 }
@@ -36,6 +37,8 @@
 - (instancetype)initWithFrame:(CGRect)frame text:(NSString *)text fieldPlaceholder:(NSString *)placeholder tag:(NSInteger)fieldTag {
     self = [super initWithFrame:frame];
     if (self) {
+        _fieldCanEdit = YES;
+        self.backgroundColor = kWithe;
         [self addSubview:self.textLabel];
         [self addSubview:self.textField];
         self.textLabel.text = text;
@@ -43,7 +46,7 @@
         self.textField.tag = fieldTag;
         
         [self.textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self).offset(10);
+            make.left.equalTo(self).offset(20);
             make.top.bottom.equalTo(self);
             make.width.equalTo(@80);
         }];
@@ -51,7 +54,18 @@
         [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.textLabel.mas_right).offset(5);
             make.top.bottom.equalTo(self);
-            make.right.equalTo(self).offset(-10);
+            make.right.equalTo(self).offset(-20);
+        }];
+        
+        UIView *lineView = [[UIView alloc] init];
+        lineView.backgroundColor = kControllerBackgroundColor;
+        [self addSubview:lineView];
+        
+        [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self).offset(20);
+            make.right.equalTo(self).offset(-20);
+            make.height.equalTo(@2);
+            make.bottom.equalTo(self).offset(-1);
         }];
     }
     return self;
@@ -61,6 +75,14 @@
     self.textField.text = fieldText;
 }
 
+- (void)setFieldPlaceholder:(NSString *)fieldPlaceholder {
+    self.textField.placeholder = fieldPlaceholder;
+}
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    return self.fieldCanEdit;
+}
 @end
 
 #pragma mark - HJDRegisterAgreementView
