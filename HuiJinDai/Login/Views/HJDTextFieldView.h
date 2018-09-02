@@ -10,7 +10,7 @@
 
 @interface HJDTextFieldView : UIView
 
-@property(nonatomic, strong) NSString *fieldText;
+@property(nonatomic, copy) NSString *fieldText;
 - (instancetype)initWithFrame:(CGRect)frame text:(NSString *)text fieldPlaceholder:(NSString *)placeholder tag:(NSInteger)fieldTag;
 @end
 

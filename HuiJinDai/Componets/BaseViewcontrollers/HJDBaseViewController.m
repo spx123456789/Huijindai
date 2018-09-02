@@ -19,7 +19,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.translucent = NO;
+    self.view.backgroundColor = kRGB_Color(242, 242, 242);
+    
+    [self setBackBarButton];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -27,6 +30,17 @@
     // Dispose of any resources that can be recreated.
 }
 
+//隐藏导航条
+- (void)hideNavigationBar {
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
+//显示导航条
+- (void)showNavigationBar {
+    [self.navigationController setNavigationBarHidden:NO];
+}
+
+//隐藏tabbleView 的多余线
 - (void)setExtraCellLineHidden:(UITableView *)tableView {
     if (tableView != nil) {
         [tableView setExtraCellLineHidden:YES];
@@ -64,4 +78,52 @@
     }
 }
 
+//设置按钮
+- (void)setRightNavigationButton:(NSString *)title
+                       backImage:(UIImage *)backImage
+                highlightedImage:(UIImage *)highlightedImage
+                           frame:(CGRect)frame {
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    if (title) {
+        [button setTitle:title forState:UIControlStateNormal];
+        [button setTitleColor:kRGB_Color(0, 194, 157) forState:UIControlStateNormal];
+        [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 8, 0, -8)];
+        button.titleLabel.font = kFont14;
+    }
+    [button addTarget:self
+               action:@selector(navigationRightButtonClicked:)
+     forControlEvents:UIControlEventTouchUpInside];
+    [button setFrame:frame];
+    if (backImage) {
+        [button setImage:backImage forState:UIControlStateNormal];
+    }
+    if (highlightedImage) {
+        [button setImage:highlightedImage forState:UIControlStateHighlighted];
+    }
+    button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -20);
+    UIBarButtonItem *rightBar = [[UIBarButtonItem alloc] initWithCustomView:button];
+    self.navigationItem.rightBarButtonItem = rightBar;
+}
+
+- (void)navigationRightButtonClicked:(UIButton *)sender {
+}
+
+//返回按钮
+- (void)setBackBarButton {
+    if (self.navigationController.viewControllers.count <= 1) {
+        return;
+    }
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
+    [button setFrame:CGRectMake(0, 0, 44, 44)];
+    [button setImage:kImage(@"back.png") forState:UIControlStateNormal];
+    [button setImage:kImage(@"back.png") forState:UIControlStateSelected];
+    button.imageEdgeInsets = UIEdgeInsetsMake(4, -10, 4, 20);
+    UIBarButtonItem *leftbutton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    self.navigationItem.leftBarButtonItem = leftbutton;
+}
+
+- (void)goBack:(UIButton *)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 @end

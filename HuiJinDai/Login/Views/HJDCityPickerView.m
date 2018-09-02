@@ -21,7 +21,7 @@
 - (UIPickerView *)pickerView {
     if (!_pickerView) {
         _pickerView = [[UIPickerView alloc]initWithFrame:CGRectMake(0, 40, kScreenWidth, 160)];
-        _pickerView.backgroundColor = [UIColor whiteColor];
+        _pickerView.backgroundColor = kWithe;
         _pickerView.delegate = self;
         _pickerView.dataSource = self;
     }

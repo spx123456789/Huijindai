@@ -21,6 +21,16 @@
 		16EDD2C4213AD7EC00E21AB2 /* HJDMyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD2C3213AD7EC00E21AB2 /* HJDMyViewController.m */; };
 		16EDD2C6213AD9E800E21AB2 /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EDD2C5213AD9E800E21AB2 /* 4.png */; };
 		16EDD2C8213AD9EC00E21AB2 /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EDD2C7213AD9EC00E21AB2 /* 5.png */; };
+		16EDD309213C06DC00E21AB2 /* HJDMyAgentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD303213C06DC00E21AB2 /* HJDMyAgentViewController.m */; };
+		16EDD30A213C06DC00E21AB2 /* HJDMySettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD305213C06DC00E21AB2 /* HJDMySettingViewController.m */; };
+		16EDD30B213C06DC00E21AB2 /* HJDMyInviteCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD306213C06DC00E21AB2 /* HJDMyInviteCodeViewController.m */; };
+		16EDD30C213C06DC00E21AB2 /* HJDMyCustomerManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD308213C06DC00E21AB2 /* HJDMyCustomerManagerViewController.m */; };
+		16EDD315213C06E600E21AB2 /* HJDMyShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD30D213C06E600E21AB2 /* HJDMyShareView.m */; };
+		16EDD316213C06E600E21AB2 /* HJDMyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD311213C06E600E21AB2 /* HJDMyTableViewCell.m */; };
+		16EDD317213C06E600E21AB2 /* HJDMySearchFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD312213C06E600E21AB2 /* HJDMySearchFieldView.m */; };
+		16EDD318213C06E600E21AB2 /* HJDMyAgentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD314213C06E600E21AB2 /* HJDMyAgentTableViewCell.m */; };
+		16EDD31B213C06EF00E21AB2 /* HJDMyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD31A213C06EF00E21AB2 /* HJDMyManager.m */; };
+		16EDD31F213C074A00E21AB2 /* HJDMyAgentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD31D213C074A00E21AB2 /* HJDMyAgentModel.m */; };
 		16FFC51621397373008BCABC /* HJDRegisterManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FFC51521397373008BCABC /* HJDRegisterManger.m */; };
 		16FFC519213973A2008BCABC /* HJDRegisterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FFC518213973A2008BCABC /* HJDRegisterModel.m */; };
 		16FFC51C21397FDD008BCABC /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 16FFC51B21397FDD008BCABC /* 1.png */; };
@@ -78,6 +88,26 @@
 		16EDD2C3213AD7EC00E21AB2 /* HJDMyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDMyViewController.m; sourceTree = "<group>"; };
 		16EDD2C5213AD9E800E21AB2 /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
 		16EDD2C7213AD9EC00E21AB2 /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5.png; sourceTree = "<group>"; };
+		16EDD301213C06DC00E21AB2 /* HJDMyAgentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJDMyAgentViewController.h; sourceTree = "<group>"; };
+		16EDD302213C06DC00E21AB2 /* HJDMyCustomerManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJDMyCustomerManagerViewController.h; sourceTree = "<group>"; };
+		16EDD303213C06DC00E21AB2 /* HJDMyAgentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJDMyAgentViewController.m; sourceTree = "<group>"; };
+		16EDD304213C06DC00E21AB2 /* HJDMySettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJDMySettingViewController.h; sourceTree = "<group>"; };
+		16EDD305213C06DC00E21AB2 /* HJDMySettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJDMySettingViewController.m; sourceTree = "<group>"; };
+		16EDD306213C06DC00E21AB2 /* HJDMyInviteCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJDMyInviteCodeViewController.m; sourceTree = "<group>"; };
+		16EDD307213C06DC00E21AB2 /* HJDMyInviteCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJDMyInviteCodeViewController.h; sourceTree = "<group>"; };
+		16EDD308213C06DC00E21AB2 /* HJDMyCustomerManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJDMyCustomerManagerViewController.m; sourceTree = "<group>"; };
+		16EDD30D213C06E600E21AB2 /* HJDMyShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJDMyShareView.m; sourceTree = "<group>"; };
+		16EDD30E213C06E600E21AB2 /* HJDMyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJDMyTableViewCell.h; sourceTree = "<group>"; };
+		16EDD30F213C06E600E21AB2 /* HJDMyAgentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJDMyAgentTableViewCell.h; sourceTree = "<group>"; };
+		16EDD310213C06E600E21AB2 /* HJDMyShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJDMyShareView.h; sourceTree = "<group>"; };
+		16EDD311213C06E600E21AB2 /* HJDMyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJDMyTableViewCell.m; sourceTree = "<group>"; };
+		16EDD312213C06E600E21AB2 /* HJDMySearchFieldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJDMySearchFieldView.m; sourceTree = "<group>"; };
+		16EDD313213C06E600E21AB2 /* HJDMySearchFieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJDMySearchFieldView.h; sourceTree = "<group>"; };
+		16EDD314213C06E600E21AB2 /* HJDMyAgentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJDMyAgentTableViewCell.m; sourceTree = "<group>"; };
+		16EDD319213C06EF00E21AB2 /* HJDMyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJDMyManager.h; sourceTree = "<group>"; };
+		16EDD31A213C06EF00E21AB2 /* HJDMyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJDMyManager.m; sourceTree = "<group>"; };
+		16EDD31D213C074A00E21AB2 /* HJDMyAgentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJDMyAgentModel.m; sourceTree = "<group>"; };
+		16EDD31E213C074A00E21AB2 /* HJDMyAgentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJDMyAgentModel.h; sourceTree = "<group>"; };
 		16FFC51421397373008BCABC /* HJDRegisterManger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDRegisterManger.h; sourceTree = "<group>"; };
 		16FFC51521397373008BCABC /* HJDRegisterManger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDRegisterManger.m; sourceTree = "<group>"; };
 		16FFC517213973A2008BCABC /* HJDRegisterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDRegisterModel.h; sourceTree = "<group>"; };
@@ -195,6 +225,7 @@
 		16C4E1C421381CCB004268C4 /* My */ = {
 			isa = PBXGroup;
 			children = (
+				16EDD31C213C074A00E21AB2 /* Models */,
 				16C4E1C521381CCB004268C4 /* ViewModels */,
 				16C4E1C621381CCB004268C4 /* Managers */,
 				16C4E1C721381CCB004268C4 /* Controllers */,
@@ -213,6 +244,8 @@
 		16C4E1C621381CCB004268C4 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				16EDD319213C06EF00E21AB2 /* HJDMyManager.h */,
+				16EDD31A213C06EF00E21AB2 /* HJDMyManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -220,6 +253,14 @@
 		16C4E1C721381CCB004268C4 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				16EDD301213C06DC00E21AB2 /* HJDMyAgentViewController.h */,
+				16EDD303213C06DC00E21AB2 /* HJDMyAgentViewController.m */,
+				16EDD302213C06DC00E21AB2 /* HJDMyCustomerManagerViewController.h */,
+				16EDD308213C06DC00E21AB2 /* HJDMyCustomerManagerViewController.m */,
+				16EDD307213C06DC00E21AB2 /* HJDMyInviteCodeViewController.h */,
+				16EDD306213C06DC00E21AB2 /* HJDMyInviteCodeViewController.m */,
+				16EDD304213C06DC00E21AB2 /* HJDMySettingViewController.h */,
+				16EDD305213C06DC00E21AB2 /* HJDMySettingViewController.m */,
 				16EDD2C2213AD7EC00E21AB2 /* HJDMyViewController.h */,
 				16EDD2C3213AD7EC00E21AB2 /* HJDMyViewController.m */,
 			);
@@ -229,6 +270,14 @@
 		16C4E1C821381CCB004268C4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				16EDD30F213C06E600E21AB2 /* HJDMyAgentTableViewCell.h */,
+				16EDD314213C06E600E21AB2 /* HJDMyAgentTableViewCell.m */,
+				16EDD313213C06E600E21AB2 /* HJDMySearchFieldView.h */,
+				16EDD312213C06E600E21AB2 /* HJDMySearchFieldView.m */,
+				16EDD310213C06E600E21AB2 /* HJDMyShareView.h */,
+				16EDD30D213C06E600E21AB2 /* HJDMyShareView.m */,
+				16EDD30E213C06E600E21AB2 /* HJDMyTableViewCell.h */,
+				16EDD311213C06E600E21AB2 /* HJDMyTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -281,6 +330,15 @@
 				16B6DEA4213988BB00CF8C8D /* HJDCityPickerView.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		16EDD31C213C074A00E21AB2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				16EDD31D213C074A00E21AB2 /* HJDMyAgentModel.m */,
+				16EDD31E213C074A00E21AB2 /* HJDMyAgentModel.h */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		16FFC51321397327008BCABC /* Models */ = {
@@ -560,19 +618,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16EDD31F213C074A00E21AB2 /* HJDMyAgentModel.m in Sources */,
+				16EDD30A213C06DC00E21AB2 /* HJDMySettingViewController.m in Sources */,
 				AAD24F77213ADE3200298386 /* UIAlertController+Blocks.m in Sources */,
+				16EDD309213C06DC00E21AB2 /* HJDMyAgentViewController.m in Sources */,
 				AAD24F6421394B3800298386 /* HKScrollView.m in Sources */,
 				16EDD2BF213AC4A000E21AB2 /* HJDLoginViewController.m in Sources */,
+				16EDD30B213C06DC00E21AB2 /* HJDMyInviteCodeViewController.m in Sources */,
 				16FFC51621397373008BCABC /* HJDRegisterManger.m in Sources */,
+				16EDD30C213C06DC00E21AB2 /* HJDMyCustomerManagerViewController.m in Sources */,
 				AAD24F6D21394D8400298386 /* HJDBaseViewController.m in Sources */,
 				16FFC519213973A2008BCABC /* HJDRegisterModel.m in Sources */,
 				AAD24F7021394EA900298386 /* UITableView+HJD.m in Sources */,
+				16EDD317213C06E600E21AB2 /* HJDMySearchFieldView.m in Sources */,
 				16C4E1D8213826D0004268C4 /* HJDTextFieldView.m in Sources */,
 				AAD24F6721394BA200298386 /* HJDHomeViewController.m in Sources */,
 				16B6DEA5213988BB00CF8C8D /* HJDCityPickerView.m in Sources */,
+				16EDD31B213C06EF00E21AB2 /* HJDMyManager.m in Sources */,
+				16EDD315213C06E600E21AB2 /* HJDMyShareView.m in Sources */,
+				16EDD318213C06E600E21AB2 /* HJDMyAgentTableViewCell.m in Sources */,
 				16C4E1D52138255B004268C4 /* HJDRegisterViewController.m in Sources */,
 				16C4E1A221381BFD004268C4 /* main.m in Sources */,
 				16C4E19421381BFC004268C4 /* AppDelegate.m in Sources */,
+				16EDD316213C06E600E21AB2 /* HJDMyTableViewCell.m in Sources */,
 				16EDD2C4213AD7EC00E21AB2 /* HJDMyViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

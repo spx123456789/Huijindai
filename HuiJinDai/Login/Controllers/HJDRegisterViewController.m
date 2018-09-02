@@ -31,7 +31,7 @@
 
 - (TPKeyboardAvoidingScrollView *)bgView {
     if (!_bgView) {
-        _bgView = [[TPKeyboardAvoidingScrollView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight)];
+        _bgView = [[TPKeyboardAvoidingScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
     }
     return _bgView;
 }

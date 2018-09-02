@@ -63,6 +63,7 @@
 
 @end
 
+#pragma mark - HJDRegisterAgreementView
 @interface HJDRegisterAgreementView()
 @property(nonatomic, strong) UIButton *selectButton;
 @property(nonatomic, strong) UILabel *label;
@@ -120,6 +121,7 @@
 
 @end
 
+#pragma mark - HJDCustomerServiceView
 @interface HJDCustomerServiceView()
 @property(nonatomic, strong) UIImageView *imgView;
 @property(nonatomic, strong) UILabel *phoneLabel;

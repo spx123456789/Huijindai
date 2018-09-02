@@ -98,7 +98,7 @@
         _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kSafeAreaTopHeight-kSafeAreaBottomHeight-kTabBarHeight) style:UITableViewStylePlain];
         _tableView.dataSource=self;
         _tableView.delegate=self;
-        _tableView.backgroundColor = [UIColor whiteColor];
+        _tableView.backgroundColor = kWithe;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
     }
