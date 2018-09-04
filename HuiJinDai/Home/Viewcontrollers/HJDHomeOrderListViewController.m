@@ -8,6 +8,7 @@
 
 #import "HJDHomeOrderListViewController.h"
 #import "HJDHomeOrderListTableViewCell.h"
+#import "HJDHomeManager.h"
 
 @interface HJDHomeOrderListViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UITableView *tableView;
@@ -17,7 +18,7 @@
 @implementation HJDHomeOrderListViewController
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - 0 - kSafeAreaBottomHeight - kTabBarHeight) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight) style:UITableViewStylePlain];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.backgroundColor = [UIColor clearColor];
@@ -30,6 +31,10 @@
     [super viewDidLoad];
     
     [self.view addSubview:self.tableView];
+    
+    NSArray *arr = [HJDHomeManager getOrderListArray];
+    self.dataSource = [NSMutableArray arrayWithArray:arr];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,6 +54,13 @@
         cell = [[HJDHomeOrderListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+    HJDOrderListModel *listModel = self.dataSource[indexPath.row];
+    cell.orderNumber = listModel.orderNumber;
+    cell.orderTime = listModel.orderTime;
+    cell.locationAddress = listModel.locationAddress;
+    cell.customerName = listModel.customerName;
+    cell.money = listModel.money;
+    cell.auditStatus = listModel.auditStatus.integerValue;
     return cell;
 }
 
@@ -58,6 +70,6 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 120;
+    return 161;
 }
 @end

@@ -8,12 +8,12 @@
 
 #import "HJDHomeViewController.h"
 #import "HKScrollView.h"
+#import "HJDOrderAuditViewController.h"
+
 @interface HJDHomeViewController ()<UITableViewDelegate,UITableViewDataSource,HKScrollViewNetDelegate>
-@property (strong, nonatomic) UITableView *tableView;
-
-@property (strong, nonatomic) NSMutableArray *dataSource;
-
-@property (strong, nonatomic) HKScrollView *netWorkScrollView;
+@property(strong, nonatomic) UITableView *tableView;
+@property(strong, nonatomic) NSMutableArray *dataSource;
+@property(strong, nonatomic) HKScrollView *netWorkScrollView;
 @end
 
 @implementation HJDHomeViewController
@@ -65,7 +65,25 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
-    cell.textLabel.text = [NSString stringWithFormat:@"Cell %d", indexPath.row];
+    //test 
+    NSString *str = @"";
+    switch (indexPath.row) {
+        case 0: {
+            str = @"房抵贷";
+            break;
+        }
+        case 1: {
+            str = @"工单审核";
+            break;
+        }
+        case 2: {
+            str = @"工单管理";
+            break;
+        }
+        default:
+            break;
+    }
+    cell.textLabel.text = str;
     
     return cell;
 }
@@ -73,7 +91,25 @@
 #pragma mark - UITableView Delegate methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    switch (indexPath.row) {
+        case 0: {
+            
+            break;
+        }
+        case 1: {
+            //工单审核
+            HJDOrderAuditViewController *controller = [[HJDOrderAuditViewController alloc] init];
+            controller.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:controller animated:YES];
+            break;
+        }
+        case 2: {
+            
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 #pragma mark - HKScrollViewNetDelegate
@@ -88,6 +124,7 @@
 - (NSMutableArray *)dataSource{
     if (!_dataSource) {
         _dataSource = [NSMutableArray new];
+        [_dataSource addObjectsFromArray:@[ @"1", @"2", @"3" ]];
     }
     return _dataSource;
 }

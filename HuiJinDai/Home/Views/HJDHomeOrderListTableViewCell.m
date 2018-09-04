@@ -50,8 +50,8 @@
 - (UILabel *)timeLabel {
     if (!_timeLabel) {
         _timeLabel = [[UILabel alloc] init];
-        _timeLabel.textColor = kControllerBackgroundColor;
-        _timeLabel.font = kFont14;
+        _timeLabel.textColor = kGray;
+        _timeLabel.font = kFont12;
     }
     return _timeLabel;
 }
@@ -59,8 +59,8 @@
 - (UILabel *)addressLabel {
     if (!_addressLabel) {
         _addressLabel = [[UILabel alloc] init];
-        _addressLabel.textColor = kControllerBackgroundColor;
-        _addressLabel.font = kFont14;
+        _addressLabel.textColor = kGray;
+        _addressLabel.font = kFont12;
     }
     return _addressLabel;
 }
@@ -68,8 +68,8 @@
 - (UILabel *)nameLabel {
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc] init];
-        _nameLabel.textColor = kControllerBackgroundColor;
-        _nameLabel.font = kFont14;
+        _nameLabel.textColor = kGray;
+        _nameLabel.font = kFont12;
     }
     return _nameLabel;
 }
@@ -77,8 +77,8 @@
 - (UILabel *)moneyLabel {
     if (!_moneyLabel) {
         _moneyLabel = [[UILabel alloc] init];
-        _moneyLabel.textColor = kControllerBackgroundColor;
-        _moneyLabel.font = kFont14;
+        _moneyLabel.textColor = kGray;
+        _moneyLabel.font = kFont12;
     }
     return _moneyLabel;
 }
@@ -86,6 +86,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.contentView.backgroundColor = kControllerBackgroundColor;
         [self setUpUI];
     }
     return self;
@@ -113,14 +114,14 @@
         make.left.equalTo(self.bgView).offset(10);
         make.right.equalTo(self.bgView).offset(-110);
         make.top.equalTo(self.bgView);
-        make.height.equalTo(@20);
+        make.height.equalTo(@30);
     }];
     
     [self.statusLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.bgView).offset(-10);
         make.top.equalTo(self.bgView);
         make.width.equalTo(@100);
-        make.height.equalTo(@20);
+        make.height.equalTo(@30);
     }];
     
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -133,28 +134,28 @@
         make.left.equalTo(self.bgView).offset(10);
         make.right.equalTo(self.bgView).offset(-10);
         make.top.equalTo(lineView.mas_bottom);
-        make.height.equalTo(@20);
+        make.height.equalTo(@30);
     }];
     
     [self.addressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.bgView).offset(10);
         make.right.equalTo(self.bgView).offset(-10);
         make.top.equalTo(self.timeLabel.mas_bottom);
-        make.height.equalTo(@20);
+        make.height.equalTo(@30);
     }];
     
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.bgView).offset(10);
         make.right.equalTo(self.bgView).offset(-10);
         make.top.equalTo(self.addressLabel.mas_bottom);
-        make.height.equalTo(@20);
+        make.height.equalTo(@30);
     }];
     
     [self.moneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.bgView).offset(10);
         make.right.equalTo(self.bgView).offset(-10);
         make.top.equalTo(self.nameLabel.mas_bottom);
-        make.height.equalTo(@20);
+        make.height.equalTo(@30);
     }];
 }
 - (void)awakeFromNib {

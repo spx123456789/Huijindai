@@ -17,6 +17,8 @@
 #import "MJRefresh.h"
 #import "UIAlertController+Blocks.h"
 #import "ReactiveCocoa.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+
 #pragma mark - 字体宏
 #define kFont9 [UIFont systemFontOfSize:9]
 #define kFont10 [UIFont systemFontOfSize:10]
@@ -37,6 +39,7 @@
 #define kRGBA_Color(r, g, b, a) [UIColor colorWithRed:r / 255.f green:g / 255.f blue:b / 255.f alpha:a]
 #define kBlack [UIColor blackColor]
 #define kWithe [UIColor whiteColor]
+#define kGray [UIColor grayColor]
 #define kControllerBackgroundColor kRGB_Color(242, 242, 242)
 
 #define kImage(name) [UIImage imageNamed:name]
