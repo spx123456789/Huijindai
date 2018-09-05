@@ -9,10 +9,12 @@
 #import "HJDHomeOrderListViewController.h"
 #import "HJDHomeOrderListTableViewCell.h"
 #import "HJDHomeManager.h"
+#import "HJDHomeOrderListSearchView.h"
 
-@interface HJDHomeOrderListViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface HJDHomeOrderListViewController ()<UITableViewDelegate, UITableViewDataSource, HJDHomeOrderListSearchViewDelegate>
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSMutableArray *dataSource;
+@property(nonatomic, strong) HJDHomeOrderListSearchView *searchView;
 @end
 
 @implementation HJDHomeOrderListViewController
@@ -23,14 +25,25 @@
         _tableView.delegate = self;
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.showsVerticalScrollIndicator = NO;
     }
     return _tableView;
+}
+
+- (HJDHomeOrderListSearchView *)searchView {
+    if (!_searchView) {
+        _searchView = [[HJDHomeOrderListSearchView alloc] initWithFrame:CGRectMake(0, kSafeAreaTopHeight, kScreenWidth, 95)];
+        _searchView.delegate = self;
+    }
+    return _searchView;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self.view addSubview:self.tableView];
+    
+    [self setRightNavigationButton:nil backImage:kImage(@"4.png") highlightedImage:nil frame:CGRectMake(0, 0, 44, 44)];
     
     NSArray *arr = [HJDHomeManager getOrderListArray];
     self.dataSource = [NSMutableArray arrayWithArray:arr];
@@ -40,6 +53,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)navigationRightButtonClicked:(UIButton *)sender {
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    [window addSubview:self.searchView];
 }
 
 #pragma mark - UITableViewDataSource
@@ -71,5 +89,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 161;
+}
+
+#pragma mark - HJDHomeOrderListSearchViewDelegate
+- (void)searchView:(HJDHomeOrderListSearchView *)searchView didSearch:(NSString *)searchStr {
+    
 }
 @end
