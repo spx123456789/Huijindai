@@ -31,23 +31,32 @@ static NSString *key2 = @"title";
         _tableView.delegate = self;
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.showsVerticalScrollIndicator = NO;
     }
     return _tableView;
 }
 
 - (HJDMyTableHeaderView *)headerView {
     if (!_headerView) {
-        _headerView = [[HJDMyTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 110)];
-        _headerView.headImgView.image = kImage(@"h1.png");
+        _headerView = [[HJDMyTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 280)];
+        _headerView.headImgView.image = kImage(@"qr.png");
         _headerView.nameLabel.text = @"周思然";
     }
     return _headerView;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self hideNavigationBar];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self showNavigationBar];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.title = @"个人中心";
     
     self.dataSource = @[ @{ key1 : kImage(@"3.png"), key2 : @"我的客户经理" }, @{ key1 : kImage(@"3.png"), key2 : @"我的经纪人" }, @{ key1 : kImage(@"3.png"), key2 : @"我的邀请码" }, @{ key1 : kImage(@"3.png"), key2 : @"设置" } ];
     
@@ -111,7 +120,7 @@ static NSString *key2 = @"title";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 60.0f;
+    return 55.0f;
 }
 
 @end

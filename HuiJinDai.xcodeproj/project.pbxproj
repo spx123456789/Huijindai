@@ -11,6 +11,8 @@
 		16908038213EBFD900AA2575 /* HJDOrderListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 16908037213EBFD800AA2575 /* HJDOrderListModel.m */; };
 		1690803C213EC04400AA2575 /* HJDHomeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1690803B213EC04400AA2575 /* HJDHomeManager.m */; };
 		1690803F213EC64300AA2575 /* HJDHomeSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1690803E213EC64300AA2575 /* HJDHomeSegmentView.m */; };
+		169C078121416ACA00E9CDD0 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 169C078021416AC900E9CDD0 /* 3.png */; };
+		169C07842141744900E9CDD0 /* HJDMyInviteCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 169C07832141744900E9CDD0 /* HJDMyInviteCodeView.m */; };
 		16B6DEA2213987CF00CF8C8D /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 16B6DEA1213987CF00CF8C8D /* 2.png */; };
 		16B6DEA5213988BB00CF8C8D /* HJDCityPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B6DEA4213988BB00CF8C8D /* HJDCityPickerView.m */; };
 		16C4E19421381BFC004268C4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E19321381BFC004268C4 /* AppDelegate.m */; };
@@ -22,7 +24,6 @@
 		16C4E1D8213826D0004268C4 /* HJDTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E1D7213826D0004268C4 /* HJDTextFieldView.m */; };
 		16C4F34C2140019100C3F76B /* HJDHomeOrderListSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4F34B2140019100C3F76B /* HJDHomeOrderListSearchView.m */; };
 		16EDD2BF213AC4A000E21AB2 /* HJDLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD2BE213AC4A000E21AB2 /* HJDLoginViewController.m */; };
-		16EDD2C1213AD26C00E21AB2 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EDD2C0213AD26C00E21AB2 /* 3.png */; };
 		16EDD2C4213AD7EC00E21AB2 /* HJDMyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD2C3213AD7EC00E21AB2 /* HJDMyViewController.m */; };
 		16EDD2C6213AD9E800E21AB2 /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EDD2C5213AD9E800E21AB2 /* 4.png */; };
 		16EDD2C8213AD9EC00E21AB2 /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EDD2C7213AD9EC00E21AB2 /* 5.png */; };
@@ -82,6 +83,9 @@
 		1690803B213EC04400AA2575 /* HJDHomeManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeManager.m; sourceTree = "<group>"; };
 		1690803D213EC64300AA2575 /* HJDHomeSegmentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeSegmentView.h; sourceTree = "<group>"; };
 		1690803E213EC64300AA2575 /* HJDHomeSegmentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeSegmentView.m; sourceTree = "<group>"; };
+		169C078021416AC900E9CDD0 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
+		169C07822141744900E9CDD0 /* HJDMyInviteCodeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDMyInviteCodeView.h; sourceTree = "<group>"; };
+		169C07832141744900E9CDD0 /* HJDMyInviteCodeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDMyInviteCodeView.m; sourceTree = "<group>"; };
 		16B6DEA1213987CF00CF8C8D /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
 		16B6DEA3213988BB00CF8C8D /* HJDCityPickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDCityPickerView.h; sourceTree = "<group>"; };
 		16B6DEA4213988BB00CF8C8D /* HJDCityPickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDCityPickerView.m; sourceTree = "<group>"; };
@@ -106,7 +110,6 @@
 		16DD8DE621382A3400C5AA4E /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		16EDD2BD213AC4A000E21AB2 /* HJDLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDLoginViewController.h; sourceTree = "<group>"; };
 		16EDD2BE213AC4A000E21AB2 /* HJDLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDLoginViewController.m; sourceTree = "<group>"; };
-		16EDD2C0213AD26C00E21AB2 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 		16EDD2C2213AD7EC00E21AB2 /* HJDMyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDMyViewController.h; sourceTree = "<group>"; };
 		16EDD2C3213AD7EC00E21AB2 /* HJDMyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDMyViewController.m; sourceTree = "<group>"; };
 		16EDD2C5213AD9E800E21AB2 /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
@@ -331,6 +334,8 @@
 				16EDD30D213C06E600E21AB2 /* HJDMyShareView.m */,
 				16EDD30E213C06E600E21AB2 /* HJDMyTableViewCell.h */,
 				16EDD311213C06E600E21AB2 /* HJDMyTableViewCell.m */,
+				169C07822141744900E9CDD0 /* HJDMyInviteCodeView.h */,
+				169C07832141744900E9CDD0 /* HJDMyInviteCodeView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -406,6 +411,7 @@
 		16FFC51A21397FCE008BCABC /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				169C078021416AC900E9CDD0 /* 3.png */,
 				16EDD323213C086100E21AB2 /* back.png */,
 				16EDD321213C086100E21AB2 /* bg.jpg */,
 				16EDD322213C086100E21AB2 /* h1.png */,
@@ -413,7 +419,6 @@
 				AAD24F78213AE0AF00298386 /* hk_timeline_image_loading.png */,
 				16EDD2C7213AD9EC00E21AB2 /* 5.png */,
 				16EDD2C5213AD9E800E21AB2 /* 4.png */,
-				16EDD2C0213AD26C00E21AB2 /* 3.png */,
 				16B6DEA1213987CF00CF8C8D /* 2.png */,
 				16FFC51B21397FDD008BCABC /* 1.png */,
 			);
@@ -613,6 +618,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				169C078121416ACA00E9CDD0 /* 3.png in Resources */,
 				16EDD326213C086100E21AB2 /* h1.png in Resources */,
 				16B6DEA2213987CF00CF8C8D /* 2.png in Resources */,
 				16EDD325213C086100E21AB2 /* bg.jpg in Resources */,
@@ -623,7 +629,6 @@
 				16EDD327213C086100E21AB2 /* back.png in Resources */,
 				16EDD2C8213AD9EC00E21AB2 /* 5.png in Resources */,
 				16EDD2C6213AD9E800E21AB2 /* 4.png in Resources */,
-				16EDD2C1213AD26C00E21AB2 /* 3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -714,6 +719,7 @@
 				16908038213EBFD900AA2575 /* HJDOrderListModel.m in Sources */,
 				16EDD318213C06E600E21AB2 /* HJDMyAgentTableViewCell.m in Sources */,
 				16C4E1D52138255B004268C4 /* HJDRegisterViewController.m in Sources */,
+				169C07842141744900E9CDD0 /* HJDMyInviteCodeView.m in Sources */,
 				16C4E1A221381BFD004268C4 /* main.m in Sources */,
 				16C4E19421381BFC004268C4 /* AppDelegate.m in Sources */,
 				16EDD316213C06E600E21AB2 /* HJDMyTableViewCell.m in Sources */,

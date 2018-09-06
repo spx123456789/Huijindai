@@ -17,7 +17,7 @@
 - (UIView *)bgView {
     if (!_bgView) {
         _bgView = [[UIView alloc] init];
-        _bgView.backgroundColor = kRGB_Color(255, 255, 255);
+        _bgView.backgroundColor = kRGB_Color(248, 248, 248);
     }
     return _bgView;
 }
@@ -33,7 +33,7 @@
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.textColor = kBlack;
-        _titleLabel.font = kFont12;
+        _titleLabel.font = kFont14;
     }
     return _titleLabel;
 }
@@ -106,7 +106,7 @@
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc] init];
         _nameLabel.textColor = kBlack;
-        _nameLabel.font = kFont12;
+        _nameLabel.font = [UIFont boldSystemFontOfSize:15];
         _nameLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _nameLabel;
@@ -121,13 +121,13 @@
         [self.bgView addSubview:self.nameLabel];
         
         [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.bottom.equalTo(self);
-            make.top.equalTo(self).offset(10);
+            make.left.right.top.equalTo(self);
+            make.height.equalTo(@210);
         }];
         
         [self.headImgView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.bgView);
-            make.top.equalTo(self.bgView).offset(15);
+            make.top.equalTo(self.bgView.mas_bottom).offset(-25);
             make.size.mas_equalTo(CGSizeMake(50, 50));
         }];
         

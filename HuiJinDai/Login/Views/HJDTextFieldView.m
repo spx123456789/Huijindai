@@ -96,7 +96,7 @@
 - (UILabel *)label {
     if (!_label) {
         _label = [[UILabel alloc] init];
-        _label.text = @"同意用户协议";
+        _label.text = @"同意亚投行金服用户协议";
         _label.textColor = kBlack;
         _label.font = kFont12;
     }
@@ -161,7 +161,7 @@
     if (!_phoneLabel) {
         _phoneLabel = [[UILabel alloc] init];
         _phoneLabel.text = @"400-250-1234";
-        _phoneLabel.textColor = kRGB_Color(0, 194, 157);
+        _phoneLabel.textColor = kMainColor;
         _phoneLabel.font = kFont14;
     }
     return _phoneLabel;

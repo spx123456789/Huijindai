@@ -22,6 +22,7 @@
     self.navigationController.navigationBar.translucent = NO;
     self.view.backgroundColor = kControllerBackgroundColor;
     
+    [self navigationBarLineHidden:YES];
     [self setBackBarButton];
 }
 

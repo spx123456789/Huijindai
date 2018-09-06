@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "HJDRegisterViewController.h"
+#import "HJDLoginViewController.h"
 #import "HJDHomeViewController.h"
 #import "HJDMyViewController.h"
 
@@ -23,7 +23,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = kWithe;
     
-    UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:[[HJDRegisterViewController alloc] init]];
+    UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:[[HJDLoginViewController alloc] init]];
     self.window.rootViewController = navi;
     
     [self.window makeKeyAndVisible];

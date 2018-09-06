@@ -194,21 +194,21 @@
 
 - (void)setOrderTime:(NSString *)orderTime {
     _orderTime = orderTime;
-    self.timeLabel.text = [NSString stringWithFormat:@"报单时间:      %@", orderTime];
+    self.timeLabel.text = [NSString stringWithFormat:@"报单时间: %@", orderTime];
 }
 
 - (void)setLocationAddress:(NSString *)locationAddress {
     _locationAddress = locationAddress;
-    self.addressLabel.text = [NSString stringWithFormat:@"房屋坐落地址: %@", locationAddress];
+    self.addressLabel.text = [NSString stringWithFormat:@"房屋地址: %@", locationAddress];
 }
 
 - (void)setCustomerName:(NSString *)customerName {
     _customerName = customerName;
-    self.nameLabel.text = [NSString stringWithFormat:@"客户姓名:      %@", customerName];
+    self.nameLabel.text = [NSString stringWithFormat:@"客户姓名: %@", customerName];
 }
 
 - (void)setMoney:(NSString *)money {
     _money = money;
-    self.moneyLabel.text = [NSString stringWithFormat:@"申请金额:      %@", money];
+    self.moneyLabel.text = [NSString stringWithFormat:@"申请金额: %@", money];
 }
 @end

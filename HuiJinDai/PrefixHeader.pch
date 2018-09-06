@@ -40,7 +40,8 @@
 #define kBlack [UIColor blackColor]
 #define kWithe [UIColor whiteColor]
 #define kGray [UIColor grayColor]
-#define kControllerBackgroundColor kRGB_Color(242, 242, 242)
+#define kControllerBackgroundColor kRGB_Color(255, 255, 255)
+#define kMainColor kRGB_Color(255, 149, 0)
 
 #define kImage(name) [UIImage imageNamed:name]
 #pragma mark - 屏幕尺寸
