@@ -26,7 +26,7 @@
 
 - (TPKeyboardAvoidingScrollView *)bgView {
     if (!_bgView) {
-        _bgView = [[TPKeyboardAvoidingScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        _bgView = [[TPKeyboardAvoidingScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight)];
     }
     return _bgView;
 }
@@ -34,7 +34,7 @@
 - (UIButton *)cityNextButton {
     if (!_cityNextButton) {
         _cityNextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_cityNextButton setImage:kImage(@"2.png") forState:UIControlStateNormal];
+        [_cityNextButton setImage:kImage(@"进入") forState:UIControlStateNormal];
         [_cityNextButton addTarget:self action:@selector(selectCity:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _cityNextButton;
@@ -44,11 +44,11 @@
     if (!_logoutButton) {
         _logoutButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_logoutButton setTitle:@"退出登录" forState:UIControlStateNormal];
-        [_logoutButton setTitleColor:kWithe forState:UIControlStateNormal];
+        [_logoutButton setTitleColor:kRGB_Color(0xff, 0xff, 0xff) forState:UIControlStateNormal];
         [_logoutButton setBackgroundColor:kMainColor];
         _logoutButton.titleLabel.font = kFont15;
         _logoutButton.layer.masksToBounds = YES;
-        _logoutButton.layer.cornerRadius = 5.f;
+        _logoutButton.layer.cornerRadius = 4.f;
         [_logoutButton addTarget:self action:@selector(logoutButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _logoutButton;
@@ -65,51 +65,45 @@
 - (void)setUpUI {
     [self.view addSubview:self.bgView];
     
-    CGFloat topHeight = 40;
-    _nameView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight, kScreenWidth, 30) text:@"姓名" fieldPlaceholder:@"李思然" tag:10];
+    CGFloat topHeight = 25;
+    _nameView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight, kScreenWidth, 60) text:@"姓名" fieldPlaceholder:@"" tag:10];
+    _nameView.textLabel.textColor = kRGB_Color(0x33, 0x33, 0x33);
+    _nameView.textField.text = @"李思然";
     _nameView.fieldCanEdit = NO;
     [self.bgView addSubview:_nameView];
     
-    [self addLineViewWithY:topHeight + 31];
-    
-    topHeight += 45;
-    _phoneView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight, kScreenWidth, 30) text:@"手机号码" fieldPlaceholder:@"13355668899" tag:11];
+    topHeight += 60;
+    _phoneView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight, kScreenWidth, 60) text:@"手机号" fieldPlaceholder:@"" tag:11];
+    _phoneView.textLabel.textColor = kRGB_Color(0x33, 0x33, 0x33);
+    _phoneView.textField.text = @"13355668899";
     _phoneView.fieldCanEdit = NO;
     [self.bgView addSubview:_phoneView];
     
-    [self addLineViewWithY:topHeight + 31];
-    
-    topHeight += 45;
-    _cityView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight, kScreenWidth - 10 - 30, 30) text:@"城市" fieldPlaceholder:@"北京" tag:13];
+    topHeight += 60;
+    _cityView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight, kScreenWidth, 60) text:@"城市" fieldPlaceholder:@"" tag:13];
+    _cityView.textLabel.textColor = kRGB_Color(0x33, 0x33, 0x33);
+    _cityView.textField.text = @"北京";
     _cityView.fieldCanEdit = NO;
     [self.bgView addSubview:_cityView];
     
-    [self addLineViewWithY:topHeight + 31];
-    
-    self.cityNextButton.frame = CGRectMake(kScreenWidth - 40, topHeight, 30, 30);
+    self.cityNextButton.frame = CGRectMake(kScreenWidth - 45, topHeight + 22, 30, 30);
     [self.bgView addSubview:self.cityNextButton];
     
-    topHeight += 80;
-    self.logoutButton.frame = CGRectMake(20, topHeight, kScreenWidth - 40, 40);
+    topHeight += (60 + 32);
+    self.logoutButton.frame = CGRectMake(24, topHeight, kScreenWidth - 48, 44);
     [self.bgView addSubview:self.logoutButton];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"设置";
+    [self setNavTitle:@"设置"];
     [self setUpUI];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)addLineViewWithY:(CGFloat)Y {
-    UIView *lineView2 = [[UIView alloc] initWithFrame:CGRectMake(20, Y, kScreenWidth - 40, 0.5)];
-    lineView2.backgroundColor = kLineColor;
-    [self.bgView addSubview:lineView2];
 }
 
 - (void)selectCity:(id)selector {

@@ -33,7 +33,7 @@
 - (UIImageView *)rowImgView {
     if (!_rowImgView) {
         _rowImgView = [[UIImageView alloc] init];
-        _rowImgView.image = kImage(@"2.png");
+        _rowImgView.image = kImage(@"进入");
     }
     return _rowImgView;
 }
@@ -41,8 +41,8 @@
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.textColor = kBlack;
-        _titleLabel.font = kFont14;
+        _titleLabel.textColor = kRGB_Color(0x33, 0x33, 0x33);
+        _titleLabel.font = kFont15;
     }
     return _titleLabel;
 }
@@ -58,27 +58,27 @@
         
         [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.equalTo(self.contentView);
-            make.bottom.equalTo(self.contentView);
+            make.top.equalTo(self.contentView);
             make.height.equalTo(@50);
         }];
         
         [self.imgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.bgView).offset(10);
+            make.left.equalTo(self.bgView).offset(16);
             make.centerY.equalTo(self.bgView);
-            make.size.mas_equalTo(CGSizeMake(44, 44));
+            make.size.mas_equalTo(CGSizeMake(20, 20));
         }];
         
         [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.imgView.mas_right).offset(10);
+            make.left.equalTo(self.imgView.mas_right).offset(16);
             make.centerY.equalTo(self.bgView);
             make.right.equalTo(self.bgView).offset(-80);
-            make.height.equalTo(@30);
+            make.height.equalTo(@20);
         }];
         
         [self.rowImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.bgView);
+            make.right.equalTo(self.bgView).offset(-16);
             make.centerY.equalTo(self.bgView);
-            make.size.mas_equalTo(CGSizeMake(44, 44));
+            make.size.mas_equalTo(CGSizeMake(9, 16));
         }];
     }
     return self;
@@ -100,15 +100,24 @@
 #pragma mark - HJDMyTableHeaderView
 @interface HJDMyTableHeaderView()
 @property(nonatomic, strong) UIImageView *bgView;
+@property(nonatomic, strong) UIView *headBgView;
 @end
 
 @implementation HJDMyTableHeaderView
 - (UIImageView *)bgView {
     if (!_bgView) {
         _bgView = [[UIImageView alloc] init];
-        _bgView.image = kImage(@"bg.jpg");
+        _bgView.image = kImage(@"我的页背景");
     }
     return _bgView;
+}
+
+- (UIView *)headBgView {
+    if (!_headBgView) {
+        _headBgView = [[UIView alloc] init];
+        _headBgView.backgroundColor = kRGB_Color(0xff, 0xff, 0xff);
+    }
+    return _headBgView;
 }
 
 - (UIImageView *)headImgView {
@@ -121,8 +130,8 @@
 - (UILabel *)nameLabel {
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc] init];
-        _nameLabel.textColor = kBlack;
-        _nameLabel.font = [UIFont boldSystemFontOfSize:15];
+        _nameLabel.textColor = kRGB_Color(0x33, 0x33, 0x33);
+        _nameLabel.font = [UIFont boldSystemFontOfSize:17];
         _nameLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _nameLabel;
@@ -133,24 +142,31 @@
     if (self) {
         self.backgroundColor = kControllerBackgroundColor;
         [self addSubview:self.bgView];
-        [self.bgView addSubview:self.headImgView];
-        [self.bgView addSubview:self.nameLabel];
+        [self addSubview:self.headBgView];
+        [self addSubview:self.headImgView];
+        [self addSubview:self.nameLabel];
         
         [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.top.equalTo(self);
             make.height.equalTo(@210);
         }];
         
+        [self.headBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self);
+            make.top.equalTo(self.bgView.mas_bottom).offset(-34);
+            make.size.mas_equalTo(CGSizeMake(68, 68));
+        }];
+        
         [self.headImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.bgView);
-            make.top.equalTo(self.bgView.mas_bottom).offset(-25);
-            make.size.mas_equalTo(CGSizeMake(50, 50));
+            make.centerX.equalTo(self);
+            make.top.equalTo(self.bgView.mas_bottom).offset(-32);
+            make.size.mas_equalTo(CGSizeMake(64, 64));
         }];
         
         [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.bgView);
-            make.top.equalTo(self.headImgView.mas_bottom).offset(8);
-            make.size.mas_equalTo(CGSizeMake(80, 20));
+            make.centerX.equalTo(self);
+            make.top.equalTo(self.headImgView.mas_bottom).offset(12);
+            make.size.mas_equalTo(CGSizeMake(68, 20));
         }];
     }
     return self;

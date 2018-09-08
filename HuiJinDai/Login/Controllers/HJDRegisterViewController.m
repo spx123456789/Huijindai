@@ -32,7 +32,8 @@
 
 - (TPKeyboardAvoidingScrollView *)bgView {
     if (!_bgView) {
-        _bgView = [[TPKeyboardAvoidingScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        _bgView = [[TPKeyboardAvoidingScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight)];
+        _bgView.showsVerticalScrollIndicator = NO;
     }
     return _bgView;
 }
@@ -50,7 +51,7 @@
 - (UIButton *)cityNextButton {
     if (!_cityNextButton) {
         _cityNextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_cityNextButton setImage:kImage(@"进入.png") forState:UIControlStateNormal];
+        [_cityNextButton setImage:kImage(@"进入") forState:UIControlStateNormal];
         [_cityNextButton addTarget:self action:@selector(selectCity:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _cityNextButton;
@@ -110,7 +111,7 @@
     _phoneView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight, kScreenWidth, 63) text:@"手机号" fieldPlaceholder:@"请输入手机号码" tag:11];
     [self.bgView addSubview:_phoneView];
   
-    self.verifiCodeButton.frame = CGRectMake(kScreenWidth - 105, topHeight + 27, 80, 20);
+    self.verifiCodeButton.frame = CGRectMake(kScreenWidth - 105, topHeight + 28, 80, 20);
     [self.bgView addSubview:self.verifiCodeButton];
     
     topHeight += 63;
@@ -122,7 +123,7 @@
     _cityView.fieldCanEdit = NO;
     [self.bgView addSubview:_cityView];
     
-    self.cityNextButton.frame = CGRectMake(kScreenWidth - 45, topHeight + 20, 30, 30);
+    self.cityNextButton.frame = CGRectMake(kScreenWidth - 45, topHeight + 22, 30, 30);
     [self.bgView addSubview:self.cityNextButton];
     
     topHeight += 63;
@@ -141,8 +142,11 @@
     self.loginButton.frame = CGRectMake(24, topHeight, kScreenWidth - 48, 44);
     [self.bgView addSubview:self.loginButton];
 
-    _customServiceView = [[HJDCustomerServiceView alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 70, kScreenHeight -kSafeAreaTopHeight - 60, 100, 30)];
+    topHeight += (44 + 24);
+    _customServiceView = [[HJDCustomerServiceView alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 70, topHeight, 100, 30)];
     [self.bgView addSubview:_customServiceView];
+    
+    self.bgView.contentSize = CGSizeMake(kScreenWidth, topHeight + 58);
 }
 
 - (void)viewDidLoad {
@@ -173,7 +177,7 @@
 
 #pragma mark - HJDCityPickerViewDelegate
 - (void)didSelectedCity:(NSString *)city {
-    self.cityView.fieldText = city;
+    self.cityView.textField.text = city;
 }
 
 @end

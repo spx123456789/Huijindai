@@ -99,9 +99,9 @@
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     if (title) {
         [button setTitle:title forState:UIControlStateNormal];
-        [button setTitleColor:kRGB_Color(0, 194, 157) forState:UIControlStateNormal];
+        [button setTitleColor:kRGB_Color(0x33, 0x33, 0x33) forState:UIControlStateNormal];
         [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 8, 0, -8)];
-        button.titleLabel.font = kFont14;
+        button.titleLabel.font = kFont15;
     }
     [button addTarget:self
                action:@selector(navigationRightButtonClicked:)

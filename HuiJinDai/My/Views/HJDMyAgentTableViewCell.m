@@ -11,10 +11,9 @@
 @interface HJDMyAgentTableViewCell()
 @property(nonatomic, strong) UIView *bgView;
 @property(nonatomic, strong) UILabel *nameLabel;
-@property(nonatomic, strong) UILabel *nameTextLabel;
-@property(nonatomic, strong) UILabel *phoneLabel;
+@property(nonatomic, strong) UIImageView *phoneImgView;
 @property(nonatomic, strong) UILabel *phoneTextLabel;
-@property(nonatomic, strong) UIImageView *imgView;
+@property(nonatomic, strong) UIImageView *rightImgView;
 @end
 
 @implementation HJDMyAgentTableViewCell
@@ -22,7 +21,9 @@
 - (UIView *)bgView {
     if (!_bgView) {
         _bgView = [[UIView alloc] init];
-        _bgView.backgroundColor = kWithe;
+        _bgView.backgroundColor = kRGB_Color(0xff, 0xff, 0xff);
+        _bgView.layer.masksToBounds = YES;
+        _bgView.layer.cornerRadius = 8.f;
     }
     return _bgView;
 }
@@ -31,53 +32,40 @@
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc] init];
         _nameLabel.text = @"姓名：";
-        _nameLabel.textColor = kBlack;
-        _nameLabel.font = kFont12;
+        _nameLabel.textColor = kRGB_Color(0x33, 0x33, 0x33);
+        _nameLabel.font = [UIFont boldSystemFontOfSize:17];
     }
     return _nameLabel;
 }
 
-- (UILabel *)nameTextLabel {
-    if (!_nameTextLabel) {
-        _nameTextLabel = [[UILabel alloc] init];
-        _nameTextLabel.text = @"";
-        _nameTextLabel.textColor = kBlack;
-        _nameTextLabel.font = kFont12;
+- (UIImageView *)phoneImgView {
+    if (!_phoneImgView) {
+        _phoneImgView = [[UIImageView alloc] init];
+        _phoneImgView.image = kImage(@"我的经纪人电话小图标");
     }
-    return _nameTextLabel;
-}
-
-- (UILabel *)phoneLabel {
-    if (!_phoneLabel) {
-        _phoneLabel = [[UILabel alloc] init];
-        _phoneLabel.text = @"联系电话：";
-        _phoneLabel.textColor = kBlack;
-        _phoneLabel.font = kFont12;
-    }
-    return _phoneLabel;
+    return _phoneImgView;
 }
 
 - (UILabel *)phoneTextLabel {
     if (!_phoneTextLabel) {
         _phoneTextLabel = [[UILabel alloc] init];
-        _phoneTextLabel.text = @"";
-        _phoneTextLabel.textColor = kBlack;
-        _phoneTextLabel.font = kFont12;
+        _phoneTextLabel.textColor = kRGB_Color(0x99, 0x99, 0x99);
+        _phoneTextLabel.font = kFont14;
     }
     return _phoneTextLabel;
 }
 
-- (UIImageView *)imgView {
-    if (!_imgView) {
-        _imgView = [[UIImageView alloc] initWithImage:kImage(@"3.png")];
+- (UIImageView *)rightImgView {
+    if (!_rightImgView) {
+        _rightImgView = [[UIImageView alloc] initWithImage:kImage(@"我的经纪人拨打电话")];
     }
-    return _imgView;
+    return _rightImgView;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.contentView.backgroundColor = kControllerBackgroundColor;
+        self.contentView.backgroundColor = kRGB_Color(244, 244, 244);
         [self setUpUI];
     }
     return self;
@@ -86,52 +74,46 @@
 - (void)setUpUI {
     [self.contentView addSubview:self.bgView];
     [self.bgView addSubview:self.nameLabel];
-    [self.bgView addSubview:self.nameTextLabel];
-    [self.bgView addSubview:self.phoneLabel];
+    [self.bgView addSubview:self.phoneImgView];
     [self.bgView addSubview:self.phoneTextLabel];
-    [self.bgView addSubview:self.imgView];
+    [self.bgView addSubview:self.rightImgView];
     
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self.contentView);
-        make.top.equalTo(self.contentView).offset(8);
+        make.left.equalTo(self.contentView).offset(16);
+        make.right.equalTo(self.contentView).offset(-16);
+        make.top.equalTo(self.contentView).offset(12);
+        make.bottom.equalTo(self.contentView);
     }];
     
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.bgView).offset(10);
-        make.top.equalTo(self.bgView).offset(10);
-        make.size.mas_equalTo(CGSizeMake(80, 25));
+        make.left.equalTo(self.bgView).offset(16);
+        make.top.equalTo(self.bgView).offset(16);
+        make.size.mas_equalTo(CGSizeMake(200, 20));
     }];
     
-    [self.nameTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.nameLabel.mas_right).offset(8);
-        make.top.equalTo(self.nameLabel);
-        make.right.equalTo(self.bgView).offset(-60);
-        make.bottom.equalTo(self.nameLabel);
-    }];
-    
-    [self.phoneLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.bgView).offset(10);
-        make.bottom.equalTo(self.bgView).offset(-10);
-        make.size.mas_equalTo(CGSizeMake(80, 25));
+    [self.phoneImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.bgView).offset(16);
+        make.bottom.equalTo(self.bgView).offset(-16);
+        make.size.mas_equalTo(CGSizeMake(8, 12));
     }];
     
     [self.phoneTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.phoneLabel.mas_right).offset(8);
-        make.top.equalTo(self.phoneLabel);
-        make.right.equalTo(self.bgView).offset(-60);
-        make.bottom.equalTo(self.phoneLabel);
+        make.left.equalTo(self.phoneImgView.mas_right).offset(3);
+        make.centerY.equalTo(self.phoneImgView);
+        make.right.equalTo(self.bgView).offset(-160);
+        make.height.equalTo(@16);
     }];
     
-    [self.imgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.bgView).offset(-10);
+    [self.rightImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.bgView).offset(-16);
         make.centerY.equalTo(self.bgView);
-        make.size.mas_equalTo(CGSizeMake(45, 45));
+        make.size.mas_equalTo(CGSizeMake(23, 23));
     }];
 }
 
 - (void)setName:(NSString *)name {
     _name = name;
-    self.nameTextLabel.text = name;
+    self.nameLabel.text = [NSString stringWithFormat:@"姓名：%@", name];
 }
 
 - (void)setPhone:(NSString *)phone {

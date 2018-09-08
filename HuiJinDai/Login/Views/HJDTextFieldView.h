@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface HJDTextFieldView : UIView
-@property(nonatomic, copy) NSString *fieldText;
+@property(nonatomic, strong) UILabel *textLabel;
+@property(nonatomic, strong) UITextField *textField;
 @property(nonatomic, copy) NSString *fieldPlaceholder;
 @property(nonatomic, assign) BOOL fieldCanEdit;
 

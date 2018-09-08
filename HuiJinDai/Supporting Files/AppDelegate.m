@@ -33,17 +33,30 @@
 
 - (void)enterHomeController {
     HJDHomeViewController *homeController = [[HJDHomeViewController alloc] init];
-    homeController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"首页" image:kImage(@"4.png") selectedImage:nil];
+    [self controller:homeController title:@"首页" tabBarItemImage:@"首页底部导航未选中" tabBarItemSelectedImage:@"底部导航首页选中"];
     UINavigationController *nav1 = [[UINavigationController alloc] initWithRootViewController:homeController];
     
     HJDMyViewController *myController = [[HJDMyViewController alloc] init];
-    myController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"个人中心" image:kImage(@"5.png") selectedImage:nil];
+    [self controller:myController title:@"个人中心" tabBarItemImage:@"底部导航我的未选中" tabBarItemSelectedImage:@"底部导航我的选中"];
     UINavigationController *nav2 = [[UINavigationController alloc] initWithRootViewController:myController];
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     tabBarController.viewControllers = @[ nav1, nav2 ];
     
+    
     self.window.rootViewController = tabBarController;
+}
+
+- (void)controller:(UIViewController *)controller title:(NSString *)title tabBarItemImage:(NSString *)image tabBarItemSelectedImage:(NSString *)selectedImage {
+    controller.title = title;
+    controller.tabBarItem.image = [UIImage imageNamed:image];
+    // 设置 tabbarItem 选中状态的图片(不被系统默认渲染,显示图像原始颜色)
+    UIImage *imageHome = [UIImage imageNamed:selectedImage];
+    imageHome = [imageHome imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [controller.tabBarItem setSelectedImage:imageHome];
+    // 设置 tabbarItem 选中状态下的文字颜色(不被系统默认渲染,显示文字自定义颜色)
+    NSDictionary *dictHome = [NSDictionary dictionaryWithObject:[UIColor orangeColor] forKey:NSForegroundColorAttributeName];
+    [controller.tabBarItem setTitleTextAttributes:dictHome forState:UIControlStateSelected];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

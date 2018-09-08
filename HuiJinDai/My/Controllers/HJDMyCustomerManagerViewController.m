@@ -23,10 +23,10 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 50) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 60) style:UITableViewStylePlain];
         _tableView.dataSource = self;
         _tableView.delegate = self;
-        _tableView.backgroundColor = [UIColor clearColor];
+        _tableView.backgroundColor = kRGB_Color(244, 244, 244);
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _tableView;
@@ -41,7 +41,8 @@
 
 - (HJDCustomerServiceView *)customServiceView {
     if (!_customServiceView) {
-        _customServiceView = [[HJDCustomerServiceView alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 75, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 50, 150, 45)];
+        _customServiceView = [[HJDCustomerServiceView alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 70, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 60, 140, 30)];
+        _customServiceView.backgroundColor = kRGB_Color(244, 244, 244);
     }
     return _customServiceView;
 }
@@ -50,6 +51,7 @@
     [super viewDidLoad];
     
     self.title = @"我的客户经理";
+    self.view.backgroundColor = kRGB_Color(244, 244, 244);
     
     NSArray *arr = [HJDMyManager getMyCustomerManagerArray];
     self.dataSource = [NSMutableArray arrayWithArray:arr];
@@ -90,7 +92,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 78;
+    return 88;
 }
 
 @end

@@ -9,8 +9,7 @@
 #import "HJDTextFieldView.h"
 
 @interface HJDTextFieldView()<UITextFieldDelegate>
-@property(nonatomic, strong) UILabel *textLabel;
-@property(nonatomic, strong) UITextField *textField;
+
 @end
 
 @implementation HJDTextFieldView
@@ -71,10 +70,6 @@
     return self;
 }
 
-- (void)setFieldText:(NSString *)fieldText {
-    self.textField.text = fieldText;
-}
-
 - (void)setFieldPlaceholder:(NSString *)fieldPlaceholder {
     self.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:fieldPlaceholder attributes:@{ NSFontAttributeName : kFont15, NSForegroundColorAttributeName : kRGB_Color(0xd4, 0xd4, 0xd4)}];
 }
@@ -106,7 +101,7 @@
 - (UIButton *)selectButton {
     if (!_selectButton) {
         _selectButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_selectButton setImage:kImage(@"1.png") forState:UIControlStateNormal];
+        [_selectButton setImage:kImage(@"注册页对勾.png") forState:UIControlStateNormal];
         [_selectButton addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _selectButton;
@@ -137,7 +132,7 @@
 
 - (void)clickButton:(id)selector {
     _selected = !self.selected;
-    UIImage *image = _selected ? kImage(@"1.png") : kImage(@"1.png");
+    UIImage *image = _selected ? kImage(@"注册页对勾.png") : kImage(@"注册页对勾.png");
     [_selectButton setImage:image forState:UIControlStateNormal];
 }
 

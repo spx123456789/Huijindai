@@ -12,5 +12,5 @@
 @property(nonatomic, strong) UIImageView *headImgView;
 @property(nonatomic, strong) UILabel *nameLabel;
 @property(nonatomic, strong) UILabel *cityLabel;
-@property(nonatomic, strong) UIImageView *QrCodeImgView;
+@property(nonatomic, copy) NSString *inviteCode;
 @end

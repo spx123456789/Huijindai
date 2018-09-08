@@ -23,10 +23,10 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 50) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 60) style:UITableViewStylePlain];
         _tableView.dataSource = self;
         _tableView.delegate = self;
-        _tableView.backgroundColor = [UIColor clearColor];
+        _tableView.backgroundColor = kRGB_Color(244, 244, 244);
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _tableView;
@@ -41,7 +41,8 @@
 
 - (HJDCustomerServiceView *)customServiceView {
     if (!_customServiceView) {
-        _customServiceView = [[HJDCustomerServiceView alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 75, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 50, 150, 45)];
+        _customServiceView = [[HJDCustomerServiceView alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 70, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 60, 140, 30)];
+        _customServiceView.backgroundColor = kRGB_Color(244, 244, 244);
     }
     return _customServiceView;
 }
@@ -49,7 +50,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"我的经纪人";
+    [self setNavTitle:@"我的经纪人"];
+    self.view.backgroundColor = kRGB_Color(244, 244, 244);
     
     NSArray *arr = [HJDMyManager getMyAgentArray];
     self.dataSource = [NSMutableArray arrayWithArray:arr];
@@ -58,6 +60,8 @@
     self.tableView.tableHeaderView = self.headerSearchView;
     
     [self.view addSubview:self.customServiceView];
+    
+    [self setRightNavigationButton:@"确定" backImage:nil highlightedImage:nil frame:CGRectMake(0, 0, 44, 44)];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -89,7 +93,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 78;
+    return 88;
 }
 
 @end

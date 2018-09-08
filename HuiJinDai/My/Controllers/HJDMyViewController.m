@@ -38,8 +38,8 @@ static NSString *key2 = @"title";
 
 - (HJDMyTableHeaderView *)headerView {
     if (!_headerView) {
-        _headerView = [[HJDMyTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 280)];
-        _headerView.headImgView.image = kImage(@"qr.png");
+        _headerView = [[HJDMyTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 340)];
+        _headerView.headImgView.image = kImage(@"我的默认头像");
         _headerView.nameLabel.text = @"周思然";
     }
     return _headerView;
@@ -58,7 +58,7 @@ static NSString *key2 = @"title";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.dataSource = @[ @{ key1 : kImage(@"3.png"), key2 : @"我的客户经理" }, @{ key1 : kImage(@"3.png"), key2 : @"我的经纪人" }, @{ key1 : kImage(@"3.png"), key2 : @"我的邀请码" }, @{ key1 : kImage(@"3.png"), key2 : @"设置" } ];
+    self.dataSource = @[ @{ key1 : kImage(@"我的页客户经理"), key2 : @"我的客户经理" }, @{ key1 : kImage(@"我的页经纪人"), key2 : @"我的经纪人" }, @{ key1 : kImage(@"我的页邀请码"), key2 : @"我的邀请码" }, @{ key1 : kImage(@"我的页设置"), key2 : @"设置" } ];
     
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.headerView;
@@ -104,10 +104,10 @@ static NSString *key2 = @"title";
             break;
         case 2: {
             HJDMyInviteCodeView *inviteView = [[HJDMyInviteCodeView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-            inviteView.headImgView.image = kImage(@"qr.png");
+            inviteView.headImgView.image = kImage(@"邀请码头像");
             inviteView.nameLabel.text = @"张思然";
             inviteView.cityLabel.text = @"北京市";
-            inviteView.QrCodeImgView.image = kImage(@"qr.png");
+            inviteView.inviteCode = @"邀请码：ASDFR";
             UIWindow *window = [UIApplication sharedApplication].keyWindow;
             [window addSubview:inviteView];
         }
@@ -124,7 +124,10 @@ static NSString *key2 = @"title";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 55.0f;
+    if (indexPath.row == 0) {
+        return 51.f;
+    }
+    return 58.f;
 }
 
 @end

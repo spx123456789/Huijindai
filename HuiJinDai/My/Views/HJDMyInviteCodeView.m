@@ -23,7 +23,7 @@
 - (UILabel *)label {
     if (!_label) {
         _label = [[UILabel alloc] init];
-        _label.textColor = kBlack;
+        _label.textColor = kRGB_Color(0x66, 0x66, 0x66);
         _label.font = kFont14;
         _label.textAlignment = NSTextAlignmentCenter;
     }
@@ -38,8 +38,9 @@
         [self addSubview:self.label];
         
         [self.imgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.top.equalTo(self);
+            make.centerX.top.equalTo(self);
             make.height.equalTo(@40);
+            make.width.equalTo(@40);
         }];
         
         [self.label mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -54,6 +55,7 @@
 
 @interface HJDMyInviteCodeView()
 @property(nonatomic, strong) UIView *bgView;
+@property(nonatomic, strong) UILabel *inviteCodeLabel;
 @property(nonatomic, strong) HJDMyShareButton *weixinButton;
 @property(nonatomic, strong) HJDMyShareButton *circelButton;
 @end
@@ -63,7 +65,7 @@
 - (UIView *)bgView {
     if (!_bgView) {
         _bgView = [[UIView alloc] init];
-        _bgView.backgroundColor = kWithe;
+        _bgView.backgroundColor = kRGB_Color(0xff, 0xff, 0xff);
     }
     return _bgView;
 }
@@ -78,8 +80,8 @@
 - (UILabel *)nameLabel {
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc] init];
-        _nameLabel.textColor = kBlack;
-        _nameLabel.font = kFont16;
+        _nameLabel.textColor = kRGB_Color(0x33, 0x33, 0x33);
+        _nameLabel.font = [UIFont boldSystemFontOfSize:17];
     }
     return _nameLabel;
 }
@@ -87,23 +89,26 @@
 - (UILabel *)cityLabel {
     if (!_cityLabel) {
         _cityLabel = [[UILabel alloc] init];
-        _cityLabel.textColor = kBlack;
-        _cityLabel.font = kFont14;
+        _cityLabel.textColor = kRGB_Color(0x99, 0x99, 0x99);
+        _cityLabel.font = kFont15;
     }
     return _cityLabel;
 }
 
-- (UIImageView *)QrCodeImgView {
-    if (!_QrCodeImgView) {
-        _QrCodeImgView = [[UIImageView alloc] init];
+- (UILabel *)inviteCodeLabel {
+    if (!_inviteCodeLabel) {
+        _inviteCodeLabel = [[UILabel alloc] init];
+        _inviteCodeLabel.textColor = kRGB_Color(0x33, 0x33, 0x33);
+        _inviteCodeLabel.font = [UIFont boldSystemFontOfSize:17];
+        _inviteCodeLabel.textAlignment = NSTextAlignmentCenter;
     }
-    return _QrCodeImgView;
+    return _inviteCodeLabel;
 }
 
 - (HJDMyShareButton *)weixinButton {
     if (!_weixinButton) {
         _weixinButton = [HJDMyShareButton buttonWithType:UIButtonTypeCustom];
-        _weixinButton.imgView.image = kImage(@"qr.png");
+        _weixinButton.imgView.image = kImage(@"邀请码微信");
         _weixinButton.label.text = @"微信";
         [_weixinButton addTarget:self action:@selector(weixinButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -113,7 +118,7 @@
 - (HJDMyShareButton *)circelButton {
     if (!_circelButton) {
         _circelButton = [HJDMyShareButton buttonWithType:UIButtonTypeCustom];
-        _circelButton.imgView.image = kImage(@"qr.png");
+        _circelButton.imgView.image = kImage(@"邀请码朋友圈");
         _circelButton.label.text = @"朋友圈";
         [_circelButton addTarget:self action:@selector(circelButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -123,7 +128,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = kRGBA_Color(80, 80, 80, 0.3);
+        self.backgroundColor = kRGBA_Color(0x00, 0x00, 0x00, 0.4);
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClick:)];
         [self addGestureRecognizer:tapGesture];
         
@@ -140,56 +145,60 @@
     [self.bgView addSubview:self.headImgView];
     [self.bgView addSubview:self.nameLabel];
     [self.bgView addSubview:self.cityLabel];
-    [self.bgView addSubview:self.QrCodeImgView];
+    [self.bgView addSubview:self.inviteCodeLabel];
     [self.bgView addSubview:self.weixinButton];
     [self.bgView addSubview:self.circelButton];
     
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self).offset(65);
-        make.left.equalTo(self).offset(20);
-        make.right.equalTo(self).offset(-20);
-        make.height.equalTo(@(20 + 50 + 25 + (kScreenWidth - 90 - 40) + 20 + 65 + 15));
+        make.top.equalTo(self).offset(130);
+        make.centerX.equalTo(self);
+        make.size.mas_equalTo(CGSizeMake(292, 309));
     }];
     
     [self.headImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.bgView).offset(20);
-        make.top.equalTo(self.bgView).offset(20);
-        make.size.mas_equalTo(CGSizeMake(50, 50));
+        make.left.equalTo(self.bgView).offset(24);
+        make.top.equalTo(self.bgView).offset(24);
+        make.size.mas_equalTo(CGSizeMake(64, 64));
     }];
     
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.headImgView.mas_right).offset(8);
-        make.top.equalTo(self.headImgView).offset(10);
-        make.right.equalTo(self.bgView).offset(-10);
-        make.height.equalTo(@15);
-    }];
-    
-    [self.cityLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.headImgView.mas_right).offset(8);
-        make.top.equalTo(self.nameLabel.mas_bottom).offset(10);
-        make.right.equalTo(self.bgView).offset(-10);
+        make.left.equalTo(self.headImgView.mas_right).offset(16);
+        make.top.equalTo(self.headImgView).offset(8);
+        make.right.equalTo(self.bgView).offset(-24);
         make.height.equalTo(@20);
     }];
     
-    [self.QrCodeImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.bgView).offset(45);
-        make.right.equalTo(self.bgView).offset(-45);
-        make.top.equalTo(self.headImgView.mas_bottom).offset(25);
-        make.height.equalTo(@(kScreenWidth - 90 - 40));
+    [self.cityLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.headImgView.mas_right).offset(16);
+        make.top.equalTo(self.nameLabel.mas_bottom).offset(12);
+        make.right.equalTo(self.bgView).offset(-24);
+        make.height.equalTo(@20);
+    }];
+    
+    [self.inviteCodeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.bgView).offset(24);
+        make.right.equalTo(self.bgView).offset(-24);
+        make.centerY.equalTo(self.bgView);
+        make.height.equalTo(@20);
     }];
     
     [self.weixinButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.bgView.mas_centerX).offset(-20);
-        make.top.equalTo(self.QrCodeImgView.mas_bottom).offset(20);
-        make.size.mas_equalTo(CGSizeMake(45, 65));
+        make.right.equalTo(self.bgView.mas_centerX).offset(-30);
+        make.bottom.equalTo(self.bgView).offset(-25);
+        make.size.mas_equalTo(CGSizeMake(40, 65));
     }];
     
     [self.circelButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.bgView.mas_centerX).offset(20);
-        make.top.equalTo(self.QrCodeImgView.mas_bottom).offset(20);
-        make.size.mas_equalTo(CGSizeMake(45, 65));
+        make.left.equalTo(self.bgView.mas_centerX).offset(30);
+        make.bottom.equalTo(self.weixinButton);
+        make.size.mas_equalTo(CGSizeMake(50, 65));
     }];
     
+}
+
+- (void)setInviteCode:(NSString *)inviteCode {
+    _inviteCode = inviteCode;
+    self.inviteCodeLabel.text = inviteCode;
 }
 
 - (void)weixinButtonClick:(id)sender {
