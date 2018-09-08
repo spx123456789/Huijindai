@@ -149,6 +149,7 @@
 		AA7D7FE4214358AA00E0D843 /* HJDHomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D7FE0214358A900E0D843 /* HJDHomeTableViewCell.m */; };
 		AA7D7FE9214398E200E0D843 /* UIView+HMCore.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D7FE6214398E200E0D843 /* UIView+HMCore.m */; };
 		AA7D7FEA214398E200E0D843 /* NSObject+HMCore.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D7FE8214398E200E0D843 /* NSObject+HMCore.m */; };
+		AA7D7FED2143A07E00E0D843 /* UIColor+HMCore.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D7FEC2143A07E00E0D843 /* UIColor+HMCore.m */; };
 		AAD24F6421394B3800298386 /* HKScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD24F6321394B3800298386 /* HKScrollView.m */; };
 		AAD24F6721394BA200298386 /* HJDHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD24F6621394BA200298386 /* HJDHomeViewController.m */; };
 		AAD24F6D21394D8400298386 /* HJDBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD24F6C21394D8400298386 /* HJDBaseViewController.m */; };
@@ -362,6 +363,8 @@
 		AA7D7FE6214398E200E0D843 /* UIView+HMCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HMCore.m"; sourceTree = "<group>"; };
 		AA7D7FE7214398E200E0D843 /* NSObject+HMCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+HMCore.h"; sourceTree = "<group>"; };
 		AA7D7FE8214398E200E0D843 /* NSObject+HMCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+HMCore.m"; sourceTree = "<group>"; };
+		AA7D7FEB2143A07E00E0D843 /* UIColor+HMCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HMCore.h"; sourceTree = "<group>"; };
+		AA7D7FEC2143A07E00E0D843 /* UIColor+HMCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HMCore.m"; sourceTree = "<group>"; };
 		AAD24F6221394B3800298386 /* HKScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKScrollView.h; sourceTree = "<group>"; };
 		AAD24F6321394B3800298386 /* HKScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKScrollView.m; sourceTree = "<group>"; };
 		AAD24F6521394BA200298386 /* HJDHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeViewController.h; sourceTree = "<group>"; };
@@ -824,6 +827,8 @@
 		AAD24F74213ADE0900298386 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				AA7D7FEB2143A07E00E0D843 /* UIColor+HMCore.h */,
+				AA7D7FEC2143A07E00E0D843 /* UIColor+HMCore.m */,
 				AA7D7FE7214398E200E0D843 /* NSObject+HMCore.h */,
 				AA7D7FE8214398E200E0D843 /* NSObject+HMCore.m */,
 				AA7D7FE5214398E200E0D843 /* UIView+HMCore.h */,
@@ -1134,6 +1139,7 @@
 				AA7D7FEA214398E200E0D843 /* NSObject+HMCore.m in Sources */,
 				AA7D7FDE2143589300E0D843 /* HJDHomeModel.m in Sources */,
 				AA7D7FE3214358AA00E0D843 /* HJDButton.m in Sources */,
+				AA7D7FED2143A07E00E0D843 /* UIColor+HMCore.m in Sources */,
 				16C4E1D8213826D0004268C4 /* HJDTextFieldView.m in Sources */,
 				AAD24F6721394BA200298386 /* HJDHomeViewController.m in Sources */,
 				16B6DEA5213988BB00CF8C8D /* HJDCityPickerView.m in Sources */,
