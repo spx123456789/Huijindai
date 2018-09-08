@@ -31,6 +31,18 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)setNavTitle:(NSString *)navTitle {
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 35)];
+    label.text = navTitle;
+    label.textColor = kRGB_Color(0x33, 0x33, 0x33);
+    label.backgroundColor = [UIColor clearColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.font = kFont17;
+    label.adjustsFontSizeToFitWidth = YES;
+    label.center = self.navigationController.navigationBar.center;
+    self.navigationItem.titleView = label;
+}
+
 //隐藏导航条
 - (void)hideNavigationBar {
     [self.navigationController setNavigationBarHidden:YES];
@@ -117,8 +129,8 @@
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
     [button setFrame:CGRectMake(0, 0, 44, 44)];
-    [button setImage:kImage(@"back.png") forState:UIControlStateNormal];
-    [button setImage:kImage(@"back.png") forState:UIControlStateSelected];
+    [button setImage:kImage(@"返回按钮") forState:UIControlStateNormal];
+    [button setImage:kImage(@"返回按钮") forState:UIControlStateSelected];
     button.imageEdgeInsets = UIEdgeInsetsMake(4, -10, 4, 20);
     UIBarButtonItem *leftbutton = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.leftBarButtonItem = leftbutton;

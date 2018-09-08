@@ -19,7 +19,3 @@
 @interface HJDRegisterAgreementView : UIView
 @property(nonatomic, assign) BOOL selected;
 @end
-
-@interface HJDCustomerServiceView : UIView
-
-@end

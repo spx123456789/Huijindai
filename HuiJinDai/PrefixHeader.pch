@@ -42,16 +42,16 @@
 #define kRGBA_Color(r, g, b, a) [UIColor colorWithRed:r / 255.f green:g / 255.f blue:b / 255.f alpha:a]
 #define kBlack [UIColor blackColor]
 #define kWithe [UIColor whiteColor]
-#define kGray [UIColor grayColor]
+#define kLineColor kRGB_Color(0xEB, 0xEB, 0xEB)
 #define kControllerBackgroundColor kRGB_Color(255, 255, 255)
-#define kMainColor kRGB_Color(255, 149, 0)
+#define kMainColor kRGB_Color(0xf5, 0x97, 0x01)
 
 #define kImage(name) [UIImage imageNamed:name]
 #pragma mark - 屏幕尺寸
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 #define kSafeAreaTopHeight (kScreenHeight == 812.0 ? 88 : 64)
-#define kStatusBarAddHight (kScreenHeight == 812.0 ? 24 : 0)
+#define kStatusBarAddHeight (kScreenHeight == 812.0 ? 24 : 0)
 #define kStatusBarHeight (kScreenHeight == 812.0 ? 44 : 20)
 #define kSafeAreaBottomHeight (kScreenHeight == 812.0 ? 34 : 0)
 #define kTabBarHeight 49

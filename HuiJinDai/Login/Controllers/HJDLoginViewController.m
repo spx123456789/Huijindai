@@ -9,6 +9,7 @@
 #import "HJDLoginViewController.h"
 #import "HJDRegisterViewController.h"
 #import "HJDTextFieldView.h"
+#import "HJDCustomerServiceView.h"
 #import "AppDelegate.h"
 
 @interface HJDLoginViewController ()
@@ -34,8 +35,8 @@
     if (!_verifiCodeButton) {
         _verifiCodeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_verifiCodeButton setTitle:@"发送验证码" forState:UIControlStateNormal];
-        [_verifiCodeButton setTitleColor:kBlack forState:UIControlStateNormal];
-        _verifiCodeButton.titleLabel.font = kFont16;
+        [_verifiCodeButton setTitleColor:kRGB_Color(0x66, 0x66, 0x66) forState:UIControlStateNormal];
+        _verifiCodeButton.titleLabel.font = kFont15;
     }
     return _verifiCodeButton;
 }
@@ -44,10 +45,11 @@
     if (!_loginButton) {
         _loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_loginButton setTitle:@"登录" forState:UIControlStateNormal];
-        [_loginButton setTitleColor:kWithe forState:UIControlStateNormal];
+        [_loginButton setTitleColor:kRGB_Color(0xff, 0xff, 0xff) forState:UIControlStateNormal];
         [_loginButton setBackgroundColor:kMainColor];
+        _loginButton.titleLabel.font = kFont15;
         _loginButton.layer.masksToBounds = YES;
-        _loginButton.layer.cornerRadius = 5.f;
+        _loginButton.layer.cornerRadius = 4.f;
         [_loginButton addTarget:self action:@selector(loginButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _loginButton;
@@ -57,8 +59,8 @@
     if (!_registerButton) {
         _registerButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_registerButton setTitle:@"注册" forState:UIControlStateNormal];
-        [_registerButton setTitleColor:kBlack forState:UIControlStateNormal];
-        _registerButton.titleLabel.font = kFont14;
+        [_registerButton setTitleColor:kRGB_Color(0x33, 0x33, 0x33) forState:UIControlStateNormal];
+        _registerButton.titleLabel.font = kFont15;
         [_registerButton addTarget:self action:@selector(registerButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _registerButton;
@@ -78,50 +80,52 @@
 - (void)setUpUI {
     [self.view addSubview:self.bgView];
     
-    self.registerButton.frame = CGRectMake(kScreenWidth - 50 , 24, 44, 20);
+    self.registerButton.frame = CGRectMake(kScreenWidth - 58 , 24, 44, 20);
     [self.bgView addSubview:self.registerButton];
     
-    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(20, 84, kScreenWidth - 40, 50)];
+    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(24, 84, kScreenWidth - 48, 30)];
     label1.text = @"手机快捷登录";
-    label1.font = [UIFont boldSystemFontOfSize:30];
+    label1.font = [UIFont boldSystemFontOfSize:28];
+    label1.textColor = kRGB_Color(0x33, 0x33, 0x33);
     [self.bgView addSubview:label1];
     
-    UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 135, kScreenWidth - 40, 50)];
-    label2.text = @"未注册的用户可以点击右上角注册按钮来\n注册您的账号";
-    label2.textColor = kGray;
-    label2.font = kFont14;
+    UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(24, 136, kScreenWidth - 48, 40)];
+    label2.text = @"未注册的用户可以点击右上角注册按钮来注册您的账号";
+    label2.textColor = kRGB_Color(0x99, 0x99, 0x99);
+    label2.font = kFont15;
     label2.numberOfLines = 0;
     [self.bgView addSubview:label2];
     
-    _phoneView = [self createTextFieldWithFrame:CGRectMake(20, 200, kScreenWidth - 40 - 100, 30) placeholder:@"请输入手机号码"];
+    _phoneView = [self createTextFieldWithFrame:CGRectMake(24, 222, kScreenWidth - 48 - 100, 20) placeholder:@"请输入手机号码"];
     [self.bgView addSubview:_phoneView];
     
-    UIView *lineView1 = [[UIView alloc] initWithFrame:CGRectMake(20, 231, kScreenWidth - 40, 0.5)];
-    lineView1.backgroundColor = kGray;
+    UIView *lineView1 = [[UIView alloc] initWithFrame:CGRectMake(24, 258, kScreenWidth - 48, 1)];
+    lineView1.backgroundColor = kLineColor;
     [self.bgView addSubview:lineView1];
     
-    _verifiCodeView = [self createTextFieldWithFrame:CGRectMake(20, 255, kScreenWidth - 40, 30) placeholder:@"请输入短信验证码"];
+    _verifiCodeView = [self createTextFieldWithFrame:CGRectMake(24, 288, kScreenWidth - 48, 20) placeholder:@"请输入短信验证码"];
     [self.bgView addSubview:_verifiCodeView];
     
-    UIView *lineView2 = [[UIView alloc] initWithFrame:CGRectMake(20, 286, kScreenWidth - 40, 0.5)];
-    lineView2.backgroundColor = kGray;
+    UIView *lineView2 = [[UIView alloc] initWithFrame:CGRectMake(24, 324, kScreenWidth - 48, 1)];
+    lineView2.backgroundColor = kLineColor;
     [self.bgView addSubview:lineView2];
     
-    self.verifiCodeButton.frame = CGRectMake(kScreenWidth - 120, 200, 100, 30);
+    self.verifiCodeButton.frame = CGRectMake(kScreenWidth - 105, 222, 80, 20);
     [self.bgView addSubview:self.verifiCodeButton];
     
-    self.loginButton.frame = CGRectMake(20, 320, kScreenWidth - 40, 40);
+    self.loginButton.frame = CGRectMake(24, 350, kScreenWidth - 48, 44);
     [self.bgView addSubview:self.loginButton];
     
-    _customServiceView = [[HJDCustomerServiceView alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 75, kScreenHeight - 80, 150, 45)];
+    _customServiceView = [[HJDCustomerServiceView alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 70, kScreenHeight - kStatusBarHeight - 60, 140, 30)];
     [self.bgView addSubview:_customServiceView];
     
 }
 
 - (UITextField *)createTextFieldWithFrame:(CGRect)rect placeholder:(NSString *)placeholder {
     UITextField *textField = [[UITextField alloc] initWithFrame:rect];
-    textField.placeholder = placeholder;
-    textField.font = kFont16;
+    textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:@{ NSFontAttributeName : kFont15, NSForegroundColorAttributeName : kRGB_Color(0xd4, 0xd4, 0xd4)}];
+    textField.textColor = kRGB_Color(0x33, 0x33, 0x33);
+    textField.font = kFont15;
     return textField;
 }
 

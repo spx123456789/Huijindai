@@ -18,8 +18,8 @@
 - (UILabel *)textLabel {
     if (!_textLabel) {
         _textLabel = [[UILabel alloc] init];
-        _textLabel.font = kFont14;
-        _textLabel.textColor = kBlack;
+        _textLabel.font = kFont15;
+        _textLabel.textColor = kRGB_Color(0x66, 0x66, 0x66);
     }
     return _textLabel;
 }
@@ -27,9 +27,9 @@
 - (UITextField *)textField {
     if (!_textField) {
         _textField = [[UITextField alloc] init];
-        _textField.font = kFont14;
+        _textField.font = kFont15;
         _textField.delegate = self;
-        //_textField.borderStyle = UITextBorderStyleRoundedRect;
+        _textField.textColor = kRGB_Color(0x33, 0x33, 0x33);
     }
     return _textField;
 }
@@ -42,29 +42,29 @@
         [self addSubview:self.textLabel];
         [self addSubview:self.textField];
         self.textLabel.text = text;
-        self.textField.placeholder = placeholder;
+        self.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:@{ NSFontAttributeName : kFont15, NSForegroundColorAttributeName : kRGB_Color(0xd4, 0xd4, 0xd4)}];
         self.textField.tag = fieldTag;
         
         [self.textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self).offset(20);
-            make.top.bottom.equalTo(self);
-            make.width.equalTo(@80);
+            make.left.equalTo(self).offset(24);
+            make.top.equalTo(self).offset(30);
+            make.size.mas_equalTo(CGSizeMake(47, 16));
         }];
         
         [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.textLabel.mas_right).offset(5);
-            make.top.bottom.equalTo(self);
-            make.right.equalTo(self).offset(-20);
+            make.left.equalTo(self.textLabel.mas_right).offset(30);
+            make.top.bottom.equalTo(self.textLabel);
+            make.right.equalTo(self).offset(-24);
         }];
         
         UIView *lineView = [[UIView alloc] init];
-        lineView.backgroundColor = kControllerBackgroundColor;
+        lineView.backgroundColor = kLineColor;
         [self addSubview:lineView];
         
         [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self).offset(20);
-            make.right.equalTo(self).offset(-20);
-            make.height.equalTo(@2);
+            make.left.equalTo(self).offset(24);
+            make.right.equalTo(self).offset(-24);
+            make.height.equalTo(@1);
             make.bottom.equalTo(self).offset(-1);
         }];
     }
@@ -76,7 +76,7 @@
 }
 
 - (void)setFieldPlaceholder:(NSString *)fieldPlaceholder {
-    self.textField.placeholder = fieldPlaceholder;
+    self.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:fieldPlaceholder attributes:@{ NSFontAttributeName : kFont15, NSForegroundColorAttributeName : kRGB_Color(0xd4, 0xd4, 0xd4)}];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -97,7 +97,7 @@
     if (!_label) {
         _label = [[UILabel alloc] init];
         _label.text = @"同意亚投行金服用户协议";
-        _label.textColor = kBlack;
+        _label.textColor = kRGB_Color(0x99, 0x99, 0x99);
         _label.font = kFont12;
     }
     return _label;
@@ -141,50 +141,4 @@
     [_selectButton setImage:image forState:UIControlStateNormal];
 }
 
-@end
-
-#pragma mark - HJDCustomerServiceView
-@interface HJDCustomerServiceView()
-@property(nonatomic, strong) UIImageView *imgView;
-@property(nonatomic, strong) UILabel *phoneLabel;
-@end
-
-@implementation HJDCustomerServiceView
-- (UIImageView *)imgView {
-    if (!_imgView) {
-        _imgView = [[UIImageView alloc] initWithImage:kImage(@"3.png")];
-    }
-    return _imgView;
-}
-
-- (UILabel *)phoneLabel {
-    if (!_phoneLabel) {
-        _phoneLabel = [[UILabel alloc] init];
-        _phoneLabel.text = @"400-250-1234";
-        _phoneLabel.textColor = kMainColor;
-        _phoneLabel.font = kFont14;
-    }
-    return _phoneLabel;
-}
-
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self addSubview:self.imgView];
-        [self addSubview:self.phoneLabel];
-        
-        [self.imgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self);
-            make.centerY.equalTo(self);
-            make.size.mas_equalTo(CGSizeMake(44, 44));
-        }];
-        
-        [self.phoneLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.imgView.mas_right).offset(2);
-            make.centerY.equalTo(self);
-            make.size.mas_equalTo(CGSizeMake(100, 30));
-        }];
-    }
-    return self;
-}
 @end

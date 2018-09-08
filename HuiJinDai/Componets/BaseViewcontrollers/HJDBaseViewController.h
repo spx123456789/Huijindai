@@ -10,6 +10,9 @@
 
 @interface HJDBaseViewController : UIViewController
 
+//设置导航栏title
+- (void)setNavTitle:(NSString *)navTitle;
+
 //显示/隐藏导航
 - (void)hideNavigationBar;
 - (void)showNavigationBar;

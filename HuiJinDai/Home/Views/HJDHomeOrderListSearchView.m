@@ -37,7 +37,7 @@
         [_sureButton setTitleColor:kBlack forState:UIControlStateNormal];
         _sureButton.titleLabel.font = kFont14;
         _sureButton.layer.borderWidth = 0.5;
-        _sureButton.layer.borderColor = kGray.CGColor;
+        _sureButton.layer.borderColor = kLineColor.CGColor;
         [_sureButton addTarget:self action:@selector(sureButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _sureButton;
@@ -51,7 +51,7 @@
         [_cancelButton setTitleColor:kBlack forState:UIControlStateNormal];
         _cancelButton.titleLabel.font = kFont14;
         _cancelButton.layer.borderWidth = 0.5;
-        _cancelButton.layer.borderColor = kGray.CGColor;
+        _cancelButton.layer.borderColor = kLineColor.CGColor;
         [_cancelButton addTarget:self action:@selector(cancelButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _cancelButton;
@@ -61,7 +61,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.layer.borderWidth = 0.5;
-        self.layer.borderColor = kGray.CGColor;
+        self.layer.borderColor = kLineColor.CGColor;
         self.backgroundColor = kWithe;
         [self addSubview:self.textField];
         [self addSubview:self.sureButton];

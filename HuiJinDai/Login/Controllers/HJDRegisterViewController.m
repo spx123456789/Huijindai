@@ -9,6 +9,7 @@
 #import "HJDRegisterViewController.h"
 #import "HJDLoginViewController.h"
 #import "HJDTextFieldView.h"
+#import "HJDCustomerServiceView.h"
 #import "HJDCityPickerView.h"
 
 @interface HJDRegisterViewController ()<HJDCityPickerViewDelegate>
@@ -40,8 +41,8 @@
     if (!_verifiCodeButton) {
         _verifiCodeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_verifiCodeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
-        [_verifiCodeButton setTitleColor:kBlack forState:UIControlStateNormal];
-        _verifiCodeButton.titleLabel.font = kFont14;
+        [_verifiCodeButton setTitleColor:kRGB_Color(0x66, 0x66, 0x66) forState:UIControlStateNormal];
+        _verifiCodeButton.titleLabel.font = kFont15;
     }
     return _verifiCodeButton;
 }
@@ -49,7 +50,7 @@
 - (UIButton *)cityNextButton {
     if (!_cityNextButton) {
         _cityNextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_cityNextButton setImage:kImage(@"2.png") forState:UIControlStateNormal];
+        [_cityNextButton setImage:kImage(@"进入.png") forState:UIControlStateNormal];
         [_cityNextButton addTarget:self action:@selector(selectCity:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _cityNextButton;
@@ -59,10 +60,11 @@
     if (!_registerButton) {
         _registerButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_registerButton setTitle:@"立即注册" forState:UIControlStateNormal];
-        [_registerButton setTitleColor:kWithe forState:UIControlStateNormal];
+        [_registerButton setTitleColor:kRGB_Color(0xff, 0xff, 0xff) forState:UIControlStateNormal];
         [_registerButton setBackgroundColor:kMainColor];
+        _registerButton.titleLabel.font = kFont15;
         _registerButton.layer.masksToBounds = YES;
-        _registerButton.layer.cornerRadius = 5.f;
+        _registerButton.layer.cornerRadius = 4.f;
         [_registerButton addTarget:self action:@selector(registerButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _registerButton;
@@ -72,12 +74,13 @@
     if (!_loginButton) {
         _loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_loginButton setTitle:@"已有账号立即登录" forState:UIControlStateNormal];
-        [_loginButton setTitleColor:kGray forState:UIControlStateNormal];
+        [_loginButton setTitleColor:kRGB_Color(0x99, 0x99, 0x99) forState:UIControlStateNormal];
         [_loginButton setBackgroundColor:kControllerBackgroundColor];
+        _loginButton.titleLabel.font = kFont15;
         _loginButton.layer.masksToBounds = YES;
-        _loginButton.layer.cornerRadius = 5.f;
+        _loginButton.layer.cornerRadius = 4.f;
         _loginButton.layer.borderWidth = 1.f;
-        _loginButton.layer.borderColor = kGray.CGColor;
+        _loginButton.layer.borderColor = kRGB_Color(0x99, 0x99, 0x99).CGColor;
         [_loginButton addTarget:self action:@selector(loginButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _loginButton;
@@ -99,69 +102,53 @@
 - (void)setUpUI {
     [self.view addSubview:self.bgView];
     
-    CGFloat topHeight = 35;
-    _nameView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight, kScreenWidth, 30) text:@"姓名:" fieldPlaceholder:@"请输入姓名" tag:10];
+    CGFloat topHeight = 22;
+    _nameView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight, kScreenWidth, 63) text:@"姓名" fieldPlaceholder:@"请输入姓名" tag:10];
     [self.bgView addSubview:_nameView];
     
-    [self addLineViewWithY:topHeight + 31];
-    
-    topHeight += 45;
-    _phoneView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight, kScreenWidth - 10 - 80, 30) text:@"手机号码:" fieldPlaceholder:@"请输入手机号码" tag:11];
+    topHeight += 63;
+    _phoneView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight, kScreenWidth, 63) text:@"手机号" fieldPlaceholder:@"请输入手机号码" tag:11];
     [self.bgView addSubview:_phoneView];
-    
-    [self addLineViewWithY:topHeight + 31];
-    
-    self.verifiCodeButton.frame = CGRectMake(kScreenWidth - 90, topHeight, 80, 30);
+  
+    self.verifiCodeButton.frame = CGRectMake(kScreenWidth - 105, topHeight + 27, 80, 20);
     [self.bgView addSubview:self.verifiCodeButton];
     
-    topHeight += 45;
-    _verifiCodeView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight, kScreenWidth, 30) text:@"验证码:" fieldPlaceholder:@"请输入验证码" tag:12];
+    topHeight += 63;
+    _verifiCodeView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight, kScreenWidth, 63) text:@"验证码" fieldPlaceholder:@"请输入验证码" tag:12];
     [self.bgView addSubview:_verifiCodeView];
     
-    [self addLineViewWithY:topHeight + 31];
-    
-    topHeight += 45;
-    _cityView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight, kScreenWidth - 10 - 30, 30) text:@"城市:" fieldPlaceholder:@"请选择城市" tag:13];
+    topHeight += 63;
+    _cityView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight, kScreenWidth, 63) text:@"城市" fieldPlaceholder:@"请选择城市" tag:13];
     _cityView.fieldCanEdit = NO;
     [self.bgView addSubview:_cityView];
     
-    [self addLineViewWithY:topHeight + 31];
-    
-    self.cityNextButton.frame = CGRectMake(kScreenWidth - 40, topHeight, 30, 30);
+    self.cityNextButton.frame = CGRectMake(kScreenWidth - 45, topHeight + 20, 30, 30);
     [self.bgView addSubview:self.cityNextButton];
     
-    topHeight += 45;
-    _inviteCodeView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight, kScreenWidth, 30) text:@"邀请码:" fieldPlaceholder:@"请输入邀请码" tag:14];
+    topHeight += 63;
+    _inviteCodeView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight, kScreenWidth, 63) text:@"邀请码" fieldPlaceholder:@"请输入邀请码" tag:14];
     [self.bgView addSubview:_inviteCodeView];
     
-    [self addLineViewWithY:topHeight + 31];
-    
-    topHeight += 40;
-    _agreementView = [[HJDRegisterAgreementView alloc] initWithFrame:CGRectMake(10, topHeight, 260, 35)];
+    topHeight += (63 + 12);
+    _agreementView = [[HJDRegisterAgreementView alloc] initWithFrame:CGRectMake(24, topHeight, 260, 15)];
     [self.bgView addSubview:_agreementView];
     
-    topHeight += 50;
-    self.registerButton.frame = CGRectMake(20, topHeight, kScreenWidth - 40, 40);
+    topHeight += 40;
+    self.registerButton.frame = CGRectMake(24, topHeight, kScreenWidth - 48, 44);
     [self.bgView addSubview:self.registerButton];
     
-    topHeight += 55;
-    self.loginButton.frame = CGRectMake(20, topHeight, kScreenWidth - 40, 40);
+    topHeight += (44 + 12);
+    self.loginButton.frame = CGRectMake(24, topHeight, kScreenWidth - 48, 44);
     [self.bgView addSubview:self.loginButton];
 
-    _customServiceView = [[HJDCustomerServiceView alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 75, kScreenHeight -kSafeAreaTopHeight - 70, 150, 45)];
+    _customServiceView = [[HJDCustomerServiceView alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 70, kScreenHeight -kSafeAreaTopHeight - 60, 100, 30)];
     [self.bgView addSubview:_customServiceView];
-}
-
-- (void)addLineViewWithY:(CGFloat)Y {
-    UIView *lineView2 = [[UIView alloc] initWithFrame:CGRectMake(20, Y, kScreenWidth - 40, 0.5)];
-    lineView2.backgroundColor = kGray;
-    [self.bgView addSubview:lineView2];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"账号注册";
+    [self setNavTitle:@"账号注册"];
     [self setUpUI];
 }
 

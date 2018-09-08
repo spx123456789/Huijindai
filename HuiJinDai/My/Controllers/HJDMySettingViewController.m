@@ -108,7 +108,7 @@
 
 - (void)addLineViewWithY:(CGFloat)Y {
     UIView *lineView2 = [[UIView alloc] initWithFrame:CGRectMake(20, Y, kScreenWidth - 40, 0.5)];
-    lineView2.backgroundColor = kGray;
+    lineView2.backgroundColor = kLineColor;
     [self.bgView addSubview:lineView2];
 }
 

@@ -18,7 +18,7 @@
 - (UIView *)bgView {
     if (!_bgView) {
         _bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth - 88 - 20, 44)];
-        _bgView.backgroundColor = kGray;
+        _bgView.backgroundColor = kLineColor;
         _bgView.layer.masksToBounds = YES;
         _bgView.layer.cornerRadius = 5.f;
     }

@@ -50,7 +50,7 @@
 - (UILabel *)timeLabel {
     if (!_timeLabel) {
         _timeLabel = [[UILabel alloc] init];
-        _timeLabel.textColor = kGray;
+        _timeLabel.textColor = kLineColor;
         _timeLabel.font = kFont12;
     }
     return _timeLabel;
@@ -59,7 +59,7 @@
 - (UILabel *)addressLabel {
     if (!_addressLabel) {
         _addressLabel = [[UILabel alloc] init];
-        _addressLabel.textColor = kGray;
+        _addressLabel.textColor = kLineColor;
         _addressLabel.font = kFont12;
     }
     return _addressLabel;
@@ -68,7 +68,7 @@
 - (UILabel *)nameLabel {
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc] init];
-        _nameLabel.textColor = kGray;
+        _nameLabel.textColor = kLineColor;
         _nameLabel.font = kFont12;
     }
     return _nameLabel;
@@ -77,7 +77,7 @@
 - (UILabel *)moneyLabel {
     if (!_moneyLabel) {
         _moneyLabel = [[UILabel alloc] init];
-        _moneyLabel.textColor = kGray;
+        _moneyLabel.textColor = kLineColor;
         _moneyLabel.font = kFont12;
     }
     return _moneyLabel;
