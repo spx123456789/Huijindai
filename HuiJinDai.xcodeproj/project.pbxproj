@@ -14,9 +14,6 @@
 		169C07842141744900E9CDD0 /* HJDMyInviteCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 169C07832141744900E9CDD0 /* HJDMyInviteCodeView.m */; };
 		16B6DEA5213988BB00CF8C8D /* HJDCityPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B6DEA4213988BB00CF8C8D /* HJDCityPickerView.m */; };
 		16B91D842143A61500AC1661 /* HJDCustomerServiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B91D832143A61500AC1661 /* HJDCustomerServiceView.m */; };
-		16C4E19421381BFC004268C4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E19321381BFC004268C4 /* AppDelegate.m */; };
-		16C4E19C21381BFD004268C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16C4E19B21381BFD004268C4 /* Assets.xcassets */; };
-		16C4E1A221381BFD004268C4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E1A121381BFD004268C4 /* main.m */; };
 		16C4E1AC21381BFD004268C4 /* HuiJinDaiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E1AB21381BFD004268C4 /* HuiJinDaiTests.m */; };
 		16C4E1B721381BFE004268C4 /* HuiJinDaiUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E1B621381BFE004268C4 /* HuiJinDaiUITests.m */; };
 		16C4E1D52138255B004268C4 /* HJDRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E1D42138255B004268C4 /* HJDRegisterViewController.m */; };
@@ -142,6 +139,11 @@
 		AA7D7FE9214398E200E0D843 /* UIView+HMCore.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D7FE6214398E200E0D843 /* UIView+HMCore.m */; };
 		AA7D7FEA214398E200E0D843 /* NSObject+HMCore.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D7FE8214398E200E0D843 /* NSObject+HMCore.m */; };
 		AA7D7FED2143A07E00E0D843 /* UIColor+HMCore.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D7FEC2143A07E00E0D843 /* UIColor+HMCore.m */; };
+		AA7D7FF52143B70300E0D843 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7FF02143B70300E0D843 /* Assets.xcassets */; };
+		AA7D7FF62143B70300E0D843 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D7FF12143B70300E0D843 /* main.m */; };
+		AA7D7FF72143B70300E0D843 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D7FF22143B70300E0D843 /* AppDelegate.m */; };
+		AA7D7FF82143B70300E0D843 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7FF42143B70300E0D843 /* Info.plist */; };
+		AA7D7FFA2143B7E300E0D843 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7FF92143B7E300E0D843 /* Launch Screen.storyboard */; };
 		AAD24F6421394B3800298386 /* HKScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD24F6321394B3800298386 /* HKScrollView.m */; };
 		AAD24F6721394BA200298386 /* HJDHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD24F6621394BA200298386 /* HJDHomeViewController.m */; };
 		AAD24F6D21394D8400298386 /* HJDBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD24F6C21394D8400298386 /* HJDBaseViewController.m */; };
@@ -184,11 +186,6 @@
 		16B91D822143A61500AC1661 /* HJDCustomerServiceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDCustomerServiceView.h; sourceTree = "<group>"; };
 		16B91D832143A61500AC1661 /* HJDCustomerServiceView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDCustomerServiceView.m; sourceTree = "<group>"; };
 		16C4E18F21381BFC004268C4 /* HuiJinDai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HuiJinDai.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		16C4E19221381BFC004268C4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		16C4E19321381BFC004268C4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		16C4E19B21381BFD004268C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		16C4E1A021381BFD004268C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		16C4E1A121381BFD004268C4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		16C4E1A721381BFD004268C4 /* HuiJinDaiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HuiJinDaiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		16C4E1AB21381BFD004268C4 /* HuiJinDaiTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HuiJinDaiTests.m; sourceTree = "<group>"; };
 		16C4E1AD21381BFD004268C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -201,7 +198,6 @@
 		16C4E1D7213826D0004268C4 /* HJDTextFieldView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDTextFieldView.m; sourceTree = "<group>"; };
 		16C4F34A2140019100C3F76B /* HJDHomeOrderListSearchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeOrderListSearchView.h; sourceTree = "<group>"; };
 		16C4F34B2140019100C3F76B /* HJDHomeOrderListSearchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeOrderListSearchView.m; sourceTree = "<group>"; };
-		16DD8DE621382A3400C5AA4E /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		16EDD2BD213AC4A000E21AB2 /* HJDLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDLoginViewController.h; sourceTree = "<group>"; };
 		16EDD2BE213AC4A000E21AB2 /* HJDLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDLoginViewController.m; sourceTree = "<group>"; };
 		16EDD2C2213AD7EC00E21AB2 /* HJDMyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDMyViewController.h; sourceTree = "<group>"; };
@@ -350,6 +346,13 @@
 		AA7D7FE8214398E200E0D843 /* NSObject+HMCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+HMCore.m"; sourceTree = "<group>"; };
 		AA7D7FEB2143A07E00E0D843 /* UIColor+HMCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HMCore.h"; sourceTree = "<group>"; };
 		AA7D7FEC2143A07E00E0D843 /* UIColor+HMCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HMCore.m"; sourceTree = "<group>"; };
+		AA7D7FEF2143B70300E0D843 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		AA7D7FF02143B70300E0D843 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AA7D7FF12143B70300E0D843 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AA7D7FF22143B70300E0D843 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		AA7D7FF32143B70300E0D843 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		AA7D7FF42143B70300E0D843 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA7D7FF92143B7E300E0D843 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		AAD24F6221394B3800298386 /* HKScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKScrollView.h; sourceTree = "<group>"; };
 		AAD24F6321394B3800298386 /* HKScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKScrollView.m; sourceTree = "<group>"; };
 		AAD24F6521394BA200298386 /* HJDHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeViewController.h; sourceTree = "<group>"; };
@@ -448,12 +451,7 @@
 				AAD24F5E21394B1B00298386 /* Home */,
 				16C4E1C921381CCB004268C4 /* Login */,
 				16C4E1C421381CCB004268C4 /* My */,
-				16C4E19221381BFC004268C4 /* AppDelegate.h */,
-				16C4E19321381BFC004268C4 /* AppDelegate.m */,
-				16C4E19B21381BFD004268C4 /* Assets.xcassets */,
-				16C4E1A021381BFD004268C4 /* Info.plist */,
-				16C4E1A121381BFD004268C4 /* main.m */,
-				16DD8DE621382A3400C5AA4E /* PrefixHeader.pch */,
+				AA7D7FEE2143B70300E0D843 /* Supporting Files */,
 			);
 			path = HuiJinDai;
 			sourceTree = "<group>";
@@ -728,6 +726,20 @@
 			path = Macros;
 			sourceTree = "<group>";
 		};
+		AA7D7FEE2143B70300E0D843 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AA7D7FEF2143B70300E0D843 /* AppDelegate.h */,
+				AA7D7FF02143B70300E0D843 /* Assets.xcassets */,
+				AA7D7FF12143B70300E0D843 /* main.m */,
+				AA7D7FF22143B70300E0D843 /* AppDelegate.m */,
+				AA7D7FF32143B70300E0D843 /* PrefixHeader.pch */,
+				AA7D7FF42143B70300E0D843 /* Info.plist */,
+				AA7D7FF92143B7E300E0D843 /* Launch Screen.storyboard */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		AAD24F5E21394B1B00298386 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -960,6 +972,7 @@
 				AA7D7F922143586100E0D843 /* 首页选择城市@3x.png in Resources */,
 				AA7D7FC42143586100E0D843 /* 返回按钮@2x.png in Resources */,
 				AA7D7FAD2143586100E0D843 /* 启动页logo@2x.png in Resources */,
+				AA7D7FFA2143B7E300E0D843 /* Launch Screen.storyboard in Resources */,
 				AA7D7F7D2143586100E0D843 /* 首页通知@2x.png in Resources */,
 				AA7D7F912143586100E0D843 /* 启动页右下@2x.png in Resources */,
 				AA7D7FAA2143586100E0D843 /* 返回按钮@3x.png in Resources */,
@@ -967,7 +980,6 @@
 				AA7D7FC72143586100E0D843 /* 首页信贷@3x.png in Resources */,
 				AA7D7FA92143586100E0D843 /* 启动页logo@3x.png in Resources */,
 				AA7D7FC12143586100E0D843 /* 工单详情拒单@3x.png in Resources */,
-				16C4E19C21381BFD004268C4 /* Assets.xcassets in Resources */,
 				AA7D7F7C2143586100E0D843 /* 共党详情已拒单@3x.png in Resources */,
 				AA7D7FB12143586100E0D843 /* 进入@3x.png in Resources */,
 				AA7D7F8C2143586100E0D843 /* 订单进程搜索中的下拉箭头@2x.png in Resources */,
@@ -999,6 +1011,7 @@
 				AA7D7F882143586100E0D843 /* 订单管理我的订单@2x.png in Resources */,
 				AA7D7FD42143586100E0D843 /* 工单详情已放款@2x.png in Resources */,
 				AA7D7F952143586100E0D843 /* 暂无网络@2x.png in Resources */,
+				AA7D7FF52143B70300E0D843 /* Assets.xcassets in Resources */,
 				AA7D7FD52143586100E0D843 /* 底部导航我的未选中@2x.png in Resources */,
 				AA7D7F772143586100E0D843 /* 订单管理我的订单@3x.png in Resources */,
 				AA7D7FBF2143586100E0D843 /* 我的经纪人拨打电话@2x.png in Resources */,
@@ -1009,6 +1022,7 @@
 				AA7D7F962143586100E0D843 /* 添加证件@2x.png in Resources */,
 				AA7D7F832143586100E0D843 /* 工单详情查看审查报告@2x.png in Resources */,
 				AA7D7FAF2143586100E0D843 /* 工单详情对勾@3x.png in Resources */,
+				AA7D7FF82143B70300E0D843 /* Info.plist in Resources */,
 				AA7D7FD02143586100E0D843 /* 进入@2x.png in Resources */,
 				AA7D7F862143586100E0D843 /* 首页通知@3x.png in Resources */,
 				AA7D7FCE2143586100E0D843 /* 我的页背景@2x.png in Resources */,
@@ -1095,6 +1109,7 @@
 				16EDD333213C323700E21AB2 /* HJDOrderCollectionViewCell.m in Sources */,
 				16EDD32A213C176000E21AB2 /* HJDHomeOrderListTableViewCell.m in Sources */,
 				162904D42140181300AC151D /* HJDHomeOrderManageViewController.m in Sources */,
+				AA7D7FF62143B70300E0D843 /* main.m in Sources */,
 				AAD24F6421394B3800298386 /* HKScrollView.m in Sources */,
 				16EDD2BF213AC4A000E21AB2 /* HJDLoginViewController.m in Sources */,
 				AA7D7FE4214358AA00E0D843 /* HJDHomeTableViewCell.m in Sources */,
@@ -1106,6 +1121,7 @@
 				16EDD330213C318100E21AB2 /* HJDOrderAuditViewController.m in Sources */,
 				AAD24F7021394EA900298386 /* UITableView+HJD.m in Sources */,
 				16EDD317213C06E600E21AB2 /* HJDMySearchFieldView.m in Sources */,
+				AA7D7FF72143B70300E0D843 /* AppDelegate.m in Sources */,
 				AA7D7FEA214398E200E0D843 /* NSObject+HMCore.m in Sources */,
 				AA7D7FDE2143589300E0D843 /* HJDHomeModel.m in Sources */,
 				AA7D7FE3214358AA00E0D843 /* HJDButton.m in Sources */,
@@ -1119,8 +1135,6 @@
 				16EDD318213C06E600E21AB2 /* HJDMyAgentTableViewCell.m in Sources */,
 				16C4E1D52138255B004268C4 /* HJDRegisterViewController.m in Sources */,
 				169C07842141744900E9CDD0 /* HJDMyInviteCodeView.m in Sources */,
-				16C4E1A221381BFD004268C4 /* main.m in Sources */,
-				16C4E19421381BFC004268C4 /* AppDelegate.m in Sources */,
 				16EDD316213C06E600E21AB2 /* HJDMyTableViewCell.m in Sources */,
 				AA7D7FE9214398E200E0D843 /* UIView+HMCore.m in Sources */,
 				1690803F213EC64300AA2575 /* HJDHomeSegmentView.m in Sources */,
@@ -1276,11 +1290,10 @@
 			baseConfigurationReference = 3934C1A1D46330E827334147 /* Pods-HuiJinDai.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/HuiJinDai/PrefixHeader.pch";
-				INFOPLIST_FILE = HuiJinDai/Info.plist;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/HuiJinDai/Supporting Files/PrefixHeader.pch";
+				INFOPLIST_FILE = "HuiJinDai/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1296,11 +1309,10 @@
 			baseConfigurationReference = 716329259416E7FBB66B2DF9 /* Pods-HuiJinDai.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/HuiJinDai/PrefixHeader.pch";
-				INFOPLIST_FILE = HuiJinDai/Info.plist;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/HuiJinDai/Supporting Files/PrefixHeader.pch";
+				INFOPLIST_FILE = "HuiJinDai/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -21,7 +21,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"首页";
+    [self setupSubViews];
+    // Do any additional setup after loading the view.
+}
+
+- (void)setupSubViews {
+    [self setNavTitle:@"首页"];
     self.userType = HJDUserType_userManager;
     [self.view addSubview:self.tableView];
     NSArray *array = @[@"",@"",@""];
@@ -37,12 +42,6 @@
         @strongify(self);
         [self refreshDate];
     }];
-    // Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)refreshDate {
