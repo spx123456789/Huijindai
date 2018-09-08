@@ -46,6 +46,107 @@
 		16FFC51621397373008BCABC /* HJDRegisterManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FFC51521397373008BCABC /* HJDRegisterManger.m */; };
 		16FFC519213973A2008BCABC /* HJDRegisterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FFC518213973A2008BCABC /* HJDRegisterModel.m */; };
 		16FFC51C21397FDD008BCABC /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 16FFC51B21397FDD008BCABC /* 1.png */; };
+		AA7D7F762143586100E0D843 /* 暂无数据_03@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F142143585200E0D843 /* 暂无数据_03@3x.png */; };
+		AA7D7F772143586100E0D843 /* 订单管理我的订单@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F152143585200E0D843 /* 订单管理我的订单@3x.png */; };
+		AA7D7F782143586100E0D843 /* 首页工单管理@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F162143585200E0D843 /* 首页工单管理@2x.png */; };
+		AA7D7F792143586100E0D843 /* 底部导航我的未选中@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F172143585200E0D843 /* 底部导航我的未选中@3x.png */; };
+		AA7D7F7A2143586100E0D843 /* 首页选择城市@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F182143585300E0D843 /* 首页选择城市@2x.png */; };
+		AA7D7F7B2143586100E0D843 /* 工单审核（渠道权限）经纪人@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F192143585300E0D843 /* 工单审核（渠道权限）经纪人@3x.png */; };
+		AA7D7F7C2143586100E0D843 /* 共党详情已拒单@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F1A2143585300E0D843 /* 共党详情已拒单@3x.png */; };
+		AA7D7F7D2143586100E0D843 /* 首页通知@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F1B2143585300E0D843 /* 首页通知@2x.png */; };
+		AA7D7F7E2143586100E0D843 /* 启动页左下@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F1C2143585300E0D843 /* 启动页左下@3x.png */; };
+		AA7D7F7F2143586100E0D843 /* 首页车抵贷@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F1D2143585300E0D843 /* 首页车抵贷@2x.png */; };
+		AA7D7F802143586100E0D843 /* 邀请码朋友圈@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F1E2143585300E0D843 /* 邀请码朋友圈@2x.png */; };
+		AA7D7F812143586100E0D843 /* 暂无数据_03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F1F2143585400E0D843 /* 暂无数据_03@2x.png */; };
+		AA7D7F822143586100E0D843 /* 我的页背景@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F202143585400E0D843 /* 我的页背景@3x.png */; };
+		AA7D7F832143586100E0D843 /* 工单详情查看审查报告@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F212143585400E0D843 /* 工单详情查看审查报告@2x.png */; };
+		AA7D7F842143586100E0D843 /* 我的页客户经理@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F222143585400E0D843 /* 我的页客户经理@2x.png */; };
+		AA7D7F852143586100E0D843 /* 启动页左上@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F232143585400E0D843 /* 启动页左上@2x.png */; };
+		AA7D7F862143586100E0D843 /* 首页通知@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F242143585400E0D843 /* 首页通知@3x.png */; };
+		AA7D7F872143586100E0D843 /* 暂无网络@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F252143585400E0D843 /* 暂无网络@3x.png */; };
+		AA7D7F882143586100E0D843 /* 订单管理我的订单@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F262143585500E0D843 /* 订单管理我的订单@2x.png */; };
+		AA7D7F892143586100E0D843 /* 启动页左下@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F272143585500E0D843 /* 启动页左下@2x.png */; };
+		AA7D7F8A2143586100E0D843 /* 工单审核（渠道权限）经纪人@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F282143585500E0D843 /* 工单审核（渠道权限）经纪人@2x.png */; };
+		AA7D7F8B2143586100E0D843 /* 底部导航我的选中@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F292143585500E0D843 /* 底部导航我的选中@3x.png */; };
+		AA7D7F8C2143586100E0D843 /* 订单进程搜索中的下拉箭头@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F2A2143585500E0D843 /* 订单进程搜索中的下拉箭头@2x.png */; };
+		AA7D7F8D2143586100E0D843 /* 工单详情查看审查报告@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F2B2143585500E0D843 /* 工单详情查看审查报告@3x.png */; };
+		AA7D7F8E2143586100E0D843 /* 首页信贷@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F2C2143585600E0D843 /* 首页信贷@2x.png */; };
+		AA7D7F8F2143586100E0D843 /* 我的页经纪人@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F2D2143585600E0D843 /* 我的页经纪人@3x.png */; };
+		AA7D7F902143586100E0D843 /* 订单管理页搜索删除@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F2E2143585600E0D843 /* 订单管理页搜索删除@3x.png */; };
+		AA7D7F912143586100E0D843 /* 启动页右下@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F2F2143585600E0D843 /* 启动页右下@2x.png */; };
+		AA7D7F922143586100E0D843 /* 首页选择城市@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F302143585600E0D843 /* 首页选择城市@3x.png */; };
+		AA7D7F932143586100E0D843 /* 我的经纪人电话小图标@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F312143585700E0D843 /* 我的经纪人电话小图标@2x.png */; };
+		AA7D7F942143586100E0D843 /* 启动页左上@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F322143585700E0D843 /* 启动页左上@3x.png */; };
+		AA7D7F952143586100E0D843 /* 暂无网络@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F332143585700E0D843 /* 暂无网络@2x.png */; };
+		AA7D7F962143586100E0D843 /* 添加证件@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F342143585700E0D843 /* 添加证件@2x.png */; };
+		AA7D7F972143586100E0D843 /* 邀请码头像@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F352143585800E0D843 /* 邀请码头像@2x.png */; };
+		AA7D7F982143586100E0D843 /* 首页还款计算器@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F362143585800E0D843 /* 首页还款计算器@2x.png */; };
+		AA7D7F992143586100E0D843 /* 我的经纪人拨打电话@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F372143585800E0D843 /* 我的经纪人拨打电话@3x.png */; };
+		AA7D7F9A2143586100E0D843 /* 客服电话@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F382143585800E0D843 /* 客服电话@2x.png */; };
+		AA7D7F9B2143586100E0D843 /* 底部导航我的选中@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F392143585800E0D843 /* 底部导航我的选中@2x.png */; };
+		AA7D7F9C2143586100E0D843 /* 首页底部导航未选中@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F3A2143585800E0D843 /* 首页底部导航未选中@3x.png */; };
+		AA7D7F9D2143586100E0D843 /* 邀请码微信@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F3B2143585900E0D843 /* 邀请码微信@3x.png */; };
+		AA7D7F9E2143586100E0D843 /* 邀请码微信@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F3C2143585900E0D843 /* 邀请码微信@2x.png */; };
+		AA7D7F9F2143586100E0D843 /* 添加证件@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F3D2143585900E0D843 /* 添加证件@3x.png */; };
+		AA7D7FA02143586100E0D843 /* 底部导航首页选中@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F3E2143585900E0D843 /* 底部导航首页选中@2x.png */; };
+		AA7D7FA12143586100E0D843 /* 订单管理渠道代码@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F3F2143585900E0D843 /* 订单管理渠道代码@2x.png */; };
+		AA7D7FA22143586100E0D843 /* 启动页右上@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F402143585A00E0D843 /* 启动页右上@3x.png */; };
+		AA7D7FA32143586100E0D843 /* 工单详情对勾@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F412143585A00E0D843 /* 工单详情对勾@2x.png */; };
+		AA7D7FA42143586100E0D843 /* 启动页地球@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F422143585A00E0D843 /* 启动页地球@2x.png */; };
+		AA7D7FA52143586100E0D843 /* 首页还款计算器@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F432143585A00E0D843 /* 首页还款计算器@3x.png */; };
+		AA7D7FA62143586100E0D843 /* 启动页右下@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F442143585A00E0D843 /* 启动页右下@3x.png */; };
+		AA7D7FA72143586100E0D843 /* 我的页邀请码@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F452143585A00E0D843 /* 我的页邀请码@2x.png */; };
+		AA7D7FA82143586100E0D843 /* 启动页右上@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F462143585B00E0D843 /* 启动页右上@2x.png */; };
+		AA7D7FA92143586100E0D843 /* 启动页logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F472143585B00E0D843 /* 启动页logo@3x.png */; };
+		AA7D7FAA2143586100E0D843 /* 返回按钮@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F482143585B00E0D843 /* 返回按钮@3x.png */; };
+		AA7D7FAB2143586100E0D843 /* 我的页邀请码@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F492143585B00E0D843 /* 我的页邀请码@3x.png */; };
+		AA7D7FAC2143586100E0D843 /* 邀请码头像@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F4A2143585B00E0D843 /* 邀请码头像@3x.png */; };
+		AA7D7FAD2143586100E0D843 /* 启动页logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F4B2143585B00E0D843 /* 启动页logo@2x.png */; };
+		AA7D7FAE2143586100E0D843 /* 通知删除@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F4C2143585C00E0D843 /* 通知删除@2x.png */; };
+		AA7D7FAF2143586100E0D843 /* 工单详情对勾@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F4D2143585C00E0D843 /* 工单详情对勾@3x.png */; };
+		AA7D7FB02143586100E0D843 /* 首页底部导航未选中@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F4E2143585C00E0D843 /* 首页底部导航未选中@2x.png */; };
+		AA7D7FB12143586100E0D843 /* 进入@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F4F2143585D00E0D843 /* 进入@3x.png */; };
+		AA7D7FB22143586100E0D843 /* 首页房抵贷@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F502143585D00E0D843 /* 首页房抵贷@3x.png */; };
+		AA7D7FB32143586100E0D843 /* 首页工单管理@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F512143585D00E0D843 /* 首页工单管理@3x.png */; };
+		AA7D7FB42143586100E0D843 /* 我的页客户经理@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F522143585D00E0D843 /* 我的页客户经理@3x.png */; };
+		AA7D7FB52143586100E0D843 /* 订单管理页搜索删除@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F532143585D00E0D843 /* 订单管理页搜索删除@2x.png */; };
+		AA7D7FB62143586100E0D843 /* 首页工单审核@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F542143585E00E0D843 /* 首页工单审核@2x.png */; };
+		AA7D7FB72143586100E0D843 /* 底部导航首页选中@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F552143585E00E0D843 /* 底部导航首页选中@3x.png */; };
+		AA7D7FB82143586100E0D843 /* 我的经纪人电话小图标@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F562143585E00E0D843 /* 我的经纪人电话小图标@3x.png */; };
+		AA7D7FB92143586100E0D843 /* 报单删除上传图片@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F572143585E00E0D843 /* 报单删除上传图片@3x.png */; };
+		AA7D7FBA2143586100E0D843 /* 订单进程搜索中的下拉箭头@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F582143585E00E0D843 /* 订单进程搜索中的下拉箭头@3x.png */; };
+		AA7D7FBB2143586100E0D843 /* 订单管理渠道代码@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F592143585F00E0D843 /* 订单管理渠道代码@3x.png */; };
+		AA7D7FBC2143586100E0D843 /* 客服电话@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F5A2143585F00E0D843 /* 客服电话@3x.png */; };
+		AA7D7FBD2143586100E0D843 /* 我的默认头像@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F5B2143585F00E0D843 /* 我的默认头像@3x.png */; };
+		AA7D7FBE2143586100E0D843 /* 邀请码朋友圈@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F5C2143585F00E0D843 /* 邀请码朋友圈@3x.png */; };
+		AA7D7FBF2143586100E0D843 /* 我的经纪人拨打电话@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F5D2143585F00E0D843 /* 我的经纪人拨打电话@2x.png */; };
+		AA7D7FC02143586100E0D843 /* 工单详情已放款@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F5E2143585F00E0D843 /* 工单详情已放款@3x.png */; };
+		AA7D7FC12143586100E0D843 /* 工单详情拒单@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F5F2143586000E0D843 /* 工单详情拒单@3x.png */; };
+		AA7D7FC22143586100E0D843 /* 注册页对勾@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F602143586000E0D843 /* 注册页对勾@3x.png */; };
+		AA7D7FC32143586100E0D843 /* 首页工单审核@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F612143586000E0D843 /* 首页工单审核@3x.png */; };
+		AA7D7FC42143586100E0D843 /* 返回按钮@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F622143586000E0D843 /* 返回按钮@2x.png */; };
+		AA7D7FC52143586100E0D843 /* 我的默认头像@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F632143586000E0D843 /* 我的默认头像@2x.png */; };
+		AA7D7FC62143586100E0D843 /* 报单删除上传图片@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F642143586000E0D843 /* 报单删除上传图片@2x.png */; };
+		AA7D7FC72143586100E0D843 /* 首页信贷@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F652143586000E0D843 /* 首页信贷@3x.png */; };
+		AA7D7FC82143586100E0D843 /* 我的页设置@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F662143586000E0D843 /* 我的页设置@3x.png */; };
+		AA7D7FC92143586100E0D843 /* 首页车抵贷@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F672143586100E0D843 /* 首页车抵贷@3x.png */; };
+		AA7D7FCA2143586100E0D843 /* 注册页对勾@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F682143586100E0D843 /* 注册页对勾@2x.png */; };
+		AA7D7FCB2143586100E0D843 /* 共党详情已拒单@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F692143586100E0D843 /* 共党详情已拒单@2x.png */; };
+		AA7D7FCC2143586100E0D843 /* 我的页经纪人@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F6A2143586100E0D843 /* 我的页经纪人@2x.png */; };
+		AA7D7FCD2143586100E0D843 /* 工单详情查看批贷函@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F6B2143586100E0D843 /* 工单详情查看批贷函@3x.png */; };
+		AA7D7FCE2143586100E0D843 /* 我的页背景@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F6C2143586100E0D843 /* 我的页背景@2x.png */; };
+		AA7D7FCF2143586100E0D843 /* 工单详情查看批贷函@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F6D2143586100E0D843 /* 工单详情查看批贷函@2x.png */; };
+		AA7D7FD02143586100E0D843 /* 进入@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F6E2143586100E0D843 /* 进入@2x.png */; };
+		AA7D7FD12143586100E0D843 /* 首页房抵贷@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F6F2143586100E0D843 /* 首页房抵贷@2x.png */; };
+		AA7D7FD22143586100E0D843 /* 我的页设置@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F702143586100E0D843 /* 我的页设置@2x.png */; };
+		AA7D7FD32143586100E0D843 /* 启动页地球@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F712143586100E0D843 /* 启动页地球@3x.png */; };
+		AA7D7FD42143586100E0D843 /* 工单详情已放款@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F722143586100E0D843 /* 工单详情已放款@2x.png */; };
+		AA7D7FD52143586100E0D843 /* 底部导航我的未选中@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F732143586100E0D843 /* 底部导航我的未选中@2x.png */; };
+		AA7D7FD62143586100E0D843 /* 通知删除@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F742143586100E0D843 /* 通知删除@3x.png */; };
+		AA7D7FD72143586100E0D843 /* 工单详情拒单@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F752143586100E0D843 /* 工单详情拒单@2x.png */; };
+		AA7D7FDE2143589300E0D843 /* HJDHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D7FDD2143589300E0D843 /* HJDHomeModel.m */; };
+		AA7D7FE3214358AA00E0D843 /* HJDButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D7FDF214358A900E0D843 /* HJDButton.m */; };
+		AA7D7FE4214358AA00E0D843 /* HJDHomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D7FE0214358A900E0D843 /* HJDHomeTableViewCell.m */; };
 		AAD24F6421394B3800298386 /* HKScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD24F6321394B3800298386 /* HKScrollView.m */; };
 		AAD24F6721394BA200298386 /* HJDHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD24F6621394BA200298386 /* HJDHomeViewController.m */; };
 		AAD24F6D21394D8400298386 /* HJDBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD24F6C21394D8400298386 /* HJDBaseViewController.m */; };
@@ -148,6 +249,113 @@
 		3934C1A1D46330E827334147 /* Pods-HuiJinDai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuiJinDai.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HuiJinDai/Pods-HuiJinDai.debug.xcconfig"; sourceTree = "<group>"; };
 		716329259416E7FBB66B2DF9 /* Pods-HuiJinDai.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuiJinDai.release.xcconfig"; path = "Pods/Target Support Files/Pods-HuiJinDai/Pods-HuiJinDai.release.xcconfig"; sourceTree = "<group>"; };
 		758AEEDFDB9B291E6C91EBA5 /* libPods-HuiJinDai.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HuiJinDai.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA7D7F142143585200E0D843 /* 暂无数据_03@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "暂无数据_03@3x.png"; sourceTree = "<group>"; };
+		AA7D7F152143585200E0D843 /* 订单管理我的订单@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "订单管理我的订单@3x.png"; sourceTree = "<group>"; };
+		AA7D7F162143585200E0D843 /* 首页工单管理@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页工单管理@2x.png"; sourceTree = "<group>"; };
+		AA7D7F172143585200E0D843 /* 底部导航我的未选中@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "底部导航我的未选中@3x.png"; sourceTree = "<group>"; };
+		AA7D7F182143585300E0D843 /* 首页选择城市@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页选择城市@2x.png"; sourceTree = "<group>"; };
+		AA7D7F192143585300E0D843 /* 工单审核（渠道权限）经纪人@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "工单审核（渠道权限）经纪人@3x.png"; sourceTree = "<group>"; };
+		AA7D7F1A2143585300E0D843 /* 共党详情已拒单@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "共党详情已拒单@3x.png"; sourceTree = "<group>"; };
+		AA7D7F1B2143585300E0D843 /* 首页通知@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页通知@2x.png"; sourceTree = "<group>"; };
+		AA7D7F1C2143585300E0D843 /* 启动页左下@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动页左下@3x.png"; sourceTree = "<group>"; };
+		AA7D7F1D2143585300E0D843 /* 首页车抵贷@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页车抵贷@2x.png"; sourceTree = "<group>"; };
+		AA7D7F1E2143585300E0D843 /* 邀请码朋友圈@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "邀请码朋友圈@2x.png"; sourceTree = "<group>"; };
+		AA7D7F1F2143585400E0D843 /* 暂无数据_03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "暂无数据_03@2x.png"; sourceTree = "<group>"; };
+		AA7D7F202143585400E0D843 /* 我的页背景@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的页背景@3x.png"; sourceTree = "<group>"; };
+		AA7D7F212143585400E0D843 /* 工单详情查看审查报告@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "工单详情查看审查报告@2x.png"; sourceTree = "<group>"; };
+		AA7D7F222143585400E0D843 /* 我的页客户经理@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的页客户经理@2x.png"; sourceTree = "<group>"; };
+		AA7D7F232143585400E0D843 /* 启动页左上@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动页左上@2x.png"; sourceTree = "<group>"; };
+		AA7D7F242143585400E0D843 /* 首页通知@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页通知@3x.png"; sourceTree = "<group>"; };
+		AA7D7F252143585400E0D843 /* 暂无网络@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "暂无网络@3x.png"; sourceTree = "<group>"; };
+		AA7D7F262143585500E0D843 /* 订单管理我的订单@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "订单管理我的订单@2x.png"; sourceTree = "<group>"; };
+		AA7D7F272143585500E0D843 /* 启动页左下@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动页左下@2x.png"; sourceTree = "<group>"; };
+		AA7D7F282143585500E0D843 /* 工单审核（渠道权限）经纪人@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "工单审核（渠道权限）经纪人@2x.png"; sourceTree = "<group>"; };
+		AA7D7F292143585500E0D843 /* 底部导航我的选中@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "底部导航我的选中@3x.png"; sourceTree = "<group>"; };
+		AA7D7F2A2143585500E0D843 /* 订单进程搜索中的下拉箭头@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "订单进程搜索中的下拉箭头@2x.png"; sourceTree = "<group>"; };
+		AA7D7F2B2143585500E0D843 /* 工单详情查看审查报告@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "工单详情查看审查报告@3x.png"; sourceTree = "<group>"; };
+		AA7D7F2C2143585600E0D843 /* 首页信贷@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页信贷@2x.png"; sourceTree = "<group>"; };
+		AA7D7F2D2143585600E0D843 /* 我的页经纪人@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的页经纪人@3x.png"; sourceTree = "<group>"; };
+		AA7D7F2E2143585600E0D843 /* 订单管理页搜索删除@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "订单管理页搜索删除@3x.png"; sourceTree = "<group>"; };
+		AA7D7F2F2143585600E0D843 /* 启动页右下@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动页右下@2x.png"; sourceTree = "<group>"; };
+		AA7D7F302143585600E0D843 /* 首页选择城市@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页选择城市@3x.png"; sourceTree = "<group>"; };
+		AA7D7F312143585700E0D843 /* 我的经纪人电话小图标@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的经纪人电话小图标@2x.png"; sourceTree = "<group>"; };
+		AA7D7F322143585700E0D843 /* 启动页左上@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动页左上@3x.png"; sourceTree = "<group>"; };
+		AA7D7F332143585700E0D843 /* 暂无网络@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "暂无网络@2x.png"; sourceTree = "<group>"; };
+		AA7D7F342143585700E0D843 /* 添加证件@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加证件@2x.png"; sourceTree = "<group>"; };
+		AA7D7F352143585800E0D843 /* 邀请码头像@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "邀请码头像@2x.png"; sourceTree = "<group>"; };
+		AA7D7F362143585800E0D843 /* 首页还款计算器@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页还款计算器@2x.png"; sourceTree = "<group>"; };
+		AA7D7F372143585800E0D843 /* 我的经纪人拨打电话@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的经纪人拨打电话@3x.png"; sourceTree = "<group>"; };
+		AA7D7F382143585800E0D843 /* 客服电话@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "客服电话@2x.png"; sourceTree = "<group>"; };
+		AA7D7F392143585800E0D843 /* 底部导航我的选中@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "底部导航我的选中@2x.png"; sourceTree = "<group>"; };
+		AA7D7F3A2143585800E0D843 /* 首页底部导航未选中@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页底部导航未选中@3x.png"; sourceTree = "<group>"; };
+		AA7D7F3B2143585900E0D843 /* 邀请码微信@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "邀请码微信@3x.png"; sourceTree = "<group>"; };
+		AA7D7F3C2143585900E0D843 /* 邀请码微信@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "邀请码微信@2x.png"; sourceTree = "<group>"; };
+		AA7D7F3D2143585900E0D843 /* 添加证件@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加证件@3x.png"; sourceTree = "<group>"; };
+		AA7D7F3E2143585900E0D843 /* 底部导航首页选中@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "底部导航首页选中@2x.png"; sourceTree = "<group>"; };
+		AA7D7F3F2143585900E0D843 /* 订单管理渠道代码@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "订单管理渠道代码@2x.png"; sourceTree = "<group>"; };
+		AA7D7F402143585A00E0D843 /* 启动页右上@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动页右上@3x.png"; sourceTree = "<group>"; };
+		AA7D7F412143585A00E0D843 /* 工单详情对勾@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "工单详情对勾@2x.png"; sourceTree = "<group>"; };
+		AA7D7F422143585A00E0D843 /* 启动页地球@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动页地球@2x.png"; sourceTree = "<group>"; };
+		AA7D7F432143585A00E0D843 /* 首页还款计算器@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页还款计算器@3x.png"; sourceTree = "<group>"; };
+		AA7D7F442143585A00E0D843 /* 启动页右下@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动页右下@3x.png"; sourceTree = "<group>"; };
+		AA7D7F452143585A00E0D843 /* 我的页邀请码@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的页邀请码@2x.png"; sourceTree = "<group>"; };
+		AA7D7F462143585B00E0D843 /* 启动页右上@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动页右上@2x.png"; sourceTree = "<group>"; };
+		AA7D7F472143585B00E0D843 /* 启动页logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动页logo@3x.png"; sourceTree = "<group>"; };
+		AA7D7F482143585B00E0D843 /* 返回按钮@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "返回按钮@3x.png"; sourceTree = "<group>"; };
+		AA7D7F492143585B00E0D843 /* 我的页邀请码@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的页邀请码@3x.png"; sourceTree = "<group>"; };
+		AA7D7F4A2143585B00E0D843 /* 邀请码头像@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "邀请码头像@3x.png"; sourceTree = "<group>"; };
+		AA7D7F4B2143585B00E0D843 /* 启动页logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动页logo@2x.png"; sourceTree = "<group>"; };
+		AA7D7F4C2143585C00E0D843 /* 通知删除@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "通知删除@2x.png"; sourceTree = "<group>"; };
+		AA7D7F4D2143585C00E0D843 /* 工单详情对勾@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "工单详情对勾@3x.png"; sourceTree = "<group>"; };
+		AA7D7F4E2143585C00E0D843 /* 首页底部导航未选中@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页底部导航未选中@2x.png"; sourceTree = "<group>"; };
+		AA7D7F4F2143585D00E0D843 /* 进入@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "进入@3x.png"; sourceTree = "<group>"; };
+		AA7D7F502143585D00E0D843 /* 首页房抵贷@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页房抵贷@3x.png"; sourceTree = "<group>"; };
+		AA7D7F512143585D00E0D843 /* 首页工单管理@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页工单管理@3x.png"; sourceTree = "<group>"; };
+		AA7D7F522143585D00E0D843 /* 我的页客户经理@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的页客户经理@3x.png"; sourceTree = "<group>"; };
+		AA7D7F532143585D00E0D843 /* 订单管理页搜索删除@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "订单管理页搜索删除@2x.png"; sourceTree = "<group>"; };
+		AA7D7F542143585E00E0D843 /* 首页工单审核@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页工单审核@2x.png"; sourceTree = "<group>"; };
+		AA7D7F552143585E00E0D843 /* 底部导航首页选中@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "底部导航首页选中@3x.png"; sourceTree = "<group>"; };
+		AA7D7F562143585E00E0D843 /* 我的经纪人电话小图标@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的经纪人电话小图标@3x.png"; sourceTree = "<group>"; };
+		AA7D7F572143585E00E0D843 /* 报单删除上传图片@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "报单删除上传图片@3x.png"; sourceTree = "<group>"; };
+		AA7D7F582143585E00E0D843 /* 订单进程搜索中的下拉箭头@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "订单进程搜索中的下拉箭头@3x.png"; sourceTree = "<group>"; };
+		AA7D7F592143585F00E0D843 /* 订单管理渠道代码@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "订单管理渠道代码@3x.png"; sourceTree = "<group>"; };
+		AA7D7F5A2143585F00E0D843 /* 客服电话@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "客服电话@3x.png"; sourceTree = "<group>"; };
+		AA7D7F5B2143585F00E0D843 /* 我的默认头像@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的默认头像@3x.png"; sourceTree = "<group>"; };
+		AA7D7F5C2143585F00E0D843 /* 邀请码朋友圈@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "邀请码朋友圈@3x.png"; sourceTree = "<group>"; };
+		AA7D7F5D2143585F00E0D843 /* 我的经纪人拨打电话@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的经纪人拨打电话@2x.png"; sourceTree = "<group>"; };
+		AA7D7F5E2143585F00E0D843 /* 工单详情已放款@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "工单详情已放款@3x.png"; sourceTree = "<group>"; };
+		AA7D7F5F2143586000E0D843 /* 工单详情拒单@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "工单详情拒单@3x.png"; sourceTree = "<group>"; };
+		AA7D7F602143586000E0D843 /* 注册页对勾@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "注册页对勾@3x.png"; sourceTree = "<group>"; };
+		AA7D7F612143586000E0D843 /* 首页工单审核@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页工单审核@3x.png"; sourceTree = "<group>"; };
+		AA7D7F622143586000E0D843 /* 返回按钮@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "返回按钮@2x.png"; sourceTree = "<group>"; };
+		AA7D7F632143586000E0D843 /* 我的默认头像@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的默认头像@2x.png"; sourceTree = "<group>"; };
+		AA7D7F642143586000E0D843 /* 报单删除上传图片@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "报单删除上传图片@2x.png"; sourceTree = "<group>"; };
+		AA7D7F652143586000E0D843 /* 首页信贷@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页信贷@3x.png"; sourceTree = "<group>"; };
+		AA7D7F662143586000E0D843 /* 我的页设置@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的页设置@3x.png"; sourceTree = "<group>"; };
+		AA7D7F672143586100E0D843 /* 首页车抵贷@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页车抵贷@3x.png"; sourceTree = "<group>"; };
+		AA7D7F682143586100E0D843 /* 注册页对勾@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "注册页对勾@2x.png"; sourceTree = "<group>"; };
+		AA7D7F692143586100E0D843 /* 共党详情已拒单@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "共党详情已拒单@2x.png"; sourceTree = "<group>"; };
+		AA7D7F6A2143586100E0D843 /* 我的页经纪人@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的页经纪人@2x.png"; sourceTree = "<group>"; };
+		AA7D7F6B2143586100E0D843 /* 工单详情查看批贷函@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "工单详情查看批贷函@3x.png"; sourceTree = "<group>"; };
+		AA7D7F6C2143586100E0D843 /* 我的页背景@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的页背景@2x.png"; sourceTree = "<group>"; };
+		AA7D7F6D2143586100E0D843 /* 工单详情查看批贷函@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "工单详情查看批贷函@2x.png"; sourceTree = "<group>"; };
+		AA7D7F6E2143586100E0D843 /* 进入@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "进入@2x.png"; sourceTree = "<group>"; };
+		AA7D7F6F2143586100E0D843 /* 首页房抵贷@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页房抵贷@2x.png"; sourceTree = "<group>"; };
+		AA7D7F702143586100E0D843 /* 我的页设置@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的页设置@2x.png"; sourceTree = "<group>"; };
+		AA7D7F712143586100E0D843 /* 启动页地球@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动页地球@3x.png"; sourceTree = "<group>"; };
+		AA7D7F722143586100E0D843 /* 工单详情已放款@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "工单详情已放款@2x.png"; sourceTree = "<group>"; };
+		AA7D7F732143586100E0D843 /* 底部导航我的未选中@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "底部导航我的未选中@2x.png"; sourceTree = "<group>"; };
+		AA7D7F742143586100E0D843 /* 通知删除@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "通知删除@3x.png"; sourceTree = "<group>"; };
+		AA7D7F752143586100E0D843 /* 工单详情拒单@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "工单详情拒单@2x.png"; sourceTree = "<group>"; };
+		AA7D7FD92143586E00E0D843 /* HMTypeDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMTypeDefine.h; sourceTree = "<group>"; };
+		AA7D7FDA2143586E00E0D843 /* HMBlockDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMBlockDefine.h; sourceTree = "<group>"; };
+		AA7D7FDB2143586E00E0D843 /* HMMacroDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMMacroDefine.h; sourceTree = "<group>"; };
+		AA7D7FDC2143589300E0D843 /* HJDHomeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJDHomeModel.h; sourceTree = "<group>"; };
+		AA7D7FDD2143589300E0D843 /* HJDHomeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJDHomeModel.m; sourceTree = "<group>"; };
+		AA7D7FDF214358A900E0D843 /* HJDButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJDButton.m; sourceTree = "<group>"; };
+		AA7D7FE0214358A900E0D843 /* HJDHomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJDHomeTableViewCell.m; sourceTree = "<group>"; };
+		AA7D7FE1214358A900E0D843 /* HJDHomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJDHomeTableViewCell.h; sourceTree = "<group>"; };
+		AA7D7FE2214358A900E0D843 /* HJDButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJDButton.h; sourceTree = "<group>"; };
 		AAD24F6221394B3800298386 /* HKScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKScrollView.h; sourceTree = "<group>"; };
 		AAD24F6321394B3800298386 /* HKScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKScrollView.m; sourceTree = "<group>"; };
 		AAD24F6521394BA200298386 /* HJDHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeViewController.h; sourceTree = "<group>"; };
@@ -199,6 +407,8 @@
 		16908035213EBFB700AA2575 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				AA7D7FDC2143589300E0D843 /* HJDHomeModel.h */,
+				AA7D7FDD2143589300E0D843 /* HJDHomeModel.m */,
 				16908036213EBFD800AA2575 /* HJDOrderListModel.h */,
 				16908037213EBFD800AA2575 /* HJDOrderListModel.m */,
 			);
@@ -401,6 +611,104 @@
 		16FFC51A21397FCE008BCABC /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				AA7D7F642143586000E0D843 /* 报单删除上传图片@2x.png */,
+				AA7D7F572143585E00E0D843 /* 报单删除上传图片@3x.png */,
+				AA7D7F3E2143585900E0D843 /* 底部导航首页选中@2x.png */,
+				AA7D7F552143585E00E0D843 /* 底部导航首页选中@3x.png */,
+				AA7D7F732143586100E0D843 /* 底部导航我的未选中@2x.png */,
+				AA7D7F172143585200E0D843 /* 底部导航我的未选中@3x.png */,
+				AA7D7F392143585800E0D843 /* 底部导航我的选中@2x.png */,
+				AA7D7F292143585500E0D843 /* 底部导航我的选中@3x.png */,
+				AA7D7F3F2143585900E0D843 /* 订单管理渠道代码@2x.png */,
+				AA7D7F592143585F00E0D843 /* 订单管理渠道代码@3x.png */,
+				AA7D7F262143585500E0D843 /* 订单管理我的订单@2x.png */,
+				AA7D7F152143585200E0D843 /* 订单管理我的订单@3x.png */,
+				AA7D7F532143585D00E0D843 /* 订单管理页搜索删除@2x.png */,
+				AA7D7F2E2143585600E0D843 /* 订单管理页搜索删除@3x.png */,
+				AA7D7F2A2143585500E0D843 /* 订单进程搜索中的下拉箭头@2x.png */,
+				AA7D7F582143585E00E0D843 /* 订单进程搜索中的下拉箭头@3x.png */,
+				AA7D7F622143586000E0D843 /* 返回按钮@2x.png */,
+				AA7D7F482143585B00E0D843 /* 返回按钮@3x.png */,
+				AA7D7F282143585500E0D843 /* 工单审核（渠道权限）经纪人@2x.png */,
+				AA7D7F192143585300E0D843 /* 工单审核（渠道权限）经纪人@3x.png */,
+				AA7D7F6D2143586100E0D843 /* 工单详情查看批贷函@2x.png */,
+				AA7D7F6B2143586100E0D843 /* 工单详情查看批贷函@3x.png */,
+				AA7D7F212143585400E0D843 /* 工单详情查看审查报告@2x.png */,
+				AA7D7F2B2143585500E0D843 /* 工单详情查看审查报告@3x.png */,
+				AA7D7F412143585A00E0D843 /* 工单详情对勾@2x.png */,
+				AA7D7F4D2143585C00E0D843 /* 工单详情对勾@3x.png */,
+				AA7D7F752143586100E0D843 /* 工单详情拒单@2x.png */,
+				AA7D7F5F2143586000E0D843 /* 工单详情拒单@3x.png */,
+				AA7D7F722143586100E0D843 /* 工单详情已放款@2x.png */,
+				AA7D7F5E2143585F00E0D843 /* 工单详情已放款@3x.png */,
+				AA7D7F692143586100E0D843 /* 共党详情已拒单@2x.png */,
+				AA7D7F1A2143585300E0D843 /* 共党详情已拒单@3x.png */,
+				AA7D7F6E2143586100E0D843 /* 进入@2x.png */,
+				AA7D7F4F2143585D00E0D843 /* 进入@3x.png */,
+				AA7D7F382143585800E0D843 /* 客服电话@2x.png */,
+				AA7D7F5A2143585F00E0D843 /* 客服电话@3x.png */,
+				AA7D7F422143585A00E0D843 /* 启动页地球@2x.png */,
+				AA7D7F712143586100E0D843 /* 启动页地球@3x.png */,
+				AA7D7F462143585B00E0D843 /* 启动页右上@2x.png */,
+				AA7D7F402143585A00E0D843 /* 启动页右上@3x.png */,
+				AA7D7F2F2143585600E0D843 /* 启动页右下@2x.png */,
+				AA7D7F442143585A00E0D843 /* 启动页右下@3x.png */,
+				AA7D7F232143585400E0D843 /* 启动页左上@2x.png */,
+				AA7D7F322143585700E0D843 /* 启动页左上@3x.png */,
+				AA7D7F272143585500E0D843 /* 启动页左下@2x.png */,
+				AA7D7F1C2143585300E0D843 /* 启动页左下@3x.png */,
+				AA7D7F4B2143585B00E0D843 /* 启动页logo@2x.png */,
+				AA7D7F472143585B00E0D843 /* 启动页logo@3x.png */,
+				AA7D7F1D2143585300E0D843 /* 首页车抵贷@2x.png */,
+				AA7D7F672143586100E0D843 /* 首页车抵贷@3x.png */,
+				AA7D7F4E2143585C00E0D843 /* 首页底部导航未选中@2x.png */,
+				AA7D7F3A2143585800E0D843 /* 首页底部导航未选中@3x.png */,
+				AA7D7F6F2143586100E0D843 /* 首页房抵贷@2x.png */,
+				AA7D7F502143585D00E0D843 /* 首页房抵贷@3x.png */,
+				AA7D7F162143585200E0D843 /* 首页工单管理@2x.png */,
+				AA7D7F512143585D00E0D843 /* 首页工单管理@3x.png */,
+				AA7D7F542143585E00E0D843 /* 首页工单审核@2x.png */,
+				AA7D7F612143586000E0D843 /* 首页工单审核@3x.png */,
+				AA7D7F362143585800E0D843 /* 首页还款计算器@2x.png */,
+				AA7D7F432143585A00E0D843 /* 首页还款计算器@3x.png */,
+				AA7D7F1B2143585300E0D843 /* 首页通知@2x.png */,
+				AA7D7F242143585400E0D843 /* 首页通知@3x.png */,
+				AA7D7F2C2143585600E0D843 /* 首页信贷@2x.png */,
+				AA7D7F652143586000E0D843 /* 首页信贷@3x.png */,
+				AA7D7F182143585300E0D843 /* 首页选择城市@2x.png */,
+				AA7D7F302143585600E0D843 /* 首页选择城市@3x.png */,
+				AA7D7F342143585700E0D843 /* 添加证件@2x.png */,
+				AA7D7F3D2143585900E0D843 /* 添加证件@3x.png */,
+				AA7D7F4C2143585C00E0D843 /* 通知删除@2x.png */,
+				AA7D7F742143586100E0D843 /* 通知删除@3x.png */,
+				AA7D7F5D2143585F00E0D843 /* 我的经纪人拨打电话@2x.png */,
+				AA7D7F372143585800E0D843 /* 我的经纪人拨打电话@3x.png */,
+				AA7D7F312143585700E0D843 /* 我的经纪人电话小图标@2x.png */,
+				AA7D7F562143585E00E0D843 /* 我的经纪人电话小图标@3x.png */,
+				AA7D7F632143586000E0D843 /* 我的默认头像@2x.png */,
+				AA7D7F5B2143585F00E0D843 /* 我的默认头像@3x.png */,
+				AA7D7F6C2143586100E0D843 /* 我的页背景@2x.png */,
+				AA7D7F202143585400E0D843 /* 我的页背景@3x.png */,
+				AA7D7F6A2143586100E0D843 /* 我的页经纪人@2x.png */,
+				AA7D7F2D2143585600E0D843 /* 我的页经纪人@3x.png */,
+				AA7D7F222143585400E0D843 /* 我的页客户经理@2x.png */,
+				AA7D7F522143585D00E0D843 /* 我的页客户经理@3x.png */,
+				AA7D7F702143586100E0D843 /* 我的页设置@2x.png */,
+				AA7D7F662143586000E0D843 /* 我的页设置@3x.png */,
+				AA7D7F452143585A00E0D843 /* 我的页邀请码@2x.png */,
+				AA7D7F492143585B00E0D843 /* 我的页邀请码@3x.png */,
+				AA7D7F1E2143585300E0D843 /* 邀请码朋友圈@2x.png */,
+				AA7D7F5C2143585F00E0D843 /* 邀请码朋友圈@3x.png */,
+				AA7D7F352143585800E0D843 /* 邀请码头像@2x.png */,
+				AA7D7F4A2143585B00E0D843 /* 邀请码头像@3x.png */,
+				AA7D7F3C2143585900E0D843 /* 邀请码微信@2x.png */,
+				AA7D7F3B2143585900E0D843 /* 邀请码微信@3x.png */,
+				AA7D7F1F2143585400E0D843 /* 暂无数据_03@2x.png */,
+				AA7D7F142143585200E0D843 /* 暂无数据_03@3x.png */,
+				AA7D7F332143585700E0D843 /* 暂无网络@2x.png */,
+				AA7D7F252143585400E0D843 /* 暂无网络@3x.png */,
+				AA7D7F682143586100E0D843 /* 注册页对勾@2x.png */,
+				AA7D7F602143586000E0D843 /* 注册页对勾@3x.png */,
 				169C078021416AC900E9CDD0 /* 3.png */,
 				16EDD323213C086100E21AB2 /* back.png */,
 				16EDD321213C086100E21AB2 /* bg.jpg */,
@@ -421,6 +729,16 @@
 				758AEEDFDB9B291E6C91EBA5 /* libPods-HuiJinDai.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AA7D7FD82143586E00E0D843 /* Macros */ = {
+			isa = PBXGroup;
+			children = (
+				AA7D7FD92143586E00E0D843 /* HMTypeDefine.h */,
+				AA7D7FDA2143586E00E0D843 /* HMBlockDefine.h */,
+				AA7D7FDB2143586E00E0D843 /* HMMacroDefine.h */,
+			);
+			path = Macros;
 			sourceTree = "<group>";
 		};
 		AAD24F5E21394B1B00298386 /* Home */ = {
@@ -452,6 +770,10 @@
 		AAD24F6121394B1B00298386 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AA7D7FE2214358A900E0D843 /* HJDButton.h */,
+				AA7D7FDF214358A900E0D843 /* HJDButton.m */,
+				AA7D7FE1214358A900E0D843 /* HJDHomeTableViewCell.h */,
+				AA7D7FE0214358A900E0D843 /* HJDHomeTableViewCell.m */,
 				AAD24F6221394B3800298386 /* HKScrollView.h */,
 				AAD24F6321394B3800298386 /* HKScrollView.m */,
 				16EDD328213C176000E21AB2 /* HJDHomeOrderListTableViewCell.h */,
@@ -469,6 +791,7 @@
 		AAD24F71213ADDBD00298386 /* Componets */ = {
 			isa = PBXGroup;
 			children = (
+				AA7D7FD82143586E00E0D843 /* Macros */,
 				AAD24F74213ADE0900298386 /* Categories */,
 				AAD24F72213ADDBD00298386 /* BaseViewcontrollers */,
 				AAD24F73213ADDBD00298386 /* BaseViews */,
@@ -608,17 +931,115 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA7D7FD32143586100E0D843 /* 启动页地球@3x.png in Resources */,
+				AA7D7FCD2143586100E0D843 /* 工单详情查看批贷函@3x.png in Resources */,
+				AA7D7FB22143586100E0D843 /* 首页房抵贷@3x.png in Resources */,
+				AA7D7FA12143586100E0D843 /* 订单管理渠道代码@2x.png in Resources */,
+				AA7D7FBA2143586100E0D843 /* 订单进程搜索中的下拉箭头@3x.png in Resources */,
+				AA7D7F942143586100E0D843 /* 启动页左上@3x.png in Resources */,
+				AA7D7FBB2143586100E0D843 /* 订单管理渠道代码@3x.png in Resources */,
 				169C078121416ACA00E9CDD0 /* 3.png in Resources */,
+				AA7D7FD22143586100E0D843 /* 我的页设置@2x.png in Resources */,
+				AA7D7FAE2143586100E0D843 /* 通知删除@2x.png in Resources */,
+				AA7D7FA22143586100E0D843 /* 启动页右上@3x.png in Resources */,
+				AA7D7FCF2143586100E0D843 /* 工单详情查看批贷函@2x.png in Resources */,
+				AA7D7FB52143586100E0D843 /* 订单管理页搜索删除@2x.png in Resources */,
+				AA7D7FCA2143586100E0D843 /* 注册页对勾@2x.png in Resources */,
+				AA7D7FB92143586100E0D843 /* 报单删除上传图片@3x.png in Resources */,
+				AA7D7FA02143586100E0D843 /* 底部导航首页选中@2x.png in Resources */,
+				AA7D7FD72143586100E0D843 /* 工单详情拒单@2x.png in Resources */,
+				AA7D7F8F2143586100E0D843 /* 我的页经纪人@3x.png in Resources */,
 				16EDD326213C086100E21AB2 /* h1.png in Resources */,
+				AA7D7FD12143586100E0D843 /* 首页房抵贷@2x.png in Resources */,
+				AA7D7F7B2143586100E0D843 /* 工单审核（渠道权限）经纪人@3x.png in Resources */,
+				AA7D7F762143586100E0D843 /* 暂无数据_03@3x.png in Resources */,
+				AA7D7FBD2143586100E0D843 /* 我的默认头像@3x.png in Resources */,
+				AA7D7FAC2143586100E0D843 /* 邀请码头像@3x.png in Resources */,
+				AA7D7FBE2143586100E0D843 /* 邀请码朋友圈@3x.png in Resources */,
+				AA7D7F902143586100E0D843 /* 订单管理页搜索删除@3x.png in Resources */,
+				AA7D7FC52143586100E0D843 /* 我的默认头像@2x.png in Resources */,
+				AA7D7F932143586100E0D843 /* 我的经纪人电话小图标@2x.png in Resources */,
+				AA7D7FCB2143586100E0D843 /* 共党详情已拒单@2x.png in Resources */,
+				AA7D7FBC2143586100E0D843 /* 客服电话@3x.png in Resources */,
 				16B6DEA2213987CF00CF8C8D /* 2.png in Resources */,
+				AA7D7FCC2143586100E0D843 /* 我的页经纪人@2x.png in Resources */,
+				AA7D7FB62143586100E0D843 /* 首页工单审核@2x.png in Resources */,
+				AA7D7F9A2143586100E0D843 /* 客服电话@2x.png in Resources */,
+				AA7D7FA32143586100E0D843 /* 工单详情对勾@2x.png in Resources */,
+				AA7D7F812143586100E0D843 /* 暂无数据_03@2x.png in Resources */,
+				AA7D7F922143586100E0D843 /* 首页选择城市@3x.png in Resources */,
+				AA7D7FC42143586100E0D843 /* 返回按钮@2x.png in Resources */,
+				AA7D7FAD2143586100E0D843 /* 启动页logo@2x.png in Resources */,
+				AA7D7F7D2143586100E0D843 /* 首页通知@2x.png in Resources */,
+				AA7D7F912143586100E0D843 /* 启动页右下@2x.png in Resources */,
+				AA7D7FAA2143586100E0D843 /* 返回按钮@3x.png in Resources */,
+				AA7D7F7F2143586100E0D843 /* 首页车抵贷@2x.png in Resources */,
 				16EDD325213C086100E21AB2 /* bg.jpg in Resources */,
+				AA7D7FC72143586100E0D843 /* 首页信贷@3x.png in Resources */,
+				AA7D7FA92143586100E0D843 /* 启动页logo@3x.png in Resources */,
+				AA7D7FC12143586100E0D843 /* 工单详情拒单@3x.png in Resources */,
 				16C4E19C21381BFD004268C4 /* Assets.xcassets in Resources */,
+				AA7D7F7C2143586100E0D843 /* 共党详情已拒单@3x.png in Resources */,
+				AA7D7FB12143586100E0D843 /* 进入@3x.png in Resources */,
+				AA7D7F8C2143586100E0D843 /* 订单进程搜索中的下拉箭头@2x.png in Resources */,
+				AA7D7F972143586100E0D843 /* 邀请码头像@2x.png in Resources */,
 				16FFC51C21397FDD008BCABC /* 1.png in Resources */,
+				AA7D7FB42143586100E0D843 /* 我的页客户经理@3x.png in Resources */,
+				AA7D7F9F2143586100E0D843 /* 添加证件@3x.png in Resources */,
+				AA7D7FC82143586100E0D843 /* 我的页设置@3x.png in Resources */,
+				AA7D7FAB2143586100E0D843 /* 我的页邀请码@3x.png in Resources */,
+				AA7D7F982143586100E0D843 /* 首页还款计算器@2x.png in Resources */,
+				AA7D7F9D2143586100E0D843 /* 邀请码微信@3x.png in Resources */,
+				AA7D7FA42143586100E0D843 /* 启动页地球@2x.png in Resources */,
+				AA7D7FC62143586100E0D843 /* 报单删除上传图片@2x.png in Resources */,
+				AA7D7F7A2143586100E0D843 /* 首页选择城市@2x.png in Resources */,
+				AA7D7F802143586100E0D843 /* 邀请码朋友圈@2x.png in Resources */,
+				AA7D7F8A2143586100E0D843 /* 工单审核（渠道权限）经纪人@2x.png in Resources */,
 				AAD24F79213AE0B000298386 /* hk_timeline_image_loading.png in Resources */,
+				AA7D7F892143586100E0D843 /* 启动页左下@2x.png in Resources */,
+				AA7D7F822143586100E0D843 /* 我的页背景@3x.png in Resources */,
 				16EDD324213C086100E21AB2 /* qr.png in Resources */,
+				AA7D7FA62143586100E0D843 /* 启动页右下@3x.png in Resources */,
+				AA7D7F792143586100E0D843 /* 底部导航我的未选中@3x.png in Resources */,
+				AA7D7F9C2143586100E0D843 /* 首页底部导航未选中@3x.png in Resources */,
+				AA7D7FB02143586100E0D843 /* 首页底部导航未选中@2x.png in Resources */,
+				AA7D7F9E2143586100E0D843 /* 邀请码微信@2x.png in Resources */,
+				AA7D7FD62143586100E0D843 /* 通知删除@3x.png in Resources */,
+				AA7D7FB72143586100E0D843 /* 底部导航首页选中@3x.png in Resources */,
+				AA7D7FB82143586100E0D843 /* 我的经纪人电话小图标@3x.png in Resources */,
 				16EDD327213C086100E21AB2 /* back.png in Resources */,
+				AA7D7F842143586100E0D843 /* 我的页客户经理@2x.png in Resources */,
+				AA7D7F9B2143586100E0D843 /* 底部导航我的选中@2x.png in Resources */,
+				AA7D7F882143586100E0D843 /* 订单管理我的订单@2x.png in Resources */,
+				AA7D7FD42143586100E0D843 /* 工单详情已放款@2x.png in Resources */,
+				AA7D7F952143586100E0D843 /* 暂无网络@2x.png in Resources */,
+				AA7D7FD52143586100E0D843 /* 底部导航我的未选中@2x.png in Resources */,
+				AA7D7F772143586100E0D843 /* 订单管理我的订单@3x.png in Resources */,
+				AA7D7FBF2143586100E0D843 /* 我的经纪人拨打电话@2x.png in Resources */,
+				AA7D7F8B2143586100E0D843 /* 底部导航我的选中@3x.png in Resources */,
+				AA7D7F8D2143586100E0D843 /* 工单详情查看审查报告@3x.png in Resources */,
+				AA7D7FA52143586100E0D843 /* 首页还款计算器@3x.png in Resources */,
+				AA7D7FC32143586100E0D843 /* 首页工单审核@3x.png in Resources */,
+				AA7D7F962143586100E0D843 /* 添加证件@2x.png in Resources */,
 				16EDD2C8213AD9EC00E21AB2 /* 5.png in Resources */,
+				AA7D7F832143586100E0D843 /* 工单详情查看审查报告@2x.png in Resources */,
+				AA7D7FAF2143586100E0D843 /* 工单详情对勾@3x.png in Resources */,
+				AA7D7FD02143586100E0D843 /* 进入@2x.png in Resources */,
+				AA7D7F862143586100E0D843 /* 首页通知@3x.png in Resources */,
+				AA7D7FCE2143586100E0D843 /* 我的页背景@2x.png in Resources */,
+				AA7D7F782143586100E0D843 /* 首页工单管理@2x.png in Resources */,
+				AA7D7F852143586100E0D843 /* 启动页左上@2x.png in Resources */,
+				AA7D7FA72143586100E0D843 /* 我的页邀请码@2x.png in Resources */,
+				AA7D7FA82143586100E0D843 /* 启动页右上@2x.png in Resources */,
+				AA7D7FC02143586100E0D843 /* 工单详情已放款@3x.png in Resources */,
+				AA7D7FC92143586100E0D843 /* 首页车抵贷@3x.png in Resources */,
+				AA7D7F992143586100E0D843 /* 我的经纪人拨打电话@3x.png in Resources */,
+				AA7D7FC22143586100E0D843 /* 注册页对勾@3x.png in Resources */,
+				AA7D7F872143586100E0D843 /* 暂无网络@3x.png in Resources */,
 				16EDD2C6213AD9E800E21AB2 /* 4.png in Resources */,
+				AA7D7FB32143586100E0D843 /* 首页工单管理@3x.png in Resources */,
+				AA7D7F7E2143586100E0D843 /* 启动页左下@3x.png in Resources */,
+				AA7D7F8E2143586100E0D843 /* 首页信贷@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -691,6 +1112,7 @@
 				162904D42140181300AC151D /* HJDHomeOrderManageViewController.m in Sources */,
 				AAD24F6421394B3800298386 /* HKScrollView.m in Sources */,
 				16EDD2BF213AC4A000E21AB2 /* HJDLoginViewController.m in Sources */,
+				AA7D7FE4214358AA00E0D843 /* HJDHomeTableViewCell.m in Sources */,
 				16FFC51621397373008BCABC /* HJDRegisterManger.m in Sources */,
 				16EDD30C213C06DC00E21AB2 /* HJDMyCustomerManagerViewController.m in Sources */,
 				AAD24F6D21394D8400298386 /* HJDBaseViewController.m in Sources */,
@@ -699,6 +1121,8 @@
 				16EDD330213C318100E21AB2 /* HJDOrderAuditViewController.m in Sources */,
 				AAD24F7021394EA900298386 /* UITableView+HJD.m in Sources */,
 				16EDD317213C06E600E21AB2 /* HJDMySearchFieldView.m in Sources */,
+				AA7D7FDE2143589300E0D843 /* HJDHomeModel.m in Sources */,
+				AA7D7FE3214358AA00E0D843 /* HJDButton.m in Sources */,
 				16C4E1D8213826D0004268C4 /* HJDTextFieldView.m in Sources */,
 				AAD24F6721394BA200298386 /* HJDHomeViewController.m in Sources */,
 				16B6DEA5213988BB00CF8C8D /* HJDCityPickerView.m in Sources */,

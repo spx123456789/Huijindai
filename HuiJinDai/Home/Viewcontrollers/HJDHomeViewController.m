@@ -9,7 +9,7 @@
 #import "HJDHomeViewController.h"
 #import "HKScrollView.h"
 #import "HJDOrderAuditViewController.h"
-
+#import "HJDHomeTableViewCell.h"
 @interface HJDHomeViewController ()<UITableViewDelegate,UITableViewDataSource,HKScrollViewNetDelegate>
 @property(strong, nonatomic) UITableView *tableView;
 @property(strong, nonatomic) NSMutableArray *dataSource;
@@ -49,41 +49,30 @@
 #pragma mark - UITableView Datasource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataSource.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellIdentifier = @"Cell";
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *cellIdentifier = @"HJDHomeTableViewCell";
+    
+    HJDHomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     if(cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell = [[HJDHomeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        
     }
+    NSDictionary * dic = [self.dataSource objectAtIndex:indexPath.section];
     
-    //test 
-    NSString *str = @"";
-    switch (indexPath.row) {
-        case 0: {
-            str = @"房抵贷";
-            break;
-        }
-        case 1: {
-            str = @"工单审核";
-            break;
-        }
-        case 2: {
-            str = @"工单管理";
-            break;
-        }
-        default:
-            break;
-    }
-    cell.textLabel.text = str;
+    NSArray * arr = [dic objectForKey:@"sectionValue"];
+    
+    [cell configCellWithArray:arr];
     
     return cell;
 }
@@ -112,6 +101,24 @@
     }
 }
 
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 100;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 30;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 30)];
+    NSDictionary * dic = [self.dataSource objectAtIndex:section];
+    NSString * sectionTitle = [dic objectForKey:@"sectionTitle"];
+    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, kScreenWidth-20, 20)];
+    label.text = sectionTitle;
+    [headerView addSubview:label];
+    return headerView;
+}
+
 #pragma mark - HKScrollViewNetDelegate
 /** 点中网络滚动视图后触发*/
 -(void)didSelectedNetImageAtIndex:(NSInteger)index {
@@ -124,7 +131,76 @@
 - (NSMutableArray *)dataSource{
     if (!_dataSource) {
         _dataSource = [NSMutableArray new];
-        [_dataSource addObjectsFromArray:@[ @"1", @"2", @"3" ]];
+        switch (self.userType) {
+                case HJDUserType_user: {
+                    
+                    HJDHomeModel * model = [HJDHomeModel new];
+                    model.title = @"房抵贷";
+                    HJDHomeModel * model1 = [HJDHomeModel new];
+                    model1.title = @"车抵贷";
+                    HJDHomeModel * model2 = [HJDHomeModel new];
+                    model2.title = @"信贷";
+                    NSArray * array = @[model,model1,model2];
+                    
+                    NSDictionary * dic = [NSDictionary dictionaryWithObjectsAndKeys:array,@"sectionValue",@"业务分类",@"sectionTitle", nil];
+                    
+                    [_dataSource addObject:dic];
+
+                    HJDHomeModel * model4 = [HJDHomeModel new];
+                    model4.title = @"工单管理";
+                    HJDHomeModel * model5 = [HJDHomeModel new];
+                    model5.title = @"还款计算器";
+                    NSArray * array2 = @[model4,model5];
+                    
+                    NSDictionary * dic2 = [NSDictionary dictionaryWithObjectsAndKeys:array2,@"sectionValue",@"功能模块",@"sectionTitle", nil];
+                    
+                    [_dataSource addObject:dic2];
+                    
+                    break;
+                }
+                case HJDUserType_userManager: {
+                    HJDHomeModel * model = [HJDHomeModel new];
+                    model.title = @"房抵贷";
+                    HJDHomeModel * model1 = [HJDHomeModel new];
+                    model1.title = @"车抵贷";
+                    HJDHomeModel * model2 = [HJDHomeModel new];
+                    model2.title = @"信贷";
+                    NSArray * array = @[model,model1,model2];
+                    
+                    NSDictionary * dic = [NSDictionary dictionaryWithObjectsAndKeys:array,@"sectionValue",@"业务分类",@"sectionTitle", nil];
+                    
+                    [_dataSource addObject:dic];
+                    
+                    HJDHomeModel * model3 = [HJDHomeModel new];
+                    model3.title = @"工单审核";
+                    HJDHomeModel * model4 = [HJDHomeModel new];
+                    model4.title = @"工单管理";
+                    HJDHomeModel * model5 = [HJDHomeModel new];
+                    model5.title = @"还款计算器";
+                    NSArray * array2 = @[model3,model4,model5];
+                    
+                    NSDictionary * dic2 = [NSDictionary dictionaryWithObjectsAndKeys:array2,@"sectionValue",@"功能模块",@"sectionTitle", nil];
+                    
+                    [_dataSource addObject:dic2];
+                    break;
+                }
+                case HJDUserType_channel: {
+                    
+                    HJDHomeModel * model3 = [HJDHomeModel new];
+                    model3.title = @"工单审核";
+                    HJDHomeModel * model4 = [HJDHomeModel new];
+                    model4.title = @"工单管理";
+                    HJDHomeModel * model5 = [HJDHomeModel new];
+                    model5.title = @"还款计算器";
+                    NSArray * array2 = @[model3,model4,model5];
+                    
+                    NSDictionary * dic2 = [NSDictionary dictionaryWithObjectsAndKeys:array2,@"sectionValue",@"功能模块",@"sectionTitle", nil];
+                    
+                    [_dataSource addObject:dic2];
+                    break;
+                }
+            
+        }
     }
     return _dataSource;
 }
@@ -141,15 +217,5 @@
     }
     return _tableView;
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
