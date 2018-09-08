@@ -10,7 +10,7 @@
 #import "HJDMyTableViewCell.h"
 #import "HJDMyCustomerManagerViewController.h"
 #import "HJDMyAgentViewController.h"
-#import "HJDMyInviteCodeViewController.h"
+#import "HJDMyInviteCodeView.h"
 #import "HJDMySettingViewController.h"
 
 @interface HJDMyViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -103,9 +103,13 @@ static NSString *key2 = @"title";
         }
             break;
         case 2: {
-            HJDMyInviteCodeViewController *inviteController = [[HJDMyInviteCodeViewController alloc] init];
-            inviteController.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:inviteController animated:YES];
+            HJDMyInviteCodeView *inviteView = [[HJDMyInviteCodeView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+            inviteView.headImgView.image = kImage(@"qr.png");
+            inviteView.nameLabel.text = @"张思然";
+            inviteView.cityLabel.text = @"北京市";
+            inviteView.QrCodeImgView.image = kImage(@"qr.png");
+            UIWindow *window = [UIApplication sharedApplication].keyWindow;
+            [window addSubview:inviteView];
         }
             break;
         case 3: {

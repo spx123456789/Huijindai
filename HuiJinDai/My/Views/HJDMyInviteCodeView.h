@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface HJDMyInviteCodeView : UIView
-
+@property(nonatomic, strong) UIImageView *headImgView;
+@property(nonatomic, strong) UILabel *nameLabel;
+@property(nonatomic, strong) UILabel *cityLabel;
+@property(nonatomic, strong) UIImageView *QrCodeImgView;
 @end

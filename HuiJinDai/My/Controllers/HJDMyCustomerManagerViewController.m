@@ -34,7 +34,7 @@
 
 - (HJDMySearchFieldView *)headerSearchView {
     if (!_headerSearchView) {
-        _headerSearchView = [[HJDMySearchFieldView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 50)];
+        _headerSearchView = [[HJDMySearchFieldView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth - 88 - 20, 44)];
     }
     return _headerSearchView;
 }
@@ -55,9 +55,10 @@
     self.dataSource = [NSMutableArray arrayWithArray:arr];
     
     [self.view addSubview:self.tableView];
-    self.tableView.tableHeaderView = self.headerSearchView;
     
     [self.view addSubview:self.customServiceView];
+    
+     self.navigationItem.titleView = self.headerSearchView;
 }
 
 - (void)didReceiveMemoryWarning {

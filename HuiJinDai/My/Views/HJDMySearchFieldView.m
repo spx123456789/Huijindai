@@ -17,8 +17,8 @@
 
 - (UIView *)bgView {
     if (!_bgView) {
-        _bgView = [[UIView alloc] initWithFrame:CGRectMake(10, 10, kScreenWidth - 20, 30)];
-        _bgView.backgroundColor = kWithe;
+        _bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth - 88 - 20, 44)];
+        _bgView.backgroundColor = kGray;
         _bgView.layer.masksToBounds = YES;
         _bgView.layer.cornerRadius = 5.f;
     }
@@ -35,8 +35,8 @@
 
 - (UITextField *)textField {
     if (!_textField) {
-        _textField = [[UITextField alloc] initWithFrame:CGRectMake(50, 5, kScreenWidth - 20 - 55 - 20, 20)];
-        _textField.placeholder = @"请输入姓名与手机号";
+        _textField = [[UITextField alloc] initWithFrame:CGRectMake(10, 5, kScreenWidth - 88 - 20 - 40, 30)];
+        _textField.placeholder = @"请输入姓名和手机号搜索";
         _textField.returnKeyType = UIReturnKeySearch;
         _textField.font = kFont12;
     }

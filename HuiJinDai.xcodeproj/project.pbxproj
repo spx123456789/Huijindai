@@ -29,9 +29,7 @@
 		16EDD2C8213AD9EC00E21AB2 /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EDD2C7213AD9EC00E21AB2 /* 5.png */; };
 		16EDD309213C06DC00E21AB2 /* HJDMyAgentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD303213C06DC00E21AB2 /* HJDMyAgentViewController.m */; };
 		16EDD30A213C06DC00E21AB2 /* HJDMySettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD305213C06DC00E21AB2 /* HJDMySettingViewController.m */; };
-		16EDD30B213C06DC00E21AB2 /* HJDMyInviteCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD306213C06DC00E21AB2 /* HJDMyInviteCodeViewController.m */; };
 		16EDD30C213C06DC00E21AB2 /* HJDMyCustomerManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD308213C06DC00E21AB2 /* HJDMyCustomerManagerViewController.m */; };
-		16EDD315213C06E600E21AB2 /* HJDMyShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD30D213C06E600E21AB2 /* HJDMyShareView.m */; };
 		16EDD316213C06E600E21AB2 /* HJDMyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD311213C06E600E21AB2 /* HJDMyTableViewCell.m */; };
 		16EDD317213C06E600E21AB2 /* HJDMySearchFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD312213C06E600E21AB2 /* HJDMySearchFieldView.m */; };
 		16EDD318213C06E600E21AB2 /* HJDMyAgentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD314213C06E600E21AB2 /* HJDMyAgentTableViewCell.m */; };
@@ -119,13 +117,9 @@
 		16EDD303213C06DC00E21AB2 /* HJDMyAgentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJDMyAgentViewController.m; sourceTree = "<group>"; };
 		16EDD304213C06DC00E21AB2 /* HJDMySettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJDMySettingViewController.h; sourceTree = "<group>"; };
 		16EDD305213C06DC00E21AB2 /* HJDMySettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJDMySettingViewController.m; sourceTree = "<group>"; };
-		16EDD306213C06DC00E21AB2 /* HJDMyInviteCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJDMyInviteCodeViewController.m; sourceTree = "<group>"; };
-		16EDD307213C06DC00E21AB2 /* HJDMyInviteCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJDMyInviteCodeViewController.h; sourceTree = "<group>"; };
 		16EDD308213C06DC00E21AB2 /* HJDMyCustomerManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJDMyCustomerManagerViewController.m; sourceTree = "<group>"; };
-		16EDD30D213C06E600E21AB2 /* HJDMyShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJDMyShareView.m; sourceTree = "<group>"; };
 		16EDD30E213C06E600E21AB2 /* HJDMyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJDMyTableViewCell.h; sourceTree = "<group>"; };
 		16EDD30F213C06E600E21AB2 /* HJDMyAgentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJDMyAgentTableViewCell.h; sourceTree = "<group>"; };
-		16EDD310213C06E600E21AB2 /* HJDMyShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJDMyShareView.h; sourceTree = "<group>"; };
 		16EDD311213C06E600E21AB2 /* HJDMyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJDMyTableViewCell.m; sourceTree = "<group>"; };
 		16EDD312213C06E600E21AB2 /* HJDMySearchFieldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJDMySearchFieldView.m; sourceTree = "<group>"; };
 		16EDD313213C06E600E21AB2 /* HJDMySearchFieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJDMySearchFieldView.h; sourceTree = "<group>"; };
@@ -315,8 +309,6 @@
 				16EDD303213C06DC00E21AB2 /* HJDMyAgentViewController.m */,
 				16EDD302213C06DC00E21AB2 /* HJDMyCustomerManagerViewController.h */,
 				16EDD308213C06DC00E21AB2 /* HJDMyCustomerManagerViewController.m */,
-				16EDD307213C06DC00E21AB2 /* HJDMyInviteCodeViewController.h */,
-				16EDD306213C06DC00E21AB2 /* HJDMyInviteCodeViewController.m */,
 				16EDD304213C06DC00E21AB2 /* HJDMySettingViewController.h */,
 				16EDD305213C06DC00E21AB2 /* HJDMySettingViewController.m */,
 			);
@@ -330,8 +322,6 @@
 				16EDD314213C06E600E21AB2 /* HJDMyAgentTableViewCell.m */,
 				16EDD313213C06E600E21AB2 /* HJDMySearchFieldView.h */,
 				16EDD312213C06E600E21AB2 /* HJDMySearchFieldView.m */,
-				16EDD310213C06E600E21AB2 /* HJDMyShareView.h */,
-				16EDD30D213C06E600E21AB2 /* HJDMyShareView.m */,
 				16EDD30E213C06E600E21AB2 /* HJDMyTableViewCell.h */,
 				16EDD311213C06E600E21AB2 /* HJDMyTableViewCell.m */,
 				169C07822141744900E9CDD0 /* HJDMyInviteCodeView.h */,
@@ -701,7 +691,6 @@
 				162904D42140181300AC151D /* HJDHomeOrderManageViewController.m in Sources */,
 				AAD24F6421394B3800298386 /* HKScrollView.m in Sources */,
 				16EDD2BF213AC4A000E21AB2 /* HJDLoginViewController.m in Sources */,
-				16EDD30B213C06DC00E21AB2 /* HJDMyInviteCodeViewController.m in Sources */,
 				16FFC51621397373008BCABC /* HJDRegisterManger.m in Sources */,
 				16EDD30C213C06DC00E21AB2 /* HJDMyCustomerManagerViewController.m in Sources */,
 				AAD24F6D21394D8400298386 /* HJDBaseViewController.m in Sources */,
@@ -715,7 +704,6 @@
 				16B6DEA5213988BB00CF8C8D /* HJDCityPickerView.m in Sources */,
 				16EDD31B213C06EF00E21AB2 /* HJDMyManager.m in Sources */,
 				16EDD32D213C2E8900E21AB2 /* HJDHomeOrderListViewController.m in Sources */,
-				16EDD315213C06E600E21AB2 /* HJDMyShareView.m in Sources */,
 				16908038213EBFD900AA2575 /* HJDOrderListModel.m in Sources */,
 				16EDD318213C06E600E21AB2 /* HJDMyAgentTableViewCell.m in Sources */,
 				16C4E1D52138255B004268C4 /* HJDRegisterViewController.m in Sources */,

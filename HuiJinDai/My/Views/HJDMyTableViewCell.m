@@ -10,6 +10,7 @@
 
 @interface HJDMyTableViewCell()
 @property(nonatomic, strong) UIView *bgView;
+@property(nonatomic, strong) UIImageView *rowImgView;
 @end
 
 @implementation HJDMyTableViewCell
@@ -29,6 +30,14 @@
     return _imgView;
 }
 
+- (UIImageView *)rowImgView {
+    if (!_rowImgView) {
+        _rowImgView = [[UIImageView alloc] init];
+        _rowImgView.image = kImage(@"2.png");
+    }
+    return _rowImgView;
+}
+
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
@@ -45,6 +54,7 @@
         [self.contentView addSubview:self.bgView];
         [self.bgView addSubview:self.imgView];
         [self.bgView addSubview:self.titleLabel];
+        [self.bgView addSubview:self.rowImgView];
         
         [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.equalTo(self.contentView);
@@ -61,8 +71,14 @@
         [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.imgView.mas_right).offset(10);
             make.centerY.equalTo(self.bgView);
-            make.right.equalTo(self.bgView);
+            make.right.equalTo(self.bgView).offset(-80);
             make.height.equalTo(@30);
+        }];
+        
+        [self.rowImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.bgView);
+            make.centerY.equalTo(self.bgView);
+            make.size.mas_equalTo(CGSizeMake(44, 44));
         }];
     }
     return self;
