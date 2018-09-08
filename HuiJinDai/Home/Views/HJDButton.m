@@ -21,13 +21,25 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.width)];
-        self.imageView.backgroundColor = [UIColor greenColor];
-        [self addSubview:self.imageView];
+        self.imageView = [[UIImageView alloc] init];
+        self.imageView.backgroundColor = [UIColor clearColor];
         
-        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, frame.size.height-20, frame.size.width, 20)];
+        [self addSubview:self.imageView];
+        [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(self.mas_centerX);
+            make.width.height.mas_equalTo(44);
+            make.top.mas_equalTo(self.mas_top).offset(20);
+        }];
+        self.titleLabel = [[UILabel alloc] init];
+        self.titleLabel.font = [UIFont systemFontOfSize:14];
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:self.titleLabel];
+        [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(self.mas_centerX);
+            make.width.mas_equalTo(frame.size.width);
+            make.height.mas_equalTo(14);
+            make.top.mas_equalTo(self.imageView.mas_bottom).offset(12);
+        }];
         
     }
     return self;

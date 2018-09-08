@@ -10,7 +10,8 @@
 #import "HKScrollView.h"
 #import "HJDOrderAuditViewController.h"
 #import "HJDHomeTableViewCell.h"
-@interface HJDHomeViewController ()<UITableViewDelegate,UITableViewDataSource,HKScrollViewNetDelegate>
+#import "HJDHomeModel.h"
+@interface HJDHomeViewController ()<UITableViewDelegate,UITableViewDataSource,HKScrollViewNetDelegate,HJDHomeTableViewCellDelegate>
 @property(strong, nonatomic) UITableView *tableView;
 @property(strong, nonatomic) NSMutableArray *dataSource;
 @property(strong, nonatomic) HKScrollView *netWorkScrollView;
@@ -20,6 +21,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"首页";
+    self.userType = HJDUserType_userManager;
     [self.view addSubview:self.tableView];
     NSArray *array = @[@"",@"",@""];
     CGFloat width = self.view.frame.size.width;
@@ -65,8 +68,7 @@
     if(cell == nil) {
         cell = [[HJDHomeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        
+        cell.delegate = self;
     }
     NSDictionary * dic = [self.dataSource objectAtIndex:indexPath.section];
     
@@ -79,30 +81,8 @@
 
 #pragma mark - UITableView Delegate methods
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.row) {
-        case 0: {
-            
-            break;
-        }
-        case 1: {
-            //工单审核
-            HJDOrderAuditViewController *controller = [[HJDOrderAuditViewController alloc] init];
-            controller.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:controller animated:YES];
-            break;
-        }
-        case 2: {
-            
-            break;
-        }
-        default:
-            break;
-    }
-}
-
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100;
+    return 120;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -114,6 +94,7 @@
     NSDictionary * dic = [self.dataSource objectAtIndex:section];
     NSString * sectionTitle = [dic objectForKey:@"sectionTitle"];
     UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, kScreenWidth-20, 20)];
+    label.font = [UIFont boldSystemFontOfSize:17];
     label.text = sectionTitle;
     [headerView addSubview:label];
     return headerView;
@@ -123,6 +104,27 @@
 /** 点中网络滚动视图后触发*/
 -(void)didSelectedNetImageAtIndex:(NSInteger)index {
     
+}
+
+- (void)tableViewCell:(HJDHomeTableViewCell *) cell didselectButtonWithIndex:(NSInteger)index {
+    HJDHomeModel * model = [cell.dataArray objectAtIndex:index];
+    if ([model.title isEqualToString:@"房抵贷"]) {
+        
+    }else if ([model.title isEqualToString:@"车抵贷"]) {
+        
+    }else if ([model.title isEqualToString:@"信贷"]) {
+        
+    }else if ([model.title isEqualToString:@"工单审核"]) {
+        //工单审核
+        HJDOrderAuditViewController *controller = [[HJDOrderAuditViewController alloc] init];
+        controller.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:controller animated:YES];
+    }else if ([model.title isEqualToString:@"工单管理"]) {
+        
+    }else if ([model.title isEqualToString:@"还款计算器"]) {
+        
+    }
+
 }
 
 
@@ -136,10 +138,13 @@
                     
                     HJDHomeModel * model = [HJDHomeModel new];
                     model.title = @"房抵贷";
+                    model.imageName = @"首页房抵贷";
                     HJDHomeModel * model1 = [HJDHomeModel new];
                     model1.title = @"车抵贷";
+                    model1.imageName = @"首页车抵贷";
                     HJDHomeModel * model2 = [HJDHomeModel new];
                     model2.title = @"信贷";
+                    model2.imageName = @"首页信贷";
                     NSArray * array = @[model,model1,model2];
                     
                     NSDictionary * dic = [NSDictionary dictionaryWithObjectsAndKeys:array,@"sectionValue",@"业务分类",@"sectionTitle", nil];
@@ -148,8 +153,10 @@
 
                     HJDHomeModel * model4 = [HJDHomeModel new];
                     model4.title = @"工单管理";
+                    model4.imageName = @"首页工单管理";
                     HJDHomeModel * model5 = [HJDHomeModel new];
                     model5.title = @"还款计算器";
+                    model5.imageName = @"首页还款计算器";
                     NSArray * array2 = @[model4,model5];
                     
                     NSDictionary * dic2 = [NSDictionary dictionaryWithObjectsAndKeys:array2,@"sectionValue",@"功能模块",@"sectionTitle", nil];
@@ -161,10 +168,13 @@
                 case HJDUserType_userManager: {
                     HJDHomeModel * model = [HJDHomeModel new];
                     model.title = @"房抵贷";
+                    model.imageName = @"首页房抵贷";
                     HJDHomeModel * model1 = [HJDHomeModel new];
                     model1.title = @"车抵贷";
+                    model1.imageName = @"首页车抵贷";
                     HJDHomeModel * model2 = [HJDHomeModel new];
                     model2.title = @"信贷";
+                    model2.imageName = @"首页信贷";
                     NSArray * array = @[model,model1,model2];
                     
                     NSDictionary * dic = [NSDictionary dictionaryWithObjectsAndKeys:array,@"sectionValue",@"业务分类",@"sectionTitle", nil];
@@ -173,10 +183,13 @@
                     
                     HJDHomeModel * model3 = [HJDHomeModel new];
                     model3.title = @"工单审核";
+                    model3.imageName = @"首页工单审核";
                     HJDHomeModel * model4 = [HJDHomeModel new];
                     model4.title = @"工单管理";
+                    model4.imageName = @"首页工单管理";
                     HJDHomeModel * model5 = [HJDHomeModel new];
                     model5.title = @"还款计算器";
+                    model5.imageName = @"首页还款计算器";
                     NSArray * array2 = @[model3,model4,model5];
                     
                     NSDictionary * dic2 = [NSDictionary dictionaryWithObjectsAndKeys:array2,@"sectionValue",@"功能模块",@"sectionTitle", nil];
@@ -188,10 +201,13 @@
                     
                     HJDHomeModel * model3 = [HJDHomeModel new];
                     model3.title = @"工单审核";
+                    model3.imageName = @"首页工单审核";
                     HJDHomeModel * model4 = [HJDHomeModel new];
                     model4.title = @"工单管理";
+                    model4.imageName = @"首页工单管理";
                     HJDHomeModel * model5 = [HJDHomeModel new];
                     model5.title = @"还款计算器";
+                    model5.imageName = @"首页还款计算器";
                     NSArray * array2 = @[model3,model4,model5];
                     
                     NSDictionary * dic2 = [NSDictionary dictionaryWithObjectsAndKeys:array2,@"sectionValue",@"功能模块",@"sectionTitle", nil];

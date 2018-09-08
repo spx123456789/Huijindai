@@ -9,16 +9,25 @@
 #import <UIKit/UIKit.h>
 #import "HJDButton.h"
 #import "HJDHomeModel.h"
+@class HJDHomeTableViewCell;
+@protocol HJDHomeTableViewCellDelegate <NSObject>
+@required
 
+- (void)tableViewCell:(HJDHomeTableViewCell *) cell didselectButtonWithIndex:(NSInteger)index;
 
+@end
 
 @interface HJDHomeTableViewCell : UITableViewCell
+
+@property (nonatomic,weak) id<HJDHomeTableViewCellDelegate> delegate;
 
 @property (nonatomic, strong) HJDButton *button1;
 
 @property (nonatomic, strong) HJDButton *button2;
 
 @property (nonatomic, strong) HJDButton *button3;
+
+@property (nonatomic, strong) NSArray *dataArray;
 
 - (void)configCellWithArray:(NSArray*)array;
 
