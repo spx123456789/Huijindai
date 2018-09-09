@@ -29,20 +29,20 @@
         [self.contentView addSubview:self.button3];
         @weakify(self);
         [self.button1 hm_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
-            @strongify(self);;
+            @strongify(self);
             if (self.delegate) {
                 [self.delegate tableViewCell:self didselectButtonWithIndex:0];
             }
 
         }];
         [self.button2 hm_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
-            @strongify(self);;
+            @strongify(self);
             if (self.delegate) {
                 [self.delegate tableViewCell:self didselectButtonWithIndex:1];
             }
         }];
         [self.button3 hm_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
-            @strongify(self);;
+            @strongify(self);
             if (self.delegate) {
                 [self.delegate tableViewCell:self didselectButtonWithIndex:2];
             }

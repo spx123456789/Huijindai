@@ -11,6 +11,9 @@
 #import "HJDOrderAuditViewController.h"
 #import "HJDHomeTableViewCell.h"
 #import "HJDHomeModel.h"
+#import "HJDCalculatorViewController.h"
+
+
 @interface HJDHomeViewController ()<UITableViewDelegate,UITableViewDataSource,HKScrollViewNetDelegate,HJDHomeTableViewCellDelegate>
 @property(strong, nonatomic) UITableView *tableView;
 @property(strong, nonatomic) NSMutableArray *dataSource;
@@ -121,7 +124,8 @@
     }else if ([model.title isEqualToString:@"工单管理"]) {
         
     }else if ([model.title isEqualToString:@"还款计算器"]) {
-        
+        HJDCalculatorViewController * controller = [[HJDCalculatorViewController alloc]init];
+        [self.navigationController pushViewController:controller animated:YES];
     }
 
 }
