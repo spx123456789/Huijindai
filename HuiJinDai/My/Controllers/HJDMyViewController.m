@@ -62,6 +62,12 @@ static NSString *key2 = @"title";
     
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.headerView;
+    
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

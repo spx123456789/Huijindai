@@ -56,7 +56,7 @@
 
 - (HJDCityPickerView *)cityPickerView {
     if (!_cityPickerView) {
-        _cityPickerView = [[HJDCityPickerView alloc] initWithFrame:CGRectMake(0, kScreenHeight - 200, kScreenWidth, 200)];
+        _cityPickerView = [[HJDCityPickerView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
         _cityPickerView.delegate = self;
     }
     return _cityPickerView;
@@ -107,8 +107,7 @@
 }
 
 - (void)selectCity:(id)selector {
-    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    [window addSubview:self.cityPickerView];
+    [self.cityPickerView show];
 }
 
 - (void)logoutButtonClick:(id)selector {
@@ -119,7 +118,8 @@
 
 #pragma mark - HJDCityPickerViewDelegate
 - (void)didSelectedCity:(NSString *)city {
-    self.cityView.fieldPlaceholder = city;
+    self.cityView.textField.text = city;
+    self.cityPickerView = nil;
 }
 
 @end

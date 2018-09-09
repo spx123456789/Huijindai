@@ -65,7 +65,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.contentView.backgroundColor = kRGB_Color(244, 244, 244);
+        self.contentView.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
         [self setUpUI];
     }
     return self;

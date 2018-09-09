@@ -13,10 +13,13 @@
 @property(nonatomic, strong) UILabel *titleLabel;
 @property(nonatomic, strong) UILabel *selectLabel;
 @property(nonatomic, strong) UILabel *cityLabel;
+@property(nonatomic, strong) UIView *line1;
+@property(nonatomic, strong) UIView *color_line;
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSMutableArray *oneDataSource;
 @property(nonatomic, strong) NSMutableArray *twoDataSource;
 @property(nonatomic, assign) NSInteger selectIndex;
+@property(nonatomic, assign) BOOL isSelectFirst;
 @end
 
 @implementation HJDCityPickerView
@@ -83,19 +86,22 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        
+        _isSelectFirst = NO;
+        
         self.backgroundColor = kRGBA_Color(0x00, 0x00, 0x00, 0.4);
         
         self.oneDataSource = [NSMutableArray arrayWithArray:@[ @"上海", @"天津", @"北京", @"石家庄", @"深圳", @"武汉市", @"广州" ]];
-        self.twoDataSource = [NSMutableArray arrayWithArray:@[ @"长治市", @"太原市市", @"大同市", @"晋城市", @"晋中市", @"武汉市", @"朔州市" ]];
+        self.twoDataSource = [NSMutableArray arrayWithArray:@[ @"长治市", @"太原市", @"大同市", @"晋城市", @"晋中市", @"武汉市", @"朔州市" ]];
         
         [self addSubview:self.bgView];
         [self.bgView addSubview:self.titleLabel];
         [self.bgView addSubview:self.cityLabel];
         [self.bgView addSubview:self.selectLabel];
         [self.bgView addSubview:self.tableView];
-        UIView *line1 = [self createLineViewColor:kLineColor];
+        self.line1 = [self createLineViewColor:kLineColor];
         UIView *line2 = [self createLineViewColor:kLineColor];
-        UIView *color_line = [self createLineViewColor:kMainColor];
+        self.color_line = [self createLineViewColor:kMainColor];
         
         [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.equalTo(self);
@@ -108,29 +114,29 @@
             make.height.equalTo(@44);
         }];
         
-        [line1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.line1 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.equalTo(self.titleLabel);
             make.top.equalTo(self.titleLabel.mas_bottom);
             make.height.equalTo(@1);
         }];
         
         [self.cityLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(line1.mas_bottom);
+            make.top.equalTo(self.line1.mas_bottom);
             make.left.equalTo(self.bgView).offset(16);
             make.height.equalTo(@44);
-            make.width.equalTo(@30);
+            make.width.equalTo(@50);
         }];
         
         [self.selectLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(line1.mas_bottom);
+            make.top.equalTo(self.line1.mas_bottom);
             make.left.equalTo(self.cityLabel.mas_right).offset(36);
             make.height.equalTo(@44);
-            make.width.equalTo(@45);
+            make.width.equalTo(@50);
         }];
         
-        [color_line mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.color_line mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.equalTo(self.selectLabel);
-            make.top.equalTo(self.selectLabel.mas_bottom);
+            make.top.equalTo(self.selectLabel.mas_bottom).offset(-2);
             make.height.equalTo(@2);
         }];
         
@@ -139,6 +145,8 @@
             make.top.equalTo(self.selectLabel.mas_bottom);
             make.height.equalTo(@1);
         }];
+        
+        [self resetConstraints];
         
     }
     return self;
@@ -151,9 +159,58 @@
     return line;
 }
 
+- (void)show {
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    [window addSubview:self];
+}
+
+- (void)resetConstraints {
+    if (self.isSelectFirst) {
+        self.cityLabel.hidden = NO;
+        
+        [self.selectLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.line1.mas_bottom);
+            make.left.equalTo(self.cityLabel.mas_right).offset(36);
+            make.height.equalTo(@44);
+            make.width.equalTo(@50);
+        }];
+        
+//        [self.color_line mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.left.right.equalTo(self.selectLabel);
+//            make.top.equalTo(self.selectLabel.mas_bottom);
+//            make.height.equalTo(@2);
+//        }];
+    } else {
+        self.cityLabel.hidden = YES;
+        
+        [self.selectLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.line1.mas_bottom);
+            make.left.equalTo(self.bgView).offset(16);
+            make.height.equalTo(@44);
+            make.width.equalTo(@50);
+        }];
+        
+//        [self.color_line mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.left.right.equalTo(self.selectLabel);
+//            make.top.equalTo(self.selectLabel.mas_bottom);
+//            make.height.equalTo(@2);
+//        }];
+    }
+}
+
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if (self.isSelectFirst) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectedCity:)]) {
+            [self.delegate didSelectedCity:self.twoDataSource[indexPath.row]];;
+        }
+        [self removeFromSuperview];
+    } else {
+        self.isSelectFirst = YES;
+        self.cityLabel.text = self.oneDataSource[indexPath.row];
+        [self.tableView reloadData];
+        [self resetConstraints];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -162,7 +219,11 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.oneDataSource.count;
+    if (self.isSelectFirst) {
+        return self.twoDataSource.count;
+    } else {
+        return self.oneDataSource.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -172,7 +233,11 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    cell.textLabel.text = self.oneDataSource[indexPath.row];
+    if (self.isSelectFirst) {
+        cell.textLabel.text = self.twoDataSource[indexPath.row];
+    } else {
+        cell.textLabel.text = self.oneDataSource[indexPath.row];
+    }
     return cell;
 }
 @end

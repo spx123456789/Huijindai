@@ -14,4 +14,6 @@
 
 @interface HJDCityPickerView : UIView
 @property(nonatomic, weak) id<HJDCityPickerViewDelegate> delegate;
+
+- (void)show;
 @end

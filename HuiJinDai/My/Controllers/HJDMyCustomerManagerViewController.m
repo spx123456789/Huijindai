@@ -42,7 +42,7 @@
 - (HJDCustomerServiceView *)customServiceView {
     if (!_customServiceView) {
         _customServiceView = [[HJDCustomerServiceView alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 70, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 60, 140, 30)];
-        _customServiceView.backgroundColor = kRGB_Color(244, 244, 244);
+        _customServiceView.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
     }
     return _customServiceView;
 }
@@ -51,7 +51,7 @@
     [super viewDidLoad];
     
     self.title = @"我的客户经理";
-    self.view.backgroundColor = kRGB_Color(244, 244, 244);
+    self.view.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
     
     NSArray *arr = [HJDMyManager getMyCustomerManagerArray];
     self.dataSource = [NSMutableArray arrayWithArray:arr];

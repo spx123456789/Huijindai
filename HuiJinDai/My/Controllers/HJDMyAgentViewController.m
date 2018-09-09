@@ -26,7 +26,7 @@
         _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 60) style:UITableViewStylePlain];
         _tableView.dataSource = self;
         _tableView.delegate = self;
-        _tableView.backgroundColor = kRGB_Color(244, 244, 244);
+        _tableView.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _tableView;
@@ -42,7 +42,7 @@
 - (HJDCustomerServiceView *)customServiceView {
     if (!_customServiceView) {
         _customServiceView = [[HJDCustomerServiceView alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 70, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 60, 140, 30)];
-        _customServiceView.backgroundColor = kRGB_Color(244, 244, 244);
+        _customServiceView.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
     }
     return _customServiceView;
 }
@@ -51,7 +51,7 @@
     [super viewDidLoad];
     
     [self setNavTitle:@"我的经纪人"];
-    self.view.backgroundColor = kRGB_Color(244, 244, 244);
+    self.view.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
     
     NSArray *arr = [HJDMyManager getMyAgentArray];
     self.dataSource = [NSMutableArray arrayWithArray:arr];
