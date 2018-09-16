@@ -12,6 +12,7 @@
 #import "HJDHomeTableViewCell.h"
 #import "HJDHomeModel.h"
 #import "HJDCalculatorViewController.h"
+#import "HJDMessageViewController.h"
 
 
 @interface HJDHomeViewController ()<UITableViewDelegate,UITableViewDataSource,HKScrollViewNetDelegate,HJDHomeTableViewCellDelegate>
@@ -25,7 +26,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupSubViews];
-    // Do any additional setup after loading the view.
+    
+    [self setRightNavigationButton:nil backImage:kImage(@"首页通知") highlightedImage:kImage(@"首页通知") frame:CGRectMake(0, 0, 44, 44)];
 }
 
 - (void)setupSubViews {
@@ -49,6 +51,12 @@
 
 - (void)refreshDate {
     
+}
+
+- (void)navigationRightButtonClicked:(UIButton *)sender {
+    HJDMessageViewController *controller = [[HJDMessageViewController alloc] init];
+    controller.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark - UITableView Datasource
@@ -125,6 +133,7 @@
         
     }else if ([model.title isEqualToString:@"还款计算器"]) {
         HJDCalculatorViewController * controller = [[HJDCalculatorViewController alloc]init];
+        controller.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:controller animated:YES];
     }
 
