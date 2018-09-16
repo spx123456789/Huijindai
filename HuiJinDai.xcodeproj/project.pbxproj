@@ -20,6 +20,8 @@
 		16B6994F214DF72C0086920C /* HJDMessageSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B6994E214DF72C0086920C /* HJDMessageSegmentView.m */; };
 		16B69952214E042D0086920C /* HJDHomeOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B69951214E042D0086920C /* HJDHomeOrderDetailViewController.m */; };
 		16B69955214E04970086920C /* HJDHomeOrderDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B69954214E04970086920C /* HJDHomeOrderDetailTableViewCell.m */; };
+		16B69958214E9AF30086920C /* HJDHomeOrderDetailPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B69957214E9AF30086920C /* HJDHomeOrderDetailPhotoCell.m */; };
+		16B6995B214EA4400086920C /* HJDHomeOrderRefuseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B6995A214EA4400086920C /* HJDHomeOrderRefuseViewController.m */; };
 		16B6DEA5213988BB00CF8C8D /* HJDCityPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B6DEA4213988BB00CF8C8D /* HJDCityPickerView.m */; };
 		16B91D842143A61500AC1661 /* HJDCustomerServiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B91D832143A61500AC1661 /* HJDCustomerServiceView.m */; };
 		16C4E1AC21381BFD004268C4 /* HuiJinDaiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E1AB21381BFD004268C4 /* HuiJinDaiTests.m */; };
@@ -205,6 +207,10 @@
 		16B69951214E042D0086920C /* HJDHomeOrderDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeOrderDetailViewController.m; sourceTree = "<group>"; };
 		16B69953214E04970086920C /* HJDHomeOrderDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeOrderDetailTableViewCell.h; sourceTree = "<group>"; };
 		16B69954214E04970086920C /* HJDHomeOrderDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeOrderDetailTableViewCell.m; sourceTree = "<group>"; };
+		16B69956214E9AF30086920C /* HJDHomeOrderDetailPhotoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeOrderDetailPhotoCell.h; sourceTree = "<group>"; };
+		16B69957214E9AF30086920C /* HJDHomeOrderDetailPhotoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeOrderDetailPhotoCell.m; sourceTree = "<group>"; };
+		16B69959214EA4400086920C /* HJDHomeOrderRefuseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeOrderRefuseViewController.h; sourceTree = "<group>"; };
+		16B6995A214EA4400086920C /* HJDHomeOrderRefuseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeOrderRefuseViewController.m; sourceTree = "<group>"; };
 		16B6DEA3213988BB00CF8C8D /* HJDCityPickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDCityPickerView.h; sourceTree = "<group>"; };
 		16B6DEA4213988BB00CF8C8D /* HJDCityPickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDCityPickerView.m; sourceTree = "<group>"; };
 		16B91D822143A61500AC1661 /* HJDCustomerServiceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDCustomerServiceView.h; sourceTree = "<group>"; };
@@ -840,6 +846,8 @@
 				AA1CEC9821454C2B00249692 /* HJDCalculatorViewController.m */,
 				16B69950214E042D0086920C /* HJDHomeOrderDetailViewController.h */,
 				16B69951214E042D0086920C /* HJDHomeOrderDetailViewController.m */,
+				16B69959214EA4400086920C /* HJDHomeOrderRefuseViewController.h */,
+				16B6995A214EA4400086920C /* HJDHomeOrderRefuseViewController.m */,
 			);
 			path = Viewcontrollers;
 			sourceTree = "<group>";
@@ -863,6 +871,8 @@
 				AA1CECB12145614000249692 /* HJDCalculatorTableViewCell.m */,
 				16B69953214E04970086920C /* HJDHomeOrderDetailTableViewCell.h */,
 				16B69954214E04970086920C /* HJDHomeOrderDetailTableViewCell.m */,
+				16B69956214E9AF30086920C /* HJDHomeOrderDetailPhotoCell.h */,
+				16B69957214E9AF30086920C /* HJDHomeOrderDetailPhotoCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1209,10 +1219,12 @@
 				AA7D7FF72143B70300E0D843 /* AppDelegate.m in Sources */,
 				163D4DB4214543E90012CB53 /* HJDHomeAuditTableViewCell.m in Sources */,
 				AA7D7FEA214398E200E0D843 /* NSObject+HMCore.m in Sources */,
+				16B6995B214EA4400086920C /* HJDHomeOrderRefuseViewController.m in Sources */,
 				AA7D7FDE2143589300E0D843 /* HJDHomeModel.m in Sources */,
 				AA1CEC9921454C2B00249692 /* HJDCalculatorViewController.m in Sources */,
 				AA7D7FE3214358AA00E0D843 /* HJDButton.m in Sources */,
 				16B69952214E042D0086920C /* HJDHomeOrderDetailViewController.m in Sources */,
+				16B69958214E9AF30086920C /* HJDHomeOrderDetailPhotoCell.m in Sources */,
 				AA7D7FED2143A07E00E0D843 /* UIColor+HMCore.m in Sources */,
 				16C4E1D8213826D0004268C4 /* HJDTextFieldView.m in Sources */,
 				AAD24F6721394BA200298386 /* HJDHomeViewController.m in Sources */,

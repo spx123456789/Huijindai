@@ -9,5 +9,38 @@
 #import <UIKit/UIKit.h>
 
 @interface HJDHomeOrderDetailTableViewCell : UITableViewCell
+@property(nonatomic, strong) UIView *bgView;
+@property(nonatomic, strong) UILabel *titleLabel;
+@property(nonatomic, strong) UIView *lineView;
+
+- (UILabel *)createLeftLabelWithTitle:(NSString *)title;
+- (UILabel *)createRightLabel;
+@end
+
+//询值
+@interface HJDHomeOrderDetailQueryCell : HJDHomeOrderDetailTableViewCell
 
 @end
+
+//报单
+@interface HJDHomeOrderDetailDeclarationCell : HJDHomeOrderDetailTableViewCell
+
+@end
+
+//工单流程
+@interface HJDHomeOrderDetailProcessCell : HJDHomeOrderDetailTableViewCell
+
+@end
+
+
+@class HJDHomeOrderDetailButtonCell;
+@protocol HJDHomeOrderDetailButtonCellDelegate<NSObject>
+- (void)buttonCell:(HJDHomeOrderDetailButtonCell *)buttonCell selectButtonIndex:(NSInteger)index;
+@end
+
+//审核
+@interface HJDHomeOrderDetailButtonCell : UITableViewCell
+@property(nonatomic, weak) id<HJDHomeOrderDetailButtonCellDelegate> delegate;
+@end
+
+

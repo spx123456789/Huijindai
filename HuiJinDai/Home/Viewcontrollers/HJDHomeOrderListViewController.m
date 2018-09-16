@@ -8,6 +8,7 @@
 
 #import "HJDHomeOrderListViewController.h"
 #import "HJDHomeOrderListTableViewCell.h"
+#import "HJDHomeOrderDetailViewController.h"
 #import "HJDHomeManager.h"
 
 @interface HJDHomeOrderListViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -112,7 +113,8 @@
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    HJDHomeOrderDetailViewController *controller = [[HJDHomeOrderDetailViewController alloc] init];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

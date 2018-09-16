@@ -22,6 +22,12 @@
 #import "UIView+HMCore.h"
 #import "UIColor+HMCore.h"
 
+typedef enum : NSUInteger {
+    HJDLoginIdentityManager,        //经理
+    HJDLoginIdentityAgent,          //经纪人
+    HJDLoginIdentityTypeChannel,    //渠道
+} HJDLoginIdentityType;
+
 #pragma mark - 字体宏
 #define kFont9 [UIFont systemFontOfSize:9]
 #define kFont10 [UIFont systemFontOfSize:10]
