@@ -10,6 +10,7 @@
 #import "HJDHomeOrderDetailTableViewCell.h"
 #import "HJDHomeOrderDetailPhotoCell.h"
 #import "HJDHomeOrderRefuseViewController.h"
+#import "HJDHomeOrderApprovedView.h"
 
 @interface HJDHomeOrderDetailViewController ()<UITableViewDelegate, UITableViewDataSource, HJDHomeOrderDetailButtonCellDelegate>
 @property(nonatomic, strong) UITableView *tableView;
@@ -160,7 +161,9 @@
         HJDHomeOrderRefuseViewController *controller = [[HJDHomeOrderRefuseViewController alloc] init];
         [self.navigationController pushViewController:controller animated:YES];
     } else { //通过
-        
+        HJDHomeOrderApprovedView *view = [[HJDHomeOrderApprovedView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        UIWindow *window = [UIApplication sharedApplication].keyWindow;
+        [window addSubview:view];
     }
 }
 @end

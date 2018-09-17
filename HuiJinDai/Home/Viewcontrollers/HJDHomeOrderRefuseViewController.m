@@ -67,7 +67,12 @@
     self.view.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
     
     [self.view addSubview:self.topView];
-    [self.view addSubview:self.textView];
+    
+    UIView *bgView = [[UIView alloc] init];
+    bgView.backgroundColor = kWithe;
+    [self.view addSubview:bgView];
+    
+    [bgView addSubview:self.textView];
     [self.view addSubview:self.sureButton];
     
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -76,17 +81,23 @@
         make.height.equalTo(@45);
     }];
     
-    [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view).offset(0);
-        make.right.equalTo(self.view).offset(0);
+    [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.view);
         make.top.equalTo(self.topView.mas_bottom);
         make.height.equalTo(@200);
+    }];
+    
+    [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(bgView).offset(16);
+        make.right.equalTo(bgView).offset(-16);
+        make.top.equalTo(bgView).offset(12);
+        make.bottom.equalTo(bgView).offset(-12);
     }];
     
     [self.sureButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(16);
         make.right.equalTo(self.view).offset(-16);
-        make.top.equalTo(self.textView.mas_bottom).offset(20);
+        make.top.equalTo(bgView.mas_bottom).offset(20);
         make.height.equalTo(@46);
     }];
     

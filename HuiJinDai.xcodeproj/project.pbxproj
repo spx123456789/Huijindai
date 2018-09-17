@@ -12,6 +12,7 @@
 		163D4DB7214549B80012CB53 /* HJDHomeNavSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 163D4DB6214549B80012CB53 /* HJDHomeNavSearchView.m */; };
 		163D4DBD21455F080012CB53 /* HJDMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 163D4DBC21455F080012CB53 /* HJDMessageViewController.m */; };
 		163D4DC021455F3D0012CB53 /* HJDMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 163D4DBF21455F3D0012CB53 /* HJDMessageTableViewCell.m */; };
+		167C6700214FE52B00F2F2DE /* HJDHomeOrderApprovedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 167C66FF214FE52B00F2F2DE /* HJDHomeOrderApprovedView.m */; };
 		16908038213EBFD900AA2575 /* HJDOrderListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 16908037213EBFD800AA2575 /* HJDOrderListModel.m */; };
 		1690803C213EC04400AA2575 /* HJDHomeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1690803B213EC04400AA2575 /* HJDHomeManager.m */; };
 		169C07842141744900E9CDD0 /* HJDMyInviteCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 169C07832141744900E9CDD0 /* HJDMyInviteCodeView.m */; };
@@ -191,6 +192,8 @@
 		163D4DBC21455F080012CB53 /* HJDMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDMessageViewController.m; sourceTree = "<group>"; };
 		163D4DBE21455F3D0012CB53 /* HJDMessageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDMessageTableViewCell.h; sourceTree = "<group>"; };
 		163D4DBF21455F3D0012CB53 /* HJDMessageTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDMessageTableViewCell.m; sourceTree = "<group>"; };
+		167C66FE214FE52B00F2F2DE /* HJDHomeOrderApprovedView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeOrderApprovedView.h; sourceTree = "<group>"; };
+		167C66FF214FE52B00F2F2DE /* HJDHomeOrderApprovedView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeOrderApprovedView.m; sourceTree = "<group>"; };
 		16908036213EBFD800AA2575 /* HJDOrderListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDOrderListModel.h; sourceTree = "<group>"; };
 		16908037213EBFD800AA2575 /* HJDOrderListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDOrderListModel.m; sourceTree = "<group>"; };
 		1690803A213EC04400AA2575 /* HJDHomeManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeManager.h; sourceTree = "<group>"; };
@@ -873,6 +876,8 @@
 				16B69954214E04970086920C /* HJDHomeOrderDetailTableViewCell.m */,
 				16B69956214E9AF30086920C /* HJDHomeOrderDetailPhotoCell.h */,
 				16B69957214E9AF30086920C /* HJDHomeOrderDetailPhotoCell.m */,
+				167C66FE214FE52B00F2F2DE /* HJDHomeOrderApprovedView.h */,
+				167C66FF214FE52B00F2F2DE /* HJDHomeOrderApprovedView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1203,6 +1208,7 @@
 				16EDD2BF213AC4A000E21AB2 /* HJDLoginViewController.m in Sources */,
 				163D4DC021455F3D0012CB53 /* HJDMessageTableViewCell.m in Sources */,
 				AA7D7FE4214358AA00E0D843 /* HJDHomeTableViewCell.m in Sources */,
+				167C6700214FE52B00F2F2DE /* HJDHomeOrderApprovedView.m in Sources */,
 				16B6994C214BE8110086920C /* HJDMessageManager.m in Sources */,
 				16B69955214E04970086920C /* HJDHomeOrderDetailTableViewCell.m in Sources */,
 				16B69948214BE77B0086920C /* HJDMessageModel.m in Sources */,
