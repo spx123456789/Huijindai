@@ -103,7 +103,30 @@
 #pragma mark - UITableView Delegate methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    switch (indexPath.row) {
+        case 0:
+        {
+            
+            break;
+        }
+        case 1:
+        {
+            
+            break;
+        }
+        case 2:
+        {
+            
+            break;
+        }
+        case 3:
+        {
+            
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
