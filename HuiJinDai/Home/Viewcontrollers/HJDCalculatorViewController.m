@@ -9,12 +9,36 @@
 #import "HJDCalculatorViewController.h"
 #import <TPKeyboardAvoidingTableView.h>
 #import "HJDCalculatorTableViewCell.h"
+#import "HJDCalculatorResultViewController.h"
 
 @interface HJDCalculatorViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) TPKeyboardAvoidingTableView *tableView;
+@property(nonatomic, strong) UIView *bottomView;
 @end
 
 @implementation HJDCalculatorViewController
+
+- (UIView *)bottomView {
+    if (!_bottomView) {
+        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44 + 32)];
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame = CGRectMake(16, 32, kScreenWidth - 16 * 2, 44);
+        [btn setBackgroundColor:kMainColor];
+        [btn setTitle:@"开始计算" forState:UIControlStateNormal];
+        [btn setTitleColor:kRGB_Color(0xff, 0xff, 0xff) forState:UIControlStateNormal];
+        btn.titleLabel.font = kFont15;
+        btn.layer.masksToBounds = YES;
+        btn.layer.cornerRadius = 4.f;
+        [btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_bottomView addSubview:btn];
+    }
+    return _bottomView;
+}
+
+- (void)buttonClick:(id)sender {
+    HJDCalculatorResultViewController *controller = [[HJDCalculatorResultViewController alloc] init];
+    [self.navigationController pushViewController:controller animated:YES];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -23,10 +47,11 @@
     [self.view addSubview:self.tableView];
     [self setExtraCellLineHidden:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.top.equalTo(self.view).offset(42);
+        make.left.right.bottom.equalTo(self.view);
     }];
     
-    // Do any additional setup after loading the view.
+    self.tableView.tableFooterView = self.bottomView;
 }
 
 - (void)didReceiveMemoryWarning {

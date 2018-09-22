@@ -87,7 +87,7 @@
 - (UIView *)line {
     if (!_line) {
         _line = [[UIView alloc] init];
-        _line.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
+        _line.backgroundColor = kLineColor;
     }
     return _line;
 }
@@ -155,7 +155,7 @@
 - (UIView *)line2 {
     if (!_line2) {
         _line2 = [[UIView alloc] init];
-        _line2.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
+        _line2.backgroundColor = kLineColor;
     }
     return _line2;
 }
@@ -163,7 +163,7 @@
 - (UIView *)line3 {
     if (!_line3) {
         _line3 = [[UIView alloc] init];
-        _line3.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
+        _line3.backgroundColor = kLineColor;
     }
     return _line3;
 }

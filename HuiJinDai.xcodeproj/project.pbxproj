@@ -26,6 +26,7 @@
 		169B9EF7215620FC0013D47B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 169B9EF6215620FC0013D47B /* CoreLocation.framework */; };
 		169B9EF9215621090013D47B /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 169B9EF8215621090013D47B /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		169B9F03215631870013D47B /* GTSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 169B9F01215631870013D47B /* GTSDK.framework */; };
+		169B9F06215635530013D47B /* HJDCalculatorResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 169B9F05215635530013D47B /* HJDCalculatorResultViewController.m */; };
 		169C07842141744900E9CDD0 /* HJDMyInviteCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 169C07832141744900E9CDD0 /* HJDMyInviteCodeView.m */; };
 		16B69948214BE77B0086920C /* HJDMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B69947214BE77B0086920C /* HJDMessageModel.m */; };
 		16B6994C214BE8110086920C /* HJDMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B6994B214BE8110086920C /* HJDMessageManager.m */; };
@@ -221,6 +222,8 @@
 		169B9EF8215621090013D47B /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		169B9F00215631870013D47B /* GTExtensionSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GTExtensionSDK.framework; sourceTree = "<group>"; };
 		169B9F01215631870013D47B /* GTSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GTSDK.framework; sourceTree = "<group>"; };
+		169B9F04215635530013D47B /* HJDCalculatorResultViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDCalculatorResultViewController.h; sourceTree = "<group>"; };
+		169B9F05215635530013D47B /* HJDCalculatorResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDCalculatorResultViewController.m; sourceTree = "<group>"; };
 		169C07822141744900E9CDD0 /* HJDMyInviteCodeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDMyInviteCodeView.h; sourceTree = "<group>"; };
 		169C07832141744900E9CDD0 /* HJDMyInviteCodeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDMyInviteCodeView.m; sourceTree = "<group>"; };
 		16B69946214BE77B0086920C /* HJDMessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDMessageModel.h; sourceTree = "<group>"; };
@@ -912,6 +915,8 @@
 				16B69951214E042D0086920C /* HJDHomeOrderDetailViewController.m */,
 				16B69959214EA4400086920C /* HJDHomeOrderRefuseViewController.h */,
 				16B6995A214EA4400086920C /* HJDHomeOrderRefuseViewController.m */,
+				169B9F04215635530013D47B /* HJDCalculatorResultViewController.h */,
+				169B9F05215635530013D47B /* HJDCalculatorResultViewController.m */,
 			);
 			path = Viewcontrollers;
 			sourceTree = "<group>";
@@ -1264,6 +1269,7 @@
 				16B91D842143A61500AC1661 /* HJDCustomerServiceView.m in Sources */,
 				16EDD309213C06DC00E21AB2 /* HJDMyAgentViewController.m in Sources */,
 				16EDD32A213C176000E21AB2 /* HJDHomeOrderListTableViewCell.m in Sources */,
+				169B9F06215635530013D47B /* HJDCalculatorResultViewController.m in Sources */,
 				162904D42140181300AC151D /* HJDHomeOrderManageViewController.m in Sources */,
 				AA7D7FF62143B70300E0D843 /* main.m in Sources */,
 				AAD24F6421394B3800298386 /* HKScrollView.m in Sources */,

@@ -22,6 +22,7 @@
     UILabel *label_1 = [[UILabel alloc] init];
     label_1.textColor = kRGB_Color(0x33, 0x33, 0x33);
     label_1.font = kFont14;
+    label_1.textAlignment = NSTextAlignmentRight;
     return label_1;
 }
 
@@ -45,7 +46,7 @@
 - (UIView *)lineView {
     if (!_lineView) {
         _lineView = [[UIView alloc] init];
-        _lineView.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
+        _lineView.backgroundColor = kLineColor;
     }
     return _lineView;
 }

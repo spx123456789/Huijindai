@@ -138,10 +138,10 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
         case 0:
-            return 44 + 1 + 16 + 14 * 5 + 12 * 4 + 16;
+            return 44 + 1 + 16 + 14 * 5 + 12 * 4 + 16 + 4;
             break;
         case 1:
-            return 44 + 1 + 16 + 14 * 7 + 12 * 6 + 16;
+            return 44 + 1 + 16 + 14 * 7 + 12 * 6 + 16 + 4;
             break;
         case 2:
             return 44 + 1 + 4 + (12 + 12 + 17 + 8 + 14 + 4 + 12 + 12) + 16;
