@@ -39,8 +39,13 @@
         _cancelButton.titleLabel.font = kFont17;
         _cancelButton.layer.masksToBounds = YES;
         _cancelButton.layer.cornerRadius = 8.f;
+        [_cancelButton addTarget:self action:@selector(cancelButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _cancelButton;
+}
+
+- (void)cancelButtonClick:(id)sender {
+    [self removeFromSuperview];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -50,7 +55,7 @@
         
         [self addSubview:self.tableView];
         [self addSubview:self.cancelButton];
-        
+    
     }
     return self;
 }
