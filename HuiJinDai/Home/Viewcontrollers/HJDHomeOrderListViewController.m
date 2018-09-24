@@ -20,7 +20,7 @@
 @implementation HJDHomeOrderListViewController
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 46, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 46) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 52, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 52) style:UITableViewStylePlain];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.backgroundColor = [UIColor clearColor];
@@ -57,32 +57,53 @@
 }
 
 - (void)createSearchView {
-    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 46)];
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 36 + 16)];
     [self.view addSubview:bgView];
     
-    UIView *s_bgView = [[UIView alloc] initWithFrame:CGRectMake(16, 8, kScreenWidth - 32, 30)];
+    UIView *s_bgView = [[UIView alloc] init];
     s_bgView.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
     s_bgView.layer.masksToBounds = YES;
     s_bgView.layer.cornerRadius = 4.f;
     [bgView addSubview:s_bgView];
     
-    self.textField.frame = CGRectMake(12, 0, kScreenWidth - 110, 30);
     [s_bgView addSubview:self.textField];
     
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(kScreenWidth - 70, 0, 1, 30)];
+    UIView *line = [[UIView alloc] init];
     line.backgroundColor = kRGB_Color(0xff, 0xff, 0xff);
     [s_bgView addSubview:line];
     
-    UILabel *sureLabel = [[UILabel alloc] initWithFrame:CGRectMake(kScreenWidth - 69, 0, 53, 30)];
-    sureLabel.text = @"确定";
-    sureLabel.textColor = kRGB_Color(0x33, 0x33, 0x33);
-    sureLabel.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
-    sureLabel.font = kFont15;
-    sureLabel.textAlignment = NSTextAlignmentCenter;
-    [s_bgView addSubview:sureLabel];
+    UIButton *sureButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [sureButton setBackgroundColor:[UIColor clearColor]];
+    [sureButton setTitle:@"确定" forState:UIControlStateNormal];
+    sureButton.titleLabel.font = kFont15;
+    [sureButton setTitleColor:kRGB_Color(0x33, 0x33, 0x33) forState:UIControlStateNormal];
+    [sureButton addTarget:self action:@selector(clickSureButton:) forControlEvents:UIControlEventTouchUpInside];
+    [s_bgView addSubview:sureButton];
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickSureButton:)];
-    [sureLabel addGestureRecognizer:tap];
+    [s_bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(bgView).offset(16);
+        make.right.equalTo(bgView).offset(-16);
+        make.height.equalTo(@36);
+        make.top.equalTo(bgView).offset(8);
+    }];
+    
+    [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(s_bgView).offset(12);
+        make.top.bottom.equalTo(s_bgView);
+        make.right.equalTo(line.mas_left).offset(-12);
+    }];
+    
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.equalTo(s_bgView);
+        make.right.equalTo(sureButton.mas_left);
+        make.width.equalTo(@1);
+    }];
+    
+    [sureButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.right.equalTo(s_bgView);
+        make.width.equalTo(@53);
+    }];
+
 }
 
 - (void)clickSureButton:(id)sender {

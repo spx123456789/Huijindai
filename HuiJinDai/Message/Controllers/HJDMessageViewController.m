@@ -39,6 +39,7 @@
     }
     return _segmentView;
 }
+
 - (instancetype)init {
     self = [super init];
     if (self) {

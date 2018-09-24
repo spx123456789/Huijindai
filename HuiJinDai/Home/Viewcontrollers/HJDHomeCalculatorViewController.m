@@ -1,22 +1,22 @@
 //
-//  HJDCalculatorViewController.m
+//  HJDHomeCalculatorViewController.m
 //  HuiJinDai
 //
 //  Created by SHANPX on 2018/9/9.
 //  Copyright © 2018年 shanpx. All rights reserved.
 //
 
-#import "HJDCalculatorViewController.h"
+#import "HJDHomeCalculatorViewController.h"
 #import <TPKeyboardAvoidingTableView.h>
 #import "HJDCalculatorTableViewCell.h"
-#import "HJDCalculatorResultViewController.h"
+#import "HJDHomeCalculatorResultViewController.h"
 
-@interface HJDCalculatorViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface HJDHomeCalculatorViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) TPKeyboardAvoidingTableView *tableView;
 @property(nonatomic, strong) UIView *bottomView;
 @end
 
-@implementation HJDCalculatorViewController
+@implementation HJDHomeCalculatorViewController
 
 - (UIView *)bottomView {
     if (!_bottomView) {
@@ -36,7 +36,7 @@
 }
 
 - (void)buttonClick:(id)sender {
-    HJDCalculatorResultViewController *controller = [[HJDCalculatorResultViewController alloc] init];
+    HJDHomeCalculatorResultViewController *controller = [[HJDHomeCalculatorResultViewController alloc] init];
     [self.navigationController pushViewController:controller animated:YES];
 }
 

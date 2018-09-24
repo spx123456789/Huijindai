@@ -1,5 +1,5 @@
 //
-//  HJDCalculatorViewController.h
+//  HJDHomeCalculatorViewController.h
 //  HuiJinDai
 //
 //  Created by SHANPX on 2018/9/9.
@@ -8,6 +8,6 @@
 
 #import "HJDBaseViewController.h"
 
-@interface HJDCalculatorViewController : HJDBaseViewController
+@interface HJDHomeCalculatorViewController : HJDBaseViewController
 
 @end

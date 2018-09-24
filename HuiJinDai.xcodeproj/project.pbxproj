@@ -26,7 +26,12 @@
 		169B9EF7215620FC0013D47B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 169B9EF6215620FC0013D47B /* CoreLocation.framework */; };
 		169B9EF9215621090013D47B /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 169B9EF8215621090013D47B /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		169B9F03215631870013D47B /* GTSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 169B9F01215631870013D47B /* GTSDK.framework */; };
-		169B9F06215635530013D47B /* HJDCalculatorResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 169B9F05215635530013D47B /* HJDCalculatorResultViewController.m */; };
+		169B9F06215635530013D47B /* HJDHomeCalculatorResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 169B9F05215635530013D47B /* HJDHomeCalculatorResultViewController.m */; };
+		169B9F0921567E390013D47B /* HJDHomeOrderProcessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 169B9F0821567E390013D47B /* HJDHomeOrderProcessViewController.m */; };
+		169B9F0C215681D90013D47B /* HJDOrderProcessSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 169B9F0B215681D90013D47B /* HJDOrderProcessSearchView.m */; };
+		169B9F0F2158F0DC0013D47B /* HJDHomeRoomDiDaiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 169B9F0E2158F0DC0013D47B /* HJDHomeRoomDiDaiViewController.m */; };
+		169B9F122158F1850013D47B /* HJDHomeRoomDiDaiTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 169B9F112158F1850013D47B /* HJDHomeRoomDiDaiTableViewCell.m */; };
+		169B9F1521590DA20013D47B /* HJDHomeCalculatorResultTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 169B9F1421590DA20013D47B /* HJDHomeCalculatorResultTableCell.m */; };
 		169C07842141744900E9CDD0 /* HJDMyInviteCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 169C07832141744900E9CDD0 /* HJDMyInviteCodeView.m */; };
 		16B69948214BE77B0086920C /* HJDMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B69947214BE77B0086920C /* HJDMessageModel.m */; };
 		16B6994C214BE8110086920C /* HJDMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B6994B214BE8110086920C /* HJDMessageManager.m */; };
@@ -53,10 +58,10 @@
 		16EDD31F213C074A00E21AB2 /* HJDMyAgentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD31D213C074A00E21AB2 /* HJDMyAgentModel.m */; };
 		16EDD32A213C176000E21AB2 /* HJDHomeOrderListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD329213C176000E21AB2 /* HJDHomeOrderListTableViewCell.m */; };
 		16EDD32D213C2E8900E21AB2 /* HJDHomeOrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD32C213C2E8900E21AB2 /* HJDHomeOrderListViewController.m */; };
-		16EDD330213C318100E21AB2 /* HJDOrderAuditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD32F213C318100E21AB2 /* HJDOrderAuditViewController.m */; };
+		16EDD330213C318100E21AB2 /* HJDHomeOrderAuditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD32F213C318100E21AB2 /* HJDHomeOrderAuditViewController.m */; };
 		16FFC51621397373008BCABC /* HJDRegisterManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FFC51521397373008BCABC /* HJDRegisterManger.m */; };
 		16FFC519213973A2008BCABC /* HJDRegisterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FFC518213973A2008BCABC /* HJDRegisterModel.m */; };
-		AA1CEC9921454C2B00249692 /* HJDCalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEC9821454C2B00249692 /* HJDCalculatorViewController.m */; };
+		AA1CEC9921454C2B00249692 /* HJDHomeCalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEC9821454C2B00249692 /* HJDHomeCalculatorViewController.m */; };
 		AA1CECB22145614000249692 /* HJDCalculatorTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CECB12145614000249692 /* HJDCalculatorTableViewCell.m */; };
 		AA7D7F762143586100E0D843 /* 暂无数据_03@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F142143585200E0D843 /* 暂无数据_03@3x.png */; };
 		AA7D7F772143586100E0D843 /* 订单管理我的订单@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7F152143585200E0D843 /* 订单管理我的订单@3x.png */; };
@@ -222,8 +227,18 @@
 		169B9EF8215621090013D47B /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		169B9F00215631870013D47B /* GTExtensionSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GTExtensionSDK.framework; sourceTree = "<group>"; };
 		169B9F01215631870013D47B /* GTSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GTSDK.framework; sourceTree = "<group>"; };
-		169B9F04215635530013D47B /* HJDCalculatorResultViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDCalculatorResultViewController.h; sourceTree = "<group>"; };
-		169B9F05215635530013D47B /* HJDCalculatorResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDCalculatorResultViewController.m; sourceTree = "<group>"; };
+		169B9F04215635530013D47B /* HJDHomeCalculatorResultViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeCalculatorResultViewController.h; sourceTree = "<group>"; };
+		169B9F05215635530013D47B /* HJDHomeCalculatorResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeCalculatorResultViewController.m; sourceTree = "<group>"; };
+		169B9F0721567E390013D47B /* HJDHomeOrderProcessViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeOrderProcessViewController.h; sourceTree = "<group>"; };
+		169B9F0821567E390013D47B /* HJDHomeOrderProcessViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeOrderProcessViewController.m; sourceTree = "<group>"; };
+		169B9F0A215681D90013D47B /* HJDOrderProcessSearchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDOrderProcessSearchView.h; sourceTree = "<group>"; };
+		169B9F0B215681D90013D47B /* HJDOrderProcessSearchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDOrderProcessSearchView.m; sourceTree = "<group>"; };
+		169B9F0D2158F0DC0013D47B /* HJDHomeRoomDiDaiViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeRoomDiDaiViewController.h; sourceTree = "<group>"; };
+		169B9F0E2158F0DC0013D47B /* HJDHomeRoomDiDaiViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeRoomDiDaiViewController.m; sourceTree = "<group>"; };
+		169B9F102158F1850013D47B /* HJDHomeRoomDiDaiTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeRoomDiDaiTableViewCell.h; sourceTree = "<group>"; };
+		169B9F112158F1850013D47B /* HJDHomeRoomDiDaiTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeRoomDiDaiTableViewCell.m; sourceTree = "<group>"; };
+		169B9F1321590DA20013D47B /* HJDHomeCalculatorResultTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeCalculatorResultTableCell.h; sourceTree = "<group>"; };
+		169B9F1421590DA20013D47B /* HJDHomeCalculatorResultTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeCalculatorResultTableCell.m; sourceTree = "<group>"; };
 		169C07822141744900E9CDD0 /* HJDMyInviteCodeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDMyInviteCodeView.h; sourceTree = "<group>"; };
 		169C07832141744900E9CDD0 /* HJDMyInviteCodeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDMyInviteCodeView.m; sourceTree = "<group>"; };
 		16B69946214BE77B0086920C /* HJDMessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDMessageModel.h; sourceTree = "<group>"; };
@@ -279,8 +294,8 @@
 		16EDD329213C176000E21AB2 /* HJDHomeOrderListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeOrderListTableViewCell.m; sourceTree = "<group>"; };
 		16EDD32B213C2E8900E21AB2 /* HJDHomeOrderListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeOrderListViewController.h; sourceTree = "<group>"; };
 		16EDD32C213C2E8900E21AB2 /* HJDHomeOrderListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeOrderListViewController.m; sourceTree = "<group>"; };
-		16EDD32E213C318100E21AB2 /* HJDOrderAuditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDOrderAuditViewController.h; sourceTree = "<group>"; };
-		16EDD32F213C318100E21AB2 /* HJDOrderAuditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDOrderAuditViewController.m; sourceTree = "<group>"; };
+		16EDD32E213C318100E21AB2 /* HJDHomeOrderAuditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeOrderAuditViewController.h; sourceTree = "<group>"; };
+		16EDD32F213C318100E21AB2 /* HJDHomeOrderAuditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeOrderAuditViewController.m; sourceTree = "<group>"; };
 		16FFC51421397373008BCABC /* HJDRegisterManger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDRegisterManger.h; sourceTree = "<group>"; };
 		16FFC51521397373008BCABC /* HJDRegisterManger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDRegisterManger.m; sourceTree = "<group>"; };
 		16FFC517213973A2008BCABC /* HJDRegisterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDRegisterModel.h; sourceTree = "<group>"; };
@@ -288,8 +303,8 @@
 		3934C1A1D46330E827334147 /* Pods-HuiJinDai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuiJinDai.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HuiJinDai/Pods-HuiJinDai.debug.xcconfig"; sourceTree = "<group>"; };
 		716329259416E7FBB66B2DF9 /* Pods-HuiJinDai.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuiJinDai.release.xcconfig"; path = "Pods/Target Support Files/Pods-HuiJinDai/Pods-HuiJinDai.release.xcconfig"; sourceTree = "<group>"; };
 		758AEEDFDB9B291E6C91EBA5 /* libPods-HuiJinDai.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HuiJinDai.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		AA1CEC9721454C2B00249692 /* HJDCalculatorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDCalculatorViewController.h; sourceTree = "<group>"; };
-		AA1CEC9821454C2B00249692 /* HJDCalculatorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDCalculatorViewController.m; sourceTree = "<group>"; };
+		AA1CEC9721454C2B00249692 /* HJDHomeCalculatorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeCalculatorViewController.h; sourceTree = "<group>"; };
+		AA1CEC9821454C2B00249692 /* HJDHomeCalculatorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeCalculatorViewController.m; sourceTree = "<group>"; };
 		AA1CECB02145614000249692 /* HJDCalculatorTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDCalculatorTableViewCell.h; sourceTree = "<group>"; };
 		AA1CECB12145614000249692 /* HJDCalculatorTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDCalculatorTableViewCell.m; sourceTree = "<group>"; };
 		AA7D7F142143585200E0D843 /* 暂无数据_03@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "暂无数据_03@3x.png"; sourceTree = "<group>"; };
@@ -905,18 +920,22 @@
 				AAD24F6621394BA200298386 /* HJDHomeViewController.m */,
 				16EDD32B213C2E8900E21AB2 /* HJDHomeOrderListViewController.h */,
 				16EDD32C213C2E8900E21AB2 /* HJDHomeOrderListViewController.m */,
-				16EDD32E213C318100E21AB2 /* HJDOrderAuditViewController.h */,
-				16EDD32F213C318100E21AB2 /* HJDOrderAuditViewController.m */,
+				16EDD32E213C318100E21AB2 /* HJDHomeOrderAuditViewController.h */,
+				16EDD32F213C318100E21AB2 /* HJDHomeOrderAuditViewController.m */,
 				162904D22140181300AC151D /* HJDHomeOrderManageViewController.h */,
 				162904D32140181300AC151D /* HJDHomeOrderManageViewController.m */,
-				AA1CEC9721454C2B00249692 /* HJDCalculatorViewController.h */,
-				AA1CEC9821454C2B00249692 /* HJDCalculatorViewController.m */,
+				AA1CEC9721454C2B00249692 /* HJDHomeCalculatorViewController.h */,
+				AA1CEC9821454C2B00249692 /* HJDHomeCalculatorViewController.m */,
 				16B69950214E042D0086920C /* HJDHomeOrderDetailViewController.h */,
 				16B69951214E042D0086920C /* HJDHomeOrderDetailViewController.m */,
 				16B69959214EA4400086920C /* HJDHomeOrderRefuseViewController.h */,
 				16B6995A214EA4400086920C /* HJDHomeOrderRefuseViewController.m */,
-				169B9F04215635530013D47B /* HJDCalculatorResultViewController.h */,
-				169B9F05215635530013D47B /* HJDCalculatorResultViewController.m */,
+				169B9F04215635530013D47B /* HJDHomeCalculatorResultViewController.h */,
+				169B9F05215635530013D47B /* HJDHomeCalculatorResultViewController.m */,
+				169B9F0721567E390013D47B /* HJDHomeOrderProcessViewController.h */,
+				169B9F0821567E390013D47B /* HJDHomeOrderProcessViewController.m */,
+				169B9F0D2158F0DC0013D47B /* HJDHomeRoomDiDaiViewController.h */,
+				169B9F0E2158F0DC0013D47B /* HJDHomeRoomDiDaiViewController.m */,
 			);
 			path = Viewcontrollers;
 			sourceTree = "<group>";
@@ -944,6 +963,12 @@
 				16B69957214E9AF30086920C /* HJDHomeOrderDetailPhotoCell.m */,
 				167C66FE214FE52B00F2F2DE /* HJDHomeOrderApprovedView.h */,
 				167C66FF214FE52B00F2F2DE /* HJDHomeOrderApprovedView.m */,
+				169B9F0A215681D90013D47B /* HJDOrderProcessSearchView.h */,
+				169B9F0B215681D90013D47B /* HJDOrderProcessSearchView.m */,
+				169B9F102158F1850013D47B /* HJDHomeRoomDiDaiTableViewCell.h */,
+				169B9F112158F1850013D47B /* HJDHomeRoomDiDaiTableViewCell.m */,
+				169B9F1321590DA20013D47B /* HJDHomeCalculatorResultTableCell.h */,
+				169B9F1421590DA20013D47B /* HJDHomeCalculatorResultTableCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1264,12 +1289,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				16EDD31F213C074A00E21AB2 /* HJDMyAgentModel.m in Sources */,
+				169B9F1521590DA20013D47B /* HJDHomeCalculatorResultTableCell.m in Sources */,
 				16EDD30A213C06DC00E21AB2 /* HJDMySettingViewController.m in Sources */,
+				169B9F0F2158F0DC0013D47B /* HJDHomeRoomDiDaiViewController.m in Sources */,
 				AAD24F77213ADE3200298386 /* UIAlertController+Blocks.m in Sources */,
 				16B91D842143A61500AC1661 /* HJDCustomerServiceView.m in Sources */,
 				16EDD309213C06DC00E21AB2 /* HJDMyAgentViewController.m in Sources */,
 				16EDD32A213C176000E21AB2 /* HJDHomeOrderListTableViewCell.m in Sources */,
-				169B9F06215635530013D47B /* HJDCalculatorResultViewController.m in Sources */,
+				169B9F06215635530013D47B /* HJDHomeCalculatorResultViewController.m in Sources */,
 				162904D42140181300AC151D /* HJDHomeOrderManageViewController.m in Sources */,
 				AA7D7FF62143B70300E0D843 /* main.m in Sources */,
 				AAD24F6421394B3800298386 /* HKScrollView.m in Sources */,
@@ -1285,17 +1312,20 @@
 				AAD24F6D21394D8400298386 /* HJDBaseViewController.m in Sources */,
 				16FFC519213973A2008BCABC /* HJDRegisterModel.m in Sources */,
 				1690803C213EC04400AA2575 /* HJDHomeManager.m in Sources */,
-				16EDD330213C318100E21AB2 /* HJDOrderAuditViewController.m in Sources */,
+				16EDD330213C318100E21AB2 /* HJDHomeOrderAuditViewController.m in Sources */,
 				AAD24F7021394EA900298386 /* UITableView+HJD.m in Sources */,
 				AA1CECB22145614000249692 /* HJDCalculatorTableViewCell.m in Sources */,
 				163D4DB7214549B80012CB53 /* HJDHomeNavSearchView.m in Sources */,
 				16EDD317213C06E600E21AB2 /* HJDMySearchFieldView.m in Sources */,
+				169B9F0921567E390013D47B /* HJDHomeOrderProcessViewController.m in Sources */,
 				AA7D7FF72143B70300E0D843 /* AppDelegate.m in Sources */,
 				163D4DB4214543E90012CB53 /* HJDHomeAuditTableViewCell.m in Sources */,
+				169B9F122158F1850013D47B /* HJDHomeRoomDiDaiTableViewCell.m in Sources */,
 				AA7D7FEA214398E200E0D843 /* NSObject+HMCore.m in Sources */,
 				16B6995B214EA4400086920C /* HJDHomeOrderRefuseViewController.m in Sources */,
 				AA7D7FDE2143589300E0D843 /* HJDHomeModel.m in Sources */,
-				AA1CEC9921454C2B00249692 /* HJDCalculatorViewController.m in Sources */,
+				AA1CEC9921454C2B00249692 /* HJDHomeCalculatorViewController.m in Sources */,
+				169B9F0C215681D90013D47B /* HJDOrderProcessSearchView.m in Sources */,
 				AA7D7FE3214358AA00E0D843 /* HJDButton.m in Sources */,
 				16B69952214E042D0086920C /* HJDHomeOrderDetailViewController.m in Sources */,
 				16B69958214E9AF30086920C /* HJDHomeOrderDetailPhotoCell.m in Sources */,

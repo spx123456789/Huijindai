@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 typedef enum : NSUInteger {
-    HJDMessageTypeMy,
+    HJDMessageTypeMy = 0,
     HJDMessageTypeChannel,
 } HJDMessageType;
 
@@ -21,4 +21,6 @@ typedef enum : NSUInteger {
 
 @interface HJDMessageSegmentView : UIView
 @property(nonatomic, weak) id<HJDMessageSegmentViewDelegate> delegate;
+
+- (void)setSegmentViewTitle:(NSString *)leftTitle rightTitle:(NSString *)rightTitle;
 @end

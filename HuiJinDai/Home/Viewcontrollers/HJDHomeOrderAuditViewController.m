@@ -1,23 +1,23 @@
 //
-//  HJDOrderAuditViewController.m
+//  HJDHomeOrderAuditViewController.m
 //  HuiJinDai
 //
 //  Created by 耿笑威 on 2018/9/2.
 //  Copyright © 2018年 shanpx. All rights reserved.
 //
 
-#import "HJDOrderAuditViewController.h"
+#import "HJDHomeOrderAuditViewController.h"
 #import "HJDHomeAuditTableViewCell.h"
 #import "HJDHomeNavSearchView.h"
 #import "HJDHomeOrderListViewController.h"
 
-@interface HJDOrderAuditViewController ()<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
+@interface HJDHomeOrderAuditViewController ()<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) HJDHomeNavSearchView *searchView;
 @property(nonatomic, strong) NSMutableArray *dataSource;
 @end
 
-@implementation HJDOrderAuditViewController
+@implementation HJDHomeOrderAuditViewController
 
 - (UITableView *)tableView {
     if (!_tableView) {

@@ -10,7 +10,6 @@
 
 @interface HJDHomeAuditTableViewCell()
 @property(nonatomic, strong) UIView *bgView;
-@property(nonatomic, strong) UIImageView *headImgView;
 @property(nonatomic, strong) UIImageView *rightImgView;
 @end
 
@@ -77,7 +76,7 @@
             make.left.equalTo(self.contentView).offset(16);
             make.right.equalTo(self.contentView).offset(-16);
             make.height.equalTo(@44);
-            make.bottom.equalTo(self.contentView);
+            make.top.equalTo(self.contentView);
         }];
         
         [self.headImgView mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -8,12 +8,6 @@
 
 #import "HJDBaseViewController.h"
 
-typedef enum : NSUInteger {
-    HJDOrderManageChannel, //渠道
-    HJDOrderManageCustomer, //客户经理
-    HJDOrderManageEconomic, //经纪人
-} HJDOrderManageStyle;
-
 @interface HJDHomeOrderManageViewController : HJDBaseViewController
 
 @end

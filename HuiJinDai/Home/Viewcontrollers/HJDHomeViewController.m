@@ -8,14 +8,15 @@
 
 #import "HJDHomeViewController.h"
 #import "HKScrollView.h"
-#import "HJDOrderAuditViewController.h"
+#import "HJDHomeOrderAuditViewController.h"
+#import "HJDHomeOrderManageViewController.h"
 #import "HJDHomeTableViewCell.h"
 #import "HJDHomeModel.h"
-#import "HJDCalculatorViewController.h"
+#import "HJDHomeCalculatorViewController.h"
 #import "HJDMessageViewController.h"
+#import "HJDHomeRoomDiDaiViewController.h"
 
-
-@interface HJDHomeViewController ()<UITableViewDelegate,UITableViewDataSource,HKScrollViewNetDelegate,HJDHomeTableViewCellDelegate>
+@interface HJDHomeViewController ()<UITableViewDelegate, UITableViewDataSource, HKScrollViewNetDelegate, HJDHomeTableViewCellDelegate>
 @property(strong, nonatomic) UITableView *tableView;
 @property(strong, nonatomic) NSMutableArray *dataSource;
 @property(strong, nonatomic) HKScrollView *netWorkScrollView;
@@ -119,22 +120,25 @@
 - (void)tableViewCell:(HJDHomeTableViewCell *) cell didselectButtonWithIndex:(NSInteger)index {
     HJDHomeModel * model = [cell.dataArray objectAtIndex:index];
     if ([model.title isEqualToString:@"房抵贷"]) {
+        HJDHomeRoomDiDaiViewController *diDaiController = [[HJDHomeRoomDiDaiViewController alloc] init];
+        diDaiController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:diDaiController animated:YES];
+    } else if ([model.title isEqualToString:@"车抵贷"]) {
         
-    }else if ([model.title isEqualToString:@"车抵贷"]) {
+    } else if ([model.title isEqualToString:@"信贷"]) {
         
-    }else if ([model.title isEqualToString:@"信贷"]) {
-        
-    }else if ([model.title isEqualToString:@"工单审核"]) {
-        //工单审核
-        HJDOrderAuditViewController *controller = [[HJDOrderAuditViewController alloc] init];
+    } else if ([model.title isEqualToString:@"工单审核"]) {
+        HJDHomeOrderAuditViewController *auditController = [[HJDHomeOrderAuditViewController alloc] init];
+        auditController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:auditController animated:YES];
+    } else if ([model.title isEqualToString:@"工单管理"]) {
+        HJDHomeOrderManageViewController *controller = [[HJDHomeOrderManageViewController alloc] init];
         controller.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:controller animated:YES];
-    }else if ([model.title isEqualToString:@"工单管理"]) {
-        
-    }else if ([model.title isEqualToString:@"还款计算器"]) {
-        HJDCalculatorViewController * controller = [[HJDCalculatorViewController alloc]init];
-        controller.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:controller animated:YES];
+    } else if ([model.title isEqualToString:@"还款计算器"]) {
+        HJDHomeCalculatorViewController *calcuController = [[HJDHomeCalculatorViewController alloc]init];
+        calcuController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:calcuController animated:YES];
     }
 
 }

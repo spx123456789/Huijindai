@@ -57,6 +57,11 @@
     return self;
 }
 
+- (void)setSegmentViewTitle:(NSString *)leftTitle rightTitle:(NSString *)rightTitle {
+    [self.leftButton setTitle:leftTitle forState:UIControlStateNormal];
+    [self.rightButton setTitle:rightTitle forState:UIControlStateNormal];
+}
+
 - (void)resetButton:(UIButton *)button {
     self.selectButton = button;
     [button setBackgroundColor:kMainColor];

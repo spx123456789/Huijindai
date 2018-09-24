@@ -1,31 +1,39 @@
 //
-//  HJDCalculatorResultViewController.m
+//  HJDHomeCalculatorResultTableCell.m
 //  HuiJinDai
 //
-//  Created by 耿笑威 on 2018/9/22.
+//  Created by 耿笑威 on 2018/9/24.
 //  Copyright © 2018年 shanpx. All rights reserved.
 //
 
-#import "HJDCalculatorResultViewController.h"
-#import "HJDHomeOrderDetailTableViewCell.h"
+#import "HJDHomeCalculatorResultTableCell.h"
 
-@interface HJDCalculatorResultTableCell : HJDHomeOrderDetailTableViewCell
-@property(nonatomic, strong) UILabel *firstLabel;
-@property(nonatomic, strong) UILabel *firstLabel_1;
-@property(nonatomic, strong) UILabel *twoLabel;
-@property(nonatomic, strong) UILabel *twoLabel_1;
-@property(nonatomic, strong) UILabel *threeLabel;
-@property(nonatomic, strong) UILabel *threeLabel_1;
-@property(nonatomic, strong) UILabel *fourLabel;
-@property(nonatomic, strong) UILabel *fourLabel_1;
+@interface HJDHomeCalculatorResultTableCell()
 @property(nonatomic, strong) UIView *firstLine;
 @property(nonatomic, strong) UIView *twoLine;
 @property(nonatomic, strong) UIView *threeLine;
-
-- (void)setCellOfNumber:(NSInteger)number;
 @end
 
-@implementation HJDCalculatorResultTableCell
+@implementation HJDHomeCalculatorResultTableCell
+
+- (UILabel *)statusLabel {
+    if (!_statusLabel) {
+        _statusLabel = [[UILabel alloc] init];
+        _statusLabel.layer.masksToBounds = YES;
+        _statusLabel.layer.cornerRadius = 6.f;
+        _statusLabel.font = kFont10;
+        _statusLabel.textAlignment = NSTextAlignmentCenter;
+    }
+    return _statusLabel;
+}
+
+- (UIImageView *)nextImgView {
+    if (!_nextImgView) {
+        _nextImgView = [[UIImageView alloc] initWithImage:kImage(@"进入")];
+    }
+    return _nextImgView;
+}
+
 - (UIView *)createLineView {
     CAShapeLayer *dotteShapeLayer = [CAShapeLayer layer];
     CGMutablePathRef dotteShapePath =  CGPathCreateMutable();
@@ -50,15 +58,18 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self createCellView];
+        
+        self.statusLabel.hidden = YES;
+        self.nextImgView.hidden = YES;
     }
     return self;
 }
 
 - (void)createCellView {
-    self.firstLabel = [self createLeftLabelWithTitle:@"借款金额"];
-    self.twoLabel = [self createLeftLabelWithTitle:@"申请期限"];
-    self.threeLabel = [self createLeftLabelWithTitle:@"放款日期"];
-    self.fourLabel = [self createLeftLabelWithTitle:@"到期日期"];
+    self.firstLabel = [self createLeftLabelWithTitle:@""];
+    self.twoLabel = [self createLeftLabelWithTitle:@""];
+    self.threeLabel = [self createLeftLabelWithTitle:@""];
+    self.fourLabel = [self createLeftLabelWithTitle:@""];
     
     [self.bgView addSubview:self.firstLabel];
     [self.bgView addSubview:self.twoLabel];
@@ -141,6 +152,29 @@
         make.left.right.height.equalTo(self.firstLabel_1);
         make.top.equalTo(self.fourLabel);
     }];
+    
+    [self.bgView addSubview:self.statusLabel];
+    [self.bgView addSubview:self.nextImgView];
+    
+    [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.bgView).offset(16);
+        make.top.equalTo(self.bgView);
+        make.width.equalTo(@210);
+        make.height.equalTo(@44);
+    }];
+    
+    [self.statusLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.titleLabel.mas_right).offset(10);
+        make.centerY.equalTo(self.titleLabel);
+        make.width.equalTo(@40);
+        make.height.equalTo(@14);
+    }];
+    
+    [self.nextImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.titleLabel);
+        make.right.equalTo(self.bgView).offset(-16);
+        make.size.mas_equalTo(CGSizeMake(9, 16));
+    }];
 }
 
 - (void)setCellOfNumber:(NSInteger)number {
@@ -151,10 +185,7 @@
         self.fourLabel_1.hidden = NO;
         self.twoLine.hidden = NO;
         self.threeLine.hidden = NO;
-        self.firstLabel.text = @"借款金额";
-        self.twoLabel.text = @"申请期限";
-        self.threeLabel.text = @"放款日期";
-        self.fourLabel.text = @"到期日期";
+        
     } else if (number == 2) {
         self.threeLabel.hidden = YES;
         self.fourLabel.hidden = YES;
@@ -162,86 +193,18 @@
         self.fourLabel_1.hidden = YES;
         self.twoLine.hidden = YES;
         self.threeLine.hidden = YES;
-        self.firstLabel.text = @"年化利率";
-        self.twoLabel.text = @"利息总计";
     }
 }
 
-@end
-
-@interface HJDCalculatorResultViewController ()<UITableViewDelegate, UITableViewDataSource>
-@property(nonatomic, strong) UITableView *tableView;
-@end
-
-@implementation HJDCalculatorResultViewController
-
-- (UITableView *)tableView {
-    if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 4, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 4) style:UITableViewStylePlain];
-        _tableView.dataSource = self;
-        _tableView.delegate = self;
-        _tableView.backgroundColor = [UIColor clearColor];
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.showsVerticalScrollIndicator = NO;
+- (void)setStatusLabelSuccess:(BOOL)success {
+    if (success) {
+        _statusLabel.text = @"成功";
+        _statusLabel.backgroundColor = kRGB_Color(0xcf, 0xf4, 0xe2);
+        _statusLabel.textColor = kRGB_Color(0x0f, 0xc8, 0x6f);
+    } else {
+        _statusLabel.text = @"失败";
+        _statusLabel.backgroundColor = kRGB_Color(0xff, 0xdc, 0xdc);
+        _statusLabel.textColor = kRGB_Color(0xff, 0x52, 0x52);
     }
-    return _tableView;
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    [self setNavTitle:@"计算结果"];
-    
-    self.view.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
-    
-    [self.view addSubview:self.tableView];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - UITableViewDelegate
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        return 44 + 1 + 36 * 4 + 1 * 3 + 4;
-    } else if (indexPath.row == 1) {
-        return 44 + 1 + 36 * 2 + 1 * 1 + 4;
-    }
-    return 33;
-}
-
-#pragma mark - UITableViewDataSource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellIdentifier = @"HJDCalculatorResultTableCell";
-    HJDCalculatorResultTableCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-        cell = [[HJDCalculatorResultTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
-    
-    if (indexPath.row == 0) {
-        cell.titleLabel.text = @"填写信息";
-        cell.firstLabel_1.text = @"1000000元";
-        cell.twoLabel_1.text = @"3月";
-        cell.threeLabel_1.text = @"2018-02-15";
-        cell.fourLabel_1.text = @"2019-04-12";
-        [cell setCellOfNumber:4];
-    } else if (indexPath.row == 1) {
-        cell.titleLabel.text = @"计算结果";
-        cell.firstLabel_1.text = @"10%";
-        cell.twoLabel_1.text = @"24,999.99元";
-        [cell setCellOfNumber:2];
-    }
-    return cell;
 }
 @end

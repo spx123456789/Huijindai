@@ -166,7 +166,7 @@
     [self.bgView addSubview:color_line];
     
     UIView *lineView = [[UIView alloc] init];
-    lineView.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
+    lineView.backgroundColor = kLineColor;
     [self.bgView addSubview:lineView];
     
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {

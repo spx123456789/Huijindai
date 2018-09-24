@@ -1,5 +1,5 @@
 //
-//  HJDCalculatorResultViewController.h
+//  HJDHomeOrderProcessViewController.h
 //  HuiJinDai
 //
 //  Created by 耿笑威 on 2018/9/22.
@@ -8,6 +8,6 @@
 
 #import "HJDBaseViewController.h"
 
-@interface HJDCalculatorResultViewController : HJDBaseViewController
+@interface HJDHomeOrderProcessViewController : HJDBaseViewController
 
 @end

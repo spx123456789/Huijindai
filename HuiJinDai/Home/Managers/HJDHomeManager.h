@@ -12,4 +12,6 @@
 @interface HJDHomeManager : NSObject
 
 + (NSArray *)getOrderListArray;
+
++ (NSArray *)getOrderProcessArray;
 @end

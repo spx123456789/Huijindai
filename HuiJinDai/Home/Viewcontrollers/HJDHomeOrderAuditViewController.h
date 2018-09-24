@@ -1,5 +1,5 @@
 //
-//  HJDOrderAuditViewController.h
+//  HJDHomeOrderAuditViewController.h
 //  HuiJinDai
 //
 //  Created by 耿笑威 on 2018/9/2.
@@ -8,6 +8,6 @@
 
 #import "HJDBaseViewController.h"
 
-@interface HJDOrderAuditViewController : HJDBaseViewController
+@interface HJDHomeOrderAuditViewController : HJDBaseViewController
 
 @end
