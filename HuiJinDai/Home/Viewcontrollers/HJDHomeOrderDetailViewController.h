@@ -9,5 +9,5 @@
 #import "HJDBaseViewController.h"
 
 @interface HJDHomeOrderDetailViewController : HJDBaseViewController
-
+@property(nonatomic, assign) BOOL isSuccess;
 @end

@@ -10,6 +10,8 @@
 #import "HJDMessageSegmentView.h"
 #import "HJDHomeRoomDiDaiTableViewCell.h"
 #import "HJDHomeCalculatorResultTableCell.h"
+#import "HJDHomeQueryValueResultViewController.h"
+#import "HJDHomeQueryValueStatusViewController.h"
 #import "HJDCustomerServiceView.h"
 
 typedef enum : NSUInteger {
@@ -73,7 +75,8 @@ typedef enum : NSUInteger {
 }
 
 - (void)queryValueButtonClick:(id)sender {
-    
+    HJDHomeQueryValueResultViewController *controller = [[HJDHomeQueryValueResultViewController alloc] init];;
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (instancetype)init {
@@ -120,7 +123,12 @@ typedef enum : NSUInteger {
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if (self.selectType == HJDRomeQueryValue) {
+        
+    } else {
+        HJDHomeQueryValueStatusViewController *statusController = [[HJDHomeQueryValueStatusViewController alloc] init];
+        [self.navigationController pushViewController:statusController animated:YES];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

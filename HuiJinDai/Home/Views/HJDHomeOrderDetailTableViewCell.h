@@ -32,6 +32,10 @@
 
 @end
 
+//询值结果
+@interface HJDHomeOrderDetailQueryValueResultCell : HJDHomeOrderDetailTableViewCell
+
+@end
 
 @class HJDHomeOrderDetailButtonCell;
 @protocol HJDHomeOrderDetailButtonCellDelegate<NSObject>

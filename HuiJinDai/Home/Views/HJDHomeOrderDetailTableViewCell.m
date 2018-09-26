@@ -452,6 +452,62 @@
 }
 @end
 
+#pragma mark - 询值结果
+@interface HJDHomeOrderDetailQueryValueResultCell()
+@property(nonatomic, strong) UILabel *priceLabel;
+@property(nonatomic, strong) UILabel *priceLabel_1;
+@property(nonatomic, strong) UILabel *totalPriceLabel;
+@property(nonatomic, strong) UILabel *totalPriceLabel_1;
+@end
+
+@implementation HJDHomeOrderDetailQueryValueResultCell
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        self.priceLabel = [self createLeftLabelWithTitle:@"仁达单价："];
+        self.totalPriceLabel = [self createLeftLabelWithTitle:@"仁达总价："];
+        [self.bgView addSubview:self.priceLabel];
+        [self.bgView addSubview:self.totalPriceLabel];
+        
+        self.priceLabel_1 = [self createRightLabel];
+        self.priceLabel_1.textColor = kMainColor;
+        self.priceLabel_1.font = [UIFont boldSystemFontOfSize:14];
+        [self.bgView addSubview:self.priceLabel_1];
+        
+        self.totalPriceLabel_1 = [self createRightLabel];
+        self.totalPriceLabel_1.textColor = kRGB_Color(0xff, 0x52, 0x52);
+        self.totalPriceLabel_1.font = [UIFont boldSystemFontOfSize:14];
+        [self.bgView addSubview:self.totalPriceLabel_1];
+        
+        [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.bgView).offset(16);
+            make.top.equalTo(self.lineView.mas_bottom).offset(16);
+            make.height.equalTo(@14);
+            make.width.equalTo(@75);
+        }];
+        
+        [self.priceLabel_1 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.priceLabel.mas_right).offset(12);
+            make.right.equalTo(self.bgView).offset(-16);
+            make.top.height.equalTo(self.priceLabel);
+        }];
+        
+        [self.totalPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.height.equalTo(self.priceLabel);
+            make.top.equalTo(self.priceLabel.mas_bottom).offset(12);
+        }];
+        
+        [self.totalPriceLabel_1 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.height.equalTo(self.priceLabel_1);
+            make.top.equalTo(self.totalPriceLabel);
+        }];
+    }
+    return self;
+}
+@end
+
+#pragma mark - 审核
 @implementation HJDHomeOrderDetailButtonCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {

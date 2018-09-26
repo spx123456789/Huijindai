@@ -66,7 +66,7 @@ static NSString *key2 = @"title";
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     } else {
-        self.automaticallyAdjustsScrollViewInsets = NO;
+        //self.automaticallyAdjustsScrollViewInsets = NO;
     }
 }
 

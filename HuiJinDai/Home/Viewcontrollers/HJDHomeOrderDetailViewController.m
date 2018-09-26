@@ -91,7 +91,7 @@
         case 1: {
             HJDHomeOrderDetailDeclarationCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier1];
             if (cell == nil) {
-                cell = [[HJDHomeOrderDetailDeclarationCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+                cell = [[HJDHomeOrderDetailDeclarationCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier1];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             cell.titleLabel.text = @"报单信息";
@@ -101,7 +101,7 @@
         case 2: {
             HJDHomeOrderDetailPhotoCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier2];
             if (cell == nil) {
-                cell = [[HJDHomeOrderDetailPhotoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+                cell = [[HJDHomeOrderDetailPhotoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier2];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             cell.titleLabel.text = @"照片信息";
@@ -111,7 +111,7 @@
         case 3: {
             HJDHomeOrderDetailProcessCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier3];
             if (cell == nil) {
-                cell = [[HJDHomeOrderDetailProcessCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+                cell = [[HJDHomeOrderDetailProcessCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier3];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             cell.titleLabel.text = @"工单流程";
@@ -121,7 +121,7 @@
         default: {
             HJDHomeOrderDetailButtonCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier4];
             if (cell == nil) {
-                cell = [[HJDHomeOrderDetailButtonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+                cell = [[HJDHomeOrderDetailButtonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier4];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             cell.delegate = self;
