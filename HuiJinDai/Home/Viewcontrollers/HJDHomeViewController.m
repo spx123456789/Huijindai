@@ -33,7 +33,7 @@
 
 - (void)setupSubViews {
     [self setNavTitle:@"首页"];
-    self.userType = HJDUserType_userManager;
+    self.userType = HJDUserTypeAgent;
     [self.view addSubview:self.tableView];
     NSArray *array = @[@"",@"",@""];
     CGFloat width = self.view.frame.size.width;
@@ -150,7 +150,7 @@
     if (!_dataSource) {
         _dataSource = [NSMutableArray new];
         switch (self.userType) {
-                case HJDUserType_user: {
+                case HJDUserTypeManager: {
                     
                     HJDHomeModel * model = [HJDHomeModel new];
                     model.title = @"房抵贷";
@@ -181,7 +181,7 @@
                     
                     break;
                 }
-                case HJDUserType_userManager: {
+                case HJDUserTypeAgent: {
                     HJDHomeModel * model = [HJDHomeModel new];
                     model.title = @"房抵贷";
                     model.imageName = @"首页房抵贷";
@@ -213,7 +213,7 @@
                     [_dataSource addObject:dic2];
                     break;
                 }
-                case HJDUserType_channel: {
+                case HJDUserTypeChannel: {
                     
                     HJDHomeModel * model3 = [HJDHomeModel new];
                     model3.title = @"工单审核";

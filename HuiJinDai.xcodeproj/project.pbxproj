@@ -44,6 +44,9 @@
 		16B6995B214EA4400086920C /* HJDHomeOrderRefuseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B6995A214EA4400086920C /* HJDHomeOrderRefuseViewController.m */; };
 		16B6DEA5213988BB00CF8C8D /* HJDCityPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B6DEA4213988BB00CF8C8D /* HJDCityPickerView.m */; };
 		16B91D842143A61500AC1661 /* HJDCustomerServiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B91D832143A61500AC1661 /* HJDCustomerServiceView.m */; };
+		16BDE863215C9621008EF899 /* HJDHomeDeclarationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BDE862215C9621008EF899 /* HJDHomeDeclarationViewController.m */; };
+		16BDE866215D1FD7008EF899 /* HJDRegisterHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BDE865215D1FD7008EF899 /* HJDRegisterHttpManager.m */; };
+		16BDE86B215D2C46008EF899 /* HJDNetAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BDE86A215D2C46008EF899 /* HJDNetAPIManager.m */; };
 		16C4E1AC21381BFD004268C4 /* HuiJinDaiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E1AB21381BFD004268C4 /* HuiJinDaiTests.m */; };
 		16C4E1B721381BFE004268C4 /* HuiJinDaiUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E1B621381BFE004268C4 /* HuiJinDaiUITests.m */; };
 		16C4E1D52138255B004268C4 /* HJDRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E1D42138255B004268C4 /* HJDRegisterViewController.m */; };
@@ -265,6 +268,12 @@
 		16B6DEA4213988BB00CF8C8D /* HJDCityPickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDCityPickerView.m; sourceTree = "<group>"; };
 		16B91D822143A61500AC1661 /* HJDCustomerServiceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDCustomerServiceView.h; sourceTree = "<group>"; };
 		16B91D832143A61500AC1661 /* HJDCustomerServiceView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDCustomerServiceView.m; sourceTree = "<group>"; };
+		16BDE861215C9621008EF899 /* HJDHomeDeclarationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeDeclarationViewController.h; sourceTree = "<group>"; };
+		16BDE862215C9621008EF899 /* HJDHomeDeclarationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeDeclarationViewController.m; sourceTree = "<group>"; };
+		16BDE864215D1FD7008EF899 /* HJDRegisterHttpManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDRegisterHttpManager.h; sourceTree = "<group>"; };
+		16BDE865215D1FD7008EF899 /* HJDRegisterHttpManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDRegisterHttpManager.m; sourceTree = "<group>"; };
+		16BDE869215D2C46008EF899 /* HJDNetAPIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDNetAPIManager.h; sourceTree = "<group>"; };
+		16BDE86A215D2C46008EF899 /* HJDNetAPIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDNetAPIManager.m; sourceTree = "<group>"; };
 		16C4E18F21381BFC004268C4 /* HuiJinDai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HuiJinDai.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16C4E1A721381BFD004268C4 /* HuiJinDaiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HuiJinDaiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		16C4E1AB21381BFD004268C4 /* HuiJinDaiTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HuiJinDaiTests.m; sourceTree = "<group>"; };
@@ -411,9 +420,6 @@
 		AA7D7F732143586100E0D843 /* 底部导航我的未选中@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "底部导航我的未选中@2x.png"; sourceTree = "<group>"; };
 		AA7D7F742143586100E0D843 /* 通知删除@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "通知删除@3x.png"; sourceTree = "<group>"; };
 		AA7D7F752143586100E0D843 /* 工单详情拒单@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "工单详情拒单@2x.png"; sourceTree = "<group>"; };
-		AA7D7FD92143586E00E0D843 /* HMTypeDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMTypeDefine.h; sourceTree = "<group>"; };
-		AA7D7FDA2143586E00E0D843 /* HMBlockDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMBlockDefine.h; sourceTree = "<group>"; };
-		AA7D7FDB2143586E00E0D843 /* HMMacroDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMMacroDefine.h; sourceTree = "<group>"; };
 		AA7D7FDC2143589300E0D843 /* HJDHomeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJDHomeModel.h; sourceTree = "<group>"; };
 		AA7D7FDD2143589300E0D843 /* HJDHomeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJDHomeModel.m; sourceTree = "<group>"; };
 		AA7D7FDF214358A900E0D843 /* HJDButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJDButton.m; sourceTree = "<group>"; };
@@ -578,6 +584,15 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		16BDE868215D2C29008EF899 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				16BDE869215D2C46008EF899 /* HJDNetAPIManager.h */,
+				16BDE86A215D2C46008EF899 /* HJDNetAPIManager.m */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		16C4E18621381BFC004268C4 = {
 			isa = PBXGroup;
 			children = (
@@ -714,6 +729,8 @@
 			children = (
 				16FFC51421397373008BCABC /* HJDRegisterManger.h */,
 				16FFC51521397373008BCABC /* HJDRegisterManger.m */,
+				16BDE864215D1FD7008EF899 /* HJDRegisterHttpManager.h */,
+				16BDE865215D1FD7008EF899 /* HJDRegisterHttpManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -884,16 +901,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		AA7D7FD82143586E00E0D843 /* Macros */ = {
-			isa = PBXGroup;
-			children = (
-				AA7D7FD92143586E00E0D843 /* HMTypeDefine.h */,
-				AA7D7FDA2143586E00E0D843 /* HMBlockDefine.h */,
-				AA7D7FDB2143586E00E0D843 /* HMMacroDefine.h */,
-			);
-			path = Macros;
-			sourceTree = "<group>";
-		};
 		AA7D7FEE2143B70300E0D843 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -946,6 +953,8 @@
 				169B9F1721591B200013D47B /* HJDHomeQueryValueResultViewController.m */,
 				1630C1A2215BD9DF004AA211 /* HJDHomeQueryValueStatusViewController.h */,
 				1630C1A3215BD9DF004AA211 /* HJDHomeQueryValueStatusViewController.m */,
+				16BDE861215C9621008EF899 /* HJDHomeDeclarationViewController.h */,
+				16BDE862215C9621008EF899 /* HJDHomeDeclarationViewController.m */,
 			);
 			path = Viewcontrollers;
 			sourceTree = "<group>";
@@ -986,11 +995,10 @@
 		AAD24F71213ADDBD00298386 /* Componets */ = {
 			isa = PBXGroup;
 			children = (
+				16BDE868215D2C29008EF899 /* Managers */,
 				169B9EE0215620110013D47B /* ThirdPart */,
-				AA7D7FD82143586E00E0D843 /* Macros */,
 				AAD24F74213ADE0900298386 /* Categories */,
 				AAD24F72213ADDBD00298386 /* BaseViewcontrollers */,
-				AAD24F73213ADDBD00298386 /* BaseViews */,
 			);
 			path = Componets;
 			sourceTree = "<group>";
@@ -1002,13 +1010,6 @@
 				AAD24F6C21394D8400298386 /* HJDBaseViewController.m */,
 			);
 			path = BaseViewcontrollers;
-			sourceTree = "<group>";
-		};
-		AAD24F73213ADDBD00298386 /* BaseViews */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = BaseViews;
 			sourceTree = "<group>";
 		};
 		AAD24F74213ADE0900298386 /* Categories */ = {
@@ -1311,11 +1312,13 @@
 				AA7D7FF62143B70300E0D843 /* main.m in Sources */,
 				169B9F1821591B200013D47B /* HJDHomeQueryValueResultViewController.m in Sources */,
 				AAD24F6421394B3800298386 /* HKScrollView.m in Sources */,
+				16BDE866215D1FD7008EF899 /* HJDRegisterHttpManager.m in Sources */,
 				16EDD2BF213AC4A000E21AB2 /* HJDLoginViewController.m in Sources */,
 				163D4DC021455F3D0012CB53 /* HJDMessageTableViewCell.m in Sources */,
 				AA7D7FE4214358AA00E0D843 /* HJDHomeTableViewCell.m in Sources */,
 				167C6700214FE52B00F2F2DE /* HJDHomeOrderApprovedView.m in Sources */,
 				1630C1A4215BD9DF004AA211 /* HJDHomeQueryValueStatusViewController.m in Sources */,
+				16BDE863215C9621008EF899 /* HJDHomeDeclarationViewController.m in Sources */,
 				16B6994C214BE8110086920C /* HJDMessageManager.m in Sources */,
 				16B69955214E04970086920C /* HJDHomeOrderDetailTableViewCell.m in Sources */,
 				16B69948214BE77B0086920C /* HJDMessageModel.m in Sources */,
@@ -1329,6 +1332,7 @@
 				AA1CECB22145614000249692 /* HJDCalculatorTableViewCell.m in Sources */,
 				163D4DB7214549B80012CB53 /* HJDHomeNavSearchView.m in Sources */,
 				16EDD317213C06E600E21AB2 /* HJDMySearchFieldView.m in Sources */,
+				16BDE86B215D2C46008EF899 /* HJDNetAPIManager.m in Sources */,
 				169B9F0921567E390013D47B /* HJDHomeOrderProcessViewController.m in Sources */,
 				AA7D7FF72143B70300E0D843 /* AppDelegate.m in Sources */,
 				163D4DB4214543E90012CB53 /* HJDHomeAuditTableViewCell.m in Sources */,

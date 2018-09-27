@@ -8,6 +8,7 @@
 
 #import "HJDHomeQueryValueResultViewController.h"
 #import "HJDCustomerServiceView.h"
+#import "HJDHomeDeclarationViewController.h"
 
 @interface HJDHomeQueryValueResultViewController ()
 @property(nonatomic, strong) UIScrollView *scrollView;
@@ -73,7 +74,8 @@
 }
 
 - (void)declarationButtonClick:(id)sender {
-    
+    HJDHomeDeclarationViewController *vc = [[HJDHomeDeclarationViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -144,7 +146,7 @@
     UILabel *subLabel = [[UILabel alloc] init];
     NSString *str = [NSString stringWithFormat:@"您当前询值次数还剩%@次", number];
     NSMutableAttributedString *attributeStr = [[NSMutableAttributedString alloc] initWithString:str attributes:@{ NSFontAttributeName : kFont10, NSForegroundColorAttributeName : kRGB_Color(0x99, 0x99, 0x99) }];
-    [attributeStr setAttributes:@{ NSFontAttributeName : kFont10, NSForegroundColorAttributeName : kRGB_Color(0xff, 0x52, 0x52)} range:NSMakeRange(9, 2)];
+    [attributeStr setAttributes:@{ NSFontAttributeName : kFont10, NSForegroundColorAttributeName : kRGB_Color(0xff, 0x52, 0x52)} range:NSMakeRange(str.length - 2, 2)];
     subLabel.attributedText = attributeStr;
     subLabel.textAlignment = NSTextAlignmentCenter;
     [clickView addSubview:subLabel];

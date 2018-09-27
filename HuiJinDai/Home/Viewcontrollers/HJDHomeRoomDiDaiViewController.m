@@ -137,7 +137,7 @@ typedef enum : NSUInteger {
             if (indexPath.row == 0 || indexPath.row == 5) {
                 return 44 + 4;
             } else {
-                return 45;
+                return 44;
             }
             break;
         }
