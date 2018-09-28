@@ -11,6 +11,10 @@
 #import "HJDTextFieldView.h"
 #import "HJDCustomerServiceView.h"
 #import "HJDCityPickerView.h"
+#import "HJDRegisterHttpManager.h"
+#import "AppDelegate.h"
+#import "HJDUserModel.h"
+#import "HJDUserDefaultsManager.h"
 
 @interface HJDRegisterViewController ()<HJDCityPickerViewDelegate>
 @property(nonatomic, strong) TPKeyboardAvoidingScrollView *bgView;
@@ -26,6 +30,8 @@
 @property(nonatomic, strong) HJDRegisterAgreementView *agreementView;
 @property(nonatomic, strong) HJDCityPickerView *cityPickerView;
 @property(nonatomic, strong) HJDCustomerServiceView *customServiceView;
+
+@property(nonatomic, strong) HJDCityModel *selectCity;
 @end
 
 @implementation HJDRegisterViewController
@@ -44,6 +50,7 @@
         [_verifiCodeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
         [_verifiCodeButton setTitleColor:kRGB_Color(0x66, 0x66, 0x66) forState:UIControlStateNormal];
         _verifiCodeButton.titleLabel.font = kFont15;
+        [_verifiCodeButton addTarget:self action:@selector(verifiCodeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _verifiCodeButton;
 }
@@ -93,6 +100,16 @@
         _cityPickerView.delegate = self;
     }
     return _cityPickerView;
+}
+
+- (void)verifiCodeButtonClick:(id)sender {
+    NSString *phone = self.phoneView.textField.text;
+    if (![phone hjd_isVaildPhoneNumber]) {
+        return;
+    }
+    [HJDRegisterHttpManager getVerifiCodeWithPhone:phone callBack:^(NSDictionary *data, NSError *error, BOOL result) {
+        
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -149,6 +166,14 @@
     self.bgView.contentSize = CGSizeMake(kScreenWidth, topHeight + 58);
 }
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _selectCity = nil;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -171,12 +196,48 @@
 }
 
 - (void)registerButtonClick:(id)sender {
+    NSString *name = self.nameView.textField.text;
+    if ([NSString hjd_isBlankString:name]) {
+        return;
+    }
     
+    NSString *phone = self.phoneView.textField.text;
+    if (![phone hjd_isVaildPhoneNumber]) {
+        return;
+    }
+    
+    NSString *verifiCode = self.verifiCodeView.textField.text;
+    if ([NSString hjd_isBlankString:verifiCode]) {
+        return;
+    }
+    
+    NSString *inviteCode = self.inviteCodeView.textField.text;
+    if ([NSString hjd_isBlankString:inviteCode]) {
+        return;
+    }
+    
+    if (self.selectCity == nil) {
+        return;
+    }
+    
+    [HJDRegisterHttpManager postRegisterRequestWithPhone:phone verifiCode:verifiCode realName:name address:self.selectCity.pid inviteCode:inviteCode callBack:^(NSDictionary *data, NSError *error, BOOL result) {
+        if (result) {
+            HJDUserModel *userModel = [[HJDUserModel alloc] init];
+            [userModel hjd_loadDataFromkeyValues:data];
+            [[HJDUserDefaultsManager shareInstance] saveObject:userModel key:kUserModelKey];
+            //进入主界面 token "278500137e0c198da65f226095e58666"
+            [[HJDNetAPIManager sharedManager] setAuthorization:@"278500137e0c198da65f226095e58666"];
+            
+            AppDelegate *appDelagate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            [appDelagate enterHomeController];
+        }
+    }];
 }
 
 #pragma mark - HJDCityPickerViewDelegate
-- (void)didSelectedCity:(NSString *)city {
-    self.cityView.textField.text = city;
+- (void)pickerView:(HJDCityPickerView *)pickerView didSelectedCity:(HJDCityModel *)city {
+    self.selectCity = city;
+    self.cityView.textField.text = city.name;
     self.cityPickerView = nil;
 }
 

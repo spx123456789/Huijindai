@@ -34,12 +34,17 @@
     // Override point for cu/Users/gengxiaowei/Desktop/HuiJinDai/HuiJinDai/Supporting Files/AppDelegate.mstomization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = kWithe;
-    
-    UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:[[HJDLoginViewController alloc] init]];
-    self.window.rootViewController = navi;
     [self.window makeKeyAndVisible];
     
     [self registerGeTui];
+    
+    //判断是否登录
+    if (/* DISABLES CODE */ (1)) {
+        [self enterHomeController];
+    } else {
+        UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:[[HJDLoginViewController alloc] init]];
+        self.window.rootViewController = navi;
+    }
     
     return YES;
 }

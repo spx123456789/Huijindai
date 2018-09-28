@@ -11,6 +11,8 @@
 
 @interface HJDHomeManager : NSObject
 
++ (void)getHomeBannerCallBack:(void(^)(NSArray *data, BOOL result))callBack;
+
 + (NSArray *)getOrderListArray;
 
 + (NSArray *)getOrderProcessArray;

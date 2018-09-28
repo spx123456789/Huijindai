@@ -8,11 +8,8 @@
 
 #import "HJDNetAPIManager.h"
 
-#define kNetworkMethodName @[ @"Get", @"Post", @"Put", @"Delete" ]
-
 static NSURL *baseurl = nil;
 static NSString *acesstoken = nil;
-static AFURLSessionManager *sessionManager = nil; /* 提供带进度的上传、下载功能 */
 
 @implementation HJDNetAPIManager
 
@@ -20,14 +17,10 @@ static HJDNetAPIManager *_sharedManager = nil;
 + (instancetype)sharedManager {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSString *serverURL = kAPIMainURL;
-        NSLog(@"server url is %@", serverURL);
-        baseurl = [NSURL URLWithString:serverURL];
+        baseurl = [NSURL URLWithString:kAPIMainURL];
         _sharedManager = [[HJDNetAPIManager alloc] initWithBaseURL:baseurl withCer:YES];
         
-        NSURLSessionConfiguration *configuration =
-        [NSURLSessionConfiguration defaultSessionConfiguration]; /* 保留以设置参数 */
-        sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration]; /* 保留以设置参数 */
         
         //_sharedManager.networkReachability = [Reachability reachabilityForInternetConnection];
         //[_sharedManager.networkReachability startNotifier];
@@ -51,6 +44,7 @@ static HJDNetAPIManager *_sharedManager = nil;
     
     [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [self.requestSerializer setValue:url.absoluteString forHTTPHeaderField:@"Referer"];
+
     
     self.securityPolicy.allowInvalidCertificates = YES;
     
@@ -61,12 +55,18 @@ static HJDNetAPIManager *_sharedManager = nil;
     self.securityPolicy.allowInvalidCertificates = YES;
     // 是否在证书域字段中验证域名
     [self.securityPolicy setValidatesDomainName:NO];
+    
+    //设置HJD header
+    [self.requestSerializer setValue:@"app-version" forHTTPHeaderField:@"1.0.0"];
+    [self.requestSerializer setValue:@"AppType" forHTTPHeaderField:@"IOS"];
+    [self.requestSerializer setValue:@"api-version" forHTTPHeaderField:@"v1.0.0"];
+    
     return self;
 }
 
 - (void)setAuthorization:(NSString *)accessToken {
     acesstoken = accessToken;
-    [self.requestSerializer setValue:accessToken forHTTPHeaderField:@"AccessToken"];
+    [self.requestSerializer setValue:accessToken forHTTPHeaderField:@"AppToken"];
 }
 
 - (NSURLSessionDataTask *)requestWithPath:(NSString *)path
@@ -77,7 +77,6 @@ static HJDNetAPIManager *_sharedManager = nil;
         return nil;
     }
     //path = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    path = [path stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"`#%^{}\"[]|\\<> "]];
     @weakify(self);
     //    发起请求
     switch (method) {

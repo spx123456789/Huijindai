@@ -9,4 +9,5 @@ pod 'TPKeyboardAvoiding'
 pod 'MJRefresh'
 pod 'MBProgressHUD'
 pod 'FMDB'
+pod 'MJExtension'
 end

@@ -53,7 +53,7 @@
     self.title = @"我的客户经理";
     self.view.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
     
-    NSArray *arr = [HJDMyManager getMyCustomerManagerArray];
+    NSArray *arr = @[ ];
     self.dataSource = [NSMutableArray arrayWithArray:arr];
     
     [self.view addSubview:self.tableView];

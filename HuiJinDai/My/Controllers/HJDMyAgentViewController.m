@@ -53,7 +53,7 @@
     [self setNavTitle:@"我的经纪人"];
     self.view.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
     
-    NSArray *arr = [HJDMyManager getMyAgentArray];
+    NSArray *arr = @[];
     self.dataSource = [NSMutableArray arrayWithArray:arr];
     
     [self.view addSubview:self.tableView];

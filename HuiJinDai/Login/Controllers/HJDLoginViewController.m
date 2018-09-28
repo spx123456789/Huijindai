@@ -11,6 +11,9 @@
 #import "HJDTextFieldView.h"
 #import "HJDCustomerServiceView.h"
 #import "AppDelegate.h"
+#import "HJDRegisterHttpManager.h"
+#import "HJDUserModel.h"
+#import "HJDUserDefaultsManager.h"
 
 @interface HJDLoginViewController ()
 @property(nonatomic, strong) TPKeyboardAvoidingScrollView *bgView;
@@ -37,6 +40,7 @@
         [_verifiCodeButton setTitle:@"发送验证码" forState:UIControlStateNormal];
         [_verifiCodeButton setTitleColor:kRGB_Color(0x66, 0x66, 0x66) forState:UIControlStateNormal];
         _verifiCodeButton.titleLabel.font = kFont15;
+        [_verifiCodeButton addTarget:self action:@selector(verifiCodeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _verifiCodeButton;
 }
@@ -64,6 +68,16 @@
         [_registerButton addTarget:self action:@selector(registerButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _registerButton;
+}
+
+- (void)verifiCodeButtonClick:(id)sender {
+    NSString *phone = self.phoneView.text;
+    if (![phone hjd_isVaildPhoneNumber]) {
+        return;
+    }
+    [HJDRegisterHttpManager getVerifiCodeWithPhone:phone callBack:^(NSDictionary *data, NSError *error, BOOL result) {
+        
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -140,8 +154,28 @@
 }
 
 - (void)loginButtonClick:(id)selector {
-    AppDelegate *appDelagate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [appDelagate enterHomeController];
+    NSString *phone = self.phoneView.text;
+    if (![phone hjd_isVaildPhoneNumber]) {
+        return;
+    }
+    
+    NSString *verifiCode = self.verifiCodeView.text;
+    if ([NSString hjd_isBlankString:verifiCode]) {
+        return;
+    }
+    
+    [HJDRegisterHttpManager loginWithPhone:phone verifiCode:verifiCode callBack:^(NSDictionary *data, NSError *error, BOOL result) {
+        if (result) {
+            HJDUserModel *userModel = [[HJDUserModel alloc] init];
+            [userModel hjd_loadDataFromkeyValues:data];
+            [[HJDUserDefaultsManager shareInstance] saveObject:userModel key:kUserModelKey];
+            //test 13500001112
+            [[HJDNetAPIManager sharedManager] setAuthorization:@"278500137e0c198da65f226095e58666"];
+            
+            AppDelegate *appDelagate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            [appDelagate enterHomeController];
+        }
+    }];
 }
 
 @end

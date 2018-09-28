@@ -32,4 +32,6 @@
 //返回按钮
 - (void)setBackBarButton;
 - (void)goBack:(UIButton *)sender;
+
+#pragma mark - 提示
 @end

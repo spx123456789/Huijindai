@@ -7,8 +7,20 @@
 //
 
 #import "HJDHomeManager.h"
+#import "HJDNetAPIManager.h"
 
 @implementation HJDHomeManager
+
++ (void)getHomeBannerCallBack:(void (^)(NSArray *, BOOL))callBack {
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/System/home_page") requestParams:nil networkMethod:GET callback:^(NSDictionary *data, NSError *error) {
+        if (error) {
+            callBack(nil, NO);
+        } else {
+            NSArray *bannerArray = [data getObjectByPath:@"data/banner"];
+            callBack(bannerArray, YES);
+        }
+    }];
+}
 
 + (NSArray *)getOrderListArray {
     HJDOrderListModel *model = [[HJDOrderListModel alloc] init];

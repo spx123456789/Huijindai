@@ -20,11 +20,13 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UIView+HMCore.h"
 #import "UIColor+HMCore.h"
+#import "NSDictionary+HJD.h"
+#import "NSString+HJD.h"
 
 typedef enum : NSUInteger {
-    HJDUserTypeManager,     //经理
-    HJDUserTypeAgent,       //经纪人
+    HJDUserTypeAgent = 1,   //经纪人
     HJDUserTypeChannel,     //渠道
+    HJDUserTypeManager,     //客户经理
 } HJDUserType;
 
 #pragma mark - 字体宏

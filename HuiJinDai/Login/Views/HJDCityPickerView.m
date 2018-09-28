@@ -7,6 +7,7 @@
 //
 
 #import "HJDCityPickerView.h"
+#import "HJDRegisterHttpManager.h"
 
 @interface HJDCityPickerView()<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UIView *bgView;
@@ -91,8 +92,8 @@
         
         self.backgroundColor = kRGBA_Color(0x00, 0x00, 0x00, 0.4);
         
-        self.oneDataSource = [NSMutableArray arrayWithArray:@[ @"上海", @"天津", @"北京", @"石家庄", @"深圳", @"武汉市", @"广州" ]];
-        self.twoDataSource = [NSMutableArray arrayWithArray:@[ @"长治市", @"太原市", @"大同市", @"晋城市", @"晋中市", @"武汉市", @"朔州市" ]];
+        self.oneDataSource = [NSMutableArray array];
+        self.twoDataSource = [NSMutableArray array];
         
         [self addSubview:self.bgView];
         [self.bgView addSubview:self.titleLabel];
@@ -148,6 +149,8 @@
         
         [self resetConstraints];
         
+        [self getFirstLevelCityList];
+        
     }
     return self;
 }
@@ -174,12 +177,6 @@
             make.height.equalTo(@44);
             make.width.equalTo(@50);
         }];
-        
-//        [self.color_line mas_remakeConstraints:^(MASConstraintMaker *make) {
-//            make.left.right.equalTo(self.selectLabel);
-//            make.top.equalTo(self.selectLabel.mas_bottom);
-//            make.height.equalTo(@2);
-//        }];
     } else {
         self.cityLabel.hidden = YES;
         
@@ -189,27 +186,23 @@
             make.height.equalTo(@44);
             make.width.equalTo(@50);
         }];
-        
-//        [self.color_line mas_remakeConstraints:^(MASConstraintMaker *make) {
-//            make.left.right.equalTo(self.selectLabel);
-//            make.top.equalTo(self.selectLabel.mas_bottom);
-//            make.height.equalTo(@2);
-//        }];
     }
 }
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.isSelectFirst) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectedCity:)]) {
-            [self.delegate didSelectedCity:self.twoDataSource[indexPath.row]];;
+        if (self.delegate && [self.delegate respondsToSelector:@selector(pickerView:didSelectedCity:)]) {
+            HJDCityModel *cityModel = self.twoDataSource[indexPath.row];
+            [self.delegate pickerView:self didSelectedCity:cityModel];
+            [self removeFromSuperview];
         }
-        [self removeFromSuperview];
     } else {
         self.isSelectFirst = YES;
-        self.cityLabel.text = self.oneDataSource[indexPath.row];
-        [self.tableView reloadData];
+        HJDCityModel *cityModel = self.oneDataSource[indexPath.row];
+        self.cityLabel.text = cityModel.name;
         [self resetConstraints];
+        [self getSecondLevelCityWithID:cityModel.pid];
     }
 }
 
@@ -233,11 +226,42 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+    
+    HJDCityModel *cityModel = nil;
     if (self.isSelectFirst) {
-        cell.textLabel.text = self.twoDataSource[indexPath.row];
+        cityModel = self.twoDataSource[indexPath.row];
     } else {
-        cell.textLabel.text = self.oneDataSource[indexPath.row];
+        cityModel = self.oneDataSource[indexPath.row];
     }
+    cell.textLabel.text = cityModel.name;
     return cell;
+}
+
+#pragma mark - 城市数据网络请求
+- (void)getFirstLevelCityList {
+    [HJDRegisterHttpManager getCityListWithCodeId:@"0" CallBack:^(NSDictionary *data, NSError *error, BOOL result) {
+        NSArray *cityArray = [data getObjectByPath:@"data/list"];
+        for (int k = 0; k < cityArray.count; k++) {
+            NSDictionary *dic = cityArray[k];
+            HJDCityModel *city = [[HJDCityModel alloc] init];
+            [city hjd_loadDataFromkeyValues:dic];
+            [self.oneDataSource addObject:city];
+        }
+        [self.tableView reloadData];
+    }];
+}
+
+- (void)getSecondLevelCityWithID:(NSString *)cityId {
+    [HJDRegisterHttpManager getCityListWithCodeId:cityId CallBack:^(NSDictionary *data, NSError *error, BOOL result) {
+        NSArray *cityArray = [data getObjectByPath:@"data/list"];
+        [self.twoDataSource removeAllObjects];
+        for (int k = 0; k < cityArray.count; k++) {
+            NSDictionary *dic = cityArray[k];
+            HJDCityModel *city = [[HJDCityModel alloc] init];
+            [city hjd_loadDataFromkeyValues:dic];
+            [self.twoDataSource addObject:city];
+        }
+        [self.tableView reloadData];
+    }];
 }
 @end

@@ -15,42 +15,74 @@
 #import "HJDHomeCalculatorViewController.h"
 #import "HJDMessageViewController.h"
 #import "HJDHomeRoomDiDaiViewController.h"
+#import "HJDHomeManager.h"
 
 @interface HJDHomeViewController ()<UITableViewDelegate, UITableViewDataSource, HKScrollViewNetDelegate, HJDHomeTableViewCellDelegate>
 @property(strong, nonatomic) UITableView *tableView;
 @property(strong, nonatomic) NSMutableArray *dataSource;
 @property(strong, nonatomic) HKScrollView *netWorkScrollView;
+@property(nonatomic, strong) NSMutableArray *imageArray;
 @end
 
 @implementation HJDHomeViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self setupSubViews];
-    
-    [self setRightNavigationButton:nil backImage:kImage(@"首页通知") highlightedImage:kImage(@"首页通知") frame:CGRectMake(0, 0, 44, 44)];
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - kTabBarHeight) style:UITableViewStylePlain];
+        _tableView.dataSource = self;
+        _tableView.delegate = self;
+        _tableView.backgroundColor = kWithe;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    return _tableView;
 }
 
-- (void)setupSubViews {
+- (HKScrollView *)netWorkScrollView {
+    if (!_netWorkScrollView) {
+        CGFloat width = self.view.frame.size.width;
+        CGFloat height = 304 * width / 720;
+        _netWorkScrollView = [[HKScrollView alloc]initWithFrame:CGRectMake(0, 0, width, height) WithNetImages:@[ @"", @"", @"" ]];
+        _netWorkScrollView.AutoScrollDelay = 2;
+        _netWorkScrollView.placeholderImage = [UIImage imageNamed:@"hk_timeline_image_loading"];
+        _netWorkScrollView.netDelagate = self;
+    }
+    return _netWorkScrollView;
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.userType = HJDUserTypeAgent;
+    }
+    return self;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
     [self setNavTitle:@"首页"];
-    self.userType = HJDUserTypeAgent;
-    [self.view addSubview:self.tableView];
-    NSArray *array = @[@"",@"",@""];
-    CGFloat width = self.view.frame.size.width;
-    CGFloat height = 304*width/720;
-    self.netWorkScrollView = [[HKScrollView alloc]initWithFrame:CGRectMake(0, 0, width, height) WithNetImages:array];
-    self.netWorkScrollView.AutoScrollDelay = 2;
-    self.netWorkScrollView.placeholderImage = [UIImage imageNamed:@"hk_timeline_image_loading"];
-    self.netWorkScrollView.netDelagate = self;
-    self.tableView.tableHeaderView = self.netWorkScrollView;
-    @weakify(self);
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        @strongify(self);
-        [self refreshDate];
+    
+    [self setupSubViews];
+    
+    [HJDHomeManager getHomeBannerCallBack:^(NSArray *data, BOOL result) {
+        
     }];
 }
 
-- (void)refreshDate {
+- (void)setupSubViews {
+    [self setRightNavigationButton:nil backImage:kImage(@"首页通知") highlightedImage:kImage(@"首页通知") frame:CGRectMake(0, 0, 44, 44)];
+    
+    [self.view addSubview:self.tableView];
+    self.tableView.tableHeaderView = self.netWorkScrollView;
+    
+    @weakify(self);
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        @strongify(self);
+        [self refreshData];
+    }];
+}
+
+- (void)refreshData {
     
 }
 
@@ -61,37 +93,29 @@
 }
 
 #pragma mark - UITableView Datasource
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.dataSource.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
     return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"HJDHomeTableViewCell";
-    
     HJDHomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
     if(cell == nil) {
         cell = [[HJDHomeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.delegate = self;
     }
-    NSDictionary * dic = [self.dataSource objectAtIndex:indexPath.section];
-    
-    NSArray * arr = [dic objectForKey:@"sectionValue"];
-    
+    NSDictionary *dic = [self.dataSource objectAtIndex:indexPath.section];
+    NSArray *arr = [dic objectForKey:@"sectionValue"];
     [cell configCellWithArray:arr];
-    
     return cell;
 }
 
 #pragma mark - UITableView Delegate methods
-
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 120;
 }
@@ -145,7 +169,6 @@
 
 
 #pragma mark - getters && setters
-
 - (NSMutableArray *)dataSource{
     if (!_dataSource) {
         _dataSource = [NSMutableArray new];
@@ -235,19 +258,6 @@
         }
     }
     return _dataSource;
-}
-
-- (UITableView *)tableView{
-    
-    if (!_tableView) {
-        _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight-kSafeAreaTopHeight-kSafeAreaBottomHeight-kTabBarHeight) style:UITableViewStylePlain];
-        _tableView.dataSource=self;
-        _tableView.delegate=self;
-        _tableView.backgroundColor = kWithe;
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        
-    }
-    return _tableView;
 }
 
 @end

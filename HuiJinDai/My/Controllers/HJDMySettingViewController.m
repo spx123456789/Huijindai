@@ -11,6 +11,8 @@
 #import "HJDCityPickerView.h"
 #import "HJDLoginViewController.h"
 #import "AppDelegate.h"
+#import "HJDUserDefaultsManager.h"
+#import "HJDUserModel.h"
 
 @interface HJDMySettingViewController ()<HJDCityPickerViewDelegate>
 @property(nonatomic, strong) TPKeyboardAvoidingScrollView *bgView;
@@ -65,17 +67,19 @@
 - (void)setUpUI {
     [self.view addSubview:self.bgView];
     
+    HJDUserModel *userModel = (HJDUserModel *)[[HJDUserDefaultsManager shareInstance] loadObject:kUserModelKey];
+    
     CGFloat topHeight = 25;
     _nameView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight, kScreenWidth, 60) text:@"姓名" fieldPlaceholder:@"" tag:10];
     _nameView.textLabel.textColor = kRGB_Color(0x33, 0x33, 0x33);
-    _nameView.textField.text = @"李思然";
+    _nameView.textField.text = userModel.rename;
     _nameView.fieldCanEdit = NO;
     [self.bgView addSubview:_nameView];
     
     topHeight += 60;
     _phoneView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight, kScreenWidth, 60) text:@"手机号" fieldPlaceholder:@"" tag:11];
     _phoneView.textLabel.textColor = kRGB_Color(0x33, 0x33, 0x33);
-    _phoneView.textField.text = @"13355668899";
+    _phoneView.textField.text = userModel.phone;
     _phoneView.fieldCanEdit = NO;
     [self.bgView addSubview:_phoneView];
     
@@ -117,8 +121,8 @@
 }
 
 #pragma mark - HJDCityPickerViewDelegate
-- (void)didSelectedCity:(NSString *)city {
-    self.cityView.textField.text = city;
+- (void)pickerView:(HJDCityPickerView *)pickerView didSelectedCity:(HJDCityModel *)city {
+    self.cityView.textField.text = city.name;
     self.cityPickerView = nil;
 }
 

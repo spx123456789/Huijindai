@@ -8,14 +8,19 @@
 
 #import <Foundation/Foundation.h>
 #import "HJDMyAgentModel.h"
+#import "HJDUserModel.h"
 
 @interface HJDMyManager : NSObject
 
 //获取我的客户经理数据
-+ (NSArray *)getMyCustomerManagerArray;
++ (void)getMyCustomerManagerWithCallBack:(void(^)(NSArray *arr))callback;
 
 //获取我的经纪人数据
-+ (NSArray *)getMyAgentArray;
++ (void)getMyAgentWithCallBack:(void(^)(NSArray *arr))callback;
+
+//获取用户邀请码
++ (void)getUserInviteCodeWithCallBack:(void(^)(NSArray *arr))callback;
 
 
++ (void)getMyInfoWithCallBack:(void(^)(NSArray *arr))callback;
 @end

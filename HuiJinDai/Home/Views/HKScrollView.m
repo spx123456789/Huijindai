@@ -134,14 +134,11 @@
     _scrollView = scrollView;
 }
 
--(void)setImageArray:(NSArray *)imageArray
-{
+-(void)setImageArray:(NSArray *)imageArray {
     //如果是网络
-    if (_isNetworkImage)
-    {
+    if (_isNetworkImage) {
         _imageArray = [imageArray copy];
-        
-    }else {
+    } else {
         //本地
         NSMutableArray *localimageArray = [NSMutableArray arrayWithCapacity:imageArray.count];
         for (NSString *imageName in imageArray) {

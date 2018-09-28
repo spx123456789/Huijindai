@@ -12,6 +12,8 @@
 #import "HJDMyAgentViewController.h"
 #import "HJDMyInviteCodeView.h"
 #import "HJDMySettingViewController.h"
+#import "HJDUserDefaultsManager.h"
+#import "HJDUserModel.h"
 
 @interface HJDMyViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UITableView *tableView;
@@ -57,6 +59,8 @@ static NSString *key2 = @"title";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    HJDUserModel *userModel = (HJDUserModel *)[[HJDUserDefaultsManager shareInstance] loadObject:kUserModelKey];
     
     self.dataSource = @[ @{ key1 : kImage(@"我的页客户经理"), key2 : @"我的客户经理" }, @{ key1 : kImage(@"我的页经纪人"), key2 : @"我的经纪人" }, @{ key1 : kImage(@"我的页邀请码"), key2 : @"我的邀请码" }, @{ key1 : kImage(@"我的页设置"), key2 : @"设置" } ];
     

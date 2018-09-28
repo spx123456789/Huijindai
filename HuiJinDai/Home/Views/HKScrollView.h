@@ -53,7 +53,6 @@
  *  @param frame      位置
  *  @param imageArray 加载本地图片
  *
- *  @return
  */
 - (instancetype) initWithFrame:(CGRect)frame WithLocalImages:(NSArray *)imageArray;
 
@@ -63,7 +62,6 @@
  *  @param frame      位置大小
  *  @param imageArray 名字
  *
- *  @return
  */
 - (instancetype) initWithFrame:(CGRect)frame WithNetImages:(NSArray *)imageArray;
 

@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HJDRegisterModel.h"
 
+@class HJDCityPickerView;
 @protocol HJDCityPickerViewDelegate<NSObject>
-- (void)didSelectedCity:(NSString *)city;
+- (void)pickerView:(HJDCityPickerView *)pickerView didSelectedCity:(HJDCityModel *)city;
 @end
 
 @interface HJDCityPickerView : UIView

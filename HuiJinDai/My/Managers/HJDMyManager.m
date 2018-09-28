@@ -7,35 +7,31 @@
 //
 
 #import "HJDMyManager.h"
+#import "HJDNetAPIManager.h"
 
 @implementation HJDMyManager
 
-+ (NSArray *)getMyCustomerManagerArray {
-    NSMutableArray *mut = [NSMutableArray array];
-    
-    HJDMyAgentModel *model = [[HJDMyAgentModel alloc] init];
-    model.name = @"李铭";
-    model.phone = @"13567892345";
-    
-    for (int i = 0; i < 5; i++) {
-        [mut addObject:model];
-    }
-    
-    return mut;
++ (void)getMyCustomerManagerWithCallBack:(void (^)(NSArray *))callback {
+    [[HJDNetAPIManager sharedManager] requestWithPath:@"/User/get_customer" requestParams:nil networkMethod:GET callback:^(id data, NSError *error) {
+        
+    }];
 }
 
-+ (NSArray *)getMyAgentArray {
-    NSMutableArray *mut = [NSMutableArray array];
-    
-    HJDMyAgentModel *model = [[HJDMyAgentModel alloc] init];
-    model.name = @"王世明";
-    model.phone = @"15367892345";
-    
-    for (int i = 0; i < 5; i++) {
-        [mut addObject:model];
-    }
-    
-    return mut;
++ (void)getMyAgentWithCallBack:(void (^)(NSArray *))callback {
+    [[HJDNetAPIManager sharedManager] requestWithPath:@"/User/get_agent" requestParams:nil networkMethod:GET callback:^(id data, NSError *error) {
+        
+    }];
 }
 
++ (void)getUserInviteCodeWithCallBack:(void (^)(NSArray *))callback {
+    [[HJDNetAPIManager sharedManager] requestWithPath:@"/User/get_qrcode" requestParams:nil networkMethod:GET callback:^(id data, NSError *error) {
+        
+    }];
+}
+
++ (void)getMyInfoWithCallBack:(void (^)(NSArray *))callback {
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/User/get_info") requestParams:nil networkMethod:GET callback:^(id data, NSError *error) {
+        
+    }];
+}
 @end

@@ -11,3 +11,10 @@
 @implementation HJDRegisterModel
 
 @end
+
+
+@implementation HJDCityModel
++ (NSDictionary *)mj_replacedKeyFromPropertyName {
+    return @{ @"pid" : @"id"};
+}
+@end

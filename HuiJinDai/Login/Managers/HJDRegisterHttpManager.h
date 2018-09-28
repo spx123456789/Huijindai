@@ -7,13 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-
-
+#import "HJDNetAPIManager.h"
 
 typedef void (^HttpCallback)(NSDictionary *data, NSError *error, BOOL result);
 
 @interface HJDRegisterHttpManager : NSObject
-- (void)getVerifiCodeWithPhone:(NSString *)phone callBack:(HttpCallback)callBack;
 
-- (void)postRegisterRequestWithPhone:(NSString *)phone verifiCode:(NSString *)code callBack:(HttpCallback)callBack;
++ (void)getVerifiCodeWithPhone:(NSString *)phone callBack:(HttpCallback)callBack;
+
++ (void)getCityListWithCodeId:(NSString *)codeID CallBack:(HttpCallback)callBack;
+
++ (void)postRegisterRequestWithPhone:(NSString *)phone verifiCode:(NSString *)code realName:(NSString *)realName address:(NSString *)address inviteCode:(NSString *)inviteCode callBack:(HttpCallback)callBack;
+
++ (void)loginWithPhone:(NSString *)phone verifiCode:(NSString *)code callBack:(HttpCallback)callBack;
 @end

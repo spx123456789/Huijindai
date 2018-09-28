@@ -35,6 +35,13 @@
 		169B9F1521590DA20013D47B /* HJDHomeCalculatorResultTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 169B9F1421590DA20013D47B /* HJDHomeCalculatorResultTableCell.m */; };
 		169B9F1821591B200013D47B /* HJDHomeQueryValueResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 169B9F1721591B200013D47B /* HJDHomeQueryValueResultViewController.m */; };
 		169C07842141744900E9CDD0 /* HJDMyInviteCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 169C07832141744900E9CDD0 /* HJDMyInviteCodeView.m */; };
+		16B42D3D215DD65500DE0D7A /* NSDictionary+HJD.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B42D3C215DD65500DE0D7A /* NSDictionary+HJD.m */; };
+		16B42D40215DFD1A00DE0D7A /* HJDUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B42D3F215DFD1A00DE0D7A /* HJDUserModel.m */; };
+		16B42D44215DFEF200DE0D7A /* HJDBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B42D43215DFEF200DE0D7A /* HJDBaseModel.m */; };
+		16B42D47215E085000DE0D7A /* NSString+HJD.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B42D46215E085000DE0D7A /* NSString+HJD.m */; };
+		16B42D4A215E1C7300DE0D7A /* UIView+HMCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B42D48215E1C7200DE0D7A /* UIView+HMCore.m */; };
+		16B42D4D215E1CCB00DE0D7A /* NSObject+HMCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B42D4B215E1CCA00DE0D7A /* NSObject+HMCore.m */; };
+		16B42D50215E659E00DE0D7A /* HJDUserDefaultsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B42D4F215E659E00DE0D7A /* HJDUserDefaultsManager.m */; };
 		16B69948214BE77B0086920C /* HJDMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B69947214BE77B0086920C /* HJDMessageModel.m */; };
 		16B6994C214BE8110086920C /* HJDMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B6994B214BE8110086920C /* HJDMessageManager.m */; };
 		16B6994F214DF72C0086920C /* HJDMessageSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B6994E214DF72C0086920C /* HJDMessageSegmentView.m */; };
@@ -169,8 +176,6 @@
 		AA7D7FDE2143589300E0D843 /* HJDHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D7FDD2143589300E0D843 /* HJDHomeModel.m */; };
 		AA7D7FE3214358AA00E0D843 /* HJDButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D7FDF214358A900E0D843 /* HJDButton.m */; };
 		AA7D7FE4214358AA00E0D843 /* HJDHomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D7FE0214358A900E0D843 /* HJDHomeTableViewCell.m */; };
-		AA7D7FE9214398E200E0D843 /* UIView+HMCore.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D7FE6214398E200E0D843 /* UIView+HMCore.m */; };
-		AA7D7FEA214398E200E0D843 /* NSObject+HMCore.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D7FE8214398E200E0D843 /* NSObject+HMCore.m */; };
 		AA7D7FED2143A07E00E0D843 /* UIColor+HMCore.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D7FEC2143A07E00E0D843 /* UIColor+HMCore.m */; };
 		AA7D7FF52143B70300E0D843 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA7D7FF02143B70300E0D843 /* Assets.xcassets */; };
 		AA7D7FF62143B70300E0D843 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7D7FF12143B70300E0D843 /* main.m */; };
@@ -250,6 +255,20 @@
 		169B9F1721591B200013D47B /* HJDHomeQueryValueResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeQueryValueResultViewController.m; sourceTree = "<group>"; };
 		169C07822141744900E9CDD0 /* HJDMyInviteCodeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDMyInviteCodeView.h; sourceTree = "<group>"; };
 		169C07832141744900E9CDD0 /* HJDMyInviteCodeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDMyInviteCodeView.m; sourceTree = "<group>"; };
+		16B42D3B215DD65500DE0D7A /* NSDictionary+HJD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+HJD.h"; sourceTree = "<group>"; };
+		16B42D3C215DD65500DE0D7A /* NSDictionary+HJD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+HJD.m"; sourceTree = "<group>"; };
+		16B42D3E215DFD1A00DE0D7A /* HJDUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDUserModel.h; sourceTree = "<group>"; };
+		16B42D3F215DFD1A00DE0D7A /* HJDUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDUserModel.m; sourceTree = "<group>"; };
+		16B42D42215DFEF200DE0D7A /* HJDBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDBaseModel.h; sourceTree = "<group>"; };
+		16B42D43215DFEF200DE0D7A /* HJDBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDBaseModel.m; sourceTree = "<group>"; };
+		16B42D45215E085000DE0D7A /* NSString+HJD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+HJD.h"; sourceTree = "<group>"; };
+		16B42D46215E085000DE0D7A /* NSString+HJD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+HJD.m"; sourceTree = "<group>"; };
+		16B42D48215E1C7200DE0D7A /* UIView+HMCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HMCore.m"; sourceTree = "<group>"; };
+		16B42D49215E1C7300DE0D7A /* UIView+HMCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HMCore.h"; sourceTree = "<group>"; };
+		16B42D4B215E1CCA00DE0D7A /* NSObject+HMCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+HMCore.m"; sourceTree = "<group>"; };
+		16B42D4C215E1CCB00DE0D7A /* NSObject+HMCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+HMCore.h"; sourceTree = "<group>"; };
+		16B42D4E215E659E00DE0D7A /* HJDUserDefaultsManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDUserDefaultsManager.h; sourceTree = "<group>"; };
+		16B42D4F215E659E00DE0D7A /* HJDUserDefaultsManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDUserDefaultsManager.m; sourceTree = "<group>"; };
 		16B69946214BE77B0086920C /* HJDMessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDMessageModel.h; sourceTree = "<group>"; };
 		16B69947214BE77B0086920C /* HJDMessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDMessageModel.m; sourceTree = "<group>"; };
 		16B6994A214BE8110086920C /* HJDMessageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDMessageManager.h; sourceTree = "<group>"; };
@@ -426,10 +445,6 @@
 		AA7D7FE0214358A900E0D843 /* HJDHomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJDHomeTableViewCell.m; sourceTree = "<group>"; };
 		AA7D7FE1214358A900E0D843 /* HJDHomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJDHomeTableViewCell.h; sourceTree = "<group>"; };
 		AA7D7FE2214358A900E0D843 /* HJDButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJDButton.h; sourceTree = "<group>"; };
-		AA7D7FE5214398E200E0D843 /* UIView+HMCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HMCore.h"; sourceTree = "<group>"; };
-		AA7D7FE6214398E200E0D843 /* UIView+HMCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HMCore.m"; sourceTree = "<group>"; };
-		AA7D7FE7214398E200E0D843 /* NSObject+HMCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+HMCore.h"; sourceTree = "<group>"; };
-		AA7D7FE8214398E200E0D843 /* NSObject+HMCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+HMCore.m"; sourceTree = "<group>"; };
 		AA7D7FEB2143A07E00E0D843 /* UIColor+HMCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HMCore.h"; sourceTree = "<group>"; };
 		AA7D7FEC2143A07E00E0D843 /* UIColor+HMCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HMCore.m"; sourceTree = "<group>"; };
 		AA7D7FEF2143B70300E0D843 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -564,6 +579,15 @@
 				169B9F01215631870013D47B /* GTSDK.framework */,
 			);
 			path = "GtSdkLib-noidfa";
+			sourceTree = "<group>";
+		};
+		16B42D41215DFEE000DE0D7A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				16B42D42215DFEF200DE0D7A /* HJDBaseModel.h */,
+				16B42D43215DFEF200DE0D7A /* HJDBaseModel.m */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		16B69945214BE75B0086920C /* Models */ = {
@@ -731,6 +755,8 @@
 				16FFC51521397373008BCABC /* HJDRegisterManger.m */,
 				16BDE864215D1FD7008EF899 /* HJDRegisterHttpManager.h */,
 				16BDE865215D1FD7008EF899 /* HJDRegisterHttpManager.m */,
+				16B42D4E215E659E00DE0D7A /* HJDUserDefaultsManager.h */,
+				16B42D4F215E659E00DE0D7A /* HJDUserDefaultsManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -773,6 +799,8 @@
 			children = (
 				16FFC517213973A2008BCABC /* HJDRegisterModel.h */,
 				16FFC518213973A2008BCABC /* HJDRegisterModel.m */,
+				16B42D3E215DFD1A00DE0D7A /* HJDUserModel.h */,
+				16B42D3F215DFD1A00DE0D7A /* HJDUserModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -995,6 +1023,7 @@
 		AAD24F71213ADDBD00298386 /* Componets */ = {
 			isa = PBXGroup;
 			children = (
+				16B42D41215DFEE000DE0D7A /* Models */,
 				16BDE868215D2C29008EF899 /* Managers */,
 				169B9EE0215620110013D47B /* ThirdPart */,
 				AAD24F74213ADE0900298386 /* Categories */,
@@ -1015,16 +1044,20 @@
 		AAD24F74213ADE0900298386 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				16B42D4C215E1CCB00DE0D7A /* NSObject+HMCore.h */,
+				16B42D4B215E1CCA00DE0D7A /* NSObject+HMCore.m */,
+				16B42D49215E1C7300DE0D7A /* UIView+HMCore.h */,
+				16B42D48215E1C7200DE0D7A /* UIView+HMCore.m */,
 				AA7D7FEB2143A07E00E0D843 /* UIColor+HMCore.h */,
 				AA7D7FEC2143A07E00E0D843 /* UIColor+HMCore.m */,
-				AA7D7FE7214398E200E0D843 /* NSObject+HMCore.h */,
-				AA7D7FE8214398E200E0D843 /* NSObject+HMCore.m */,
-				AA7D7FE5214398E200E0D843 /* UIView+HMCore.h */,
-				AA7D7FE6214398E200E0D843 /* UIView+HMCore.m */,
 				AAD24F75213ADE3200298386 /* UIAlertController+Blocks.h */,
 				AAD24F76213ADE3200298386 /* UIAlertController+Blocks.m */,
 				AAD24F6E21394EA900298386 /* UITableView+HJD.h */,
 				AAD24F6F21394EA900298386 /* UITableView+HJD.m */,
+				16B42D3B215DD65500DE0D7A /* NSDictionary+HJD.h */,
+				16B42D3C215DD65500DE0D7A /* NSDictionary+HJD.m */,
+				16B42D45215E085000DE0D7A /* NSString+HJD.h */,
+				16B42D46215E085000DE0D7A /* NSString+HJD.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -1320,6 +1353,7 @@
 				1630C1A4215BD9DF004AA211 /* HJDHomeQueryValueStatusViewController.m in Sources */,
 				16BDE863215C9621008EF899 /* HJDHomeDeclarationViewController.m in Sources */,
 				16B6994C214BE8110086920C /* HJDMessageManager.m in Sources */,
+				16B42D50215E659E00DE0D7A /* HJDUserDefaultsManager.m in Sources */,
 				16B69955214E04970086920C /* HJDHomeOrderDetailTableViewCell.m in Sources */,
 				16B69948214BE77B0086920C /* HJDMessageModel.m in Sources */,
 				16FFC51621397373008BCABC /* HJDRegisterManger.m in Sources */,
@@ -1332,16 +1366,18 @@
 				AA1CECB22145614000249692 /* HJDCalculatorTableViewCell.m in Sources */,
 				163D4DB7214549B80012CB53 /* HJDHomeNavSearchView.m in Sources */,
 				16EDD317213C06E600E21AB2 /* HJDMySearchFieldView.m in Sources */,
+				16B42D3D215DD65500DE0D7A /* NSDictionary+HJD.m in Sources */,
 				16BDE86B215D2C46008EF899 /* HJDNetAPIManager.m in Sources */,
 				169B9F0921567E390013D47B /* HJDHomeOrderProcessViewController.m in Sources */,
 				AA7D7FF72143B70300E0D843 /* AppDelegate.m in Sources */,
 				163D4DB4214543E90012CB53 /* HJDHomeAuditTableViewCell.m in Sources */,
 				169B9F122158F1850013D47B /* HJDHomeRoomDiDaiTableViewCell.m in Sources */,
-				AA7D7FEA214398E200E0D843 /* NSObject+HMCore.m in Sources */,
 				16B6995B214EA4400086920C /* HJDHomeOrderRefuseViewController.m in Sources */,
 				AA7D7FDE2143589300E0D843 /* HJDHomeModel.m in Sources */,
 				AA1CEC9921454C2B00249692 /* HJDHomeCalculatorViewController.m in Sources */,
+				16B42D44215DFEF200DE0D7A /* HJDBaseModel.m in Sources */,
 				169B9F0C215681D90013D47B /* HJDOrderProcessSearchView.m in Sources */,
+				16B42D4A215E1C7300DE0D7A /* UIView+HMCore.m in Sources */,
 				AA7D7FE3214358AA00E0D843 /* HJDButton.m in Sources */,
 				16B69952214E042D0086920C /* HJDHomeOrderDetailViewController.m in Sources */,
 				16B69958214E9AF30086920C /* HJDHomeOrderDetailPhotoCell.m in Sources */,
@@ -1349,16 +1385,18 @@
 				16C4E1D8213826D0004268C4 /* HJDTextFieldView.m in Sources */,
 				AAD24F6721394BA200298386 /* HJDHomeViewController.m in Sources */,
 				16B6DEA5213988BB00CF8C8D /* HJDCityPickerView.m in Sources */,
+				16B42D40215DFD1A00DE0D7A /* HJDUserModel.m in Sources */,
 				16B6994F214DF72C0086920C /* HJDMessageSegmentView.m in Sources */,
 				163D4DBD21455F080012CB53 /* HJDMessageViewController.m in Sources */,
+				16B42D4D215E1CCB00DE0D7A /* NSObject+HMCore.m in Sources */,
 				16EDD31B213C06EF00E21AB2 /* HJDMyManager.m in Sources */,
 				16EDD32D213C2E8900E21AB2 /* HJDHomeOrderListViewController.m in Sources */,
+				16B42D47215E085000DE0D7A /* NSString+HJD.m in Sources */,
 				16908038213EBFD900AA2575 /* HJDOrderListModel.m in Sources */,
 				16EDD318213C06E600E21AB2 /* HJDMyAgentTableViewCell.m in Sources */,
 				16C4E1D52138255B004268C4 /* HJDRegisterViewController.m in Sources */,
 				169C07842141744900E9CDD0 /* HJDMyInviteCodeView.m in Sources */,
 				16EDD316213C06E600E21AB2 /* HJDMyTableViewCell.m in Sources */,
-				AA7D7FE9214398E200E0D843 /* UIView+HMCore.m in Sources */,
 				16EDD2C4213AD7EC00E21AB2 /* HJDMyViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1522,7 +1560,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = HJD.HuiJinDai;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hfax.houseloan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1545,7 +1583,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = HJD.HuiJinDai;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hfax.houseloan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
