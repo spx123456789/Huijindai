@@ -44,7 +44,7 @@
 }
 
 + (void)loginWithPhone:(NSString *)phone verifiCode:(NSString *)code callBack:(HttpCallback)callBack {
-    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"") requestParams:@{ @"phone" : phone, @"rand_code" : code} networkMethod:POST callback:^(id data, NSError *error) {
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/User/login") requestParams:@{ @"phone" : phone, @"rand_code" : code} networkMethod:POST callback:^(id data, NSError *error) {
         if (error) {
             callBack(nil, error, NO);
         } else {

@@ -20,8 +20,10 @@
 #define kGtAppKey @"yIPfqwq6OMAPp6dkqgLpG5"
 #define kGtAppSecret @"G0aBqAD6t79JfzTB6Z5lo5"
 
-
-
+//test
+#import "HJDNetAPIManager.h"
+#import "HJDUserModel.h"
+#import "HJDUserDefaultsManager.h"
 
 @interface AppDelegate ()<GeTuiSdkDelegate, UNUserNotificationCenterDelegate>
 
@@ -38,14 +40,26 @@
     
     [self registerGeTui];
     
+    NSNumber *isLogin = [[NSUserDefaults standardUserDefaults] objectForKey:HJDLoginSuccess];
     //判断是否登录
-    if (/* DISABLES CODE */ (1)) {
+    if (isLogin.integerValue == 1) {
         [self enterHomeController];
     } else {
         UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:[[HJDLoginViewController alloc] init]];
         self.window.rootViewController = navi;
     }
     
+    
+//    //test
+//    [[HJDNetAPIManager sharedManager] setAuthorization:@"278500137e0c198da65f226095e58666"];
+//
+//    [[HJDNetAPIManager sharedManager] requestWithPath:@"/User/get_info" requestParams:nil networkMethod:GET  callback:^(id data, NSError *error) {
+//        if (!error) {
+//            HJDUserModel *userModel = [[HJDUserModel alloc] init];
+//            [userModel hjd_loadDataFromkeyValues:data];
+//            [[HJDUserDefaultsManager shareInstance] saveObject:userModel key:kUserModelKey];
+//        }
+//    }];
     return YES;
 }
 

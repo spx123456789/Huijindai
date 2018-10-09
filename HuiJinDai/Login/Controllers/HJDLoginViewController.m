@@ -164,16 +164,23 @@
         return;
     }
     
+    [MBProgressHUD showMessage:@"登陆中..."];
     [HJDRegisterHttpManager loginWithPhone:phone verifiCode:verifiCode callBack:^(NSDictionary *data, NSError *error, BOOL result) {
+        [MBProgressHUD hideHUD];
         if (result) {
             HJDUserModel *userModel = [[HJDUserModel alloc] init];
             [userModel hjd_loadDataFromkeyValues:data];
             [[HJDUserDefaultsManager shareInstance] saveObject:userModel key:kUserModelKey];
-            //test 13500001112
-            [[HJDNetAPIManager sharedManager] setAuthorization:@"278500137e0c198da65f226095e58666"];
+
+            [[HJDNetAPIManager sharedManager] setAuthorization:userModel.token];
             
             AppDelegate *appDelagate = (AppDelegate *)[UIApplication sharedApplication].delegate;
             [appDelagate enterHomeController];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:@(1) forKey:HJDLoginSuccess];
+        } else {
+            [MBProgressHUD showError:@"登录失败"];
+            [[NSUserDefaults standardUserDefaults] setObject:@(2) forKey:HJDLoginSuccess];
         }
     }];
 }

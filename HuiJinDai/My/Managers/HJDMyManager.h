@@ -21,6 +21,9 @@
 //获取用户邀请码
 + (void)getUserInviteCodeWithCallBack:(void(^)(NSArray *arr))callback;
 
-
+//获取我的信息
 + (void)getMyInfoWithCallBack:(void(^)(NSArray *arr))callback;
+
+//设置头像信息
++ (void)setMyAvatarWithImage:(UIImage *)image callBack:(void(^)(BOOL result))callback;
 @end

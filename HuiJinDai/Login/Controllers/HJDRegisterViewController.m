@@ -220,16 +220,24 @@
         return;
     }
     
+    [MBProgressHUD showMessage:@"注册中..."];
     [HJDRegisterHttpManager postRegisterRequestWithPhone:phone verifiCode:verifiCode realName:name address:self.selectCity.pid inviteCode:inviteCode callBack:^(NSDictionary *data, NSError *error, BOOL result) {
+        [MBProgressHUD hideHUD];
         if (result) {
             HJDUserModel *userModel = [[HJDUserModel alloc] init];
             [userModel hjd_loadDataFromkeyValues:data];
             [[HJDUserDefaultsManager shareInstance] saveObject:userModel key:kUserModelKey];
-            //进入主界面 token "278500137e0c198da65f226095e58666"
-            [[HJDNetAPIManager sharedManager] setAuthorization:@"278500137e0c198da65f226095e58666"];
+            
+            //进入主界面
+            [[HJDNetAPIManager sharedManager] setAuthorization:userModel.token];
             
             AppDelegate *appDelagate = (AppDelegate *)[UIApplication sharedApplication].delegate;
             [appDelagate enterHomeController];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:@(1) forKey:HJDLoginSuccess];
+        } else {
+            [MBProgressHUD showError:@"注册失败"];
+            [[NSUserDefaults standardUserDefaults] setObject:@(2) forKey:HJDLoginSuccess];
         }
     }];
 }

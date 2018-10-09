@@ -185,23 +185,70 @@ static HJDNetAPIManager *_sharedManager = nil;
 
 @end
 
-/*
+@implementation AFHTTPSessionManager (UploadData)
 
-+ (id)client {
-    NetAPIClient *client = [[self alloc] initWithBaseURL:baseurl withCer:NO];
-    [client setAuthorization:acesstoken];
-    return client;
+- (NSURLSessionDataTask *)requestWithMethod:(NetworkMethod)method
+                                        url:(NSString *)URLString
+                                 parameters:(id)parameters
+                  constructingBodyWithBlock:(void (^)(id<AFMultipartFormData> formData))block
+                                   progress:(void (^)(NSUInteger bytesWritten, long long totalBytesWritten,
+                                                      long long totalBytesExpectedToWrite))upLoadProgress
+                                    success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                                    failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure {
+    NSString *requestMethod = @"POST";
+    if (PUT == method) {
+        requestMethod = @"PUT";
+    }
+    NSError *serializationError = nil;
+    NSMutableURLRequest *request = [self.requestSerializer
+                                    multipartFormRequestWithMethod:requestMethod
+                                    URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString]
+                                    parameters:parameters
+                                    constructingBodyWithBlock:block
+                                    error:&serializationError];
+    if (serializationError) {
+        if (failure) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wgnu"
+            dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{
+                failure(nil, serializationError);
+            });
+#pragma clang diagnostic pop
+        }
+        
+        return nil;
+    }
+    
+    [request addValue:@"" forHTTPHeaderField:@"Accept-Encoding"];
+    __block NSURLSessionDataTask *task =
+    [self uploadTaskWithStreamedRequest:request
+                               progress:nil
+                      completionHandler:^(NSURLResponse *__unused response, id responseObject, NSError *error) {
+                          if (error) {
+                              if (failure) {
+                                  failure(task, error);
+                              }
+                          } else {
+                              if (success) {
+                                  success(task, responseObject);
+                              }
+                          }
+                      }];
+    
+    if (upLoadProgress) {
+        NSProgress *progress = [self uploadProgressForTask:task];
+        @weakify(progress);
+        [RACObserve(progress, localizedDescription) subscribeNext:^(NSString *x) {
+            @strongify(progress);
+            upLoadProgress(0, progress.completedUnitCount, progress.totalUnitCount);
+        }];
+    }
+    [task resume];
+    
+    return task;
 }
 
-- (BOOL)isReachable {
-    return self.networkReachability.currentReachabilityStatus != NotReachable;
-}
-
-- (NetworkStatus)NetworkType {
-    return self.networkReachability.currentReachabilityStatus;
-}
-*/
-
+@end
 
 #pragma mark DownLoadFile -
 @implementation AFHTTPSessionManager (DownLoadData)

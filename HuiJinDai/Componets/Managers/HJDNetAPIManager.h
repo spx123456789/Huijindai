@@ -11,6 +11,7 @@
 
 #define kAPIMainURL @"http://hanhouxiong.hjxd.xiaoyutab.cn/api"
 #define kAPIURL(url) [NSString stringWithFormat:@"%@%@", kAPIMainURL, url]
+#define kAvatar(avatar) [NSString stringWithFormat:@"%@%@",kAPIMainURL, avatar]
 
 typedef NS_ENUM(NSUInteger, NetworkMethod) {
     GET = 0,  // get请求
@@ -45,6 +46,17 @@ typedef NS_ENUM(NSUInteger, NetworkMethod) {
 
 @end
 
+#pragma mark - AF PUT/POST upload file.
+@interface AFHTTPSessionManager (UploadData)
+- (NSURLSessionDataTask *)requestWithMethod:(NetworkMethod)method
+                                        url:(NSString *)URLString
+                                 parameters:(id)parameters
+                  constructingBodyWithBlock:(void (^)(id<AFMultipartFormData> formData))block
+                                   progress:(void (^)(NSUInteger bytesWritten, long long totalBytesWritten,
+                                                      long long totalBytesExpectedToWrite))upLoadProgress
+                                    success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                                    failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
+@end
 
 #pragma mark DownLoadFile -
 @interface AFHTTPSessionManager (DownLoadData)

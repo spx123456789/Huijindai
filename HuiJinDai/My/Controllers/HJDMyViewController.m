@@ -12,6 +12,7 @@
 #import "HJDMyAgentViewController.h"
 #import "HJDMyInviteCodeView.h"
 #import "HJDMySettingViewController.h"
+#import "HJDNetAPIManager.h"
 #import "HJDUserDefaultsManager.h"
 #import "HJDUserModel.h"
 
@@ -19,6 +20,7 @@
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSArray *dataSource;
 @property(nonatomic, strong) HJDMyTableHeaderView *headerView;
+@property(nonatomic, strong) HJDUserModel *userModel;
 @end
 
 @implementation HJDMyViewController
@@ -41,10 +43,22 @@ static NSString *key2 = @"title";
 - (HJDMyTableHeaderView *)headerView {
     if (!_headerView) {
         _headerView = [[HJDMyTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 340)];
-        _headerView.headImgView.image = kImage(@"我的默认头像");
-        _headerView.nameLabel.text = @"周思然";
+        NSString *avatar = kAvatar(self.userModel.avatar);
+        if (self.userModel.avatar == nil || self.userModel.avatar.length == 0) {
+            avatar = @"";
+        }
+        [_headerView.headImgView sd_setImageWithURL:[NSURL URLWithString:avatar] placeholderImage:kImage(@"我的默认头像")];
+        _headerView.nameLabel.text = self.userModel.rename;
     }
     return _headerView;
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _userModel = (HJDUserModel *)[[HJDUserDefaultsManager shareInstance] loadObject:kUserModelKey];
+    }
+    return self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -59,10 +73,9 @@ static NSString *key2 = @"title";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     
-    HJDUserModel *userModel = (HJDUserModel *)[[HJDUserDefaultsManager shareInstance] loadObject:kUserModelKey];
-    
-    self.dataSource = @[ @{ key1 : kImage(@"我的页客户经理"), key2 : @"我的客户经理" }, @{ key1 : kImage(@"我的页经纪人"), key2 : @"我的经纪人" }, @{ key1 : kImage(@"我的页邀请码"), key2 : @"我的邀请码" }, @{ key1 : kImage(@"我的页设置"), key2 : @"设置" } ];
+    self.dataSource = @[ @{ key1 : kImage(@"我的客户经理"), key2 : @"我的客户经理" }, @{ key1 : kImage(@"我的页经纪人"), key2 : @"我的经纪人" }, @{ key1 : kImage(@"我的页邀请码"), key2 : @"我的邀请码" }, @{ key1 : kImage(@"我的页设置"), key2 : @"设置" } ];
     
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.headerView;
