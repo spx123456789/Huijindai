@@ -75,7 +75,6 @@
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     tabBarController.viewControllers = @[ nav1, nav2 ];
     
-    
     self.window.rootViewController = tabBarController;
 }
 

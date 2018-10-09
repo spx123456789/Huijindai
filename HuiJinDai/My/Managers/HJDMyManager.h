@@ -13,16 +13,16 @@
 @interface HJDMyManager : NSObject
 
 //获取我的客户经理数据
-+ (void)getMyCustomerManagerWithCallBack:(void(^)(NSArray *arr))callback;
++ (void)getMyCustomerManagerWithCallBack:(void(^)(NSArray *arr, BOOL result))callback;
 
 //获取我的经纪人数据
-+ (void)getMyAgentWithCallBack:(void(^)(NSArray *arr))callback;
++ (void)getMyAgentWithCallBack:(void(^)(NSArray *arr, BOOL result))callback;
 
 //获取用户邀请码
-+ (void)getUserInviteCodeWithCallBack:(void(^)(NSArray *arr))callback;
++ (void)getUserInviteCodeWithCallBack:(void(^)(NSDictionary *dic, BOOL result))callback;
 
 //获取我的信息
-+ (void)getMyInfoWithCallBack:(void(^)(NSArray *arr))callback;
++ (void)getMyInfoWithCallBack:(void(^)(NSArray *arr, BOOL result))callback;
 
 //设置头像信息
 + (void)setMyAvatarWithImage:(UIImage *)image callBack:(void(^)(BOOL result))callback;

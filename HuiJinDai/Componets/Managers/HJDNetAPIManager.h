@@ -11,7 +11,7 @@
 
 #define kAPIMainURL @"http://hanhouxiong.hjxd.xiaoyutab.cn/api"
 #define kAPIURL(url) [NSString stringWithFormat:@"%@%@", kAPIMainURL, url]
-#define kAvatar(avatar) [NSString stringWithFormat:@"%@%@",kAPIMainURL, avatar]
+#define kAvatar(avatar) [NSString stringWithFormat:@"%@/%@",kAPIMainURL, avatar]
 
 typedef NS_ENUM(NSUInteger, NetworkMethod) {
     GET = 0,  // get请求

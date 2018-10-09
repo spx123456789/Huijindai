@@ -12,9 +12,9 @@
 #import "HJDMyAgentViewController.h"
 #import "HJDMyInviteCodeView.h"
 #import "HJDMySettingViewController.h"
+#import "HJDMyManager.h"
 #import "HJDNetAPIManager.h"
 #import "HJDUserDefaultsManager.h"
-#import "HJDUserModel.h"
 
 @interface HJDMyViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UITableView *tableView;
@@ -57,6 +57,7 @@ static NSString *key2 = @"title";
     self = [super init];
     if (self) {
         _userModel = (HJDUserModel *)[[HJDUserDefaultsManager shareInstance] loadObject:kUserModelKey];
+        _dataSource = @[ @{ key1 : kImage(@"我的页客户经理"), key2 : @"我的客户经理" }, @{ key1 : kImage(@"我的页经纪人"), key2 : @"我的经纪人" }, @{ key1 : kImage(@"我的页邀请码"), key2 : @"我的邀请码" }, @{ key1 : kImage(@"我的页设置"), key2 : @"设置" } ];
     }
     return self;
 }
@@ -73,9 +74,6 @@ static NSString *key2 = @"title";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    
-    self.dataSource = @[ @{ key1 : kImage(@"我的客户经理"), key2 : @"我的客户经理" }, @{ key1 : kImage(@"我的页经纪人"), key2 : @"我的经纪人" }, @{ key1 : kImage(@"我的页邀请码"), key2 : @"我的邀请码" }, @{ key1 : kImage(@"我的页设置"), key2 : @"设置" } ];
     
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.headerView;
@@ -112,35 +110,57 @@ static NSString *key2 = @"title";
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger userType = self.userModel.type.integerValue;
     switch (indexPath.row) {
         case 0: {
-            HJDMyCustomerManagerViewController *customerController = [[HJDMyCustomerManagerViewController alloc] init];
-            customerController.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:customerController animated:YES];
-        }
+            if (userType == HJDUserTypeChannel) {
+                HJDMyCustomerManagerViewController *customerController = [[HJDMyCustomerManagerViewController alloc] init];
+                customerController.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:customerController animated:YES];
+            } else {
+                [MBProgressHUD showError:@"无访问权限"];
+            }
             break;
+        }
         case 1: {
-            HJDMyAgentViewController *agentController = [[HJDMyAgentViewController alloc] init];
-            agentController.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:agentController animated:YES];
-        }
+            if (userType == HJDUserTypeChannel) {
+                HJDMyAgentViewController *agentController = [[HJDMyAgentViewController alloc] init];
+                agentController.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:agentController animated:YES];
+            } else {
+                [MBProgressHUD showError:@"无访问权限"];
+            }
             break;
+        }
         case 2: {
-            HJDMyInviteCodeView *inviteView = [[HJDMyInviteCodeView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-            inviteView.headImgView.image = kImage(@"邀请码头像");
-            inviteView.nameLabel.text = @"张思然";
-            inviteView.cityLabel.text = @"北京市";
-            inviteView.inviteCode = @"邀请码：ASDFR";
-            UIWindow *window = [UIApplication sharedApplication].keyWindow;
-            [window addSubview:inviteView];
-        }
+            if (userType == HJDUserTypeChannel) {
+                [MBProgressHUD showMessage:@"加载中..."];
+                [HJDMyManager getUserInviteCodeWithCallBack:^(NSDictionary *dic, BOOL result) {
+                    [MBProgressHUD hideHUD];
+                    if (result) {
+                        HJDMyInviteCodeView *inviteView = [[HJDMyInviteCodeView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+                        [inviteView.headImgView sd_setImageWithURL:[NSURL URLWithString:kAvatar(dic[@"images"])] placeholderImage:kImage(@"邀请码头像")];
+                        inviteView.nameLabel.text = dic[@"rename"];
+                        inviteView.cityLabel.text = dic[@"city"];
+                        inviteView.inviteCode = [NSString stringWithFormat:@"邀请码：%@", dic[@"code"]];
+                        UIWindow *window = [UIApplication sharedApplication].keyWindow;
+                        [window addSubview:inviteView];
+                    } else {
+                        [MBProgressHUD showError:@"请求失败"];
+                    }
+                }];
+                
+            } else {
+                [MBProgressHUD showError:@"无访问权限"];
+            }
             break;
+        }
         case 3: {
             HJDMySettingViewController *settingController = [[HJDMySettingViewController alloc] init];
             settingController.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:settingController animated:YES];
-        }
             break;
+        }
         default:
             break;
     }

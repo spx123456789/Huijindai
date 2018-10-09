@@ -12,27 +12,43 @@
 
 @implementation HJDMyManager
 
-+ (void)getMyCustomerManagerWithCallBack:(void (^)(NSArray *))callback {
-    [[HJDNetAPIManager sharedManager] requestWithPath:@"/User/get_customer" requestParams:nil networkMethod:GET callback:^(id data, NSError *error) {
-        
++ (void)getMyCustomerManagerWithCallBack:(void (^)(NSArray *, BOOL))callback {
+    [[HJDNetAPIManager sharedManager] requestWithPath:@"/User/get_customer" requestParams:nil networkMethod:GET callback:^(NSDictionary *data, NSError *error) {
+        if (error) {
+            callback(nil, NO);
+        } else {
+            callback([data getObjectByPath:@"data/list"], YES);
+        }
     }];
 }
 
-+ (void)getMyAgentWithCallBack:(void (^)(NSArray *))callback {
-    [[HJDNetAPIManager sharedManager] requestWithPath:@"/User/get_agent" requestParams:nil networkMethod:GET callback:^(id data, NSError *error) {
-        
++ (void)getMyAgentWithCallBack:(void (^)(NSArray *, BOOL))callback {
+    [[HJDNetAPIManager sharedManager] requestWithPath:@"/User/get_agent" requestParams:nil networkMethod:GET callback:^(NSDictionary *data, NSError *error) {
+        if (error) {
+            callback(nil, NO);
+        } else {
+            callback([data getObjectByPath:@"data/list"], YES);
+        }
     }];
 }
 
-+ (void)getUserInviteCodeWithCallBack:(void (^)(NSArray *))callback {
-    [[HJDNetAPIManager sharedManager] requestWithPath:@"/User/get_qrcode" requestParams:nil networkMethod:GET callback:^(id data, NSError *error) {
-        
++ (void)getUserInviteCodeWithCallBack:(void (^)(NSDictionary *, BOOL))callback {
+    [[HJDNetAPIManager sharedManager] requestWithPath:@"/User/get_qrcode" requestParams:nil networkMethod:GET callback:^(NSDictionary *data, NSError *error) {
+        if (error) {
+            callback(nil, NO);
+        } else {
+            callback([data getObjectByPath:@"data"], YES);
+        }
     }];
 }
 
-+ (void)getMyInfoWithCallBack:(void (^)(NSArray *))callback {
++ (void)getMyInfoWithCallBack:(void (^)(NSArray *, BOOL))callback {
     [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/User/get_info") requestParams:nil networkMethod:GET callback:^(id data, NSError *error) {
-        
+        if (error) {
+            callback(nil, NO);
+        } else {
+            callback(data, YES);
+        }
     }];
 }
 
