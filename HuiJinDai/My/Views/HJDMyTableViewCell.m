@@ -123,6 +123,7 @@
 - (UIImageView *)headImgView {
     if (!_headImgView) {
         _headImgView = [[UIImageView alloc] init];
+        _headImgView.userInteractionEnabled = YES;
     }
     return _headImgView;
 }

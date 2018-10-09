@@ -43,6 +43,8 @@
     NSNumber *isLogin = [[NSUserDefaults standardUserDefaults] objectForKey:HJDLoginSuccess];
     //判断是否登录
     if (isLogin.integerValue == 1) {
+        HJDUserModel *userModel = (HJDUserModel *)[[HJDUserDefaultsManager shareInstance] loadObject:kUserModelKey];
+        [[HJDNetAPIManager sharedManager] setAuthorization:userModel.token];
         [self enterHomeController];
     } else {
         UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:[[HJDLoginViewController alloc] init]];
@@ -51,7 +53,7 @@
     
     
 //    //test
-//    [[HJDNetAPIManager sharedManager] setAuthorization:@"278500137e0c198da65f226095e58666"];
+//
 //
 //    [[HJDNetAPIManager sharedManager] requestWithPath:@"/User/get_info" requestParams:nil networkMethod:GET  callback:^(id data, NSError *error) {
 //        if (!error) {

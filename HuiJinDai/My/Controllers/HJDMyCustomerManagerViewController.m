@@ -23,7 +23,7 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 60 - 64) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 64) style:UITableViewStylePlain];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.backgroundColor = kRGB_Color(244, 244, 244);
@@ -43,7 +43,7 @@
 
 - (HJDCustomerServiceView *)customServiceView {
     if (!_customServiceView) {
-        _customServiceView = [[HJDCustomerServiceView alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 70, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 60, 140, 30)];
+        _customServiceView = [[HJDCustomerServiceView alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 70, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight, 140, 30)];
         _customServiceView.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
     }
     return _customServiceView;
@@ -62,10 +62,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.view.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
+    self.dataSource = [NSMutableArray array];
     
-    NSArray *arr = @[ ];
-    self.dataSource = [NSMutableArray arrayWithArray:arr];
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight - 170, kScreenWidth, 170)];
+    bgView.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
+    [self.view addSubview:bgView];
     
     [self.view addSubview:self.searchView];
     [self.view addSubview:self.tableView];
@@ -75,7 +76,8 @@
     [HJDMyManager getMyCustomerManagerWithCallBack:^(NSArray *arr, BOOL result) {
         [MBProgressHUD hideHUD];
         if (result) {
-            
+            [self.dataSource addObjectsFromArray:arr];
+            [self.tableView reloadData];
         } else {
             [MBProgressHUD showError:@"请求失败"];
         }
@@ -120,7 +122,8 @@
 }
 
 - (void)searchView:(HJDMyNavTextFieldSearchView *)searchView clearButton:(id)sender {
-    
+    [self.dataSource removeAllObjects];
+    [self.tableView reloadData];
 }
 
 - (void)searchView:(HJDMyNavTextFieldSearchView *)searchView keyWord:(NSString *)keyWord sureButton:(id)sender {

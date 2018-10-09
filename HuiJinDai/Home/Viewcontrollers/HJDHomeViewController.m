@@ -16,12 +16,15 @@
 #import "HJDMessageViewController.h"
 #import "HJDHomeRoomDiDaiViewController.h"
 #import "HJDHomeManager.h"
+#import "HJDUserModel.h"
+#import "HJDUserDefaultsManager.h"
 
 @interface HJDHomeViewController ()<UITableViewDelegate, UITableViewDataSource, HKScrollViewNetDelegate, HJDHomeTableViewCellDelegate>
 @property(strong, nonatomic) UITableView *tableView;
 @property(strong, nonatomic) NSMutableArray *dataSource;
 @property(strong, nonatomic) HKScrollView *netWorkScrollView;
 @property(nonatomic, strong) NSMutableArray *imageArray;
+@property(nonatomic, strong) HJDUserModel *userModel;
 @end
 
 @implementation HJDHomeViewController
@@ -39,7 +42,7 @@
 
 - (HKScrollView *)netWorkScrollView {
     if (!_netWorkScrollView) {
-        CGFloat width = self.view.frame.size.width;
+        CGFloat width = kScreenWidth;
         CGFloat height = 304 * width / 720;
         _netWorkScrollView = [[HKScrollView alloc]initWithFrame:CGRectMake(0, 0, width, height) WithNetImages:@[ @"", @"", @"" ]];
         _netWorkScrollView.AutoScrollDelay = 2;
@@ -52,7 +55,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.userType = HJDUserTypeAgent;
+        _userModel = (HJDUserModel *)[[HJDUserDefaultsManager shareInstance] loadObject:kUserModelKey];
     }
     return self;
 }
@@ -65,7 +68,17 @@
     [self setupSubViews];
     
     [HJDHomeManager getHomeBannerCallBack:^(NSArray *data, BOOL result) {
-        
+        /*
+         {
+         click = "";
+         src = "../images/banner_default.png";
+         },
+         {
+         click = "http://baidu.com";
+         src = "../images/banner_default_2.png";
+         }
+         */
+        //kHJDImage(@"");
     }];
 }
 
@@ -172,9 +185,8 @@
 - (NSMutableArray *)dataSource{
     if (!_dataSource) {
         _dataSource = [NSMutableArray new];
-        switch (self.userType) {
+        switch (self.userModel.type.integerValue) {
                 case HJDUserTypeManager: {
-                    
                     HJDHomeModel * model = [HJDHomeModel new];
                     model.title = @"房抵贷";
                     model.imageName = @"首页房抵贷";

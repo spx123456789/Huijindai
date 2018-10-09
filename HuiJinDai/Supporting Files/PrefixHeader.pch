@@ -33,6 +33,9 @@ typedef enum : NSUInteger {
 //登录 1  未登录 2
 #define HJDLoginSuccess @"HJDLoginSuccess"
 
+#define kHJDImage(avatar) [NSString stringWithFormat:@"http://hanhouxiong.hjxd.xiaoyutab.cn/upload/%@", avatar]
+//http://hanhouxiong.hjxd.xiaoyutab.cn/upload/../images/banner_default.png
+
 #pragma mark - 字体宏
 #define kFont9 [UIFont systemFontOfSize:9]
 #define kFont10 [UIFont systemFontOfSize:10]

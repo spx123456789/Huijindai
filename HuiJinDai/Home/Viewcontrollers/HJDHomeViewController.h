@@ -11,6 +11,4 @@
 
 @interface HJDHomeViewController : HJDBaseViewController
 
-@property (nonatomic, assign) HJDUserType userType;
-
 @end

@@ -13,6 +13,12 @@
 
 + (void)getHomeBannerCallBack:(void(^)(NSArray *data, BOOL result))callBack;
 
++ (void)getOrderAuditListWithKeyWord:(NSString *)keyWord callBack:(void(^)(NSArray *data, BOOL result))callBack;
+
++ (void)getOrderAuditListChannelOrAgentWithUid:(NSString *)uid callBack:(void(^)(NSArray *data, BOOL result))callBack;
+
++ (void)getOrderManageListWithKeyWord:(NSString *)keyWord callBack:(void(^)(NSDictionary *data, BOOL result))callBack;
+
 + (NSArray *)getOrderListArray;
 
 + (NSArray *)getOrderProcessArray;

@@ -53,15 +53,18 @@
 }
 
 + (void)setMyAvatarWithImage:(UIImage *)image callBack:(void (^)(BOOL))callback {
-    [[HJDNetAPIManager sharedManager] requestWithMethod:POST url:kAPIURL(@"/User/set_avatar") parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        NSData *photo = UIImageJPEGRepresentation(image, 1);
-        [formData appendPartWithFileData:photo name:@"avatar" fileName:[NSString stringWithFormat:@"%@.jpg", @"000"] mimeType:@"image/jpg"];
-    } progress:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+    NSData *photo = UIImageJPEGRepresentation(image, 1);
+
+    [[HJDNetAPIManager sharedManager] POST:kAPIURL(@"/User/set_avatar") parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithFileData:photo name:@"avatar" fileName:@"avatar" mimeType:@"image/jpg"];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
         
-    } success:^(NSURLSessionDataTask *task, id responseObject) {
-        
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        callback(YES);
+        NSLog(@"===success %@", responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        callback(NO);
+        NSLog(@"===%@", error.userInfo);
     }];
 }
 @end

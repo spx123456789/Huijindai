@@ -49,6 +49,16 @@
     NSArray *arr = [HJDHomeManager getOrderListArray];
     self.dataSource = [NSMutableArray arrayWithArray:arr];
     [self.tableView reloadData];
+    
+    [MBProgressHUD showMessage:@"正在加载..."];
+    [HJDHomeManager getOrderAuditListChannelOrAgentWithUid:self.uid callBack:^(NSArray *data, BOOL result) {
+        [MBProgressHUD hideHUD];
+        if (result) {
+            
+        } else {
+            [MBProgressHUD showError:@"加载失败"];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

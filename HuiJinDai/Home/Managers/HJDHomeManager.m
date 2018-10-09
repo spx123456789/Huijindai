@@ -22,6 +22,40 @@
     }];
 }
 
++ (void)getOrderAuditListWithKeyWord:(NSString *)keyWord callBack:(void (^)(NSArray *, BOOL))callBack {
+    NSDictionary *param = nil;
+    if (keyWord != nil) {
+        param = @{ @"rename" : keyWord };
+    }
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Loan/get_shenhe") requestParams:param networkMethod:GET callback:^(NSDictionary *data, NSError *error) {
+        if (error) {
+            callBack(nil, NO);
+        } else {
+            callBack([data getObjectByPath:@"data/list"], YES);
+        }
+    }];
+}
+
++ (void)getOrderAuditListChannelOrAgentWithUid:(NSString *)uid callBack:(void (^)(NSArray *, BOOL))callBack {
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Loan/get_ulist") requestParams:@{ @"uid" : uid, @"status" : @"100" } networkMethod:GET callback:^(id data, NSError *error) {
+        
+    }];
+}
+
++ (void)getOrderManageListWithKeyWord:(NSString *)keyWord callBack:(void (^)(NSDictionary *, BOOL))callBack {
+    NSDictionary *param = nil;
+    if (keyWord != nil) {
+        param = @{ @"rename" : keyWord };
+    }
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Loan/manage") requestParams:param networkMethod:GET callback:^(NSDictionary *data, NSError *error) {
+        if (error) {
+            callBack(nil, NO);
+        } else {
+            callBack([data getObjectByPath:@"data"], YES);
+        }
+    }];
+}
+
 + (NSArray *)getOrderListArray {
     HJDOrderListModel *model = [[HJDOrderListModel alloc] init];
     model.orderNumber = @"20170912-00450";

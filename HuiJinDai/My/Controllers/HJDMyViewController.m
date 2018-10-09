@@ -16,11 +16,12 @@
 #import "HJDNetAPIManager.h"
 #import "HJDUserDefaultsManager.h"
 
-@interface HJDMyViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface HJDMyViewController ()<UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSArray *dataSource;
 @property(nonatomic, strong) HJDMyTableHeaderView *headerView;
 @property(nonatomic, strong) HJDUserModel *userModel;
+@property(nonatomic, strong) UIImagePickerController *imgPickerController;
 @end
 
 @implementation HJDMyViewController
@@ -40,17 +41,67 @@ static NSString *key2 = @"title";
     return _tableView;
 }
 
+- (UIImagePickerController *)imgPickerController {
+    if (!_imgPickerController) {
+        _imgPickerController = [[UIImagePickerController alloc] init];
+        _imgPickerController.delegate = self;
+        _imgPickerController.allowsEditing = YES;
+    }
+    return _imgPickerController;
+}
+
 - (HJDMyTableHeaderView *)headerView {
     if (!_headerView) {
         _headerView = [[HJDMyTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 340)];
-        NSString *avatar = kAvatar(self.userModel.avatar);
+        NSString *avatar = kHJDImage(self.userModel.avatar);
         if (self.userModel.avatar == nil || self.userModel.avatar.length == 0) {
             avatar = @"";
         }
         [_headerView.headImgView sd_setImageWithURL:[NSURL URLWithString:avatar] placeholderImage:kImage(@"我的默认头像")];
         _headerView.nameLabel.text = self.userModel.rename;
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
+        [_headerView.headImgView addGestureRecognizer:tap];
     }
     return _headerView;
+}
+
+- (void)tapGesture:(UITapGestureRecognizer *)tap {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *photoAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            self.imgPickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+            [self presentViewController:self.imgPickerController animated:YES completion:nil];
+        } else {
+            UIAlertController *aler = [UIAlertController alertControllerWithTitle:@"提示" message:@"请在设置-->隐私-->相机，中开启本应用的相机访问权限！" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { }];
+            [aler addAction:okAction];
+            [self presentViewController:aler animated:YES completion:nil];
+        }
+    }];
+    
+    UIAlertAction *albumAction = [UIAlertAction actionWithTitle:@"从手机相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]) {
+            self.imgPickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            [self presentViewController:self.imgPickerController animated:YES completion:nil];
+        } else {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请在设置-->隐私-->相机，中开启本应用的相册访问权限！" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { }];
+            [alert addAction:okAction];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"Cancel Action");
+    }];
+    
+    [alertController addAction:photoAction];
+    [alertController addAction:albumAction];
+    [alertController addAction:cancelAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (instancetype)init {
@@ -134,12 +185,12 @@ static NSString *key2 = @"title";
         }
         case 2: {
             if (userType == HJDUserTypeChannel) {
-                [MBProgressHUD showMessage:@"加载中..."];
+                [MBProgressHUD showMessage:@"正在加载..."];
                 [HJDMyManager getUserInviteCodeWithCallBack:^(NSDictionary *dic, BOOL result) {
                     [MBProgressHUD hideHUD];
                     if (result) {
                         HJDMyInviteCodeView *inviteView = [[HJDMyInviteCodeView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-                        [inviteView.headImgView sd_setImageWithURL:[NSURL URLWithString:kAvatar(dic[@"images"])] placeholderImage:kImage(@"邀请码头像")];
+                        [inviteView.headImgView sd_setImageWithURL:[NSURL URLWithString:kHJDImage(dic[@"images"])] placeholderImage:kImage(@"邀请码头像")];
                         inviteView.nameLabel.text = dic[@"rename"];
                         inviteView.cityLabel.text = dic[@"city"];
                         inviteView.inviteCode = [NSString stringWithFormat:@"邀请码：%@", dic[@"code"]];
@@ -171,6 +222,35 @@ static NSString *key2 = @"title";
         return 51.f;
     }
     return 58.f;
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(nonnull NSDictionary<NSString *,id> *)info {
+    [picker dismissViewControllerAnimated:YES completion:^{
+        NSString *mediaType = info[UIImagePickerControllerMediaType];
+        if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
+            UIImage *theImage = info[UIImagePickerControllerEditedImage];
+            //NSURL *imageUrl = info[UIImagePickerControllerImageURL];
+            [self uploadImage:theImage];
+        }
+    }];
+    
+}
+
+- (void)uploadImage:(UIImage *)head {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [MBProgressHUD showMessage:@"正在上传..."];
+        [HJDMyManager setMyAvatarWithImage:head callBack:^(BOOL result) {
+            [MBProgressHUD hideHUD];
+            if (!result) {
+                [MBProgressHUD showError:@"上传失败"];
+            }
+        }];
+    });
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

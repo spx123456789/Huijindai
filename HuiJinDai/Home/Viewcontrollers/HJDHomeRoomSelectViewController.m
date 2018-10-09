@@ -126,8 +126,6 @@
     view.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
     self.tableView.tableHeaderView = view;
     [self.view addSubview:self.tableView];
-    
-    [self setRightNavigationButton:@"确定" backImage:nil highlightedImage:nil frame:CGRectMake(0, 0, 44, 44)];
 }
 
 - (void)didReceiveMemoryWarning {

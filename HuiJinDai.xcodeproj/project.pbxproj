@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16095A54216D04F10013D137 /* HJDHomeLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 16095A53216D04F10013D137 /* HJDHomeLocationManager.m */; };
 		162904D42140181300AC151D /* HJDHomeOrderManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 162904D32140181300AC151D /* HJDHomeOrderManageViewController.m */; };
 		1630C1A4215BD9DF004AA211 /* HJDHomeQueryValueStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1630C1A3215BD9DF004AA211 /* HJDHomeQueryValueStatusViewController.m */; };
 		163D4DB4214543E90012CB53 /* HJDHomeAuditTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 163D4DB3214543E90012CB53 /* HJDHomeAuditTableViewCell.m */; };
-		163D4DB7214549B80012CB53 /* HJDHomeNavSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 163D4DB6214549B80012CB53 /* HJDHomeNavSearchView.m */; };
 		163D4DBD21455F080012CB53 /* HJDMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 163D4DBC21455F080012CB53 /* HJDMessageViewController.m */; };
 		163D4DC021455F3D0012CB53 /* HJDMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 163D4DBF21455F3D0012CB53 /* HJDMessageTableViewCell.m */; };
 		167C6700214FE52B00F2F2DE /* HJDHomeOrderApprovedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 167C66FF214FE52B00F2F2DE /* HJDHomeOrderApprovedView.m */; };
@@ -70,7 +70,6 @@
 		16EDD30A213C06DC00E21AB2 /* HJDMySettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD305213C06DC00E21AB2 /* HJDMySettingViewController.m */; };
 		16EDD30C213C06DC00E21AB2 /* HJDMyCustomerManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD308213C06DC00E21AB2 /* HJDMyCustomerManagerViewController.m */; };
 		16EDD316213C06E600E21AB2 /* HJDMyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD311213C06E600E21AB2 /* HJDMyTableViewCell.m */; };
-		16EDD317213C06E600E21AB2 /* HJDMySearchFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD312213C06E600E21AB2 /* HJDMySearchFieldView.m */; };
 		16EDD318213C06E600E21AB2 /* HJDMyAgentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD314213C06E600E21AB2 /* HJDMyAgentTableViewCell.m */; };
 		16EDD31B213C06EF00E21AB2 /* HJDMyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD31A213C06EF00E21AB2 /* HJDMyManager.m */; };
 		16EDD31F213C074A00E21AB2 /* HJDMyAgentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD31D213C074A00E21AB2 /* HJDMyAgentModel.m */; };
@@ -215,14 +214,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		16095A52216D04F10013D137 /* HJDHomeLocationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeLocationManager.h; sourceTree = "<group>"; };
+		16095A53216D04F10013D137 /* HJDHomeLocationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeLocationManager.m; sourceTree = "<group>"; };
 		162904D22140181300AC151D /* HJDHomeOrderManageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeOrderManageViewController.h; sourceTree = "<group>"; };
 		162904D32140181300AC151D /* HJDHomeOrderManageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeOrderManageViewController.m; sourceTree = "<group>"; };
 		1630C1A2215BD9DF004AA211 /* HJDHomeQueryValueStatusViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeQueryValueStatusViewController.h; sourceTree = "<group>"; };
 		1630C1A3215BD9DF004AA211 /* HJDHomeQueryValueStatusViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeQueryValueStatusViewController.m; sourceTree = "<group>"; };
 		163D4DB2214543E90012CB53 /* HJDHomeAuditTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeAuditTableViewCell.h; sourceTree = "<group>"; };
 		163D4DB3214543E90012CB53 /* HJDHomeAuditTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeAuditTableViewCell.m; sourceTree = "<group>"; };
-		163D4DB5214549B80012CB53 /* HJDHomeNavSearchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeNavSearchView.h; sourceTree = "<group>"; };
-		163D4DB6214549B80012CB53 /* HJDHomeNavSearchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeNavSearchView.m; sourceTree = "<group>"; };
 		163D4DBB21455F080012CB53 /* HJDMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDMessageViewController.h; sourceTree = "<group>"; };
 		163D4DBC21455F080012CB53 /* HJDMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDMessageViewController.m; sourceTree = "<group>"; };
 		163D4DBE21455F3D0012CB53 /* HJDMessageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDMessageTableViewCell.h; sourceTree = "<group>"; };
@@ -335,8 +334,6 @@
 		16EDD30E213C06E600E21AB2 /* HJDMyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJDMyTableViewCell.h; sourceTree = "<group>"; };
 		16EDD30F213C06E600E21AB2 /* HJDMyAgentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJDMyAgentTableViewCell.h; sourceTree = "<group>"; };
 		16EDD311213C06E600E21AB2 /* HJDMyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJDMyTableViewCell.m; sourceTree = "<group>"; };
-		16EDD312213C06E600E21AB2 /* HJDMySearchFieldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJDMySearchFieldView.m; sourceTree = "<group>"; };
-		16EDD313213C06E600E21AB2 /* HJDMySearchFieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJDMySearchFieldView.h; sourceTree = "<group>"; };
 		16EDD314213C06E600E21AB2 /* HJDMyAgentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJDMyAgentTableViewCell.m; sourceTree = "<group>"; };
 		16EDD319213C06EF00E21AB2 /* HJDMyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJDMyManager.h; sourceTree = "<group>"; };
 		16EDD31A213C06EF00E21AB2 /* HJDMyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJDMyManager.m; sourceTree = "<group>"; };
@@ -582,6 +579,8 @@
 				1690803B213EC04400AA2575 /* HJDHomeManager.m */,
 				16A0CB902160D02000133DA7 /* HJDHomeRoomDiDaiManager.h */,
 				16A0CB912160D02000133DA7 /* HJDHomeRoomDiDaiManager.m */,
+				16095A52216D04F10013D137 /* HJDHomeLocationManager.h */,
+				16095A53216D04F10013D137 /* HJDHomeLocationManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -743,8 +742,6 @@
 				16A0CB992160DF3800133DA7 /* HJDMyNavTextFieldSearchView.m */,
 				16EDD30F213C06E600E21AB2 /* HJDMyAgentTableViewCell.h */,
 				16EDD314213C06E600E21AB2 /* HJDMyAgentTableViewCell.m */,
-				16EDD313213C06E600E21AB2 /* HJDMySearchFieldView.h */,
-				16EDD312213C06E600E21AB2 /* HJDMySearchFieldView.m */,
 				16EDD30E213C06E600E21AB2 /* HJDMyTableViewCell.h */,
 				16EDD311213C06E600E21AB2 /* HJDMyTableViewCell.m */,
 				169C07822141744900E9CDD0 /* HJDMyInviteCodeView.h */,
@@ -1026,8 +1023,6 @@
 				16EDD329213C176000E21AB2 /* HJDHomeOrderListTableViewCell.m */,
 				163D4DB2214543E90012CB53 /* HJDHomeAuditTableViewCell.h */,
 				163D4DB3214543E90012CB53 /* HJDHomeAuditTableViewCell.m */,
-				163D4DB5214549B80012CB53 /* HJDHomeNavSearchView.h */,
-				163D4DB6214549B80012CB53 /* HJDHomeNavSearchView.m */,
 				AA1CECB02145614000249692 /* HJDCalculatorTableViewCell.h */,
 				AA1CECB12145614000249692 /* HJDCalculatorTableViewCell.m */,
 				16B69953214E04970086920C /* HJDHomeOrderDetailTableViewCell.h */,
@@ -1384,6 +1379,7 @@
 				16A0CB952160DB8700133DA7 /* HJDHomeRoomSelectViewController.m in Sources */,
 				167C6700214FE52B00F2F2DE /* HJDHomeOrderApprovedView.m in Sources */,
 				1630C1A4215BD9DF004AA211 /* HJDHomeQueryValueStatusViewController.m in Sources */,
+				16095A54216D04F10013D137 /* HJDHomeLocationManager.m in Sources */,
 				16BDE863215C9621008EF899 /* HJDHomeDeclarationViewController.m in Sources */,
 				16B6994C214BE8110086920C /* HJDMessageManager.m in Sources */,
 				16B42D50215E659E00DE0D7A /* HJDUserDefaultsManager.m in Sources */,
@@ -1397,8 +1393,6 @@
 				16EDD330213C318100E21AB2 /* HJDHomeOrderAuditViewController.m in Sources */,
 				AAD24F7021394EA900298386 /* UITableView+HJD.m in Sources */,
 				AA1CECB22145614000249692 /* HJDCalculatorTableViewCell.m in Sources */,
-				163D4DB7214549B80012CB53 /* HJDHomeNavSearchView.m in Sources */,
-				16EDD317213C06E600E21AB2 /* HJDMySearchFieldView.m in Sources */,
 				16A0CB9B2160DF3800133DA7 /* HJDMyNavTextFieldSearchView.m in Sources */,
 				16B42D3D215DD65500DE0D7A /* NSDictionary+HJD.m in Sources */,
 				16BDE86B215D2C46008EF899 /* HJDNetAPIManager.m in Sources */,
