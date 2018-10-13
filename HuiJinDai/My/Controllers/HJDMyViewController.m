@@ -13,8 +13,8 @@
 #import "HJDMyInviteCodeView.h"
 #import "HJDMySettingViewController.h"
 #import "HJDMyManager.h"
-#import "HJDNetAPIManager.h"
 #import "HJDUserDefaultsManager.h"
+#import <MobileCoreServices/UTCoreTypes.h>
 
 @interface HJDMyViewController ()<UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property(nonatomic, strong) UITableView *tableView;

@@ -46,22 +46,18 @@
         HJDUserModel *userModel = (HJDUserModel *)[[HJDUserDefaultsManager shareInstance] loadObject:kUserModelKey];
         [[HJDNetAPIManager sharedManager] setAuthorization:userModel.token];
         [self enterHomeController];
+//        [[HJDNetAPIManager sharedManager] requestWithPath:@"/User/get_info" requestParams:nil networkMethod:GET  callback:^(id data, NSError *error) {
+//            if (!error) {
+//                HJDUserModel *userModel = [[HJDUserModel alloc] init];
+//                [userModel hjd_loadDataFromkeyValues:data];
+//                [[HJDUserDefaultsManager shareInstance] saveObject:userModel key:kUserModelKey];
+//            }
+//        }];
     } else {
         UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:[[HJDLoginViewController alloc] init]];
         self.window.rootViewController = navi;
     }
-    
-    
-//    //test
-//
-//
-//    [[HJDNetAPIManager sharedManager] requestWithPath:@"/User/get_info" requestParams:nil networkMethod:GET  callback:^(id data, NSError *error) {
-//        if (!error) {
-//            HJDUserModel *userModel = [[HJDUserModel alloc] init];
-//            [userModel hjd_loadDataFromkeyValues:data];
-//            [[HJDUserDefaultsManager shareInstance] saveObject:userModel key:kUserModelKey];
-//        }
-//    }];
+
     return YES;
 }
 

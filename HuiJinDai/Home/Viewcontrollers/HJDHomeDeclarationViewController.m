@@ -9,11 +9,18 @@
 #import "HJDHomeDeclarationViewController.h"
 #import "HJDHomeRoomDiDaiTableViewCell.h"
 #import "HJDCustomerServiceView.h"
+#import "HJDDeclarationModel.h"
+#import <MobileCoreServices/UTCoreTypes.h>
 
-@interface HJDHomeDeclarationViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface HJDHomeDeclarationViewController ()<UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate, HJDHomeRoomDiDaiPhotoTableViewCellDelegate>
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) HJDCustomerServiceView *customServiceView;
 @property(nonatomic, strong) UIButton *submitButton;
+@property(nonatomic, strong) UIPickerView *pickerView;
+@property(nonatomic, strong) UIImagePickerController *imgPickerController;
+@property(nonatomic, strong) HJDDeclarationModel *declarationModel;
+@property(nonatomic, strong) NSArray *pickerArray;
+@property(nonatomic, assign) NSInteger selectShowIndex;
 @end
 
 @implementation HJDHomeDeclarationViewController
@@ -52,8 +59,36 @@
     return _submitButton;
 }
 
+- (UIPickerView *)pickerView {
+    if (!_pickerView) {
+        _pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 150, kScreenWidth, 150)];
+        _pickerView.backgroundColor = kMainColor;
+        _pickerView.delegate = self;
+        _pickerView.dataSource = self;
+    }
+    return _pickerView;
+}
+
+- (UIImagePickerController *)imgPickerController {
+    if (!_imgPickerController) {
+        _imgPickerController = [[UIImagePickerController alloc] init];
+        _imgPickerController.delegate = self;
+        _imgPickerController.allowsEditing = YES;
+    }
+    return _imgPickerController;
+}
+
 - (void)submitButtonClick:(id)sender {
     
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _declarationModel = [[HJDDeclarationModel alloc] init];
+        _selectShowIndex = NSNotFound;
+    }
+    return self;
 }
 
 - (void)viewDidLoad {
@@ -80,43 +115,89 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)showPickerView {
+    [self.view addSubview:self.pickerView];
+}
+
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    switch (indexPath.row) {
+        case 0: {
+            self.selectShowIndex = indexPath.row;
+            self.pickerArray = @[ @"房屋抵押贷款", @"房屋抵押贷款（加案）", @"车辆抵押贷款" ];
+            [self showPickerView];
+            break;
+        }
+        case 6: {
+            self.selectShowIndex = indexPath.row;
+            self.pickerArray = @[ @"月", @"天" ];
+            [self showPickerView];
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.row) {
-        case 0:
-        case 1:
-        case 5:
-            return 44 + 4;
-            break;
-        case 2:
-        case 3:
-        case 4:
-        case 6:
-        case 7:
-        case 8:
-        case 9:
-            return 44;
-            break;
-        default:
-            return 4 + 44 + 1 + 16 + kPhotoHeight + 16;
-            break;
+    if (indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 5) {
+        return 44 + 4;
+    }
+    
+    NSInteger cellCount = 8;
+    if (self.declarationModel.loan_variety == HJDLoanVarietyHouse_2) {
+        cellCount = 9;
+    }
+    if (indexPath.row < cellCount) {
+        return 44;
+    } else {
+        NSInteger pictureCount = 0;
+        switch (indexPath.row - cellCount) {
+            case 0: {
+                pictureCount = self.declarationModel.idCardArray.count;
+                break;
+            }
+            case 1: {
+                pictureCount = self.declarationModel.bookArray.count;
+                break;
+            }
+            case 2: {
+                pictureCount = self.declarationModel.creditReportArray.count;
+                break;
+            }
+            case 3: {
+                pictureCount = self.declarationModel.marriageArray.count;
+                break;
+            }
+            case 4: {
+                pictureCount = self.declarationModel.houseArry.count;
+                break;
+            }
+            default:
+                break;
+        }
+        return 4 + 44 + 1 + 16 + kPhotoHeight * (pictureCount/3 + 1) + 8 * (pictureCount/3) + 16;
     }
 }
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10 + 5;
+    if (self.declarationModel.loan_variety == HJDLoanVarietyHouse_2) {
+        return 9 + 5;
+    }
+    return 8 + 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"HJDHomeRoomDiDaiTableViewCell";
     static NSString *cellPhotoIdentifier = @"HJDHomeRoomDiDaiPhotoTableViewCell";
     
-    if (indexPath.row < 10) {
+    NSInteger cellCount = 8;
+    if (self.declarationModel.loan_variety == HJDLoanVarietyHouse_2) {
+        cellCount = 9;
+    }
+    
+    if (indexPath.row < cellCount) {
         HJDHomeRoomDiDaiTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (cell == nil) {
             cell = [[HJDHomeRoomDiDaiTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
@@ -130,30 +211,31 @@
             cell = [[HJDHomeRoomDiDaiPhotoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellPhotoIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        switch (indexPath.row) {
-            case 10: {
+        cell.delegate  = self;
+        switch (indexPath.row - cellCount) {
+            case 0: {
                 cell.title = @"借款人身份证";
-                [cell addCellImageWithImageArray:@[ @"添加证件", @"添加证件" ]];
+                cell.imageArray = self.declarationModel.idCardArray;
                 break;
             }
-            case 11: {
+            case 1: {
                 cell.title = @"借款人户口本";
-                [cell addCellImageWithImageArray:@[ @"添加证件", @"添加证件" ]];
+                cell.imageArray = self.declarationModel.bookArray;
                 break;
             }
-            case 12: {
+            case 2: {
                 cell.title = @"借款人征信报告";
-                [cell addCellImageWithImageArray:@[ @"添加证件"]];
+                cell.imageArray = self.declarationModel.creditReportArray;
                 break;
             }
-            case 13: {
+            case 3: {
                 cell.title = @"借款人婚姻证明";
-                [cell addCellImageWithImageArray:@[ @"添加证件" ]];
+                cell.imageArray = self.declarationModel.marriageArray;
                 break;
             }
-            case 14: {
+            case 4: {
                 cell.title = @"房产证";
-                [cell addCellImageWithImageArray:@[ @"添加证件", @"添加证件" ]];
+                cell.imageArray = self.declarationModel.houseArry;
                 break;
             }
             default:
@@ -172,6 +254,14 @@
             cell.rightImgView.hidden = NO;
             cell.rightLabel.hidden = YES;
             cell.lineView.hidden = YES;
+            cell.fieldCanEdit = NO;
+            if (self.declarationModel.loan_variety == HJDLoanVarietyHouse) {
+                cell.textField.text = @"房屋抵押贷款";
+            } else if (self.declarationModel.loan_variety == HJDLoanVarietyHouse_2) {
+                cell.textField.text = @"房屋抵押贷款（加案）";
+            } else if (self.declarationModel.loan_variety == HJDLoanVarietyCar) {
+                cell.textField.text = @"车辆抵押贷款";
+            }
             break;
         }
         case 1: {
@@ -180,6 +270,7 @@
             cell.rightImgView.hidden = YES;
             cell.rightLabel.hidden = YES;
             cell.lineView.hidden = NO;
+            cell.textField.text = @"";
             break;
         }
         case 2: {
@@ -188,6 +279,7 @@
             cell.rightImgView.hidden = NO;
             cell.rightLabel.hidden = YES;
             cell.lineView.hidden = NO;
+            cell.fieldCanEdit = NO;
             break;
         }
         case 3: {
@@ -204,6 +296,7 @@
             cell.rightImgView.hidden = NO;
             cell.rightLabel.hidden = YES;
             cell.lineView.hidden = YES;
+            cell.fieldCanEdit = NO;
             break;
         }
         case 5: {
@@ -213,6 +306,7 @@
             cell.rightLabel.hidden = NO;
             cell.rightLabel.text = @"元";
             cell.lineView.hidden = NO;
+            cell.textField.text = self.declarationModel.loan_money;
             break;
         }
         case 6: {
@@ -221,37 +315,233 @@
             cell.rightImgView.hidden = NO;
             cell.rightLabel.hidden = YES;
             cell.lineView.hidden = NO;
+            cell.fieldCanEdit = NO;
+            if (self.declarationModel.loan_time_type == HJDLoanTimeDay) {
+                cell.textField.text = @"天";
+            } else if (self.declarationModel.loan_time_type == HJDLoanTimeMonth) {
+                cell.textField.text = @"月";
+            }
             break;
         }
         case 7: {
-            cell.leftLabel.text = @"天数";
-            cell.placeholderString = @"";
+            if (self.declarationModel.loan_time_type == HJDLoanTimeDay) {
+                cell.leftLabel.text = @"天数";
+                cell.rightLabel.text = @"天";
+            } else {
+                cell.leftLabel.text = @"月份";
+                cell.rightLabel.text = @"月";
+            }
+            cell.placeholderString = @"请填写";
             cell.rightImgView.hidden = YES;
             cell.rightLabel.hidden = NO;
-            cell.rightLabel.text = @"天";
             cell.lineView.hidden = NO;
+            cell.textField.text = self.declarationModel.loan_time;
             break;
         }
         case 8: {
-            cell.leftLabel.text = @"月份";
-            cell.placeholderString = @"";
-            cell.rightImgView.hidden = YES;
-            cell.rightLabel.hidden = NO;
-            cell.rightLabel.text = @"月";
-            cell.lineView.hidden = NO;
-            break;
-        }
-        case 9: {
             cell.leftLabel.text = @"一抵余额";
             cell.placeholderString = @"请填写";
             cell.rightImgView.hidden = YES;
             cell.rightLabel.hidden = NO;
-            cell.rightLabel.text = @"万元";
+            cell.rightLabel.text = @"元";
             cell.lineView.hidden = YES;
+            cell.textField.text = self.declarationModel.loan_first;
             break;
         }
         default:
             break;
     }
+}
+
+#pragma mark - HJDHomeRoomDiDaiPhotoTableViewCellDelegate
+- (void)photoCell:(HJDHomeRoomDiDaiPhotoTableViewCell *)photoCell clickDeleteButtonAtIndex:(NSInteger)index {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:photoCell];
+    
+    NSInteger cellCount = 8;
+    if (self.declarationModel.loan_variety == HJDLoanVarietyHouse_2) {
+        cellCount = 9;
+    }
+    NSArray *pictureArray = nil;
+    switch (indexPath.row - cellCount) {
+        case 0: {
+            pictureArray = self.declarationModel.idCardArray;
+            break;
+        }
+        case 1: {
+            pictureArray = self.declarationModel.bookArray;
+            break;
+        }
+        case 2: {
+            pictureArray = self.declarationModel.creditReportArray;
+            break;
+        }
+        case 3: {
+            pictureArray = self.declarationModel.marriageArray;
+            break;
+        }
+        case 4: {
+            pictureArray = self.declarationModel.houseArry;
+            break;
+        }
+        default:
+            break;
+    }
+    if (pictureArray != nil && index < pictureArray.count) {
+        NSMutableArray *mutPicture = [NSMutableArray arrayWithArray:pictureArray];
+        [mutPicture removeObjectAtIndex:index];
+        switch (indexPath.row - cellCount) {
+            case 0: {
+                self.declarationModel.idCardArray = mutPicture;
+                break;
+            }
+            case 1: {
+                self.declarationModel.bookArray = mutPicture;
+                break;
+            }
+            case 2: {
+                self.declarationModel.creditReportArray = mutPicture;
+                break;
+            }
+            case 3: {
+                self.declarationModel.marriageArray = mutPicture;
+                break;
+            }
+            case 4: {
+                self.declarationModel.houseArry = mutPicture;
+                break;
+            }
+            default:
+                break;
+        }
+        [self.tableView reloadData];
+    }
+}
+
+- (void)photoCell:(HJDHomeRoomDiDaiPhotoTableViewCell *)photoCell clickAddButton:(id)sender {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:photoCell];
+    self.selectShowIndex = indexPath.row;
+    [self showImagePickerController];
+}
+
+#pragma mark - UIPickerViewDataSource
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView*)pickerView {
+    return 1; // 返回1表明该控件只包含1列
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return self.pickerArray.count;
+}
+
+#pragma mark - UIPickerViewDelegate
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return [self.pickerArray objectAtIndex:row];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    if (self.selectShowIndex == 0) {
+        self.declarationModel.loan_variety = row + 1;
+        [self.tableView reloadData];
+    } else if (self.selectShowIndex == 6) {
+        self.declarationModel.loan_time_type = row + 1;
+        [self.tableView reloadData];
+    }
+    [pickerView removeFromSuperview];
+    self.pickerView = nil;
+}
+
+#pragma mark - 相册
+- (void)showImagePickerController {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *photoAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            self.imgPickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+            [self presentViewController:self.imgPickerController animated:YES completion:nil];
+        } else {
+            UIAlertController *aler = [UIAlertController alertControllerWithTitle:@"提示" message:@"请在设置-->隐私-->相机，中开启本应用的相机访问权限！" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { }];
+            [aler addAction:okAction];
+            [self presentViewController:aler animated:YES completion:nil];
+        }
+    }];
+    
+    UIAlertAction *albumAction = [UIAlertAction actionWithTitle:@"从手机相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]) {
+            self.imgPickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            [self presentViewController:self.imgPickerController animated:YES completion:nil];
+        } else {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请在设置-->隐私-->相机，中开启本应用的相册访问权限！" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { }];
+            [alert addAction:okAction];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"Cancel Action");
+    }];
+    
+    [alertController addAction:photoAction];
+    [alertController addAction:albumAction];
+    [alertController addAction:cancelAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(nonnull NSDictionary<NSString *,id> *)info {
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
+    NSString *mediaType = info[UIImagePickerControllerMediaType];
+    if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
+        NSInteger cellCount = 8;
+        if (self.declarationModel.loan_variety == HJDLoanVarietyHouse_2) {
+            cellCount = 9;
+        }
+        switch (self.selectShowIndex - cellCount) {
+            case 0: {
+                NSMutableArray *mut = [NSMutableArray arrayWithArray:self.declarationModel.idCardArray];
+                [mut addObject:info];
+                self.declarationModel.idCardArray = mut;
+                break;
+            }
+            case 1: {
+                NSMutableArray *mut = [NSMutableArray arrayWithArray:self.declarationModel.bookArray];
+                [mut addObject:info];
+                self.declarationModel.bookArray = mut;
+                break;
+            }
+            case 2: {
+                NSMutableArray *mut = [NSMutableArray arrayWithArray:self.declarationModel.creditReportArray];
+                [mut addObject:info];
+                self.declarationModel.creditReportArray = mut;
+                break;
+            }
+            case 3: {
+                NSMutableArray *mut = [NSMutableArray arrayWithArray:self.declarationModel.marriageArray];
+                [mut addObject:info];
+                self.declarationModel.marriageArray = mut;
+                break;
+            }
+            case 4: {
+                NSMutableArray *mut = [NSMutableArray arrayWithArray:self.declarationModel.houseArry];
+                [mut addObject:info];
+                self.declarationModel.houseArry = mut;
+                break;
+            }
+            default:
+                break;
+        }
+        [self.tableView reloadData];
+    }
+    
+}
+
+- (void)uploadImage:(UIImage *)head {
+    
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 @end

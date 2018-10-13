@@ -29,4 +29,10 @@ typedef void (^RoomDiDaiHttpCallback)(NSArray *data, BOOL result);
 
 //评值
 + (void)postRoomEvaluateWithModel:(HJDHomeRoomDiDaiModel *)model callBack:(RoomDiDaiHttpCallback)callback;
+
+//获取评值记录
++ (void)getRoomEvaluateListWithCallBack:(RoomDiDaiHttpCallback)callback;
+
+//工单详情
++ (void)getOrderDetailWithID:(NSString *)uid callBack:(RoomDiDaiHttpCallback)callback;
 @end

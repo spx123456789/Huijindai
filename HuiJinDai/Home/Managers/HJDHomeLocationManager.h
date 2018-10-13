@@ -8,6 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol HJDHomeLocationManagerDelegate<NSObject>
+- (void)locationManagerDidUpdateLocation:(NSString *)location;
+@end
+
 @interface HJDHomeLocationManager : NSObject
+
+@property(nonatomic, weak) id<HJDHomeLocationManagerDelegate> delegate;
+
++ (instancetype)sharedManager;
+
+- (void)startLocation;
 
 @end

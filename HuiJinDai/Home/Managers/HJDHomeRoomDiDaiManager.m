@@ -78,4 +78,20 @@
         }
     }];
 }
+
++ (void)getRoomEvaluateListWithCallBack:(RoomDiDaiHttpCallback)callback {
+    [[HJDNetAPIManager sharedManager] requestWithPath:@"/Assessment/get_list" requestParams:nil networkMethod:GET callback:^(id data, NSError *error) {
+        if (error) {
+            callback(nil, NO);
+        } else {
+            callback([data getObjectByPath:@"data/list"], YES);
+        }
+    }];
+}
+
++ (void)getOrderDetailWithID:(NSString *)uid callBack:(RoomDiDaiHttpCallback)callback {
+    [[HJDNetAPIManager sharedManager] requestWithPath:@"/Loan/get_info" requestParams:@{ @"loan_id" : uid } networkMethod:GET callback:^(id data, NSError *error) {
+        
+    }];
+}
 @end

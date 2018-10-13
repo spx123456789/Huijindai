@@ -11,10 +11,11 @@
 #import "HJDHomeRoomDiDaiTableViewCell.h"
 #import "HJDHomeCalculatorResultTableCell.h"
 #import "HJDHomeQueryValueResultViewController.h"
-#import "HJDHomeQueryValueStatusViewController.h"
+#import "HJDHomeQueryValueFailViewController.h"
 #import "HJDCustomerServiceView.h"
 #import "HJDHomeRoomSelectViewController.h"
 #import "HJDHomeRoomDiDaiPickerView.h"
+#import "HJDHomeRoomDiDaiManager.h"
 
 typedef enum : NSUInteger {
     HJDRomeQueryValue = 0,  //极速询值
@@ -87,8 +88,22 @@ typedef enum : NSUInteger {
 }
 
 - (void)queryValueButtonClick:(id)sender {
-    HJDHomeQueryValueResultViewController *controller = [[HJDHomeQueryValueResultViewController alloc] init];;
+    HJDHomeQueryValueResultViewController *controller = [[HJDHomeQueryValueResultViewController alloc] init];
     [self.navigationController pushViewController:controller animated:YES];
+    return;
+    
+    [MBProgressHUD showMessage:@"正在询值..."];
+    [HJDHomeRoomDiDaiManager postRoomEvaluateWithModel:self.roomModel callBack:^(NSArray *data, BOOL result) {
+        [MBProgressHUD hideHUD];
+        if (result) {
+            HJDHomeQueryValueResultViewController *controller = [[HJDHomeQueryValueResultViewController alloc] init];
+            controller.resultArray = [NSArray arrayWithArray:data];
+            [self.navigationController pushViewController:controller animated:YES];
+        } else {
+            HJDHomeQueryValueFailViewController *failController = [[HJDHomeQueryValueFailViewController alloc] init];
+            [self.navigationController pushViewController:failController animated:YES];
+        }
+    }];
 }
 
 - (instancetype)init {
@@ -96,6 +111,7 @@ typedef enum : NSUInteger {
     if (self) {
         self.selectType = HJDRomeQueryValue;
         self.roomModel = [[HJDHomeRoomDiDaiModel alloc] init];
+        self.dataSource = [NSMutableArray array];
     }
     return self;
 }
@@ -111,7 +127,9 @@ typedef enum : NSUInteger {
 
 - (void)reloadView {
     if (self.selectType == HJDRomeQueryValue) {
-        self.dataSource = [NSMutableArray arrayWithArray:@[ @"", @"", @"", @"", @"", @"", @"" ]];
+        [self.dataSource removeAllObjects];
+        [self.dataSource addObjectsFromArray:@[ @"", @"", @"", @"", @"", @"", @"" ]];
+        
         self.tableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 60);
         [self.view addSubview:self.tableView];
         [self.view addSubview:self.customServiceView];
@@ -121,7 +139,6 @@ typedef enum : NSUInteger {
         [footerView addSubview:self.queryValueButton];
         self.tableView.tableFooterView = footerView;
     } else {
-        self.dataSource = [NSMutableArray arrayWithArray:@[ @"", @"", @"" ]];
         self.tableView.frame = CGRectMake(0, 4, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 4);
         [self.view addSubview:self.tableView];
         self.customServiceView.hidden = YES;
@@ -139,7 +156,7 @@ typedef enum : NSUInteger {
     if (self.selectType == HJDRomeQueryValue) {
         
     } else {
-        HJDHomeQueryValueStatusViewController *statusController = [[HJDHomeQueryValueStatusViewController alloc] init];
+        HJDHomeQueryValueFailViewController *statusController = [[HJDHomeQueryValueFailViewController alloc] init];
         [self.navigationController pushViewController:statusController animated:YES];
     }
 }
@@ -190,15 +207,18 @@ typedef enum : NSUInteger {
                 cell = [[HJDHomeCalculatorResultTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
-            cell.titleLabel.text = @"询值编号：20170912-00450";
+            NSDictionary *dic = self.dataSource[indexPath.row];
+            cell.titleLabel.text = [NSString stringWithFormat:@"询值编号：%@", dic[@"no"]];
             cell.firstLabel.text = @"询值时间";
             cell.twoLabel.text = @"房产地址";
-            cell.firstLabel_1.text = @"2018-02-14 18:15";
-            cell.twoLabel_1.text = @"北京新世界家园";
+            cell.firstLabel_1.text = dic[@"ad_time"];
+            cell.twoLabel_1.text = dic[@"addr"];
             [cell setCellOfNumber:2];
             cell.statusLabel.hidden = NO;
             cell.nextImgView.hidden = NO;
-            if (indexPath.row % 2 == 0) {
+            
+            NSString *status = [NSString stringWithFormat:@"%@", dic[@"request"]];
+            if ([status isEqualToString:@"true"]) {
                 [cell setStatusLabelSuccess:YES];
             } else {
                 [cell setStatusLabelSuccess:NO];
@@ -285,9 +305,27 @@ typedef enum : NSUInteger {
 #pragma mark - HJDMessageSegmentViewDelegate
 - (void)segmentView:(HJDMessageSegmentView *)segmentView didSelectMessageType:(HJDMessageType)type {
     self.selectType = (NSUInteger)type;
-    //刷新数据
-    [self reloadView];
-    [self.tableView reloadData];
+    
+    if (self.selectType == HJDRomeQueryRecord) {
+        [self reloadView];
+        [self.dataSource removeAllObjects];
+        [self.tableView reloadData];
+        //请求数据
+        [MBProgressHUD showMessage:@"正在加载..."];
+        [HJDHomeRoomDiDaiManager getRoomEvaluateListWithCallBack:^(NSArray *data, BOOL result) {
+            [MBProgressHUD hideHUD];
+            if (result) {
+                [self.dataSource addObjectsFromArray:data];
+                [self.tableView reloadData];
+            } else {
+                [MBProgressHUD showError:@"加载失败"];
+            }
+        }];
+    } else {
+        //刷新数据
+        [self reloadView];
+        [self.tableView reloadData];
+    }
 }
 
 #pragma mark - HJDHomeRoomDiDaiTableViewCellDelegate

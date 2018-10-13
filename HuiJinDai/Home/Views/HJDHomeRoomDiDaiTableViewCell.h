@@ -30,7 +30,7 @@
 
 //报单 照片上传cell
 @class HJDHomeRoomDiDaiPhotoTableViewCell;
-@protocol HJDHomeRoomDiDaiPhotoTableViewCellDelegate
+@protocol HJDHomeRoomDiDaiPhotoTableViewCellDelegate<NSObject>
 - (void)photoCell:(HJDHomeRoomDiDaiPhotoTableViewCell *)photoCell clickDeleteButtonAtIndex:(NSInteger)index;
 - (void)photoCell:(HJDHomeRoomDiDaiPhotoTableViewCell *)photoCell clickAddButton:(id)sender;
 @end
@@ -38,6 +38,5 @@
 @interface HJDHomeRoomDiDaiPhotoTableViewCell : UITableViewCell
 @property(nonatomic, copy) NSString *title;
 @property(nonatomic, weak) id<HJDHomeRoomDiDaiPhotoTableViewCellDelegate> delegate;
-
-- (void)addCellImageWithImageArray:(NSArray *)imgArray;
+@property(nonatomic, strong) NSArray *imageArray;
 @end

@@ -1,21 +1,21 @@
 //
-//  HJDHomeQueryValueStatusViewController.m
+//  HJDHomeQueryValueFailViewController.m
 //  HuiJinDai
 //
 //  Created by 耿笑威 on 2018/9/26.
 //  Copyright © 2018年 shanpx. All rights reserved.
 //
 
-#import "HJDHomeQueryValueStatusViewController.h"
+#import "HJDHomeQueryValueFailViewController.h"
 #import "HJDHomeOrderDetailTableViewCell.h"
 
-@interface HJDHomeQueryValueStatusViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface HJDHomeQueryValueFailViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) UIButton *continueButton;
 @property(nonatomic, strong) UIButton *declarationBtn;
 @end
 
-@implementation HJDHomeQueryValueStatusViewController
+@implementation HJDHomeQueryValueFailViewController
 
 - (UITableView *)tableView {
     if (!_tableView) {

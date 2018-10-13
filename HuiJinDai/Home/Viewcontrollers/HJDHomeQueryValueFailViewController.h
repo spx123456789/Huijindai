@@ -1,5 +1,5 @@
 //
-//  HJDHomeQueryValueStatusViewController.h
+//  HJDHomeQueryValueFailViewController.h
 //  HuiJinDai
 //
 //  Created by 耿笑威 on 2018/9/26.
@@ -8,7 +8,6 @@
 
 #import "HJDBaseViewController.h"
 
-//询值成功 询值失败
-@interface HJDHomeQueryValueStatusViewController : HJDBaseViewController
+@interface HJDHomeQueryValueFailViewController : HJDBaseViewController
 
 @end

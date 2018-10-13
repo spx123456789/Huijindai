@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import "HJDUserDefaultsManager.h"
 #import "HJDUserModel.h"
+#import "HJDNetAPIManager.h"
 
 @interface HJDMySettingViewController ()<HJDCityPickerViewDelegate>
 @property(nonatomic, strong) TPKeyboardAvoidingScrollView *bgView;
@@ -115,6 +116,10 @@
 }
 
 - (void)logoutButtonClick:(id)selector {
+    
+    [[HJDNetAPIManager sharedManager] setAuthorization:nil];
+    [[NSUserDefaults standardUserDefaults] setObject:@(2) forKey:HJDLoginSuccess];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kUserModelKey];
    //退出登录 进入登录界面
     UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:[[HJDLoginViewController alloc] init]];
     [UIApplication sharedApplication].delegate.window.rootViewController = navi;

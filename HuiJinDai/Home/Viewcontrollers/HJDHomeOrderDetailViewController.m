@@ -11,6 +11,7 @@
 #import "HJDHomeOrderDetailPhotoCell.h"
 #import "HJDHomeOrderRefuseViewController.h"
 #import "HJDHomeOrderApprovedView.h"
+#import "HJDHomeRoomDiDaiManager.h"
 
 @interface HJDHomeOrderDetailViewController ()<UITableViewDelegate, UITableViewDataSource, HJDHomeOrderDetailButtonCellDelegate>
 @property(nonatomic, strong) UITableView *tableView;
@@ -58,6 +59,16 @@
     [self.view addSubview:self.tableView];
     self.topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 * 2 + 3 + 5);
     self.tableView.tableHeaderView = self.topView;
+    
+    [MBProgressHUD showMessage:@"正在加载..."];
+    [HJDHomeRoomDiDaiManager getOrderDetailWithID:@"" callBack:^(NSArray *data, BOOL result) {
+        [MBProgressHUD hideHUD];
+        if (result) {
+            
+        } else {
+            [MBProgressHUD showError:@"加载失败"];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

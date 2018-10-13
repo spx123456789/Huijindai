@@ -7,6 +7,7 @@
 //
 
 #import "HJDHomeRoomDiDaiTableViewCell.h"
+#import "HJDHomePhotoCollectionViewCell.h"
 
 @interface HJDHomeRoomDiDaiTableViewCell()<UITextFieldDelegate>
 @property(nonatomic, strong) UIView *bgView;
@@ -163,11 +164,12 @@
 @end
 
 #pragma mark - 报单 照片上传cell
-@interface HJDHomeRoomDiDaiPhotoTableViewCell()
+@interface HJDHomeRoomDiDaiPhotoTableViewCell()<UICollectionViewDelegate, UICollectionViewDataSource, HJDHomePhotoCollectionViewCellDelegate>
 @property(nonatomic, strong) UILabel *titleLabel;
 @property(nonatomic, strong) UIView *lineView;
 @property(nonatomic, strong) UIView *bgView;
 @property(nonatomic, strong) UIView *photoView;
+@property(nonatomic, strong) UICollectionView *collectionView;
 @end
 
 @implementation HJDHomeRoomDiDaiPhotoTableViewCell
@@ -203,6 +205,26 @@
     return _photoView;
 }
 
+- (UICollectionView *)collectionView {
+    if (!_collectionView) {
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        //设置item的行间距和列间距
+        layout.minimumInteritemSpacing = 8;
+        layout.minimumLineSpacing = 8;
+        //设置item的大小
+        layout.itemSize = CGSizeMake(kPhotoWidth, kPhotoHeight);
+        //设置每个分区的上左下右的内边距
+        layout.sectionInset = UIEdgeInsetsMake(16, 16, 16, 16);
+        
+        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 16 + kPhotoHeight + 16) collectionViewLayout:layout];
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        _collectionView.backgroundColor = [UIColor cyanColor];
+        [_collectionView registerClass:[HJDHomePhotoCollectionViewCell class] forCellWithReuseIdentifier:@"HJDHomePhotoCollectionViewCell"];
+    }
+    return _collectionView;
+}
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -211,6 +233,7 @@
         [self.bgView addSubview:self.titleLabel];
         [self.bgView addSubview:self.lineView];
         [self.bgView addSubview:self.photoView];
+        [self.photoView addSubview:self.collectionView];
         
         [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.bottom.equalTo(self.contentView);
@@ -232,7 +255,7 @@
         
         [self.photoView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.bottom.equalTo(self.bgView);
-            make.top.equalTo(self.lineView.mas_bottom).offset(16);
+            make.top.equalTo(self.lineView.mas_bottom).offset(0);
         }];
     }
     return self;
@@ -246,42 +269,54 @@
     self.titleLabel.attributedText = attributeStr;
 }
 
-- (void)addCellImageWithImageArray:(NSArray *)imgArray {
-    for (UIImageView *subView in self.photoView.subviews) {
-        [subView removeFromSuperview];
-    }
-    for (int k = 0; k < imgArray.count + 1; k++) {
-        UIImageView *imgView = [[UIImageView alloc] init];
-        imgView.userInteractionEnabled = YES;
-        if (k == 0) {
-            imgView.image = kImage(@"添加证件");
-            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
-            [imgView addGestureRecognizer:tap];
-        } else {
-            imgView.image = kImage(imgArray[k - 1]);
-            UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
-            deleteButton.tag = k;
-            deleteButton.frame = CGRectMake(kPhotoWidth - 15, -5, 20, 20);
-            deleteButton.layer.masksToBounds = YES;
-            deleteButton.layer.cornerRadius = 10.f;
-            [deleteButton setBackgroundImage:kImage(@"报单删除上传图片") forState:UIControlStateNormal];
-            [deleteButton addTarget:self action:@selector(deleteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-            [imgView addSubview:deleteButton];
-        }
-        imgView.frame = CGRectMake(16 + (kPhotoWidth + 8) * (k % 3), (kPhotoHeight + 8) * (k / 3), kPhotoWidth, kPhotoHeight);
-        [self.photoView addSubview:imgView];
+- (void)setImageArray:(NSArray *)imageArray {
+    _imageArray = imageArray;
+    CGFloat height = 16 + kPhotoHeight * (imageArray.count/3 + 1) + 8 * (imageArray.count/3) + 16;
+    self.collectionView.frame = CGRectMake(0, 0, kScreenWidth, height);
+    [self.collectionView reloadData];
+}
+
+#pragma mark - HJDHomePhotoCollectionViewCellDelegate
+- (void)photoCollectionCell:(HJDHomePhotoCollectionViewCell *)photoCollectionCell deleteButton:(id)sender {
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:photoCollectionCell];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(photoCell:clickDeleteButtonAtIndex:)]) {
+        [self.delegate photoCell:self clickDeleteButtonAtIndex:indexPath.row - 1];
     }
 }
 
-- (void)deleteButtonClick:(UIButton *)sender {
-    if (self.delegate) {
-        [self.delegate photoCell:self clickDeleteButtonAtIndex:sender.tag];
-    }
-}
-
-- (void)tapGesture:(id)sender {
-    if (self.delegate) {
+- (void)photoCollectionCell:(HJDHomePhotoCollectionViewCell *)photoCollectionCell clickImageView:(id)sender {
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:photoCollectionCell];
+    if (indexPath.item == 0 && self.delegate && [self.delegate respondsToSelector:@selector(photoCell:clickAddButton:)]) {
         [self.delegate photoCell:self clickAddButton:sender];
     }
 }
+
+#pragma mark - UICollectionViewDelegate
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.imageArray.count + 1;
+}
+
+#pragma mark - UICollectionViewDataSource
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *cellIndentifer = @"HJDHomePhotoCollectionViewCell";
+    HJDHomePhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIndentifer forIndexPath:indexPath];
+    cell.delegate = self;
+    if (indexPath.item == 0) {
+        cell.imageView.image = kImage(@"添加证件");
+        cell.deleteButton.hidden = YES;
+    } else {
+        NSDictionary *pictureInfo = self.imageArray[indexPath.item - 1];
+        cell.imageView.image = pictureInfo[UIImagePickerControllerEditedImage];
+        cell.deleteButton.hidden = NO;
+    }
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+
+}
+
 @end

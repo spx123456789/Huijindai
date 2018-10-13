@@ -247,10 +247,14 @@ static id AFJSONObjectByRemovingKeysWithNullValues(id JSONObject, NSJSONReadingO
     if (data.length == 0 || isSpace) {
         return nil;
     }
+    //test
+    NSString *teststr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
+    NSData *testData = [teststr dataUsingEncoding:NSUTF8StringEncoding];
     
     NSError *serializationError = nil;
     
-    id responseObject = [NSJSONSerialization JSONObjectWithData:data options:self.readingOptions error:&serializationError];
+    id responseObject = [NSJSONSerialization JSONObjectWithData:testData options:self.readingOptions error:&serializationError];
 
     if (!responseObject)
     {

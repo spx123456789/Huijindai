@@ -18,8 +18,10 @@
 #import "HJDHomeManager.h"
 #import "HJDUserModel.h"
 #import "HJDUserDefaultsManager.h"
+#import "HJDHomeLocationManager.h"
+#import "HJDHomeNavBarButton.h"
 
-@interface HJDHomeViewController ()<UITableViewDelegate, UITableViewDataSource, HKScrollViewNetDelegate, HJDHomeTableViewCellDelegate>
+@interface HJDHomeViewController ()<UITableViewDelegate, UITableViewDataSource, HKScrollViewNetDelegate, HJDHomeTableViewCellDelegate, HJDHomeLocationManagerDelegate>
 @property(strong, nonatomic) UITableView *tableView;
 @property(strong, nonatomic) NSMutableArray *dataSource;
 @property(strong, nonatomic) HKScrollView *netWorkScrollView;
@@ -67,7 +69,7 @@
     
     [self setupSubViews];
     
-    [HJDHomeManager getHomeBannerCallBack:^(NSArray *data, BOOL result) {
+    //[HJDHomeManager getHomeBannerCallBack:^(NSArray *data, BOOL result) {
         /*
          {
          click = "";
@@ -79,7 +81,14 @@
          }
          */
         //kHJDImage(@"");
-    }];
+    //}];
+    
+    HJDHomeLocationManager *locationManager = [HJDHomeLocationManager sharedManager];
+    locationManager.delegate = self;
+    [locationManager startLocation];
+    
+    //test
+    [self locationManagerDidUpdateLocation:@"齐齐哈尔"];
 }
 
 - (void)setupSubViews {
@@ -180,6 +189,16 @@
 
 }
 
+#pragma mark - HJDHomeLocationManagerDelegate
+- (void)locationManagerDidUpdateLocation:(NSString *)location {
+    //首页选择城市@3x
+    HJDHomeNavBarButton *btn = [[HJDHomeNavBarButton alloc] initWithFrame:CGRectMake(0, 00, 100, 44)];
+    btn.hjd_title = location;
+
+    UIBarButtonItem *leftBar = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    self.navigationItem.leftBarButtonItem = leftBar;
+
+}
 
 #pragma mark - getters && setters
 - (NSMutableArray *)dataSource{
