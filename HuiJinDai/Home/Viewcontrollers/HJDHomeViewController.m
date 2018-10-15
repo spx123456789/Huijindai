@@ -43,14 +43,14 @@
 }
 
 - (HKScrollView *)netWorkScrollView {
-    if (!_netWorkScrollView) {
+//    if (!_netWorkScrollView) {
         CGFloat width = kScreenWidth;
         CGFloat height = 304 * width / 720;
-        _netWorkScrollView = [[HKScrollView alloc]initWithFrame:CGRectMake(0, 0, width, height) WithNetImages:@[ @"", @"", @"" ]];
+        _netWorkScrollView = [[HKScrollView alloc]initWithFrame:CGRectMake(0, 0, width, height) WithNetImages:self.imageArray];
         _netWorkScrollView.AutoScrollDelay = 2;
         _netWorkScrollView.placeholderImage = [UIImage imageNamed:@"hk_timeline_image_loading"];
         _netWorkScrollView.netDelagate = self;
-    }
+//    }
     return _netWorkScrollView;
 }
 
@@ -66,22 +66,30 @@
     [super viewDidLoad];
     
     [self setNavTitle:@"首页"];
-    
+    self.imageArray = [NSMutableArray new];
+    self.dataSource ;
     [self setupSubViews];
     
-    //[HJDHomeManager getHomeBannerCallBack:^(NSArray *data, BOOL result) {
+    [HJDHomeManager getHomeBannerCallBack:^(NSArray *data, BOOL result) {
+        [self.imageArray removeAllObjects];
+        for (NSDictionary * dic in data) {
+            NSString * imageurl = [dic objectForKey:@"src"];
+            [self.imageArray addObject:kHJDImage(imageurl)];
+        }
+        self.tableView.tableHeaderView = self.netWorkScrollView ;
+        [self.tableView reloadData];
         /*
          {
          click = "";
          src = "../images/banner_default.png";
          },
          {
-         click = "http://baidu.com";
+         click = "http:baidu.com";
          src = "../images/banner_default_2.png";
          }
          */
-        //kHJDImage(@"");
-    //}];
+        kHJDImage(@"");
+    }];
     
     HJDHomeLocationManager *locationManager = [HJDHomeLocationManager sharedManager];
     locationManager.delegate = self;
@@ -105,7 +113,16 @@
 }
 
 - (void)refreshData {
-    
+    [HJDHomeManager getHomeBannerCallBack:^(NSArray *data, BOOL result) {
+        [self.imageArray removeAllObjects];
+        for (NSDictionary * dic in data) {
+            NSString * imageurl = [dic objectForKey:@"src"];
+            [self.imageArray addObject:kHJDImage(imageurl)];
+        }
+        self.tableView.tableHeaderView = self.netWorkScrollView ;
+        [self.tableView reloadData];
+        [self.tableView.mj_header endRefreshing];
+    }];
 }
 
 - (void)navigationRightButtonClicked:(UIButton *)sender {
