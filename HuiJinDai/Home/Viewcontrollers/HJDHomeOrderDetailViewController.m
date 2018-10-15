@@ -60,15 +60,15 @@
     self.topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 * 2 + 3 + 5);
     self.tableView.tableHeaderView = self.topView;
     
-    [MBProgressHUD showMessage:@"正在加载..."];
-    [HJDHomeRoomDiDaiManager getOrderDetailWithID:@"" callBack:^(NSArray *data, BOOL result) {
-        [MBProgressHUD hideHUD];
-        if (result) {
-            
-        } else {
-            [MBProgressHUD showError:@"加载失败"];
-        }
-    }];
+//    [MBProgressHUD showMessage:@"正在加载..."];
+//    [HJDHomeRoomDiDaiManager getOrderDetailWithID:@"" callBack:^(NSArray *data, BOOL result) {
+//        [MBProgressHUD hideHUD];
+//        if (result) {
+//
+//        } else {
+//            [MBProgressHUD showError:@"加载失败"];
+//        }
+//    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -116,6 +116,7 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             cell.titleLabel.text = @"照片信息";
+            cell.imgDataArray = @[ @[ @"", @"" ], @[ @"", @"", @"", @"" ], @[@"", @""]];
             return cell;
             break;
         }
@@ -126,6 +127,7 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             cell.titleLabel.text = @"工单流程";
+            cell.processArray = @[ @"", @"", @"" ];
             return cell;
             break;
         }
@@ -154,12 +156,21 @@
         case 1:
             return 44 + 1 + 16 + 14 * 7 + 12 * 6 + 16 + 4;
             break;
-        case 2:
-            return 44 + 1 + 4 + (12 + 12 + 17 + 8 + 14 + 4 + 12 + 12) + 16;
+        case 2: {
+            CGFloat collectionHeight = 44 + 1;
+            NSArray *imgDataArray = @[ @[ @"", @"" ], @[ @"", @"", @"", @"" ], @[@"", @""]];
+            for (NSArray *sectionArray in imgDataArray) {
+                collectionHeight += 30;
+                collectionHeight += (12 + kDetailPhotoHeight * (sectionArray.count/3 + 1) + 8 * (sectionArray.count/3));
+            }
+            return collectionHeight + 16;
             break;
-        case 3:
-            return 44 + 1 + 4 + (12 + 12 + 17 + 8 + 14 + 4 + 12 + 12) + 16;
+        }
+        case 3: {
+            CGFloat viewHeight = 12 + 12 + 17 + 8 + 14 + 4 + 12 + 12;
+            return 44 + 1 + 4 + (viewHeight * 3) + 16;
             break;
+        }
         default:
             return 49;
             break;

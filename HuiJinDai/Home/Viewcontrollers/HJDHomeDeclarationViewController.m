@@ -413,7 +413,7 @@
             default:
                 break;
         }
-        [self.tableView reloadData];
+        [self.tableView reloadRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
 
@@ -532,7 +532,8 @@
             default:
                 break;
         }
-        [self.tableView reloadData];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.selectShowIndex inSection:0];
+        [self.tableView reloadRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationFade];
     }
     
 }

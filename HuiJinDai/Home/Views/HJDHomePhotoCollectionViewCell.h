@@ -19,3 +19,7 @@
 @property(nonatomic, strong) UIButton *deleteButton;
 @property(nonatomic, weak) id<HJDHomePhotoCollectionViewCellDelegate> delegate;
 @end
+
+@interface HJDHomeCollectionReusableView : UICollectionReusableView
+@property(nonatomic, strong) UILabel *titleLabel;
+@end

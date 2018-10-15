@@ -64,3 +64,26 @@
     return self;
 }
 @end
+
+#pragma mark - HJDHomeCollectionReusableView
+@implementation HJDHomeCollectionReusableView
+
+- (UILabel *)titleLabel {
+    if (!_titleLabel) {
+        _titleLabel = [[UILabel alloc] init];
+        _titleLabel.textColor = kRGB_Color(0x99, 0x99, 0x99);
+        _titleLabel.font = kFont14;
+    }
+    return _titleLabel;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.titleLabel.frame = CGRectMake(16, 16, 200, 14);
+        [self addSubview:self.titleLabel];
+    }
+    return self;
+}
+
+@end

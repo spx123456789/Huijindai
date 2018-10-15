@@ -33,6 +33,9 @@ typedef void (^RoomDiDaiHttpCallback)(NSArray *data, BOOL result);
 //获取评值记录
 + (void)getRoomEvaluateListWithCallBack:(RoomDiDaiHttpCallback)callback;
 
+//获取评值信息
++ (void)getRoomEvaluateInfoWithXunid:(NSString *)xun_id callBack:(RoomDiDaiHttpCallback)callback;
+
 //工单详情
 + (void)getOrderDetailWithID:(NSString *)uid callBack:(RoomDiDaiHttpCallback)callback;
 @end

@@ -13,7 +13,7 @@
 @implementation HJDMyManager
 
 + (void)getMyCustomerManagerWithCallBack:(void (^)(NSArray *, BOOL))callback {
-    [[HJDNetAPIManager sharedManager] requestWithPath:@"/User/get_customer" requestParams:nil networkMethod:GET callback:^(NSDictionary *data, NSError *error) {
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/User/get_customer") requestParams:nil networkMethod:GET callback:^(NSDictionary *data, NSError *error) {
         if (error) {
             callback(nil, NO);
         } else {
@@ -23,7 +23,7 @@
 }
 
 + (void)getMyAgentWithCallBack:(void (^)(NSArray *, BOOL))callback {
-    [[HJDNetAPIManager sharedManager] requestWithPath:@"/User/get_agent" requestParams:nil networkMethod:GET callback:^(NSDictionary *data, NSError *error) {
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/User/get_agent") requestParams:nil networkMethod:GET callback:^(NSDictionary *data, NSError *error) {
         if (error) {
             callback(nil, NO);
         } else {
@@ -33,7 +33,7 @@
 }
 
 + (void)getUserInviteCodeWithCallBack:(void (^)(NSDictionary *, BOOL))callback {
-    [[HJDNetAPIManager sharedManager] requestWithPath:@"/User/get_qrcode" requestParams:nil networkMethod:GET callback:^(NSDictionary *data, NSError *error) {
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/User/get_qrcode") requestParams:nil networkMethod:GET callback:^(NSDictionary *data, NSError *error) {
         if (error) {
             callback(nil, NO);
         } else {

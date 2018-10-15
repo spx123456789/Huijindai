@@ -29,12 +29,12 @@
 
 //工单流程
 @interface HJDHomeOrderDetailProcessCell : HJDHomeOrderDetailTableViewCell
-
+@property(nonatomic, strong) NSArray *processArray;
 @end
 
 //询值结果
 @interface HJDHomeOrderDetailQueryValueResultCell : HJDHomeOrderDetailTableViewCell
-
+@property(nonatomic, strong) NSMutableArray *dataSource;
 @end
 
 @class HJDHomeOrderDetailButtonCell;

@@ -10,8 +10,8 @@
 #import "HJDMessageSegmentView.h"
 #import "HJDHomeRoomDiDaiTableViewCell.h"
 #import "HJDHomeCalculatorResultTableCell.h"
-#import "HJDHomeQueryValueResultViewController.h"
 #import "HJDHomeQueryValueFailViewController.h"
+#import "HJDHomeQueryValueResultViewController.h"
 #import "HJDCustomerServiceView.h"
 #import "HJDHomeRoomSelectViewController.h"
 #import "HJDHomeRoomDiDaiPickerView.h"
@@ -100,8 +100,7 @@ typedef enum : NSUInteger {
             controller.resultArray = [NSArray arrayWithArray:data];
             [self.navigationController pushViewController:controller animated:YES];
         } else {
-            HJDHomeQueryValueFailViewController *failController = [[HJDHomeQueryValueFailViewController alloc] init];
-            [self.navigationController pushViewController:failController animated:YES];
+            [MBProgressHUD showError:@"询值失败"];
         }
     }];
 }
@@ -156,7 +155,15 @@ typedef enum : NSUInteger {
     if (self.selectType == HJDRomeQueryValue) {
         
     } else {
+        NSDictionary *dic = self.dataSource[indexPath.row];
+        NSString *status = [NSString stringWithFormat:@"%@", dic[@"request"]];
         HJDHomeQueryValueFailViewController *statusController = [[HJDHomeQueryValueFailViewController alloc] init];
+        statusController.xun_id = dic[@"x_id"];
+        if ([status isEqualToString:@"true"]) {
+            statusController.isSuccess = YES;
+        } else {
+            statusController.isSuccess = NO;
+        }
         [self.navigationController pushViewController:statusController animated:YES];
     }
 }

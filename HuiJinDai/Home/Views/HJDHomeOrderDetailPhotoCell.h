@@ -8,6 +8,9 @@
 
 #import "HJDHomeOrderDetailTableViewCell.h"
 
-@interface HJDHomeOrderDetailPhotoCell : HJDHomeOrderDetailTableViewCell
+#define kDetailPhotoWidth (kScreenWidth - 16 * 2 - 8 * 2)/3.0
+#define kDetailPhotoHeight (83.0 / 110.0 * kDetailPhotoWidth)
 
+@interface HJDHomeOrderDetailPhotoCell : HJDHomeOrderDetailTableViewCell
+@property(nonatomic, strong) NSArray *imgDataArray;
 @end

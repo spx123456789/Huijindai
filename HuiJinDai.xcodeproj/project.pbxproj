@@ -823,8 +823,8 @@
 		16EDD31C213C074A00E21AB2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				16EDD31D213C074A00E21AB2 /* HJDMyAgentModel.m */,
 				16EDD31E213C074A00E21AB2 /* HJDMyAgentModel.h */,
+				16EDD31D213C074A00E21AB2 /* HJDMyAgentModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1363,7 +1363,6 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

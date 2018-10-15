@@ -6,9 +6,9 @@
 //  Copyright © 2018年 shanpx. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "HJDBaseModel.h"
 
-@interface HJDMyAgentModel : NSObject
-@property(nonatomic, copy) NSString *name;
+@interface HJDMyAgentModel : HJDBaseModel
+@property(nonatomic, copy) NSString *rename;
 @property(nonatomic, copy) NSString *phone;
 @end

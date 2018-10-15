@@ -94,6 +94,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *dic = self.dataSource[indexPath.row];
     HJDHomeOrderListViewController *listController = [[HJDHomeOrderListViewController alloc] init];
+    listController.uid = dic[@"uid"];
     [listController setNavTitle:[NSString stringWithFormat:@"%@", dic[@"rename"]]];
     [self.navigationController pushViewController:listController animated:YES];
 }

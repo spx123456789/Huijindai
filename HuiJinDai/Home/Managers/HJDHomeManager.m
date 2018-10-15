@@ -38,7 +38,11 @@
 
 + (void)getOrderAuditListChannelOrAgentWithUid:(NSString *)uid callBack:(void (^)(NSArray *, BOOL))callBack {
     [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Loan/get_ulist") requestParams:@{ @"uid" : uid, @"status" : @"100" } networkMethod:GET callback:^(id data, NSError *error) {
-        
+        if (error) {
+            callBack(nil, NO);
+        } else {
+            callBack([data getObjectByPath:@"data"], YES);
+        }
     }];
 }
 

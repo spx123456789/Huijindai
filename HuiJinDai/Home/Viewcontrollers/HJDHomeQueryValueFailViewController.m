@@ -8,9 +8,13 @@
 
 #import "HJDHomeQueryValueFailViewController.h"
 #import "HJDHomeOrderDetailTableViewCell.h"
+#import "HJDHomeRoomDiDaiManager.h"
+#import "HJDHomeQueryValueResultViewController.h"
+#import "HJDHomeDeclarationViewController.h"
 
 @interface HJDHomeQueryValueFailViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UITableView *tableView;
+@property(nonatomic, strong) NSMutableArray *dataSource;
 @property(nonatomic, strong) UIButton *continueButton;
 @property(nonatomic, strong) UIButton *declarationBtn;
 @end
@@ -60,11 +64,13 @@
 }
 
 - (void)continueButtonClick:(id)sender {
-    
+    HJDHomeQueryValueResultViewController *controller = [[HJDHomeQueryValueResultViewController alloc] init];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)declarationButtonClick:(id)sender {
-    
+    HJDHomeDeclarationViewController *controller = [[HJDHomeDeclarationViewController alloc] init];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)viewDidLoad {
@@ -83,6 +89,22 @@
     [bottomView addSubview:self.declarationBtn];
     
     self.tableView.tableFooterView = bottomView;
+    
+    [self loadData];
+}
+
+- (void)loadData {
+    [MBProgressHUD showMessage:@"正在加载..."];
+    [HJDHomeRoomDiDaiManager getRoomEvaluateInfoWithXunid:self.xun_id callBack:^(NSArray *data, BOOL result) {
+        [MBProgressHUD hideHUD];
+        if (result) {
+            self.dataSource = [NSMutableArray arrayWithObject:@[]];
+            [self.dataSource addObject:data];
+            [self.tableView reloadData];
+        } else {
+            [MBProgressHUD showError:@"加载失败"];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -99,9 +121,11 @@
         case 0:
             return 44 + 1 + 16 + 14 * 5 + 12 * 4 + 16 + 4;
             break;
-        case 1:
-            return 44 + 1 + 16 + 14 * 2 + 12 + 16 + 4;
+        case 1: {
+            NSArray *arr = self.dataSource[indexPath.row];
+            return 44 + 1 + (16 + 14 + 12 + 14 + 16) * arr.count + 4;
             break;
+        }
         default:
             return 49;
             break;
@@ -134,6 +158,7 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             cell.titleLabel.text = @"询值结果";
+            cell.dataSource = self.dataSource[indexPath.row];
             return cell;
             break;
         }

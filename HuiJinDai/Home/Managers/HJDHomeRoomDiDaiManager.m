@@ -80,7 +80,17 @@
 }
 
 + (void)getRoomEvaluateListWithCallBack:(RoomDiDaiHttpCallback)callback {
-    [[HJDNetAPIManager sharedManager] requestWithPath:@"/Assessment/get_list" requestParams:nil networkMethod:GET callback:^(id data, NSError *error) {
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Assessment/get_list") requestParams:nil networkMethod:GET callback:^(id data, NSError *error) {
+        if (error) {
+            callback(nil, NO);
+        } else {
+            callback([data getObjectByPath:@"data/list"], YES);
+        }
+    }];
+}
+
++ (void)getRoomEvaluateInfoWithXunid:(NSString *)xun_id callBack:(RoomDiDaiHttpCallback)callback {
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Assessment/get_price") requestParams:@{ @"xun_id" : xun_id } networkMethod:GET callback:^(id data, NSError *error) {
         if (error) {
             callback(nil, NO);
         } else {
@@ -90,7 +100,7 @@
 }
 
 + (void)getOrderDetailWithID:(NSString *)uid callBack:(RoomDiDaiHttpCallback)callback {
-    [[HJDNetAPIManager sharedManager] requestWithPath:@"/Loan/get_info" requestParams:@{ @"loan_id" : uid } networkMethod:GET callback:^(id data, NSError *error) {
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Loan/get_info") requestParams:@{ @"loan_id" : uid } networkMethod:GET callback:^(id data, NSError *error) {
         
     }];
 }

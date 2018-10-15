@@ -335,16 +335,35 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        UIView *view = [self createViewWithTitle:@"报单" subTitle:@"经纪人" process:@"报单提交" time:@"2016-02-03 15:30:20" hideTop:YES hideBottom:NO];
-        [self.bgView addSubview:view];
-        
-        [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.equalTo(self.bgView);
-            make.top.equalTo(self.lineView.mas_bottom).offset(4);
-            make.height.equalTo(@(12 + 12 + 17 + 8 + 14 + 4 + 12 + 12));
-        }];
+       
     }
     return self;
+}
+
+- (void)setProcessArray:(NSArray *)processArray {
+    _processArray = processArray;
+    CGFloat viewHeight = 12 + 12 + 17 + 8 + 14 + 4 + 12 + 12;
+    
+    UIView *firstView = nil;
+    for (int i = 0; i < processArray.count; i++) {
+        UIView *view = [self createViewWithTitle:@"报单" subTitle:@"经纪人" process:@"报单提交" time:@"2016-02-03 15:30:20" hideTop:(i == 0) hideBottom:(i == processArray.count - 1)];
+        [self.bgView addSubview:view];
+        
+        if (firstView == nil) {
+            [view mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.equalTo(self.bgView);
+                make.top.equalTo(self.lineView.mas_bottom).offset(4);
+                make.height.equalTo(@(viewHeight));
+            }];
+        } else {
+            [view mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.equalTo(self.bgView);
+                make.top.equalTo(firstView.mas_bottom);
+                make.height.equalTo(@(viewHeight));
+            }];
+        }
+        firstView = view;
+    }
 }
 
 - (UIView *)createViewWithTitle:(NSString *)title subTitle:(NSString *)subTitle process:(NSString *)process time:(NSString *)time hideTop:(BOOL)hideTop hideBottom:(BOOL)hideBottom {
@@ -396,7 +415,7 @@
     [topView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(mainView).offset(23.5);
         make.top.equalTo(mainView);
-        make.size.mas_equalTo(CGSizeMake(1, 24));
+        make.size.mas_equalTo(CGSizeMake(1, 26));
     }];
     
     [imgView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -453,43 +472,50 @@
 @end
 
 #pragma mark - 询值结果
-@interface HJDHomeOrderDetailQueryValueResultCell()
+@interface HJDHomeOrderDetailQueryValueResultSubCell : UITableViewCell
 @property(nonatomic, strong) UILabel *priceLabel;
 @property(nonatomic, strong) UILabel *priceLabel_1;
 @property(nonatomic, strong) UILabel *totalPriceLabel;
 @property(nonatomic, strong) UILabel *totalPriceLabel_1;
+@property(nonatomic, strong) UIView *lineView;
 @end
 
-@implementation HJDHomeOrderDetailQueryValueResultCell
+@implementation HJDHomeOrderDetailQueryValueResultSubCell
+
+- (UIView *)lineView {
+    if (!_lineView) {
+        _lineView = [[UIView alloc] init];
+        _lineView.backgroundColor = kLineColor;
+    }
+    return _lineView;
+}
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.priceLabel = [self createLeftLabelWithTitle:@"仁达单价："];
-        self.totalPriceLabel = [self createLeftLabelWithTitle:@"仁达总价："];
-        [self.bgView addSubview:self.priceLabel];
-        [self.bgView addSubview:self.totalPriceLabel];
+        self.priceLabel = [self createSubLeftLabelWithTitle:@"仁达单价："];
+        self.totalPriceLabel = [self createSubLeftLabelWithTitle:@"仁达总价："];
+        [self.contentView addSubview:self.priceLabel];
+        [self.contentView addSubview:self.totalPriceLabel];
         
-        self.priceLabel_1 = [self createRightLabel];
+        self.priceLabel_1 = [self createSubRightLabel];
         self.priceLabel_1.textColor = kMainColor;
-        self.priceLabel_1.font = [UIFont boldSystemFontOfSize:14];
-        [self.bgView addSubview:self.priceLabel_1];
+        [self.contentView addSubview:self.priceLabel_1];
         
-        self.totalPriceLabel_1 = [self createRightLabel];
+        self.totalPriceLabel_1 = [self createSubRightLabel];
         self.totalPriceLabel_1.textColor = kRGB_Color(0xff, 0x52, 0x52);
-        self.totalPriceLabel_1.font = [UIFont boldSystemFontOfSize:14];
-        [self.bgView addSubview:self.totalPriceLabel_1];
+        [self.contentView addSubview:self.totalPriceLabel_1];
         
         [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.bgView).offset(16);
-            make.top.equalTo(self.lineView.mas_bottom).offset(16);
+            make.left.equalTo(self.contentView).offset(16);
+            make.top.equalTo(self.contentView).offset(16);
             make.height.equalTo(@14);
             make.width.equalTo(@75);
         }];
         
         [self.priceLabel_1 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.priceLabel.mas_right).offset(12);
-            make.right.equalTo(self.bgView).offset(-16);
+            make.right.equalTo(self.contentView).offset(-16);
             make.top.height.equalTo(self.priceLabel);
         }];
         
@@ -502,8 +528,118 @@
             make.left.right.height.equalTo(self.priceLabel_1);
             make.top.equalTo(self.totalPriceLabel);
         }];
+        
+        [self.contentView addSubview:self.lineView];
+        [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.contentView).offset(16);
+            make.right.equalTo(self.contentView).offset(-16);
+            make.height.equalTo(@1);
+            make.bottom.equalTo(self.contentView);
+        }];
     }
     return self;
+}
+
+- (UILabel *)createSubLeftLabelWithTitle:(NSString *)title {
+    UILabel *label = [[UILabel alloc] init];
+    label.textColor = kRGB_Color(0x99, 0x99, 0x99);
+    label.text = title;
+    label.font = kFont14;
+    return label;
+}
+
+- (UILabel *)createSubRightLabel {
+    UILabel *label_1 = [[UILabel alloc] init];
+    label_1.textColor = kRGB_Color(0x33, 0x33, 0x33);
+    label_1.font = [UIFont boldSystemFontOfSize:14];
+    return label_1;
+}
+
+@end
+
+@interface HJDHomeOrderDetailQueryValueResultCell()<UITableViewDelegate, UITableViewDataSource>
+@property(nonatomic, strong) UITableView *tableView;
+@end
+
+@implementation HJDHomeOrderDetailQueryValueResultCell
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 52, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 52) style:UITableViewStylePlain];
+        _tableView.dataSource = self;
+        _tableView.delegate = self;
+        _tableView.backgroundColor = [UIColor clearColor];
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.showsVerticalScrollIndicator = NO;
+    }
+    return _tableView;
+}
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        [self.bgView addSubview:self.tableView];
+        
+        [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.equalTo(self.bgView);
+            make.top.equalTo(self.lineView.mas_bottom);
+        }];
+    }
+    return self;
+}
+
+- (void)setDataSource:(NSMutableArray *)dataSource {
+    _dataSource = dataSource;
+    [self.tableView reloadData];
+}
+
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 16 + 14 + 12 + 14 + 16;
+}
+
+#pragma mark - UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.dataSource.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *cellIdentifier = @"HJDHomeOrderDetailQueryValueResultSubCell";
+    HJDHomeOrderDetailQueryValueResultSubCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[HJDHomeOrderDetailQueryValueResultSubCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    NSDictionary *dic = self.dataSource[indexPath.row];
+    NSString *company = dic[@"assessCompany"];
+    NSString *title = @"";
+    switch (company.integerValue) {
+        case 01: {
+            title = @"世联";
+            break;
+        }
+        case 02: {
+            title = @"仁达";
+            break;
+        }
+        default: {
+            title = @"首佳";
+            break;
+        }
+    }
+    cell.priceLabel.text = [NSString stringWithFormat:@"%@单价：",title];
+    cell.totalPriceLabel.text = [NSString stringWithFormat:@"%@总价：",title];
+    cell.priceLabel_1.text = [NSString stringWithFormat:@"%@元/m²", dic[@"unitPrice"]];
+    cell.totalPriceLabel_1.text = dic[@"totalPrice"];
+    if (indexPath.row == self.dataSource.count - 1) {
+        cell.lineView.hidden = YES;
+    } else {
+        cell.lineView.hidden = NO;
+    }
+    return cell;
 }
 @end
 

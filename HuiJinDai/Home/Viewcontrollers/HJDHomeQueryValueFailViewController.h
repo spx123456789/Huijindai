@@ -9,5 +9,6 @@
 #import "HJDBaseViewController.h"
 
 @interface HJDHomeQueryValueFailViewController : HJDBaseViewController
-
+@property(nonatomic, copy) NSString *xun_id;
+@property(nonatomic, assign) BOOL isSuccess;
 @end

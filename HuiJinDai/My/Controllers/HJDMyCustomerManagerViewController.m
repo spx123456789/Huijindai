@@ -76,7 +76,11 @@
     [HJDMyManager getMyCustomerManagerWithCallBack:^(NSArray *arr, BOOL result) {
         [MBProgressHUD hideHUD];
         if (result) {
-            [self.dataSource addObjectsFromArray:arr];
+            for (int k = 0; k < arr.count; k++) {
+                HJDMyAgentModel *model = [[HJDMyAgentModel alloc] init];
+                [model hjd_loadDataFromkeyValues:arr[k]];
+                [self.dataSource addObject:model];
+            }
             [self.tableView reloadData];
         } else {
             [MBProgressHUD showError:@"请求失败"];
@@ -102,7 +106,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     HJDMyAgentModel *model = self.dataSource[indexPath.row];
-    cell.name = model.name;
+    cell.name = model.rename;
     cell.phone = model.phone;
     return cell;
 }
