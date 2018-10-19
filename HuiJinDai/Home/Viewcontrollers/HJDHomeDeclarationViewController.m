@@ -11,8 +11,9 @@
 #import "HJDCustomerServiceView.h"
 #import "HJDDeclarationModel.h"
 #import <MobileCoreServices/UTCoreTypes.h>
+#import "HJDHomeRoomDiDaiManager.h"
 
-@interface HJDHomeDeclarationViewController ()<UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate, HJDHomeRoomDiDaiPhotoTableViewCellDelegate>
+@interface HJDHomeDeclarationViewController ()<UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate, HJDHomeRoomDiDaiPhotoTableViewCellDelegate, HJDHomeRoomDiDaiTableViewCellDelegate>
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) HJDCustomerServiceView *customServiceView;
 @property(nonatomic, strong) UIButton *submitButton;
@@ -79,7 +80,21 @@
 }
 
 - (void)submitButtonClick:(id)sender {
-    
+    [MBProgressHUD showMessage:@"正在提交..."];
+    @weakify(self);
+    [HJDHomeRoomDiDaiManager getOrderIdWithCallBack:^(NSDictionary *data, BOOL result) {
+        @strongify(self);
+        self.declarationModel.loan_id = data[@"loan_id"];
+        NSLog(@"====%@", self.declarationModel.loan_id);
+        [HJDHomeRoomDiDaiManager postRoomDeclarationWithModel:self.declarationModel callBack:^(NSDictionary *data, BOOL result) {
+            [MBProgressHUD hideHUD];
+            if (result) {
+                [MBProgressHUD showSuccess:@"提交成功"];
+            } else {
+                [MBProgressHUD showError:@"提交失败"];
+            }
+        }];
+    }];
 }
 
 - (instancetype)init {
@@ -121,22 +136,7 @@
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.row) {
-        case 0: {
-            self.selectShowIndex = indexPath.row;
-            self.pickerArray = @[ @"房屋抵押贷款", @"房屋抵押贷款（加案）", @"车辆抵押贷款" ];
-            [self showPickerView];
-            break;
-        }
-        case 6: {
-            self.selectShowIndex = indexPath.row;
-            self.pickerArray = @[ @"月", @"天" ];
-            [self showPickerView];
-            break;
-        }
-        default:
-            break;
-    }
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -203,6 +203,7 @@
             cell = [[HJDHomeRoomDiDaiTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
+        cell.delegate = self;
         [self setCellValue:cell indexPath:indexPath];
         return cell;
     } else {
@@ -270,7 +271,11 @@
             cell.rightImgView.hidden = YES;
             cell.rightLabel.hidden = YES;
             cell.lineView.hidden = NO;
-            cell.textField.text = @"";
+            @weakify(self);
+            [cell.textField.rac_textSignal subscribeNext:^(NSString *x) {
+                @strongify(self);
+                self.declarationModel.name = x;
+            }];
             break;
         }
         case 2: {
@@ -280,6 +285,34 @@
             cell.rightLabel.hidden = YES;
             cell.lineView.hidden = NO;
             cell.fieldCanEdit = NO;
+            switch (self.declarationModel.certificate_type) {
+                case HJDLoanCertificate_idCard:
+                    cell.textField.text = @"身份证";
+                    break;
+                case HJDLoanCertificate_businessLicense:
+                    cell.textField.text = @"营业执照";
+                    break;
+                case HJDLoanCertificate_passport:
+                    cell.textField.text = @"护照";
+                    break;
+                case HJDLoanCertificate_officer:
+                    cell.textField.text = @"军官证";
+                    break;
+                case HJDLoanCertificate_soldiers:
+                    cell.textField.text = @"士兵证";
+                    break;
+                case HJDLoanCertificate_HongKong:
+                    cell.textField.text = @"港澳居民来往内地通行证";
+                    break;
+                case HJDLoanCertificate_Taiwan:
+                    cell.textField.text = @"台湾居民来往大陆通行证";
+                    break;
+                case HJDLoanCertificate_other:
+                    cell.textField.text = @"其他";
+                    break;
+                default:
+                    break;
+            }
             break;
         }
         case 3: {
@@ -288,6 +321,11 @@
             cell.rightImgView.hidden = YES;
             cell.rightLabel.hidden = YES;
             cell.lineView.hidden = NO;
+            @weakify(self);
+            [cell.textField.rac_textSignal subscribeNext:^(NSString *x) {
+                @strongify(self);
+                self.declarationModel.certificate_number = x;
+            }];
             break;
         }
         case 4: {
@@ -297,6 +335,28 @@
             cell.rightLabel.hidden = YES;
             cell.lineView.hidden = YES;
             cell.fieldCanEdit = NO;
+            switch (self.declarationModel.indiv_marital) {
+                case HJDLoanMarriage_unmarried:
+                    cell.textField.text = @"未婚";
+                    break;
+                case HJDLoanMarriage_hasChildren:
+                    cell.textField.text = @"已婚有子女";
+                    break;
+                case HJDLoanMarriage_noChildren:
+                    cell.textField.text = @"已婚无子女";
+                    break;
+                case HJDLoanMarriage_no:
+                    cell.textField.text = @"丧偶";
+                    break;
+                case HJDLoanMarriage_divorced:
+                    cell.textField.text = @"离异";
+                    break;
+                case HJDLoanMarriage_remarried:
+                    cell.textField.text = @"再婚";
+                    break;
+                default:
+                    break;
+            }
             break;
         }
         case 5: {
@@ -306,7 +366,11 @@
             cell.rightLabel.hidden = NO;
             cell.rightLabel.text = @"元";
             cell.lineView.hidden = NO;
-            cell.textField.text = self.declarationModel.loan_money;
+            @weakify(self);
+            [cell.textField.rac_textSignal subscribeNext:^(NSString *x) {
+                @strongify(self);
+                self.declarationModel.loan_money = x;
+            }];
             break;
         }
         case 6: {
@@ -335,7 +399,11 @@
             cell.rightImgView.hidden = YES;
             cell.rightLabel.hidden = NO;
             cell.lineView.hidden = NO;
-            cell.textField.text = self.declarationModel.loan_time;
+            @weakify(self);
+            [cell.textField.rac_textSignal subscribeNext:^(NSString *x) {
+                @strongify(self);
+                self.declarationModel.loan_time = x;
+            }];
             break;
         }
         case 8: {
@@ -345,7 +413,44 @@
             cell.rightLabel.hidden = NO;
             cell.rightLabel.text = @"元";
             cell.lineView.hidden = YES;
-            cell.textField.text = self.declarationModel.loan_first;
+            @weakify(self);
+            [cell.textField.rac_textSignal subscribeNext:^(NSString *x) {
+                @strongify(self);
+                self.declarationModel.loan_first = x;
+            }];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+#pragma mark - HJDHomeRoomDiDaiTableViewCellDelegate
+- (void)roomDiDaiCellDidClick:(HJDHomeRoomDiDaiTableViewCell *)cell {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    switch (indexPath.row) {
+        case 0: {
+            self.selectShowIndex = indexPath.row;
+            self.pickerArray = @[ @"房屋抵押贷款", @"房屋抵押贷款（加案）", @"车辆抵押贷款" ];
+            [self showPickerView];
+            break;
+        }
+        case 2: {
+            self.selectShowIndex = indexPath.row;
+            self.pickerArray = @[ @"身份证", @"营业执照", @"护照", @"军官证", @"士兵证", @"港澳居民来往内地通行证", @"台湾居民来往大陆通行证", @"其他证件" ];
+            [self showPickerView];
+            break;
+        }
+        case 4: {
+            self.selectShowIndex = indexPath.row;
+            self.pickerArray = @[ @"未婚", @"已婚有子女", @"已婚无子女", @"丧偶", @"离异", @"再婚" ];
+            [self showPickerView];
+            break;
+        }
+        case 6: {
+            self.selectShowIndex = indexPath.row;
+            self.pickerArray = @[ @"月", @"天" ];
+            [self showPickerView];
             break;
         }
         default:
@@ -440,6 +545,12 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     if (self.selectShowIndex == 0) {
         self.declarationModel.loan_variety = row + 1;
+        [self.tableView reloadData];
+    } else if (self.selectShowIndex == 2) {
+        self.declarationModel.certificate_type = row + 1;
+        [self.tableView reloadData];
+    } else if (self.selectShowIndex == 4) {
+        self.declarationModel.indiv_marital = row + 1;
         [self.tableView reloadData];
     } else if (self.selectShowIndex == 6) {
         self.declarationModel.loan_time_type = row + 1;

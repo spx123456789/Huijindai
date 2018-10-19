@@ -67,7 +67,6 @@
     
     [self setNavTitle:@"首页"];
     self.imageArray = [NSMutableArray new];
-    self.dataSource ;
     [self setupSubViews];
     
     [HJDHomeManager getHomeBannerCallBack:^(NSArray *data, BOOL result) {
@@ -88,7 +87,6 @@
          src = "../images/banner_default_2.png";
          }
          */
-        kHJDImage(@"");
     }];
     
     HJDHomeLocationManager *locationManager = [HJDHomeLocationManager sharedManager];
@@ -222,7 +220,7 @@
     if (!_dataSource) {
         _dataSource = [NSMutableArray new];
         switch (self.userModel.type.integerValue) {
-                case HJDUserTypeManager: {
+                case HJDUserTypeAgent: {
                     HJDHomeModel * model = [HJDHomeModel new];
                     model.title = @"房抵贷";
                     model.imageName = @"首页房抵贷";
@@ -252,7 +250,7 @@
                     
                     break;
                 }
-                case HJDUserTypeAgent: {
+                case HJDUserTypeManager: {
                     HJDHomeModel * model = [HJDHomeModel new];
                     model.title = @"房抵贷";
                     model.imageName = @"首页房抵贷";

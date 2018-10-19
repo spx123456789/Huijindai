@@ -57,7 +57,8 @@ static NSString *key2 = @"title";
         if (self.userModel.avatar == nil || self.userModel.avatar.length == 0) {
             avatar = @"";
         }
-        [_headerView.headImgView sd_setImageWithURL:[NSURL URLWithString:avatar] placeholderImage:kImage(@"我的默认头像")];
+        [_headerView.headImgView sd_setImageWithURL:[NSURL URLWithString:avatar]
+                                   placeholderImage:kImage(@"我的默认头像")];
         _headerView.nameLabel.text = self.userModel.rename;
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
@@ -240,9 +241,12 @@ static NSString *key2 = @"title";
 - (void)uploadImage:(UIImage *)head {
     dispatch_async(dispatch_get_main_queue(), ^{
         [MBProgressHUD showMessage:@"正在上传..."];
-        [HJDMyManager setMyAvatarWithImage:head callBack:^(BOOL result) {
+        [HJDMyManager setMyAvatarWithImage:head callBack:^(NSString *path, BOOL result) {
             [MBProgressHUD hideHUD];
-            if (!result) {
+            if (result) {
+                self.userModel.avatar = path;
+                [[HJDUserDefaultsManager shareInstance] saveObject:self.userModel key:kUserModelKey];
+            } else {
                 [MBProgressHUD showError:@"上传失败"];
             }
         }];

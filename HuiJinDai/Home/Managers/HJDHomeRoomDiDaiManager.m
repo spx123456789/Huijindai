@@ -99,9 +99,101 @@
     }];
 }
 
-+ (void)getOrderDetailWithID:(NSString *)uid callBack:(RoomDiDaiHttpCallback)callback {
+#pragma mark - 工单
++ (void)getOrderIdWithCallBack:(void (^)(NSDictionary *, BOOL))callback {
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Loan/sq") requestParams:nil networkMethod:GET callback:^(NSDictionary *data, NSError *error) {
+        if (error) {
+            callback(nil, NO);
+        } else {
+            callback([data getObjectByPath:@"data"], YES);
+        }
+    }];
+}
+
++ (void)postRoomDeclarationWithModel:(HJDDeclarationModel *)model callBack:(void (^)(NSDictionary *, BOOL))callback {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    if (model.loan_variety == HJDLoanVarietyHouse_2) {
+        [params setObject:model.loan_first forKey:@"loan_first"];
+    }
+    [params addEntriesFromDictionary:@{ @"loan_id" : model.loan_id, @"name" : model.name, @"certificate_type" : @(model.certificate_type), @"certificate_number" : model.certificate_number, @"indiv_marital" : @(model.indiv_marital), @"loan_variety" : @(model.loan_variety), @"loan_money" : model.loan_money, @"loan_time" : model.loan_time, @"loan_time_type" : @(model.loan_time_type) }];
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Loan/create") requestParams:params networkMethod:POST callback:^(id data, NSError *error) {
+        if (error) {
+            callback(nil, NO);
+        } else {
+            NSLog(@"====文字成功");
+            [HJDHomeRoomDiDaiManager uploadPictureWithModel:model callBack:callback];
+        }
+    }];
+    //http://hanhouxiong.hjxd.xiaoyutab.cn/upload/upload/20181018/thumb_100_632492fd7e24fa9d8786b430f8ac3784.png
+    
+}
+
++ (void)getOrderDetailWithID:(NSString *)uid callBack:(void (^)(NSDictionary *, BOOL))callback {
     [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Loan/get_info") requestParams:@{ @"loan_id" : uid } networkMethod:GET callback:^(id data, NSError *error) {
         
     }];
+}
+
+#pragma mark - 上传图片
++ (void)uploadPictureWithModel:(HJDDeclarationModel *)model callBack:(void (^)(NSDictionary *, BOOL))callback {
+    NSMutableArray *imageArray = [NSMutableArray array];
+    NSString *pic_type = @"";
+    if (model.idCardArray && model.idCardArray.count != 0) {
+        [imageArray addObjectsFromArray:model.idCardArray];
+        pic_type = @"1";
+    }
+    
+    if (model.bookArray && model.bookArray.count != 0) {
+        [imageArray addObjectsFromArray:model.bookArray];
+        pic_type = @"2";
+    }
+    
+    if (model.creditReportArray && model.creditReportArray.count != 0) {
+        [imageArray addObjectsFromArray:model.creditReportArray];
+        pic_type = @"3";
+    }
+    
+    if (model.marriageArray && model.marriageArray.count != 0) {
+        [imageArray addObjectsFromArray:model.marriageArray];
+        pic_type = @"4";
+    }
+    
+    if (model.houseArry && model.houseArry.count != 0) {
+        [imageArray addObjectsFromArray:model.houseArry];
+        pic_type = @"5";
+    }
+    
+    if (imageArray.count == 0) {
+        callback(nil, YES);
+    }
+    
+    __block NSInteger totalCount = 0;
+    __block NSInteger uploadCount = 0;
+    for (NSDictionary *dic in imageArray) {
+        UIImage *image = dic[UIImagePickerControllerEditedImage];
+        NSData *photo = UIImageJPEGRepresentation(image, 1);
+        NSDictionary *params = @{ @"loan_id" : model.loan_id, @"type_id" : pic_type };
+        [[HJDNetAPIManager sharedManager] POST:kAPIURL(@"/Loan/upload_file") parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+            [formData appendPartWithFileData:photo name:@"file" fileName:@"file" mimeType:@"image/jpg"];
+        } progress:^(NSProgress * _Nonnull uploadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            totalCount += 1;
+            uploadCount += 1;
+            if (totalCount == imageArray.count) {
+                if (totalCount == uploadCount) {
+                    callback(nil, YES);
+                } else {
+                    callback(nil, NO);
+                }
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            totalCount += 1;
+            if (totalCount == imageArray.count) {
+                callback(nil, NO);
+            }
+        }];
+    }
+    
 }
 @end

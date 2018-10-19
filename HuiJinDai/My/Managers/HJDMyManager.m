@@ -42,28 +42,28 @@
     }];
 }
 
-+ (void)getMyInfoWithCallBack:(void (^)(NSArray *, BOOL))callback {
-    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/User/get_info") requestParams:nil networkMethod:GET callback:^(id data, NSError *error) {
++ (void)getMyInfoWithCallBack:(void (^)(NSDictionary *, BOOL))callback {
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/User/get_info") requestParams:nil networkMethod:GET callback:^(NSDictionary *data, NSError *error) {
         if (error) {
             callback(nil, NO);
         } else {
-            callback(data, YES);
+            callback([data getObjectByPath:@"data"], YES);
         }
     }];
 }
 
-+ (void)setMyAvatarWithImage:(UIImage *)image callBack:(void (^)(BOOL))callback {
++ (void)setMyAvatarWithImage:(UIImage *)image callBack:(void (^)(NSString *, BOOL))callback {
     NSData *photo = UIImageJPEGRepresentation(image, 1);
-
     [[HJDNetAPIManager sharedManager] POST:kAPIURL(@"/User/set_avatar") parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         [formData appendPartWithFileData:photo name:@"avatar" fileName:@"avatar" mimeType:@"image/jpg"];
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        callback(YES);
+        NSDictionary *dataDic = (NSDictionary *)responseObject;
+        callback([dataDic getObjectByPath:@"data/path"], YES);
         NSLog(@"===success %@", responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        callback(NO);
+        callback(nil, NO);
         NSLog(@"===%@", error.userInfo);
     }];
 }

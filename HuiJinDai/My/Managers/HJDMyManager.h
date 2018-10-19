@@ -22,8 +22,8 @@
 + (void)getUserInviteCodeWithCallBack:(void(^)(NSDictionary *dic, BOOL result))callback;
 
 //获取我的信息
-+ (void)getMyInfoWithCallBack:(void(^)(NSArray *arr, BOOL result))callback;
++ (void)getMyInfoWithCallBack:(void(^)(NSDictionary *dic, BOOL result))callback;
 
 //设置头像信息
-+ (void)setMyAvatarWithImage:(UIImage *)image callBack:(void(^)(BOOL result))callback;
++ (void)setMyAvatarWithImage:(UIImage *)image callBack:(void(^)(NSString *path, BOOL result))callback;
 @end

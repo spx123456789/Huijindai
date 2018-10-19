@@ -20,9 +20,8 @@
 #define kGtAppKey @"yIPfqwq6OMAPp6dkqgLpG5"
 #define kGtAppSecret @"G0aBqAD6t79JfzTB6Z5lo5"
 
-//test
 #import "HJDNetAPIManager.h"
-#import "HJDUserModel.h"
+#import "HJDMyManager.h"
 #import "HJDUserDefaultsManager.h"
 
 @interface AppDelegate ()<GeTuiSdkDelegate, UNUserNotificationCenterDelegate>
@@ -46,13 +45,12 @@
         HJDUserModel *userModel = (HJDUserModel *)[[HJDUserDefaultsManager shareInstance] loadObject:kUserModelKey];
         [[HJDNetAPIManager sharedManager] setAuthorization:userModel.token];
         [self enterHomeController];
-//        [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/User/get_info")  requestParams:nil networkMethod:GET  callback:^(id data, NSError *error) {
-//            if (!error) {
-//                HJDUserModel *userModel = [[HJDUserModel alloc] init];
-//                [userModel hjd_loadDataFromkeyValues:data];
-//                [[HJDUserDefaultsManager shareInstance] saveObject:userModel key:kUserModelKey];
-//            }
-//        }];
+        [HJDMyManager getMyInfoWithCallBack:^(NSDictionary *dic, BOOL result) {
+            if (result) {
+                userModel.avatar = dic[@"avatar"];
+                [[HJDUserDefaultsManager shareInstance] saveObject:userModel key:kUserModelKey];
+            }
+        }];
     } else {
         UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:[[HJDLoginViewController alloc] init]];
         self.window.rootViewController = navi;

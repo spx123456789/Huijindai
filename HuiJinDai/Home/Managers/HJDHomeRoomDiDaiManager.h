@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "HJDHomeRoomDiDaiModel.h"
+#import "HJDDeclarationModel.h"
 
 typedef void (^RoomDiDaiHttpCallback)(NSArray *data, BOOL result);
 
@@ -36,6 +37,12 @@ typedef void (^RoomDiDaiHttpCallback)(NSArray *data, BOOL result);
 //获取评值信息
 + (void)getRoomEvaluateInfoWithXunid:(NSString *)xun_id callBack:(RoomDiDaiHttpCallback)callback;
 
+//申请工单号
++ (void)getOrderIdWithCallBack:(void(^)(NSDictionary *data, BOOL result))callback;
+
+//提交工单
++ (void)postRoomDeclarationWithModel:(HJDDeclarationModel *)model callBack:(void(^)(NSDictionary *data, BOOL result))callback;
+
 //工单详情
-+ (void)getOrderDetailWithID:(NSString *)uid callBack:(RoomDiDaiHttpCallback)callback;
++ (void)getOrderDetailWithID:(NSString *)uid callBack:(void(^)(NSDictionary *data, BOOL result))callback;
 @end
