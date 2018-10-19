@@ -34,4 +34,6 @@
 - (void)goBack:(UIButton *)sender;
 
 #pragma mark - 提示
+- (void)showToast:(NSString *)message;
+
 @end

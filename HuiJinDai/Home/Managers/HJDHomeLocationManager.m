@@ -36,11 +36,7 @@ static HJDHomeLocationManager *_sharedManager = nil;
 }
 
 - (void)startLocation {
-    if ([CLLocationManager locationServicesEnabled]) {//判断定位操作是否被允许
-         [self.locationManager startUpdatingLocation];//开始定位
-    } else {
-        
-    }
+    [self.locationManager startUpdatingLocation];
 }
 
 #pragma mark - CLLocationManagerDelegate

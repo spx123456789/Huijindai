@@ -30,7 +30,8 @@
 @property(nonatomic, strong) HJDRegisterAgreementView *agreementView;
 @property(nonatomic, strong) HJDCityPickerView *cityPickerView;
 @property(nonatomic, strong) HJDCustomerServiceView *customServiceView;
-
+@property(nonatomic, assign) NSInteger timeSeconds;
+@property(nonatomic, strong) NSTimer *myTimer;
 @property(nonatomic, strong) HJDCityModel *selectCity;
 @end
 
@@ -105,12 +106,45 @@
 - (void)verifiCodeButtonClick:(id)sender {
     NSString *phone = self.phoneView.textField.text;
     if (![phone hjd_isVaildPhoneNumber]) {
+        [self showToast:@"请输入正确手机号"];
         return;
     }
+    
+    [MBProgressHUD showMessage:@"获取验证码..."];
     [HJDRegisterHttpManager getVerifiCodeWithPhone:phone callBack:^(NSDictionary *data, NSError *error, BOOL result) {
-        
+        [MBProgressHUD hideHUD];
+        if (result) {
+            [self showTimer];
+            [MBProgressHUD showSuccess:@"验证码发送成功"];
+        } else {
+            [MBProgressHUD showError:@"验证码发送失败"];
+        }
     }];
 }
+
+- (void)showTimer {
+    self.timeSeconds = 60;
+    self.verifiCodeButton.enabled = NO;
+    [self.myTimer invalidate];
+    self.myTimer = nil;
+    self.myTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timeGo:) userInfo:nil repeats:YES];
+}
+
+- (void)timeGo:(NSTimer *)timer {
+    if (self.timeSeconds > 0) {
+        [self.verifiCodeButton setTitle:[NSString stringWithFormat:@"%lds", (long)self.timeSeconds]
+                               forState:UIControlStateNormal];
+        [self.verifiCodeButton setTitleColor:kMainColor forState:UIControlStateNormal];
+    } else {
+        [timer invalidate];
+        timer = nil;
+        [self.verifiCodeButton setTitle:@"发送验证码" forState:UIControlStateNormal];
+        [self.verifiCodeButton setTitleColor:kRGB_Color(0x66, 0x66, 0x66) forState:UIControlStateNormal];
+        self.verifiCodeButton.enabled = YES;
+    }
+    self.timeSeconds--;
+}
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -198,31 +232,47 @@
 - (void)registerButtonClick:(id)sender {
     NSString *name = self.nameView.textField.text;
     if ([NSString hjd_isBlankString:name]) {
+        [self showToast:@"请输入用户姓名"];
         return;
     }
     
     NSString *phone = self.phoneView.textField.text;
     if (![phone hjd_isVaildPhoneNumber]) {
+        [self showToast:@"请输入正确手机号"];
         return;
     }
     
     NSString *verifiCode = self.verifiCodeView.textField.text;
     if ([NSString hjd_isBlankString:verifiCode]) {
+        [self showToast:@"请输入验证码"];
         return;
     }
     
     NSString *inviteCode = self.inviteCodeView.textField.text;
     if ([NSString hjd_isBlankString:inviteCode]) {
+        [self showToast:@"请输入邀请码"];
         return;
     }
     
     if (self.selectCity == nil) {
+        [self showToast:@"请选择城市信息"];
         return;
     }
     
+    if (!self.agreementView.selected) {
+        [self showToast:@"请同意亚投行金服用户协议"];
+        return;
+    }
     [MBProgressHUD showMessage:@"注册中..."];
     [HJDRegisterHttpManager postRegisterRequestWithPhone:phone verifiCode:verifiCode realName:name address:self.selectCity.pid inviteCode:inviteCode callBack:^(NSDictionary *data, NSError *error, BOOL result) {
         [MBProgressHUD hideHUD];
+        if (self.myTimer) {
+            [self.myTimer invalidate];
+            self.myTimer = nil;
+            [self.verifiCodeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
+            [self.verifiCodeButton setTitleColor:kRGB_Color(0x66, 0x66, 0x66) forState:UIControlStateNormal];
+            self.verifiCodeButton.enabled = YES;
+        }
         if (result) {
             HJDUserModel *userModel = [[HJDUserModel alloc] init];
             [userModel hjd_loadDataFromkeyValues:data];

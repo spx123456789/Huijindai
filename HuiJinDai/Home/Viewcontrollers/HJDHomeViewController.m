@@ -89,12 +89,18 @@
          */
     }];
     
-    HJDHomeLocationManager *locationManager = [HJDHomeLocationManager sharedManager];
-    locationManager.delegate = self;
-    [locationManager startLocation];
-    
-    //test
-    [self locationManagerDidUpdateLocation:@"齐齐哈尔"];
+    if (![CLLocationManager locationServicesEnabled]) {//判断定位操作是否被允许
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请在设置-->隐私-->定位服务，中开启本应用的位置访问权限！" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { }];
+        [alert addAction:okAction];
+        [self presentViewController:alert animated:YES completion:nil];
+    } else {
+        [self locationManagerDidUpdateLocation:@"正在定位"];
+        
+        HJDHomeLocationManager *locationManager = [HJDHomeLocationManager sharedManager];
+        locationManager.delegate = self;
+        [locationManager startLocation];
+    }
 }
 
 - (void)setupSubViews {
@@ -179,6 +185,9 @@
 }
 
 - (void)tableViewCell:(HJDHomeTableViewCell *) cell didselectButtonWithIndex:(NSInteger)index {
+    if (index >= cell.dataArray.count) {
+        return;
+    }
     HJDHomeModel * model = [cell.dataArray objectAtIndex:index];
     if ([model.title isEqualToString:@"房抵贷"]) {
         HJDHomeRoomDiDaiViewController *diDaiController = [[HJDHomeRoomDiDaiViewController alloc] init];
@@ -206,7 +215,6 @@
 
 #pragma mark - HJDHomeLocationManagerDelegate
 - (void)locationManagerDidUpdateLocation:(NSString *)location {
-    //首页选择城市@3x
     HJDHomeNavBarButton *btn = [[HJDHomeNavBarButton alloc] initWithFrame:CGRectMake(0, 00, 100, 44)];
     btn.hjd_title = location;
 

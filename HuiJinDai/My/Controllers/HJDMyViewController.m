@@ -53,14 +53,6 @@ static NSString *key2 = @"title";
 - (HJDMyTableHeaderView *)headerView {
     if (!_headerView) {
         _headerView = [[HJDMyTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 340)];
-        NSString *avatar = kHJDImage(self.userModel.avatar);
-        if (self.userModel.avatar == nil || self.userModel.avatar.length == 0) {
-            avatar = @"";
-        }
-        [_headerView.headImgView sd_setImageWithURL:[NSURL URLWithString:avatar]
-                                   placeholderImage:kImage(@"我的默认头像")];
-        _headerView.nameLabel.text = self.userModel.rename;
-        
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
         [_headerView.headImgView addGestureRecognizer:tap];
     }
@@ -108,8 +100,7 @@ static NSString *key2 = @"title";
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _userModel = (HJDUserModel *)[[HJDUserDefaultsManager shareInstance] loadObject:kUserModelKey];
-        _dataSource = @[ @{ key1 : kImage(@"我的页客户经理"), key2 : @"我的客户经理" }, @{ key1 : kImage(@"我的页经纪人"), key2 : @"我的经纪人" }, @{ key1 : kImage(@"我的页邀请码"), key2 : @"我的邀请码" }, @{ key1 : kImage(@"我的页设置"), key2 : @"设置" } ];
+        
     }
     return self;
 }
@@ -117,6 +108,7 @@ static NSString *key2 = @"title";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self hideNavigationBar];
+    [self updateMyInfo];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -127,6 +119,7 @@ static NSString *key2 = @"title";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.dataSource = @[ @{ key1 : kImage(@"我的页客户经理"), key2 : @"我的客户经理" }, @{ key1 : kImage(@"我的页经纪人"), key2 : @"我的经纪人" }, @{ key1 : kImage(@"我的页邀请码"), key2 : @"我的邀请码" }, @{ key1 : kImage(@"我的页设置"), key2 : @"设置" } ];
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.headerView;
     
@@ -135,6 +128,17 @@ static NSString *key2 = @"title";
     } else {
         //self.automaticallyAdjustsScrollViewInsets = NO;
     }
+}
+
+- (void)updateMyInfo {
+    self.userModel = (HJDUserModel *)[[HJDUserDefaultsManager shareInstance] loadObject:kUserModelKey];
+    NSString *avatar = kHJDImage(self.userModel.avatar);
+    if (self.userModel.avatar == nil || self.userModel.avatar.length == 0) {
+        avatar = @"";
+    }
+    [_headerView.headImgView sd_setImageWithURL:[NSURL URLWithString:avatar]
+                               placeholderImage:kImage(@"我的默认头像")];
+    _headerView.nameLabel.text = self.userModel.rename;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -227,30 +231,32 @@ static NSString *key2 = @"title";
 
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(nonnull NSDictionary<NSString *,id> *)info {
+    
+    NSString *mediaType = info[UIImagePickerControllerMediaType];
+    if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
+        UIImage *theImage = info[UIImagePickerControllerEditedImage];
+        //NSURL *imageUrl = info[UIImagePickerControllerImageURL];
+        [self uploadImage:theImage];
+    }
+    
     [picker dismissViewControllerAnimated:YES completion:^{
-        NSString *mediaType = info[UIImagePickerControllerMediaType];
-        if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
-            UIImage *theImage = info[UIImagePickerControllerEditedImage];
-            //NSURL *imageUrl = info[UIImagePickerControllerImageURL];
-            [self uploadImage:theImage];
-        }
+        
     }];
     
 }
 
 - (void)uploadImage:(UIImage *)head {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [MBProgressHUD showMessage:@"正在上传..."];
-        [HJDMyManager setMyAvatarWithImage:head callBack:^(NSString *path, BOOL result) {
-            [MBProgressHUD hideHUD];
-            if (result) {
-                self.userModel.avatar = path;
-                [[HJDUserDefaultsManager shareInstance] saveObject:self.userModel key:kUserModelKey];
-            } else {
-                [MBProgressHUD showError:@"上传失败"];
-            }
-        }];
-    });
+    [MBProgressHUD showMessage:@"正在上传..."];
+    [HJDMyManager setMyAvatarWithImage:head callBack:^(NSString *path, BOOL result) {
+        [MBProgressHUD hideHUD];
+        if (result) {
+            self.userModel.avatar = path;
+            [[HJDUserDefaultsManager shareInstance] saveObject:self.userModel key:kUserModelKey];
+            [self updateMyInfo];
+        } else {
+            [MBProgressHUD showError:@"上传失败"];
+        }
+    }];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {

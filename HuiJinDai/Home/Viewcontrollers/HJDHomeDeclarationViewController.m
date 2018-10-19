@@ -80,11 +80,38 @@
 }
 
 - (void)submitButtonClick:(id)sender {
+    if (self.declarationModel.loan_variety == 0) {
+        [self showToast:@"请选择贷款品种"];
+        return;
+    }
+    
+    if ([NSString hjd_isBlankString:self.declarationModel.loan_money]) {
+        [self showToast:@"请填写申请金额"];
+        return;
+    }
+    
+    if (self.declarationModel.loan_time_type == 0) {
+        [self showToast:@"请选择申请期限"];
+        return;
+    }
+    
+    if ([NSString hjd_isBlankString:self.declarationModel.loan_time]) {
+        [self showToast:@"请填写贷款时长"];
+        return;
+    }
+    
+    if (self.declarationModel.loan_variety == HJDLoanVarietyHouse_2) {
+        if ([NSString hjd_isBlankString:self.declarationModel.loan_first]) {
+            [self showToast:@"请填写一抵余额"];
+            return;
+        }
+    }
     [MBProgressHUD showMessage:@"正在提交..."];
     @weakify(self);
     [HJDHomeRoomDiDaiManager getOrderIdWithCallBack:^(NSDictionary *data, BOOL result) {
         @strongify(self);
         self.declarationModel.loan_id = data[@"loan_id"];
+        self.declarationModel.evaluation_id = self.xun_id;
         NSLog(@"====%@", self.declarationModel.loan_id);
         [HJDHomeRoomDiDaiManager postRoomDeclarationWithModel:self.declarationModel callBack:^(NSDictionary *data, BOOL result) {
             [MBProgressHUD hideHUD];

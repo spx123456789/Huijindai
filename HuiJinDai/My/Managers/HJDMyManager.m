@@ -67,4 +67,31 @@
         NSLog(@"===%@", error.userInfo);
     }];
 }
+
++ (void)modifyMyInfoWithParams:(NSDictionary *)params callBack:(void (^)(BOOL))callback {
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/User/set_info") requestParams:params networkMethod:POST callback:^(id data, NSError *error) {
+        if (error) {
+            callback(NO);
+        } else {
+            callback(YES);
+        }
+    }];
+}
+
+#pragma mark - 重新更新一下我的信息
++ (void)reUpdateMyInfo:(void (^)(BOOL))callback {
+    [HJDMyManager getMyInfoWithCallBack:^(NSDictionary *dic, BOOL result) {
+        if (result) {
+            HJDUserModel *userModel = (HJDUserModel *)[[HJDUserDefaultsManager shareInstance] loadObject:kUserModelKey];
+            userModel.avatar = dic[@"avatar"];
+            userModel.rename = dic[@"rename"];
+            userModel.addr_office_tree = dic[@"addr_office_tree"];
+            [[HJDUserDefaultsManager shareInstance] saveObject:userModel key:kUserModelKey];
+        }
+        if (callback) {
+            callback(YES);
+        }
+    }];
+}
+
 @end

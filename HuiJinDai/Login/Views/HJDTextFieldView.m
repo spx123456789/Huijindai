@@ -102,7 +102,7 @@
     if (!_selectButton) {
         _selectButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_selectButton setImage:kImage(@"注册页对勾.png") forState:UIControlStateNormal];
-        [_selectButton addTarget:self action:@selector(clickButton:) forControlEvents:UIControlEventTouchUpInside];
+        [_selectButton addTarget:self action:@selector(tapClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _selectButton;
 }
@@ -110,7 +110,9 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        self.selected = NO;
         [self addSubview:self.selectButton];
+        self.selectButton.hidden = YES;
         [self addSubview:self.label];
         
         [self.selectButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -126,14 +128,16 @@
             make.right.equalTo(self);
             make.height.equalTo(@25);
         }];
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClick:)];
+        [self addGestureRecognizer:tap];
     }
     return self;
 }
 
-- (void)clickButton:(id)selector {
+- (void)tapClick:(id)selector {
     _selected = !self.selected;
-    UIImage *image = _selected ? kImage(@"注册页对勾.png") : kImage(@"注册页对勾.png");
-    [_selectButton setImage:image forState:UIControlStateNormal];
+    self.selectButton.hidden = !_selected;
 }
 
 @end

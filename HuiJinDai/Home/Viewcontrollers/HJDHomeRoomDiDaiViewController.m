@@ -91,6 +91,44 @@ typedef enum : NSUInteger {
     HJDHomeQueryValueResultViewController *controller = [[HJDHomeQueryValueResultViewController alloc] init];
     [self.navigationController pushViewController:controller animated:YES];
     return;
+
+    
+    /*
+     
+     houseId    string
+     房间 Id
+     
+     houseNo    string
+     门牌号，如：1702
+     
+     companyStr    string
+     询值类型， 01-世联,02-仁达,03-首佳*/
+    if ([NSString hjd_isBlankString:self.roomModel.provinceId]) {
+        [self showToast:@"请选择城市"];
+        return;
+    }
+    
+    if ([NSString hjd_isBlankString:self.roomModel.communityId]) {
+        [self showToast:@"请选择小区名称"];
+        return;
+    }
+    
+    if ([NSString hjd_isBlankString:self.roomModel.buildingUnitId]) {
+        [self showToast:@"请选择楼栋名称"];
+        return;
+    }
+    //单元门  门牌号
+    
+    //规划用途
+    if (self.roomModel.useType == 0) {
+        [self showToast:@"请选择规划用途"];
+        return;
+    }
+    
+    if ([NSString hjd_isBlankString:self.roomModel.houseSpace]) {
+        [self showToast:@"请填写建筑面积"];
+        return;
+    }
     
     [MBProgressHUD showMessage:@"正在询值..."];
     [HJDHomeRoomDiDaiManager postRoomEvaluateWithModel:self.roomModel callBack:^(NSArray *data, BOOL result) {
@@ -345,7 +383,7 @@ typedef enum : NSUInteger {
         }
         case 1: { //小区名称
             if ([NSString hjd_isBlankString:self.roomModel.districtId]) {
-                [MBProgressHUD showError:@"请先选择城市"];
+                [self showToast:@"请先选择城市"];
                 return;
             }
             HJDHomeRoomSelectViewController *controller = [[HJDHomeRoomSelectViewController alloc] init];
@@ -363,7 +401,7 @@ typedef enum : NSUInteger {
         }
         case 2: { //楼栋名称
             if ([NSString hjd_isBlankString:self.roomModel.communityId]) {
-                [MBProgressHUD showError:@"请先选择小区名称"];
+                [self showToast:@"请先选择小区名称"];
                 return;
             }
             HJDHomeRoomSelectViewController *controller = [[HJDHomeRoomSelectViewController alloc] init];
@@ -380,18 +418,24 @@ typedef enum : NSUInteger {
         }
         case 3: { //单元门
             if ([NSString hjd_isBlankString:self.roomModel.buildingUnitId]) {
-                [MBProgressHUD showError:@"请先选择楼栋名称"];
+                [self showToast:@"请先选择楼栋名称"];
                 return;
             }
             HJDHomeRoomSelectViewController *controller = [[HJDHomeRoomSelectViewController alloc] init];
             controller.diDaiModel = self.roomModel;
             controller.searchType = HJDRoomSearchUnit;
+            controller.callback = ^(NSDictionary *dic) {
+                self.roomModel.buildingUnitId = dic[@"buildingId"];
+                self.roomModel.buildingUnitName = dic[@"buildingName"];
+                self.roomModel.buildingCompany = dic[@"company"];
+                cell.textField.text = dic[@"buildingName"];
+            };
             [self.navigationController pushViewController:controller animated:YES];
             break;
         }
         case 4: { //门牌号
             if ([NSString hjd_isBlankString:self.roomModel.houseId]) {
-                [MBProgressHUD showError:@"请先选择单元"];
+                [self showToast:@"请先选择单元"];
                 return;
             }
             HJDHomeRoomSelectViewController *controller = [[HJDHomeRoomSelectViewController alloc] init];

@@ -9,5 +9,5 @@
 #import "HJDBaseViewController.h"
 
 @interface HJDHomeDeclarationViewController : HJDBaseViewController
-
+@property(nonatomic, copy) NSString *xun_id;
 @end

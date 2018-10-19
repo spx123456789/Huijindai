@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "HJDMyAgentModel.h"
+#import "HJDUserDefaultsManager.h"
 #import "HJDUserModel.h"
 
 @interface HJDMyManager : NSObject
@@ -26,4 +27,10 @@
 
 //设置头像信息
 + (void)setMyAvatarWithImage:(UIImage *)image callBack:(void(^)(NSString *path, BOOL result))callback;
+
+//修改个人信息
++ (void)modifyMyInfoWithParams:(NSDictionary *)params callBack:(void(^)(BOOL result))callback;
+
+//重新更新一下我的信息
++ (void)reUpdateMyInfo:(void(^)(BOOL result))callback;;
 @end

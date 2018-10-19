@@ -16,6 +16,7 @@
 @property(nonatomic, strong) UIView *topView;
 @property(nonatomic, strong) HJDCustomerServiceView *customServiceView;
 @property(nonatomic, strong) UIButton *declarationBtn;
+@property(nonatomic, strong) NSMutableArray *companyArray;
 @end
 
 @implementation HJDHomeQueryValueResultViewController
@@ -79,6 +80,7 @@
 
 - (void)declarationButtonClick:(id)sender {
     HJDHomeDeclarationViewController *vc = [[HJDHomeDeclarationViewController alloc] init];
+    vc.xun_id = @"";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -92,6 +94,28 @@
     [self showNavigationBar];
 }
 
+- (void)setResultArray:(NSArray *)resultArray {
+    _resultArray = resultArray;
+    self.companyArray = [NSMutableArray arrayWithArray:@[ @"世联", @"仁达", @"首佳" ]];
+    for (NSDictionary *dic in self.resultArray) {
+        NSString *company = dic[@"assessCompany"];
+        switch (company.integerValue) {
+            case 01: {
+                [self.companyArray removeObject:@"世联"];
+                break;
+            }
+            case 02: {
+                [self.companyArray removeObject:@"仁达"];
+                break;
+            }
+            default: {
+                [self.companyArray removeObject:@"首佳"];
+                break;
+            }
+        }
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -102,7 +126,11 @@
     NSArray *testArr = @[ @{ @"totalPrice":@"4480000", @"unitPrice":@"44797", @"assessCompany":@"01", @"x_id":@"1"
     }, @{ @"totalPrice":@"4480000",  @"unitPrice":@"44797", @"assessCompany":@"02", @"x_id":@"2" }];
     
-    self.resultArray = [NSArray arrayWithArray:testArr];
+    NSArray *testArr2 = @[ @{ @"totalPrice":@"4480000", @"unitPrice":@"44797", @"assessCompany":@"01", @"x_id":@"1"
+                             }];
+    
+    self.resultArray = [NSArray arrayWithArray:testArr2];
+    
     UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:self.tableView.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(16 , 16)];
     CAShapeLayer *shapeLayer = [[CAShapeLayer alloc] init];
     shapeLayer.frame = self.tableView.bounds;
@@ -131,7 +159,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return self.resultArray.count + self.companyArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -151,7 +179,9 @@
             cell = [[HJDHomeQueryValueResultNumberTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier2];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        cell.company = @"仁达";
+    
+        NSString *title = self.companyArray[indexPath.row - self.resultArray.count];
+        cell.company = title;
         cell.number = @"5";
         return cell;
     }

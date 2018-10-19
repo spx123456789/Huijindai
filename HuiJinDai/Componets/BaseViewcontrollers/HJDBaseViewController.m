@@ -141,5 +141,8 @@
 }
 
 #pragma mark - 提示
+- (void)showToast:(NSString *)message {
+    [MBProgressHUD showError:message];
+}
 
 @end

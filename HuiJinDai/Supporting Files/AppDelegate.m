@@ -22,7 +22,6 @@
 
 #import "HJDNetAPIManager.h"
 #import "HJDMyManager.h"
-#import "HJDUserDefaultsManager.h"
 
 @interface AppDelegate ()<GeTuiSdkDelegate, UNUserNotificationCenterDelegate>
 
@@ -45,12 +44,7 @@
         HJDUserModel *userModel = (HJDUserModel *)[[HJDUserDefaultsManager shareInstance] loadObject:kUserModelKey];
         [[HJDNetAPIManager sharedManager] setAuthorization:userModel.token];
         [self enterHomeController];
-        [HJDMyManager getMyInfoWithCallBack:^(NSDictionary *dic, BOOL result) {
-            if (result) {
-                userModel.avatar = dic[@"avatar"];
-                [[HJDUserDefaultsManager shareInstance] saveObject:userModel key:kUserModelKey];
-            }
-        }];
+        [HJDMyManager reUpdateMyInfo:NULL];
     } else {
         UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:[[HJDLoginViewController alloc] init]];
         self.window.rootViewController = navi;

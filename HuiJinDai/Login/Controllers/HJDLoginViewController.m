@@ -23,6 +23,8 @@
 @property(nonatomic, strong) UIButton *registerButton;
 @property(nonatomic, strong) UIButton *loginButton;
 @property(nonatomic, strong) HJDCustomerServiceView *customServiceView;
+@property(nonatomic, assign) NSInteger timeSeconds;
+@property(nonatomic, strong) NSTimer *myTimer;
 @end
 
 @implementation HJDLoginViewController
@@ -73,11 +75,43 @@
 - (void)verifiCodeButtonClick:(id)sender {
     NSString *phone = self.phoneView.text;
     if (![phone hjd_isVaildPhoneNumber]) {
+        [self showToast:@"请输入正确手机号"];
         return;
     }
+    
+    [MBProgressHUD showMessage:@"获取验证码..."];
     [HJDRegisterHttpManager getVerifiCodeWithPhone:phone callBack:^(NSDictionary *data, NSError *error, BOOL result) {
-        
+        [MBProgressHUD hideHUD];
+        if (result) {
+            [self showTimer];
+            [MBProgressHUD showSuccess:@"验证码发送成功"];
+        } else {
+            [MBProgressHUD showError:@"验证码发送失败"];
+        }
     }];
+}
+
+- (void)showTimer {
+    self.timeSeconds = 60;
+    self.verifiCodeButton.enabled = NO;
+    [self.myTimer invalidate];
+    self.myTimer = nil;
+    self.myTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timeGo:) userInfo:nil repeats:YES];
+}
+
+- (void)timeGo:(NSTimer *)timer {
+    if (self.timeSeconds > 0) {
+        [self.verifiCodeButton setTitle:[NSString stringWithFormat:@"%lds", (long)self.timeSeconds]
+                               forState:UIControlStateNormal];
+        [self.verifiCodeButton setTitleColor:kMainColor forState:UIControlStateNormal];
+    } else {
+        [timer invalidate];
+        timer = nil;
+        [self.verifiCodeButton setTitle:@"发送验证码" forState:UIControlStateNormal];
+        [self.verifiCodeButton setTitleColor:kRGB_Color(0x66, 0x66, 0x66) forState:UIControlStateNormal];
+        self.verifiCodeButton.enabled = YES;
+    }
+    self.timeSeconds--;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -167,6 +201,13 @@
     [MBProgressHUD showMessage:@"登陆中..."];
     [HJDRegisterHttpManager loginWithPhone:phone verifiCode:verifiCode callBack:^(NSDictionary *data, NSError *error, BOOL result) {
         [MBProgressHUD hideHUD];
+        if (self.myTimer) {
+            [self.myTimer invalidate];
+            self.myTimer = nil;
+            [self.verifiCodeButton setTitle:@"发送验证码" forState:UIControlStateNormal];
+            [self.verifiCodeButton setTitleColor:kRGB_Color(0x66, 0x66, 0x66) forState:UIControlStateNormal];
+            self.verifiCodeButton.enabled = YES;
+        }
         if (result) {
             HJDUserModel *userModel = [[HJDUserModel alloc] init];
             [userModel hjd_loadDataFromkeyValues:data];

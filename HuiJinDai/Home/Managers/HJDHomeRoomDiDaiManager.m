@@ -52,7 +52,7 @@
 }
 
 + (void)getLouDongListWithModel:(HJDHomeRoomDiDaiModel *)model keyWord:(NSString *)keyWord CallBack:(RoomDiDaiHttpCallback)callback {
-    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Assessment/building") requestParams:@{ @"qu" : model.districtId, @"community_id" : model.communityId, @"building" : keyWord, @"companyStr" : model.communityCompany} networkMethod:GET callback:^(id data, NSError *error) {
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Assessment/building") requestParams:@{ @"qu" : model.districtId, @"community_id" : model.communityId, @"building" : keyWord, @"companyStr" : model.communityCompany } networkMethod:GET callback:^(id data, NSError *error) {
         if (error) {
             callback(nil, NO);
         } else {
@@ -62,11 +62,28 @@
 }
 
 + (void)getDanYuanListWithModel:(HJDHomeRoomDiDaiModel *)model keyWord:(NSString *)keyWord CallBack:(RoomDiDaiHttpCallback)callback {
-    
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Assessment/unit") requestParams:@{ @"qu" : model.districtId, @"community_id" : model.communityId, @"building_id" : model.buildingUnitId, @"unit" : keyWord, @"companyStr" : model.buildingCompany } networkMethod:GET callback:^(id data, NSError *error) {
+        if (error) {
+            callback(nil, NO);
+        } else {
+            callback([data getObjectByPath:@"data/list"], YES);
+        }
+    }];
 }
 
 + (void)getMenPaiListWithModel:(HJDHomeRoomDiDaiModel *)model keyWord:(NSString *)keyWord CallBack:(RoomDiDaiHttpCallback)callback {
-    
+    /*
+     unit_id    string 单元编号[选填]
+     unit    string 单元名称[选填]
+     companyStr 字段有问题
+     */
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Assessment/house") requestParams:@{ @"qu" : model.districtId, @"community_id" : model.communityId, @"building_id" : model.buildingUnitId, @"building" : model.buildingUnitName, @"house" : keyWord, @"companyStr" : model.communityCompany } networkMethod:GET callback:^(id data, NSError *error) {
+        if (error) {
+            callback(nil, NO);
+        } else {
+            callback([data getObjectByPath:@"data/list"], YES);
+        }
+    }];
 }
 
 + (void)postRoomEvaluateWithModel:(HJDHomeRoomDiDaiModel *)model callBack:(RoomDiDaiHttpCallback)callback {
@@ -112,6 +129,9 @@
 
 + (void)postRoomDeclarationWithModel:(HJDDeclarationModel *)model callBack:(void (^)(NSDictionary *, BOOL))callback {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    if (![NSString hjd_isBlankString:model.evaluation_id]) {
+        [params setObject:model.evaluation_id forKey:@"evaluation_id"];
+    }
     if (model.loan_variety == HJDLoanVarietyHouse_2) {
         [params setObject:model.loan_first forKey:@"loan_first"];
     }
@@ -124,8 +144,6 @@
             [HJDHomeRoomDiDaiManager uploadPictureWithModel:model callBack:callback];
         }
     }];
-    //http://hanhouxiong.hjxd.xiaoyutab.cn/upload/upload/20181018/thumb_100_632492fd7e24fa9d8786b430f8ac3784.png
-    
 }
 
 + (void)getOrderDetailWithID:(NSString *)uid callBack:(void (^)(NSDictionary *, BOOL))callback {

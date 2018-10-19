@@ -34,6 +34,21 @@
 @property(nonatomic, copy) NSString *avatar;
 @property(nonatomic, copy) NSString *sex;
 @property(nonatomic, copy) NSString *addr_office;
+@property(nonatomic, copy) NSString *addr_office_desc;
+@property(nonatomic, strong) NSDictionary *addr_office_tree;
 @property(nonatomic, copy) NSString *token;
 @property(nonatomic, copy) NSString *rename;
+@property(nonatomic, copy) NSString *invitation_uid;
+@property(nonatomic, copy) NSString *is_supper;
+@property(nonatomic, copy) NSString *ad_time;
+/*
+ "addr_office_tree": {
+ "sheng": "37",
+ "sheng_name": "河北省",
+ "shi": "77",
+ "shi_name": "秦皇岛市",
+ "qu": "",
+ "qu_name": ""
+ }
+ */
 @end

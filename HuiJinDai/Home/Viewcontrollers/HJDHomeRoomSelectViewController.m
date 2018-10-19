@@ -167,7 +167,7 @@
             str = dic[@"buildingName"];
             break;
         case HJDRoomSearchUnit:
-            str = @"请输入单元名称";
+            str = dic[@"buildingName"];
             break;
         default:
             str = @"请输入门牌号";
@@ -219,7 +219,21 @@
         }
         case HJDRoomSearchUnit: {
             [MBProgressHUD showMessage:@"正在加载..."];
-            [HJDHomeRoomDiDaiManager getLouDongListWithModel:self.diDaiModel keyWord:keyWord CallBack:^(NSArray *data, BOOL result) {
+            [HJDHomeRoomDiDaiManager getDanYuanListWithModel:self.diDaiModel keyWord:keyWord CallBack:^(NSArray *data, BOOL result) {
+                [MBProgressHUD hideHUD];
+                if (result) {
+                    [self.dataSource removeAllObjects];
+                    [self.dataSource addObjectsFromArray:data];
+                    [self.tableView reloadData];
+                } else {
+                    [MBProgressHUD showError:@"请求失败"];
+                }
+            }];
+            break;
+        }
+        case HJDRoomSearchHouse: {
+            [MBProgressHUD showMessage:@"正在加载..."];
+            [HJDHomeRoomDiDaiManager getMenPaiListWithModel:self.diDaiModel keyWord:keyWord CallBack:^(NSArray *data, BOOL result) {
                 [MBProgressHUD hideHUD];
                 if (result) {
                     [self.dataSource removeAllObjects];
