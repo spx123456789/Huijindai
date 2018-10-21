@@ -274,7 +274,8 @@ static NSString *key2 = @"imageInfo";
     NSDictionary *params = @{ @"loan_id" : loanId, @"type_id" : picType };
     
     [[HJDNetAPIManager sharedManager] POST:kAPIURL(@"/Loan/upload_file") parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        [formData appendPartWithFileData:photoData name:@"file" fileName:@"file" mimeType:@"image/jpg"];
+        NSString * fileName = [NSString stringWithFormat:@"%@.jpg",[NSDate date]];
+        [formData appendPartWithFileData:photoData name:@"file" fileName:fileName mimeType:@"image/jpg"];
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
