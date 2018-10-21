@@ -19,6 +19,7 @@
 @property(nonatomic, strong) NSMutableArray *myDataSource;
 @property(nonatomic, strong) NSMutableArray *channelDataSource;
 @property(nonatomic, assign) BOOL isFirstLoadChannel;
+@property(nonatomic, strong) NSIndexPath *editingIndexPath;
 @end
 
 @implementation HJDMessageViewController
@@ -53,6 +54,16 @@
     return self;
 }
 
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    if (self.editingIndexPath)
+    {
+        [self configSwipeButtons];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -85,7 +96,93 @@
     }];
 }
 
+- (void)configSwipeButtons
+{
+    // 获取选项按钮的reference
+    NSString *version = [UIDevice currentDevice].systemVersion;
+    if (version.doubleValue>=11.0)
+    {
+        // iOS 11层级 (Xcode 9编译): UITableView -> UISwipeActionPullView
+        for (UIView *subview in self.tableView.subviews)
+        {
+            if ([subview isKindOfClass:NSClassFromString(@"UISwipeActionPullView")])
+            {
+                // 和iOS 10的按钮顺序相反
+                UIButton *deleteButton = subview.subviews[0];
+                
+                [self configDeleteButton:deleteButton];
+            }
+        }
+    }
+    else
+    {
+        // iOS 8-10层级: UITableView -> UITableViewCell -> UITableViewCellDeleteConfirmationView
+        HJDMessageTableViewCell *tableCell = [self.tableView cellForRowAtIndexPath:self.editingIndexPath];
+        for (UIView *subview in tableCell.subviews)
+        {
+            if ([subview isKindOfClass:NSClassFromString(@"UITableViewCellDeleteConfirmationView")] && [subview.subviews count] >= 2)
+            {
+                UIButton *deleteButton = subview.subviews[0];
+                
+                [self configDeleteButton:deleteButton];
+            }
+        }
+    }
+}
+
+- (void)configDeleteButton:(UIButton*)deleteButton
+{
+    if (deleteButton)
+    {
+        [deleteButton.titleLabel setFont:[UIFont systemFontOfSize:12]];
+        [deleteButton setTitle:@"删除通知" forState:UIControlStateNormal];
+        [deleteButton setImage:[UIImage imageNamed:@"通知删除"] forState:UIControlStateNormal];
+        [deleteButton setBackgroundColor:kRGB_Color(0xFF, 0x52, 0x52)];
+        [self centerImageAndTextOnButton:deleteButton];
+    }
+}
+
+- (void)centerImageAndTextOnButton:(UIButton*)button
+{
+    // this is to center the image and text on button.
+    // the space between the image and text
+    CGFloat spacing = 35.0;
+    
+    // lower the text and push it left so it appears centered below the image
+    CGSize imageSize = button.imageView.image.size;
+    button.titleEdgeInsets = UIEdgeInsetsMake(0.0, - imageSize.width, - (imageSize.height + spacing), 0.0);
+    
+    // raise the image and push it right so it appears centered above the text
+    CGSize titleSize = [button.titleLabel.text sizeWithAttributes:@{NSFontAttributeName: button.titleLabel.font}];
+    button.imageEdgeInsets = UIEdgeInsetsMake(-(titleSize.height + spacing), 0.0, 0.0, - titleSize.width);
+    
+    // increase the content height to avoid clipping
+    CGFloat edgeOffset = (titleSize.height - imageSize.height) / 2.0;
+    button.contentEdgeInsets = UIEdgeInsetsMake(edgeOffset, 0.0, edgeOffset, 0.0);
+    
+    // move whole button down, apple placed the button too high in iOS 10
+    NSString *version = [UIDevice currentDevice].systemVersion;
+    if (version.doubleValue<11.0)
+    {
+        CGRect btnFrame = button.frame;
+        btnFrame.origin.y = 18;
+        button.frame = btnFrame;
+    }
+}
+
 #pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.editingIndexPath = indexPath;
+    [self.view setNeedsLayout];   // 触发-(void)viewDidLayoutSubviews
+}
+
+- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.editingIndexPath = nil;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
 }
