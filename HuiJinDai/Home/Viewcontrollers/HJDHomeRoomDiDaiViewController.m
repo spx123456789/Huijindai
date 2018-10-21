@@ -122,14 +122,14 @@ typedef enum : NSUInteger {
     }
     
     [MBProgressHUD showMessage:@"正在询值..."];
-    [HJDHomeRoomDiDaiManager postRoomEvaluateWithModel:self.roomModel callBack:^(NSArray *data, BOOL result) {
+    [HJDHomeRoomDiDaiManager postRoomEvaluateWithModel:self.roomModel callBack:^(NSDictionary *dataDic, BOOL result) {
         [MBProgressHUD hideHUD];
         if (result) {
             HJDHomeQueryValueResultViewController *controller = [[HJDHomeQueryValueResultViewController alloc] init];
-            controller.resultArray = [NSArray arrayWithArray:data];
+            controller.resultDic = [NSDictionary dictionaryWithDictionary:dataDic];
             [self.navigationController pushViewController:controller animated:YES];
         } else {
-            if (data) {
+            if (dataDic) {
                 [MBProgressHUD showError:@"用户询值次数已达上限"];
             } else {
                 [MBProgressHUD showError:@"询值失败"];
@@ -170,12 +170,41 @@ typedef enum : NSUInteger {
         UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44 + 20)];
         [footerView addSubview:self.queryValueButton];
         self.tableView.tableFooterView = footerView;
+        
+        self.tableView.mj_footer = nil;
     } else {
         self.tableView.frame = CGRectMake(0, 4, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 4);
         [self.view addSubview:self.tableView];
         self.customServiceView.hidden = YES;
         self.tableView.tableFooterView = nil;
+        
+        @weakify(self);
+        self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            @strongify(self);
+            [self loadMoreData];
+        }];
     }
+}
+
+static NSInteger page = 1;
+- (void)loadMoreData {
+    @weakify(self);
+    [MBProgressHUD showMessage:@"正在加载..."];
+    [HJDHomeRoomDiDaiManager getRoomEvaluateListWithPage:page callBack:^(NSArray *data, BOOL result) {
+        @strongify(self);
+        [MBProgressHUD hideHUD];
+        [self.tableView.mj_footer endRefreshing];
+        if (result) {
+            [self.dataSource addObjectsFromArray:data];
+            [self.tableView reloadData];
+            if (data.count == 0 || data.count < kHJDHttpRow) {
+                [self.tableView.mj_footer endRefreshingWithNoMoreData];
+            }
+            page++;
+        } else {
+            [MBProgressHUD showError:@"加载失败"];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -450,16 +479,8 @@ typedef enum : NSUInteger {
         [self.dataSource removeAllObjects];
         [self.tableView reloadData];
         //请求数据
-        [MBProgressHUD showMessage:@"正在加载..."];
-        [HJDHomeRoomDiDaiManager getRoomEvaluateListWithCallBack:^(NSArray *data, BOOL result) {
-            [MBProgressHUD hideHUD];
-            if (result) {
-                [self.dataSource addObjectsFromArray:data];
-                [self.tableView reloadData];
-            } else {
-                [MBProgressHUD showError:@"加载失败"];
-            }
-        }];
+        page = 1;
+        [self loadMoreData];
     } else {
         //刷新数据
         [self reloadView];

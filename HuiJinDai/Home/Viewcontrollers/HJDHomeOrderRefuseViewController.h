@@ -9,5 +9,6 @@
 #import "HJDBaseViewController.h"
 
 @interface HJDHomeOrderRefuseViewController : HJDBaseViewController
-
+@property(nonatomic, copy) NSString *order_id;
+@property(nonatomic, copy) NSString *refuseContent;
 @end

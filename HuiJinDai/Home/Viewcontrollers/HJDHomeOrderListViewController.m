@@ -49,16 +49,28 @@
     self.dataSource = [NSMutableArray array];
     
     [self searchKeyWord:nil];
+    
+    @weakify(self);
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        @strongify(self);
+        [self searchKeyWord:self.textField.text];
+    }];
 }
 
+static NSInteger orderListPage = 1;
 - (void)searchKeyWord:(NSString *)keyWord {
     [MBProgressHUD showMessage:@"正在加载..."];
-    [HJDHomeManager getOrderAuditListChannelOrAgentWithUid:self.uid keyWord:keyWord callBack:^(NSArray *data, BOOL result) {
+    [HJDHomeManager getOrderAuditListChannelOrAgentWithUid:self.uid keyWord:keyWord page:orderListPage callBack:^(NSArray *data, BOOL result) {
         [MBProgressHUD hideHUD];
+        [self.tableView.mj_footer endRefreshing];
         if (result) {
             [self.dataSource removeAllObjects];
             [self.dataSource addObjectsFromArray:data];
             [self.tableView reloadData];
+            if (data.count == 0 || data.count < kHJDHttpRow) {
+                [self.tableView.mj_footer endRefreshingWithNoMoreData];
+            }
+            orderListPage++;
         } else {
             [MBProgressHUD showError:@"加载失败"];
         }
@@ -121,6 +133,7 @@
 }
 
 - (void)clickSureButton:(id)sender {
+    orderListPage = 1;
     [self searchKeyWord:self.textField.text];
 }
 

@@ -17,6 +17,7 @@
 @property(nonatomic, strong) HJDCustomerServiceView *customServiceView;
 @property(nonatomic, strong) UIButton *declarationBtn;
 @property(nonatomic, strong) NSMutableArray *companyArray;
+@property(nonatomic, strong) NSArray *dataSource;
 @end
 
 @implementation HJDHomeQueryValueResultViewController
@@ -94,10 +95,10 @@
     [self showNavigationBar];
 }
 
-- (void)setResultArray:(NSArray *)resultArray {
-    _resultArray = resultArray;
+- (void)setDataSource:(NSArray *)dataSource {
+    _dataSource = dataSource;
     self.companyArray = [NSMutableArray arrayWithArray:@[ @"世联", @"仁达", @"首佳" ]];
-    for (NSDictionary *dic in self.resultArray) {
+    for (NSDictionary *dic in self.dataSource) {
         NSString *company = dic[@"assessCompany"];
         switch (company.integerValue) {
             case 01: {
@@ -116,20 +117,17 @@
     }
 }
 
+- (void)setResultDic:(NSDictionary *)resultDic {
+    _resultDic = resultDic;
+    self.dataSource = [NSArray arrayWithArray:[resultDic getObjectByPath:@"data/list"]];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self.view addSubview:self.topView];
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.customServiceView];
-    
-    NSArray *testArr = @[ @{ @"totalPrice":@"4480000", @"unitPrice":@"44797", @"assessCompany":@"01", @"x_id":@"1"
-    }, @{ @"totalPrice":@"4480000",  @"unitPrice":@"44797", @"assessCompany":@"02", @"x_id":@"2" }];
-    
-    NSArray *testArr2 = @[ @{ @"totalPrice":@"4480000", @"unitPrice":@"44797", @"assessCompany":@"01", @"x_id":@"1"
-                             }];
-    
-    self.resultArray = [NSArray arrayWithArray:testArr2];
     
     UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:self.tableView.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(16 , 16)];
     CAShapeLayer *shapeLayer = [[CAShapeLayer alloc] init];
@@ -159,18 +157,18 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.resultArray.count + self.companyArray.count;
+    return self.dataSource.count + self.companyArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row < self.resultArray.count) {
+    if (indexPath.row < self.dataSource.count) {
         static NSString *cellIdentifier = @"HJDHomeQueryValueResultTableViewCell";
         HJDHomeQueryValueResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (cell == nil) {
             cell = [[HJDHomeQueryValueResultTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        [cell setCellValue:self.resultArray[indexPath.row]];
+        [cell setCellValue:self.dataSource[indexPath.row]];
         return cell;
     } else {
         static NSString *cellIdentifier2 = @"HJDHomeQueryValueResultNumberTableCell";
@@ -180,9 +178,9 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
     
-        NSString *title = self.companyArray[indexPath.row - self.resultArray.count];
+        NSString *title = self.companyArray[indexPath.row - self.dataSource.count];
         cell.company = title;
-        cell.number = @"5";
+        cell.number = [self.resultDic getObjectByPath:@"data/frequency"];
         return cell;
     }
     

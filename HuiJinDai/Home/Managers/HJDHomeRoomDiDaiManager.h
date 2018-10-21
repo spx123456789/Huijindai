@@ -30,16 +30,16 @@ typedef void (^RoomDiDaiHttpCallback)(NSArray *data, BOOL result);
 
 #pragma Mark - 评值
 //评值
-+ (void)postRoomEvaluateWithModel:(HJDHomeRoomDiDaiModel *)model callBack:(RoomDiDaiHttpCallback)callback;
++ (void)postRoomEvaluateWithModel:(HJDHomeRoomDiDaiModel *)model callBack:(void(^)(NSDictionary *dataDic, BOOL result))callback;
 
 //获取评值记录
-+ (void)getRoomEvaluateListWithCallBack:(RoomDiDaiHttpCallback)callback;
++ (void)getRoomEvaluateListWithPage:(NSInteger)page callBack:(RoomDiDaiHttpCallback)callback;
 
 //获取评值信息（已询值）
 + (void)getRoomEvaluateInfoWithXunid:(NSString *)xun_id callBack:(void(^)(NSDictionary *dataDic, BOOL result))callback;
 
 //获取评值信息（新询值）
-+ (void)getNewRoomEvaluateInfoWithXunid:(NSString *)xun_id company:(NSString *)company callBack:(RoomDiDaiHttpCallback)callback;
++ (void)getNewRoomEvaluateInfoWithXunid:(NSString *)xun_id company:(NSString *)company callBack:(void(^)(NSDictionary *dataDic, BOOL result))callback;
 
 #pragma mark - 创建工单
 //申请工单号
@@ -51,9 +51,7 @@ typedef void (^RoomDiDaiHttpCallback)(NSArray *data, BOOL result);
 //工单详情
 + (void)getOrderDetailWithID:(NSString *)uid callBack:(void(^)(NSDictionary *data, BOOL result))callback;
 
+//工单审核
++ (void)auditOrderWithID:(NSString *)uid step:(NSString *)step content:(NSString *)content callBack:(void(^)(BOOL result))callback;
 
-
-
-#pragma mark - 测试 只上传图片
-+ (void)postRoomModel:(HJDDeclarationModel *)model callBack:(void(^)(NSDictionary *data, BOOL result))callback;
 @end

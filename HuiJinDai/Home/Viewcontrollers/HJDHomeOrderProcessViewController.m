@@ -13,11 +13,12 @@
 #import "HJDOrderProcessSearchView.h"
 #import "HJDHomeManager.h"
 
-@interface HJDHomeOrderProcessViewController ()<UITableViewDelegate, UITableViewDataSource, HJDMessageSegmentViewDelegate>
+@interface HJDHomeOrderProcessViewController ()<UITableViewDelegate, UITableViewDataSource, HJDMessageSegmentViewDelegate, HJDOrderProcessSearchViewDelegate>
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSMutableArray *dataSource;
 @property(nonatomic, strong) HJDMessageSegmentView *segmentView;
 @property(nonatomic, strong) HJDOrderProcessSearchView *searchView;
+@property(nonatomic, copy) NSString *order_status;
 @end
 
 @implementation HJDHomeOrderProcessViewController
@@ -46,7 +47,8 @@
 - (HJDOrderProcessSearchView *)searchView {
     if (!_searchView) {
         _searchView = [[HJDOrderProcessSearchView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 36 + 16)];
-        _searchView.selectIndex = 1;
+        _searchView.selectIndex = 0;
+        _searchView.delegate = self;
     }
     return _searchView;
 }
@@ -61,11 +63,9 @@
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.searchView;
     
-    [self searchKeyWord:nil status:@"1"];
-}
-
-- (void)loadData {
+    self.order_status = @"1";
     
+    [self searchKeyWord:nil status:@"1"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,8 +75,7 @@
 
 - (void)searchKeyWord:(NSString *)keyWord status:(NSString *)status {
     [MBProgressHUD showMessage:@"正在加载..."];
-    [HJDHomeManager getOrderManageListChannelOrAgentWithUid:self.uid status:status keyWord:keyWord callBack:^(NSArray *data, BOOL result) {
-        [MBProgressHUD hideHUD];
+    [HJDHomeManager getOrderManageListChannelOrAgentWithUid:self.uid status:status keyWord:keyWord page:1 callBack:^(NSArray *data, BOOL result) {[MBProgressHUD hideHUD];
         if (result) {
             [self.dataSource removeAllObjects];
             [self.dataSource addObjectsFromArray:data];
@@ -122,9 +121,21 @@
 #pragma mark - HJDMessageSegmentViewDelegate
 - (void)segmentView:(HJDMessageSegmentView *)segmentView didSelectMessageType:(HJDMessageType)type {
     if (type == HJDMessageTypeMy) { //left
+        self.order_status = @"1";
         [self searchKeyWord:nil status:@"1"];
     } else {
+        self.order_status = @"2";
         [self searchKeyWord:nil status:@"2"];
     }
+}
+
+#pragma mark - HJDOrderProcessSearchViewDelegate
+- (void)processSearchView:(HJDOrderProcessSearchView *)searchView searchWord:(NSString *)keyWord {
+    if ([NSString hjd_isBlankString:keyWord]) {
+        [self showToast:@"请输入搜索关键词"];
+        return;
+    }
+    
+    [self searchKeyWord:keyWord status:self.order_status];
 }
 @end

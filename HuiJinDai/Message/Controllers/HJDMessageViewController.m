@@ -10,6 +10,7 @@
 #import "HJDMessageTableViewCell.h"
 #import "HJDMessageManager.h"
 #import "HJDMessageSegmentView.h"
+#import "HJDHomeOrderDetailViewController.h"
 
 @interface HJDMessageViewController ()<UITableViewDelegate, UITableViewDataSource, HJDMessageSegmentViewDelegate>
 @property(nonatomic, strong) UITableView *tableView;
@@ -68,10 +69,20 @@
     [super viewDidLoad];
     
     self.navigationItem.titleView = self.segmentView;
-    
+    self.view.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
     [self.view addSubview:self.tableView];
     
+    @weakify(self);
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        @strongify(self);
+        
+    }];
+    
     [self getMessageData];
+}
+
+- (void)loadMoreData {
+    [self.tableView.mj_footer endRefreshing];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -96,8 +107,7 @@
     }];
 }
 
-- (void)configSwipeButtons
-{
+- (void)configSwipeButtons {
     // 获取选项按钮的reference
     NSString *version = [UIDevice currentDevice].systemVersion;
     if (version.doubleValue>=11.0)
@@ -130,10 +140,8 @@
     }
 }
 
-- (void)configDeleteButton:(UIButton*)deleteButton
-{
-    if (deleteButton)
-    {
+- (void)configDeleteButton:(UIButton*)deleteButton {
+    if (deleteButton) {
         [deleteButton.titleLabel setFont:[UIFont systemFontOfSize:12]];
         [deleteButton setTitle:@"删除通知" forState:UIControlStateNormal];
         [deleteButton setImage:[UIImage imageNamed:@"通知删除"] forState:UIControlStateNormal];
@@ -142,8 +150,7 @@
     }
 }
 
-- (void)centerImageAndTextOnButton:(UIButton*)button
-{
+- (void)centerImageAndTextOnButton:(UIButton*)button {
     // this is to center the image and text on button.
     // the space between the image and text
     CGFloat spacing = 35.0;
@@ -171,20 +178,21 @@
 }
 
 #pragma mark - UITableViewDelegate
-
-- (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath {
     self.editingIndexPath = indexPath;
     [self.view setNeedsLayout];   // 触发-(void)viewDidLayoutSubviews
 }
 
-- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
     self.editingIndexPath = nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    NSMutableArray *mut = self.dataSource[indexPath.section];
+    HJDMessageModel *message = mut[indexPath.row];
+    HJDHomeOrderDetailViewController *detailController = [[HJDHomeOrderDetailViewController alloc] init];
+    detailController.order_id = message.lid;
+    [self.navigationController pushViewController:detailController animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -203,6 +211,11 @@
         [mut removeObjectAtIndex:indexPath.row];
         if (mut.count == 0) {
             [self.dataSource removeObject:mut];
+            if (self.selectType == HJDMessageTypeMy) {
+                [self.myDataSource removeObject:mut];
+            } else {
+                [self.channelDataSource removeObject:mut];
+            }
         }
         [self.tableView reloadData];
         completionHandler (YES);

@@ -12,11 +12,14 @@
 #import "HJDHomeOrderRefuseViewController.h"
 #import "HJDHomeOrderApprovedView.h"
 #import "HJDHomeRoomDiDaiManager.h"
+#import "HJDHomeOrderDetailResultViewController.h"
+#import "HJDUserModel.h"
+#import "HJDUserDefaultsManager.h"
 
 @interface HJDHomeOrderDetailViewController ()<UITableViewDelegate, UITableViewDataSource, HJDHomeOrderDetailButtonCellDelegate>
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSMutableArray *dataSource;
-@property(nonatomic, strong) UIView *topView;
+@property(nonatomic, strong) NSMutableDictionary *topDictionary;
 @end
 
 @implementation HJDHomeOrderDetailViewController
@@ -33,35 +36,13 @@
     return _tableView;
 }
 
-- (UIView *)topView {
-    if (!_topView) {
-        _topView = [[UIView alloc] init];
-        _topView.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
-        UIButton *topBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        topBtn.frame = CGRectMake(16, 10, kScreenWidth - 32, 53);
-        [topBtn setBackgroundImage:kImage(@"工单详情查看批贷函") forState:UIControlStateNormal];
-        [topBtn setBackgroundImage:kImage(@"工单详情查看批贷函") forState:UIControlStateHighlighted];
-        [_topView addSubview:topBtn];
-        
-        UIButton *bottomBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        bottomBtn.frame = CGRectMake(16, 10 + 53 + 3, kScreenWidth - 32, 53);
-        [bottomBtn setBackgroundImage:kImage(@"工单详情查看审查报告") forState:UIControlStateNormal];
-        [bottomBtn setBackgroundImage:kImage(@"工单详情查看审查报告") forState:UIControlStateHighlighted];
-        [_topView addSubview:bottomBtn];
-    }
-    return _topView;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setNavTitle:@"工单详情"];
     
     self.dataSource = [NSMutableArray array];
-    
     [self.view addSubview:self.tableView];
-    self.topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 * 2 + 3 + 5);
-    self.tableView.tableHeaderView = self.topView;
     
     NSDictionary *testDic = @{
                               @"ad_time": @"2018-09-23 17:41:22",// 提交时间
@@ -70,24 +51,107 @@
                               },
                               @"shot": @"询值中",
                               @"title": @"报单",
-                              @"step": @"1"
+                              @"step": @"2"
                               };
     
+    self.order_id = @"151";
+    
     [MBProgressHUD showMessage:@"正在加载..."];
-    [HJDHomeRoomDiDaiManager getOrderDetailWithID:@"151" callBack:^(NSDictionary *data, BOOL result) {
+    [HJDHomeRoomDiDaiManager getOrderDetailWithID:self.order_id callBack:^(NSDictionary *data, BOOL result) {
         [MBProgressHUD hideHUD];
         if (result) {
             [self.dataSource addObject:data[@"xunzhi"]];
             [self.dataSource addObject:data[@"baodan"]];
             [self.dataSource addObject:data[@"fujian"]];
-            //[self.dataSource addObject:data[@"status_log"]];
-            [self.dataSource addObject:@[ testDic ]];
-            [self.dataSource addObject:@""];
+            [self.dataSource addObject:data[@"status_log"]];
+            
+            HJDUserModel *userModel = (HJDUserModel *)[[HJDUserDefaultsManager shareInstance] loadObject:kUserModelKey];
+            if (userModel.type.integerValue == 2 || userModel.type.integerValue == 3) {
+                [self.dataSource addObject:@""];
+            }
+            [self setTabelViewTopView:data];
             [self.tableView reloadData];
         } else {
             [MBProgressHUD showError:@"加载失败"];
         }
     }];
+}
+
+- (void)setTabelViewTopView:(NSDictionary *)resultDic {
+    self.topDictionary = [NSMutableDictionary dictionaryWithDictionary:resultDic];
+    //拒单原因
+    NSString *refuseStr = resultDic[@"refuse"];
+    // 审查报告文件位置,PDF文件
+    NSString *presentation = resultDic[@"presentation"];
+    // 审批函文件位置,PDF文件
+    //NSString *approval = resultDic[@"approval"];
+    // 还款计划信息，该信息为字典形式，目前暂时未定义
+    //NSString *plan = resultDic[@"plan"];
+    
+    UIView *topView = [[UIView alloc] init];
+    topView.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
+    
+    UIButton *topBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    topBtn.frame = CGRectMake(16, 10, kScreenWidth - 32, 53);
+    [topView addSubview:topBtn];
+    
+    if (![NSString hjd_isBlankString:refuseStr]) {
+        [topBtn setBackgroundImage:kImage(@"共党详情已拒单") forState:UIControlStateNormal];
+        [topBtn setBackgroundImage:kImage(@"共党详情已拒单") forState:UIControlStateHighlighted];
+        [topBtn addTarget:self action:@selector(refuseButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 + 3 + 5);
+    } else if (![NSString hjd_isBlankString:presentation]) {
+        [topBtn setBackgroundImage:kImage(@"工单详情查看批贷函") forState:UIControlStateNormal];
+        [topBtn setBackgroundImage:kImage(@"工单详情查看批贷函") forState:UIControlStateHighlighted];
+        [topBtn addTarget:self action:@selector(presentationButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIButton *bottomBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        bottomBtn.frame = CGRectMake(16, 10 + 53 + 3, kScreenWidth - 32, 53);
+        [bottomBtn setBackgroundImage:kImage(@"工单详情查看审查报告") forState:UIControlStateNormal];
+        [bottomBtn setBackgroundImage:kImage(@"工单详情查看审查报告") forState:UIControlStateHighlighted];
+        [bottomBtn addTarget:self action:@selector(approvalButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [topView addSubview:bottomBtn];
+        topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 * 2 + 3 + 5);
+    } else {
+        [topBtn setBackgroundImage:kImage(@"工单详情已放款") forState:UIControlStateNormal];
+        [topBtn setBackgroundImage:kImage(@"工单详情已放款") forState:UIControlStateHighlighted];
+        [topBtn addTarget:self action:@selector(planButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 + 3 + 5);
+    }
+    self.tableView.tableHeaderView = topView;
+}
+
+- (void)refuseButtonClick:(id)sender {
+    //拒单原因
+    NSString *refuseStr = self.topDictionary[@"refuse"];
+    HJDHomeOrderRefuseViewController *controller = [[HJDHomeOrderRefuseViewController alloc] init];
+    controller.order_id = self.order_id;
+    controller.refuseContent = refuseStr;
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)presentationButtonClick:(id)sender {
+    // 审查报告文件位置,PDF文件
+    NSString *presentation = self.topDictionary[@"presentation"];
+    [self goToNextController:presentation];
+}
+
+- (void)approvalButtonClick:(id)sender {
+    // 审批函文件位置,PDF文件
+    NSString *approval = self.topDictionary[@"approval"];
+    [self goToNextController:approval];
+}
+
+- (void)planButtonClick:(id)sender {
+    // 还款计划信息，该信息为字典形式，目前暂时未定义
+    NSString *plan = self.topDictionary[@"plan"];
+    [self goToNextController:plan];
+}
+
+- (void)goToNextController:(NSString *)word {
+    HJDHomeOrderDetailResultViewController *resultController = [[HJDHomeOrderDetailResultViewController alloc] init];
+    resultController.wordUrl = word;
+    [self.navigationController pushViewController:resultController animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -205,11 +269,21 @@
 - (void)buttonCell:(HJDHomeOrderDetailButtonCell *)buttonCell selectButtonIndex:(NSInteger)index {
     if (index == 0) { //拒单
         HJDHomeOrderRefuseViewController *controller = [[HJDHomeOrderRefuseViewController alloc] init];
+        controller.order_id = self.order_id;
         [self.navigationController pushViewController:controller animated:YES];
     } else { //通过
-        HJDHomeOrderApprovedView *view = [[HJDHomeOrderApprovedView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-        UIWindow *window = [UIApplication sharedApplication].keyWindow;
-        [window addSubview:view];
+        [MBProgressHUD showMessage:@"正在提交..."];
+        [HJDHomeRoomDiDaiManager auditOrderWithID:self.order_id step:@"1" content:nil callBack:^(BOOL result) {
+            [MBProgressHUD hideHUD];
+            if (result) {
+                [MBProgressHUD showSuccess:@"提交成功"];
+            } else {
+                [MBProgressHUD showError:@"提交失败"];
+            }
+        }];
+//        HJDHomeOrderApprovedView *view = [[HJDHomeOrderApprovedView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+//        UIWindow *window = [UIApplication sharedApplication].keyWindow;
+//        [window addSubview:view];
     }
 }
 @end

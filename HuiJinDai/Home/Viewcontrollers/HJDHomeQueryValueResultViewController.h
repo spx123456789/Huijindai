@@ -9,5 +9,5 @@
 #import "HJDBaseViewController.h"
 
 @interface HJDHomeQueryValueResultViewController : HJDBaseViewController
-@property(nonatomic, strong) NSArray *resultArray;
+@property(nonatomic, strong) NSDictionary *resultDic;
 @end

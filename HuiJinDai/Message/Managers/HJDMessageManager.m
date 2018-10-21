@@ -12,12 +12,11 @@
 @implementation HJDMessageManager
 
 + (void)getMyMessageWithType:(NSString *)type callBack:(void (^)(NSArray *, BOOL))callBack {
-    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Msg/self") requestParams:@{ @"type" : type } networkMethod:GET callback:^(id data, NSError *error) {
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Msg/self") requestParams:@{ @"type" : type, @"p0" : @"100" } networkMethod:GET callback:^(id data, NSError *error) {
         if (error) {
             callBack(nil, NO);
         } else {
             NSArray *arr = [data getObjectByPath:@"data/list"];
-            arr = [HJDMessageManager fakeData];
             NSMutableArray *resultArray = [NSMutableArray array];
             for (int k = 0; k < arr.count; k++) {
                 HJDMessageModel *message = [[HJDMessageModel alloc] init];

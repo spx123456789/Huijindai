@@ -194,11 +194,7 @@
     self.cityLabel_1.text = [NSString stringWithFormat:@"%@%@%@", model.provinceName, model.cityName, model.districtName];
     self.xiaoquLabel_1.text = model.communityName;
     self.addressLabel_1.text = model.address;
-    if (model.planning.integerValue == 1) {
-        self.useLabel_1.text = @"住宅";
-    } else {
-        self.useLabel_1.text = @"别墅";
-    }
+    self.useLabel_1.text = model.planning;
     self.areaLabel_1.text = [NSString stringWithFormat:@"%@m²", model.houseSpace];
 }
 
@@ -377,8 +373,31 @@
     UIView *firstView = nil;
     for (int i = 0; i < processArray.count; i++) {
         NSDictionary *dictionary = processArray[i];
-        NSDictionary *subDic = dictionary[@"user"];
-        UIView *view = [self createViewWithTitle:dictionary[@"title"] subTitle:subDic[@"1"] process:dictionary[@"shot"] time:dictionary[@"ad_time"] hideTop:(i == 0) hideBottom:(i == processArray.count - 1)];
+        NSString *agree = dictionary[@"step"];
+        NSString *process = @"";
+        switch (agree.integerValue) {
+            case 1:
+                process = @"待审核";
+                break;
+            case 2:
+                process = @"审核中";
+                break;
+            case 3:
+                process = @"审核完成";
+                break;
+            case 4:
+                process = @"审核终止";
+                break;
+            case 5:
+                process = @"审核打回";
+                break;
+            case 6:
+                process = @"审核暂留";
+                break;
+            default:
+                break;
+        }
+        UIView *view = [self createViewWithTitle:dictionary[@"title"] subTitle:dictionary[@"user"] process:process time:dictionary[@"ad_time"] hideTop:(i == 0) hideBottom:(i == processArray.count - 1) agree:!(agree.integerValue == 4)];
         [self.bgView addSubview:view];
         
         if (firstView == nil) {
@@ -398,7 +417,7 @@
     }
 }
 
-- (UIView *)createViewWithTitle:(NSString *)title subTitle:(NSString *)subTitle process:(NSString *)process time:(NSString *)time hideTop:(BOOL)hideTop hideBottom:(BOOL)hideBottom {
+- (UIView *)createViewWithTitle:(NSString *)title subTitle:(NSString *)subTitle process:(NSString *)process time:(NSString *)time hideTop:(BOOL)hideTop hideBottom:(BOOL)hideBottom agree:(BOOL)agree {
     UIView *mainView = [[UIView alloc] init];
     mainView.backgroundColor = kWithe;
     
@@ -407,6 +426,9 @@
     [mainView addSubview:topView];
     
     UIImageView *imgView = [[UIImageView alloc] initWithImage:kImage(@"工单详情对勾")];
+    if (!agree) {
+        imgView.image = kImage(@"工单详情拒单");
+    }
     [mainView addSubview:imgView];
     
     UIView *bottomView = [[UIView alloc] init];
@@ -664,7 +686,7 @@
     }
     cell.priceLabel.text = [NSString stringWithFormat:@"%@单价：",title];
     cell.totalPriceLabel.text = [NSString stringWithFormat:@"%@总价：",title];
-    cell.priceLabel_1.text = [NSString stringWithFormat:@"%@元/m²", dic[@"unitPrice"]];
+    cell.priceLabel_1.text = dic[@"unitPrice"];
     cell.totalPriceLabel_1.text = dic[@"totalPrice"];
     if (indexPath.row == self.dataSource.count - 1) {
         cell.lineView.hidden = YES;

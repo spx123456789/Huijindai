@@ -7,6 +7,7 @@
 //
 
 #import "HJDHomeOrderRefuseViewController.h"
+#import "HJDHomeRoomDiDaiManager.h"
 
 @interface HJDHomeOrderRefuseViewController ()
 @property(nonatomic, strong) UIView *topView;
@@ -55,17 +56,29 @@
         _sureButton.titleLabel.font = kFont15;
         [_sureButton setTitle:@"确定" forState:UIControlStateNormal];
         [_sureButton setTitleColor:kRGB_Color(0xff, 0xff, 0xff) forState:UIControlStateNormal];
+        [_sureButton addTarget:self action:@selector(sureButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _sureButton;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)sureButtonClick:(id)sender {
+    if ([NSString hjd_isBlankString:self.textView.text]) {
+        [self showToast:@"请填写拒绝原因"];
+        return;
+    }
     
-    [self setNavTitle:@"拒单"];
-    
-    self.view.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
-    
+    [MBProgressHUD showMessage:@"正在提交..."];
+    [HJDHomeRoomDiDaiManager auditOrderWithID:self.order_id step:@"2" content:self.textView.text callBack:^(BOOL result) {
+        [MBProgressHUD hideHUD];
+        if (result) {
+            [MBProgressHUD showSuccess:@"提交成功"];
+        } else {
+            [MBProgressHUD showError:@"提交失败"];
+        }
+    }];
+}
+
+- (void)setUpUI {
     [self.view addSubview:self.topView];
     
     UIView *bgView = [[UIView alloc] init];
@@ -100,6 +113,22 @@
         make.top.equalTo(bgView.mas_bottom).offset(20);
         make.height.equalTo(@46);
     }];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self setNavTitle:@"拒单"];
+    
+    self.view.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
+    
+    [self setUpUI];
+    
+    if (![NSString hjd_isBlankString:self.refuseContent]) {
+        self.textView.text = self.refuseContent;
+        self.sureButton.hidden = YES;
+        self.textView.userInteractionEnabled = NO;
+    }
     
 }
 

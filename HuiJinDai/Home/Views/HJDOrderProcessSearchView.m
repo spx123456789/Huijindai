@@ -33,10 +33,10 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.selectIndexPath = nil;
-        self.dataSource = @[ @"客户经理审核中", @"风控分配中", @"审核岗处理中", @"放款审核处理中", @"待放款" ];
+        self.dataSource = @[ @"全部", @"客户经理审核中", @"风控分配中", @"审核岗处理中", @"合同/公证/抵押岗处理中", @"放款审核处理中", @"待放款" ];
         
-        CGFloat view_width = 120;
-        CGFloat view_height = 162;
+        CGFloat view_width = 170;
+        CGFloat view_height = 162 + 28 * 2;
         //imageView的superView
         UIView *fangkuanView1 = [[UIView alloc] initWithFrame:CGRectMake(16, 64 + 44, view_width, view_height)];
         //imageView的superView 的阴影view
@@ -176,8 +176,15 @@
         [_sureButton setTitle:@"确定" forState:UIControlStateNormal];
         _sureButton.titleLabel.font = kFont15;
         [_sureButton setTitleColor:kRGB_Color(0x33, 0x33, 0x33) forState:UIControlStateNormal];
+        [_sureButton addTarget:self action:@selector(sureButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _sureButton;
+}
+
+- (void)sureButtonClick:(id)sender {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(processSearchView:searchWord:)]) {
+        [self.delegate processSearchView:self searchWord:self.textField.text];
+    }
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {

@@ -20,6 +20,7 @@
 #import "HJDUserDefaultsManager.h"
 #import "HJDHomeLocationManager.h"
 #import "HJDHomeNavBarButton.h"
+#import "HJDHomeOrderProcessViewController.h"
 
 @interface HJDHomeViewController ()<UITableViewDelegate, UITableViewDataSource, HKScrollViewNetDelegate, HJDHomeTableViewCellDelegate, HJDHomeLocationManagerDelegate>
 @property(strong, nonatomic) UITableView *tableView;
@@ -202,9 +203,16 @@
         auditController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:auditController animated:YES];
     } else if ([model.title isEqualToString:@"工单管理"]) {
-        HJDHomeOrderManageViewController *controller = [[HJDHomeOrderManageViewController alloc] init];
-        controller.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:controller animated:YES];
+        if (self.userModel.type.integerValue == HJDUserTypeAgent) {
+            HJDHomeOrderProcessViewController *controller = [[HJDHomeOrderProcessViewController alloc] init];
+            controller.uid = self.userModel.user_id;
+            controller.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:controller animated:YES];
+        } else {
+            HJDHomeOrderManageViewController *controller = [[HJDHomeOrderManageViewController alloc] init];
+            controller.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:controller animated:YES];
+        }
     } else if ([model.title isEqualToString:@"还款计算器"]) {
         HJDHomeCalculatorViewController *calcuController = [[HJDHomeCalculatorViewController alloc]init];
         calcuController.hidesBottomBarWhenPushed = YES;

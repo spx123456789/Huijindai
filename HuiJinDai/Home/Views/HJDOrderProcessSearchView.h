@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class HJDOrderProcessSearchView;
+@protocol HJDOrderProcessSearchViewDelegate <NSObject>
+- (void)processSearchView:(HJDOrderProcessSearchView *)searchView searchWord:(NSString *)keyWord;
+@end
+
 @interface HJDOrderProcessSearchView : UIView
 @property(nonatomic, assign) NSInteger selectIndex;
+@property(nonatomic, weak) id<HJDOrderProcessSearchViewDelegate> delegate;
 @end

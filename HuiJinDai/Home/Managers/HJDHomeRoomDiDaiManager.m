@@ -86,28 +86,27 @@
     }];
 }
 
-+ (void)postRoomEvaluateWithModel:(HJDHomeRoomDiDaiModel *)model callBack:(RoomDiDaiHttpCallback)callback {
++ (void)postRoomEvaluateWithModel:(HJDHomeRoomDiDaiModel *)model callBack:(void (^)(NSDictionary *, BOOL))callback {
     [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Assessment/evaluate") requestParams:[model getRoomEvaluateParams] networkMethod:POST callback:^(NSDictionary *data, NSError *error) {
         if (error) {
             callback(nil, NO);
         } else {
             NSArray *dataArray = [data getObjectByPath:@"data/list"];
             if (dataArray && dataArray.count > 0) {
-                callback(dataArray, YES);
+                callback(data, YES);
             } else {
                 if ([[data getObjectByPath:@"string_code"] isEqualToString:@"ERROR_USER"]) {
-                    callback(@[ @"ERROR_USER" ], NO);
+                    callback( @{ @"1" : @"ERROR_USER" }, NO);
                 } else {
                     callback(nil, NO);
                 }
             }
-            
         }
     }];
 }
 
-+ (void)getRoomEvaluateListWithCallBack:(RoomDiDaiHttpCallback)callback {
-    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Assessment/get_list") requestParams:nil networkMethod:GET callback:^(id data, NSError *error) {
++ (void)getRoomEvaluateListWithPage:(NSInteger)page callBack:(RoomDiDaiHttpCallback)callback {
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Assessment/get_list") requestParams:@{ @"p0" : [NSString stringWithFormat:@"%ld", (long)page]} networkMethod:GET callback:^(id data, NSError *error) {
         if (error) {
             callback(nil, NO);
         } else {
@@ -126,16 +125,20 @@
     }];
 }
 
-+ (void)getNewRoomEvaluateInfoWithXunid:(NSString *)xun_id company:(NSString *)company callBack:(RoomDiDaiHttpCallback)callback {
++ (void)getNewRoomEvaluateInfoWithXunid:(NSString *)xun_id company:(NSString *)company callBack:(void (^)(NSDictionary *, BOOL))callback {
     [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Assessment/get_newprice") requestParams:@{ @"xun_id" : xun_id, @"companyStr" : company } networkMethod:GET callback:^(id data, NSError *error) {
-        NSArray *dataArray = [data getObjectByPath:@"data/list"];
-        if (dataArray && dataArray.count > 0) {
-            callback(dataArray, YES);
+        if (error) {
+            callback(nil, NO);
         } else {
-            if ([[data getObjectByPath:@"string_code"] isEqualToString:@"ERROR_USER"]) {
-                callback(@[ @"ERROR_USER" ], NO);
+            NSArray *dataArray = [data getObjectByPath:@"data/list"];
+            if (dataArray && dataArray.count > 0) {
+                callback(data, YES);
             } else {
-                callback(nil, NO);
+                if ([[data getObjectByPath:@"string_code"] isEqualToString:@"ERROR_USER"]) {
+                    callback( @{ @"1" : @"ERROR_USER" }, NO);
+                } else {
+                    callback(nil, NO);
+                }
             }
         }
     }];
@@ -209,6 +212,21 @@
             callback(nil, NO);
         } else {
             callback([data getObjectByPath:@"data"], YES);
+        }
+    }];
+}
+
++ (void)auditOrderWithID:(NSString *)uid step:(NSString *)step content:(NSString *)content callBack:(void (^)(BOOL))callback {
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{ @"loan_id" : uid, @"step" : step }];
+    if (step.integerValue == 2) {
+        [params setObject:content forKey:@"content"];
+    }
+    
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Loan/examine") requestParams:params networkMethod:GET callback:^(id data, NSError *error) {
+        if (error) {
+            callback(NO);
+        } else {
+            callback(YES);
         }
     }];
 }
@@ -289,8 +307,4 @@ static NSString *key2 = @"imageInfo";
     }];
 }
 
-#pragma mark - 测试 只上传图片
-+ (void)postRoomModel:(HJDDeclarationModel *)model callBack:(void(^)(NSDictionary *data, BOOL result))callback {
-    [HJDHomeRoomDiDaiManager uploadPictureWithModel:model callBack:callback];
-}
 @end
