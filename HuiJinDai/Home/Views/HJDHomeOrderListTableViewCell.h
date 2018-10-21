@@ -20,5 +20,5 @@ typedef enum : NSUInteger {
 @property(nonatomic, copy) NSString *locationAddress;
 @property(nonatomic, copy) NSString *customerName;
 @property(nonatomic, copy) NSString *money;
-@property(nonatomic, assign) HJDOrderAuditStatus auditStatus;
+@property(nonatomic, copy) NSString *status;
 @end

@@ -10,4 +10,8 @@
 
 @implementation HJDOrderListModel
 
++ (NSDictionary *)mj_replacedKeyFromPropertyName {
+    return @{ @"order_id" : @"id"};
+}
+
 @end

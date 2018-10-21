@@ -72,17 +72,7 @@
     self.view.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
     [self.view addSubview:self.tableView];
     
-    @weakify(self);
-    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        @strongify(self);
-        
-    }];
-    
     [self getMessageData];
-}
-
-- (void)loadMoreData {
-    [self.tableView.mj_footer endRefreshing];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -211,7 +211,12 @@
         if (error) {
             callback(nil, NO);
         } else {
-            callback([data getObjectByPath:@"data"], YES);
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                callback([data getObjectByPath:@"data"], YES);
+            } else {
+                callback(nil, NO);
+            }
         }
     }];
 }

@@ -8,10 +8,6 @@
 
 #import "HJDTextFieldView.h"
 
-@interface HJDTextFieldView()<UITextFieldDelegate>
-
-@end
-
 @implementation HJDTextFieldView
 
 - (UILabel *)textLabel {
@@ -27,7 +23,6 @@
     if (!_textField) {
         _textField = [[UITextField alloc] init];
         _textField.font = kFont15;
-        _textField.delegate = self;
         _textField.textColor = kRGB_Color(0x33, 0x33, 0x33);
     }
     return _textField;
@@ -36,7 +31,7 @@
 - (instancetype)initWithFrame:(CGRect)frame text:(NSString *)text fieldPlaceholder:(NSString *)placeholder tag:(NSInteger)fieldTag {
     self = [super initWithFrame:frame];
     if (self) {
-        _fieldCanEdit = YES;
+        self.fieldCanEdit = YES;
         self.backgroundColor = kWithe;
         [self addSubview:self.textLabel];
         [self addSubview:self.textField];
@@ -74,10 +69,11 @@
     self.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:fieldPlaceholder attributes:@{ NSFontAttributeName : kFont15, NSForegroundColorAttributeName : kRGB_Color(0xd4, 0xd4, 0xd4)}];
 }
 
-#pragma mark - UITextFieldDelegate
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    return self.fieldCanEdit;
+- (void)setFieldCanEdit:(BOOL)fieldCanEdit {
+    _fieldCanEdit = fieldCanEdit;
+    self.textField.userInteractionEnabled = fieldCanEdit;
 }
+
 @end
 
 #pragma mark - HJDRegisterAgreementView

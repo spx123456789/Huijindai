@@ -38,7 +38,13 @@
         if (error) {
             callBack(nil, error, NO);
         } else {
-            callBack([data getObjectByPath:@"data"], nil, YES);
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                callBack([data getObjectByPath:@"data"], nil, YES);
+            } else {
+                callBack(@{ @"error_msg" : [data getObjectByPath:@"error_msg"] }, nil, NO);
+            }
+            
         }
     }];
 }

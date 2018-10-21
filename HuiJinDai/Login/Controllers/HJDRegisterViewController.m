@@ -60,7 +60,6 @@
     if (!_cityNextButton) {
         _cityNextButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_cityNextButton setImage:kImage(@"进入") forState:UIControlStateNormal];
-        [_cityNextButton addTarget:self action:@selector(selectCity:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _cityNextButton;
 }
@@ -172,6 +171,8 @@
     topHeight += 63;
     _cityView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight, kScreenWidth, 63) text:@"城市" fieldPlaceholder:@"请选择城市" tag:13];
     _cityView.fieldCanEdit = NO;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectCity:)];
+    [_cityView addGestureRecognizer:tap];
     [self.bgView addSubview:_cityView];
     
     self.cityNextButton.frame = CGRectMake(kScreenWidth - 45, topHeight + 22, 30, 30);
@@ -286,7 +287,11 @@
             
             [[NSUserDefaults standardUserDefaults] setObject:@(1) forKey:HJDLoginSuccess];
         } else {
-            [MBProgressHUD showError:@"注册失败"];
+            if (data) {
+                [MBProgressHUD showError:data[@"error_msg"]];
+            } else {
+                [MBProgressHUD showError:@"注册失败"];
+            }
             [[NSUserDefaults standardUserDefaults] setObject:@(2) forKey:HJDLoginSuccess];
         }
     }];

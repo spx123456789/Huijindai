@@ -271,23 +271,9 @@
     self.numberLabel.text = [NSString stringWithFormat:@"报单编号:%@", orderNumber];
 }
 
-- (void)setAuditStatus:(HJDOrderAuditStatus)auditStatus {
-    _auditStatus = auditStatus;
-    NSString *str = @"";
-    switch (auditStatus) {
-        case HJDOrderAuditStatus_To:
-            str = @"待审核";
-            break;
-        case HJDOrderAuditStatus_In:
-            str = @"审核中";
-            break;
-        case HJDOrderAuditStatus_End:
-            str = @"审核完成";
-            break;
-        default:
-            break;
-    }
-    self.statusLabel.text = str;
+- (void)setStatus:(NSString *)status {
+    _status = status;
+    self.statusLabel.text = status;
 }
 
 - (void)setOrderTime:(NSString *)orderTime {

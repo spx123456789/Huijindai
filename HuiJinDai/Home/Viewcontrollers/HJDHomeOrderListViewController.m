@@ -65,7 +65,11 @@ static NSInteger orderListPage = 1;
         [self.tableView.mj_footer endRefreshing];
         if (result) {
             [self.dataSource removeAllObjects];
-            [self.dataSource addObjectsFromArray:data];
+            for (int k = 0; k < data.count; k++) {
+                HJDOrderListModel *listModel = [[HJDOrderListModel alloc] init];
+                [listModel hjd_loadDataFromkeyValues:data[k]];
+                [self.dataSource addObject:listModel];
+            }
             [self.tableView reloadData];
             if (data.count == 0 || data.count < kHJDHttpRow) {
                 [self.tableView.mj_footer endRefreshingWithNoMoreData];
@@ -150,18 +154,20 @@ static NSInteger orderListPage = 1;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     HJDOrderListModel *listModel = self.dataSource[indexPath.row];
-    cell.orderNumber = listModel.orderNumber;
-    cell.orderTime = listModel.orderTime;
-    cell.locationAddress = listModel.locationAddress;
-    cell.customerName = listModel.customerName;
-    cell.money = listModel.money;
-    cell.auditStatus = listModel.auditStatus.integerValue;
+    cell.orderNumber = listModel.loan_num;
+    cell.orderTime = listModel.ad_time;
+    cell.locationAddress = listModel.address;
+    cell.customerName = listModel.customer_name;
+    cell.money = listModel.loan_money;
+    cell.status = listModel.loan_status_name;
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    HJDOrderListModel *listModel = self.dataSource[indexPath.row];
     HJDHomeOrderDetailViewController *controller = [[HJDHomeOrderDetailViewController alloc] init];
+    controller.order_id = listModel.order_id;
     [self.navigationController pushViewController:controller animated:YES];
 }
 

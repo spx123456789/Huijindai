@@ -78,7 +78,11 @@
     [HJDHomeManager getOrderManageListChannelOrAgentWithUid:self.uid status:status keyWord:keyWord page:1 callBack:^(NSArray *data, BOOL result) {[MBProgressHUD hideHUD];
         if (result) {
             [self.dataSource removeAllObjects];
-            [self.dataSource addObjectsFromArray:data];
+            for (int k = 0; k < data.count; k++) {
+                HJDOrderListModel *model = [[HJDOrderListModel alloc] init];
+                [model hjd_loadDataFromkeyValues:data[k]];
+                [self.dataSource addObject:model];
+            }
             [self.tableView reloadData];
         } else {
             [MBProgressHUD showError:@"加载失败"];
@@ -99,18 +103,20 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     HJDOrderListModel *listModel = self.dataSource[indexPath.row];
-    cell.orderNumber = listModel.orderNumber;
-    cell.orderTime = listModel.orderTime;
-    cell.locationAddress = listModel.locationAddress;
-    cell.customerName = listModel.customerName;
-    cell.money = listModel.money;
-    cell.auditStatus = listModel.auditStatus.integerValue;
+    cell.orderNumber = listModel.loan_num;
+    cell.orderTime = listModel.ad_time;
+    cell.locationAddress = listModel.address;
+    cell.customerName = listModel.customer_name;
+    cell.money = listModel.loan_money;
+    cell.status = listModel.loan_status_name;
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    HJDOrderListModel *listModel = self.dataSource[indexPath.row];
     HJDHomeOrderDetailViewController *controller = [[HJDHomeOrderDetailViewController alloc] init];
+    controller.order_id = listModel.order_id;
     [self.navigationController pushViewController:controller animated:YES];
 }
 

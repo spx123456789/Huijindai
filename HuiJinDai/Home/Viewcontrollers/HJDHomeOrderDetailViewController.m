@@ -26,7 +26,7 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 4, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 4) style:UITableViewStylePlain];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.backgroundColor = [UIColor clearColor];
@@ -40,21 +40,9 @@
     [super viewDidLoad];
     
     [self setNavTitle:@"工单详情"];
-    
+    self.view.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
     self.dataSource = [NSMutableArray array];
     [self.view addSubview:self.tableView];
-    
-    NSDictionary *testDic = @{
-                              @"ad_time": @"2018-09-23 17:41:22",// 提交时间
-                              @"user": @{// 用户信息
-                                  @"1": @"测试卡",
-                              },
-                              @"shot": @"询值中",
-                              @"title": @"报单",
-                              @"step": @"2"
-                              };
-    
-    self.order_id = @"151";
     
     [MBProgressHUD showMessage:@"正在加载..."];
     [HJDHomeRoomDiDaiManager getOrderDetailWithID:self.order_id callBack:^(NSDictionary *data, BOOL result) {
@@ -87,6 +75,11 @@
     //NSString *approval = resultDic[@"approval"];
     // 还款计划信息，该信息为字典形式，目前暂时未定义
     //NSString *plan = resultDic[@"plan"];
+    
+    if ([NSString hjd_isBlankString:refuseStr] && [NSString hjd_isBlankString:presentation]) {
+        return;
+    }
+    
     
     UIView *topView = [[UIView alloc] init];
     topView.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);

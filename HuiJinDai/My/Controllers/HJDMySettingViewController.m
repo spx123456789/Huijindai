@@ -40,7 +40,6 @@
     if (!_cityNextButton) {
         _cityNextButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_cityNextButton setImage:kImage(@"进入") forState:UIControlStateNormal];
-        [_cityNextButton addTarget:self action:@selector(selectCity:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _cityNextButton;
 }
@@ -89,6 +88,8 @@
     NSDictionary *addressDic = self.userModel.addr_office_tree;
     _cityView.textField.text = [NSString stringWithFormat:@"%@ %@", addressDic[@"sheng_name"], addressDic[@"shi_name"]];
     _cityView.fieldCanEdit = NO;
+    UITapGestureRecognizer *cityTapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectCity:)];
+    [_cityView addGestureRecognizer:cityTapGes];
     [self.bgView addSubview:_cityView];
     
     self.cityNextButton.frame = CGRectMake(kScreenWidth - 45, topHeight + 22, 30, 30);
