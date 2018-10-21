@@ -21,11 +21,12 @@
 //询值
 @interface HJDHomeOrderDetailQueryCell : HJDHomeOrderDetailTableViewCell
 - (void)setCellValue:(HJDHomeQueryValueDetailModel *)model;
+- (void)setDetailCellValue:(NSDictionary *)dic;
 @end
 
 //报单
 @interface HJDHomeOrderDetailDeclarationCell : HJDHomeOrderDetailTableViewCell
-
+- (void)setCellDeclarationValue:(NSDictionary *)dic;
 @end
 
 //工单流程

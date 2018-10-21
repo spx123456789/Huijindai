@@ -205,7 +205,11 @@
 
 + (void)getOrderDetailWithID:(NSString *)uid callBack:(void (^)(NSDictionary *, BOOL))callback {
     [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Loan/get_info") requestParams:@{ @"loan_id" : uid } networkMethod:GET callback:^(id data, NSError *error) {
-        
+        if (error) {
+            callback(nil, NO);
+        } else {
+            callback([data getObjectByPath:@"data"], YES);
+        }
     }];
 }
 

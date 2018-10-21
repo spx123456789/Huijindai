@@ -11,11 +11,6 @@
 #define kPhotoWidth (kScreenWidth - 16 * 2 - 8 * 2)/3.0
 #define kPhotoHeight (83.0 / 110.0 * kPhotoWidth)
 
-@class HJDHomeRoomDiDaiTableViewCell;
-@protocol HJDHomeRoomDiDaiTableViewCellDelegate<NSObject>
-- (void)roomDiDaiCellDidClick:(HJDHomeRoomDiDaiTableViewCell *)cell;
-@end
-
 @interface HJDHomeRoomDiDaiTableViewCell : UITableViewCell
 @property(nonatomic, strong) UITextField *textField;
 @property(nonatomic, strong) UILabel *leftLabel;
@@ -24,7 +19,6 @@
 @property(nonatomic, strong) UIView *lineView;
 @property(nonatomic, copy) NSString *placeholderString;
 
-@property(nonatomic, weak) id<HJDHomeRoomDiDaiTableViewCellDelegate> delegate;
 @property(nonatomic, assign) BOOL fieldCanEdit;
 @end
 

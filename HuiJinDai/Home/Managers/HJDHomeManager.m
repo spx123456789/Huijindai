@@ -36,12 +36,16 @@
     }];
 }
 
-+ (void)getOrderAuditListChannelOrAgentWithUid:(NSString *)uid callBack:(void (^)(NSArray *, BOOL))callBack {
-    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Loan/get_ulist") requestParams:@{ @"uid" : uid, @"status" : @"100" } networkMethod:GET callback:^(id data, NSError *error) {
++ (void)getOrderAuditListChannelOrAgentWithUid:(NSString *)uid keyWord:(NSString *)keyWord callBack:(void (^)(NSArray *, BOOL))callBack {
+    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:@{ @"uid" : uid, @"status" : @"100" }];
+    if (keyWord != nil) {
+        [param addEntriesFromDictionary:@{ @"address" : keyWord }];;
+    }
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Loan/get_ulist") requestParams:param networkMethod:GET callback:^(id data, NSError *error) {
         if (error) {
             callBack(nil, NO);
         } else {
-            callBack([data getObjectByPath:@"data"], YES);
+            callBack([data getObjectByPath:@"data/list"], YES);
         }
     }];
 }
@@ -60,38 +64,19 @@
     }];
 }
 
-+ (NSArray *)getOrderListArray {
-    HJDOrderListModel *model = [[HJDOrderListModel alloc] init];
-    model.orderNumber = @"20170912-00450";
-    model.orderTime = @"2017-09-12 11:30";
-    model.locationAddress = @"新世嘉家园";
-    model.customerName = @"董冰";
-    model.money = @"500万元";
-    model.auditStatus = @"0";
-    
-    NSMutableArray *mut = [NSMutableArray array];
-    for (int i = 0; i < 8; i ++) {
-        [mut addObject:model];
++ (void)getOrderManageListChannelOrAgentWithUid:(NSString *)uid status:(NSString *)status keyWord:(NSString *)keyWord callBack:(void (^)(NSArray *, BOOL))callBack {
+    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:@{ @"uid" : uid, @"status" : status }];
+    if (keyWord != nil) {
+        [param addEntriesFromDictionary:@{ @"address" : keyWord }];;
     }
-    return mut;
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Loan/list_manage") requestParams:param networkMethod:GET callback:^(id data, NSError *error) {
+        if (error) {
+            callBack(nil, NO);
+        } else {
+            callBack([data getObjectByPath:@"data/list"], YES);
+        }
+    }];
 }
-
-+ (NSArray *)getOrderProcessArray {
-    HJDOrderListModel *model = [[HJDOrderListModel alloc] init];
-    model.orderNumber = @"20170912-00450";
-    model.orderTime = @"2017-09-12 11:30";
-    model.locationAddress = @"大兴区兴泰街5号";
-    model.customerName = @"董冰";
-    model.money = @"500万元";
-    model.auditStatus = @"0";
-    
-    NSMutableArray *mut = [NSMutableArray array];
-    for (int i = 0; i < 8; i ++) {
-        [mut addObject:model];
-    }
-    return mut;
-}
-
 
 #pragma mark - 计算器
 + (void)getEndDateWithStartTime:(NSString *)startTime month:(NSString *)month callBack:(void (^)(NSString *, BOOL))callBack {

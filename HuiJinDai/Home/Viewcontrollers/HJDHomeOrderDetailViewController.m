@@ -15,6 +15,7 @@
 
 @interface HJDHomeOrderDetailViewController ()<UITableViewDelegate, UITableViewDataSource, HJDHomeOrderDetailButtonCellDelegate>
 @property(nonatomic, strong) UITableView *tableView;
+@property(nonatomic, strong) NSMutableArray *dataSource;
 @property(nonatomic, strong) UIView *topView;
 @end
 
@@ -56,19 +57,37 @@
     
     [self setNavTitle:@"工单详情"];
     
+    self.dataSource = [NSMutableArray array];
+    
     [self.view addSubview:self.tableView];
     self.topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 * 2 + 3 + 5);
     self.tableView.tableHeaderView = self.topView;
     
-//    [MBProgressHUD showMessage:@"正在加载..."];
-//    [HJDHomeRoomDiDaiManager getOrderDetailWithID:@"" callBack:^(NSArray *data, BOOL result) {
-//        [MBProgressHUD hideHUD];
-//        if (result) {
-//
-//        } else {
-//            [MBProgressHUD showError:@"加载失败"];
-//        }
-//    }];
+    NSDictionary *testDic = @{
+                              @"ad_time": @"2018-09-23 17:41:22",// 提交时间
+                              @"user": @{// 用户信息
+                                  @"1": @"测试卡",
+                              },
+                              @"shot": @"询值中",
+                              @"title": @"报单",
+                              @"step": @"1"
+                              };
+    
+    [MBProgressHUD showMessage:@"正在加载..."];
+    [HJDHomeRoomDiDaiManager getOrderDetailWithID:@"151" callBack:^(NSDictionary *data, BOOL result) {
+        [MBProgressHUD hideHUD];
+        if (result) {
+            [self.dataSource addObject:data[@"xunzhi"]];
+            [self.dataSource addObject:data[@"baodan"]];
+            [self.dataSource addObject:data[@"fujian"]];
+            //[self.dataSource addObject:data[@"status_log"]];
+            [self.dataSource addObject:@[ testDic ]];
+            [self.dataSource addObject:@""];
+            [self.tableView reloadData];
+        } else {
+            [MBProgressHUD showError:@"加载失败"];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -78,7 +97,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return self.dataSource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -96,6 +115,7 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             cell.titleLabel.text = @"询值信息";
+            [cell setDetailCellValue:self.dataSource[indexPath.row]];
             return cell;
             break;
         }
@@ -106,6 +126,7 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             cell.titleLabel.text = @"报单信息";
+            [cell setCellDeclarationValue:self.dataSource[indexPath.row]];
             return cell;
             break;
         }
@@ -116,7 +137,7 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             cell.titleLabel.text = @"照片信息";
-            cell.imgDataArray = @[ @[ @"", @"" ], @[ @"", @"", @"", @"" ], @[@"", @""]];
+            cell.imgDataArray = self.dataSource[indexPath.row];
             return cell;
             break;
         }
@@ -127,7 +148,7 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             cell.titleLabel.text = @"工单流程";
-            cell.processArray = @[ @"", @"", @"" ];
+            cell.processArray = self.dataSource[indexPath.row];
             return cell;
             break;
         }
@@ -158,17 +179,20 @@
             break;
         case 2: {
             CGFloat collectionHeight = 44 + 1;
-            NSArray *imgDataArray = @[ @[ @"", @"" ], @[ @"", @"", @"", @"" ], @[@"", @""]];
-            for (NSArray *sectionArray in imgDataArray) {
-                collectionHeight += 30;
-                collectionHeight += (12 + kDetailPhotoHeight * (sectionArray.count/3 + 1) + 8 * (sectionArray.count/3));
+            for (NSDictionary *infoDic in self.dataSource[indexPath.row]) {
+                NSArray *sectionArray = infoDic[@"list"];
+                if (sectionArray.count != 0) {
+                    collectionHeight += 30;
+                    collectionHeight += (12 + kDetailPhotoHeight * (sectionArray.count/3 + 1) + 8 * (sectionArray.count/3));
+                }
             }
             return collectionHeight + 16;
             break;
         }
         case 3: {
+            NSArray *arr = self.dataSource[indexPath.row];
             CGFloat viewHeight = 12 + 12 + 17 + 8 + 14 + 4 + 12 + 12;
-            return 44 + 1 + 4 + (viewHeight * 3) + 16;
+            return 44 + 1 + 4 + (viewHeight * arr.count) + 16;
             break;
         }
         default:

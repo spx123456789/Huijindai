@@ -12,6 +12,8 @@
 #import "HJDHomeQueryValueResultViewController.h"
 #import "HJDHomeDeclarationViewController.h"
 
+#import "HJDHomeOrderDetailViewController.h"
+
 @interface HJDHomeQueryValueDetailViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) UIButton *continueButton;
@@ -84,6 +86,11 @@
 }
 
 - (void)declarationButtonClick:(id)sender {
+    //测试
+    HJDHomeOrderDetailViewController *controller11 = [[HJDHomeOrderDetailViewController alloc] init];
+    [self.navigationController pushViewController:controller11 animated:YES];
+    return;
+    
     HJDHomeDeclarationViewController *controller = [[HJDHomeDeclarationViewController alloc] init];
     controller.xun_id = self.xun_id;
     [self.navigationController pushViewController:controller animated:YES];

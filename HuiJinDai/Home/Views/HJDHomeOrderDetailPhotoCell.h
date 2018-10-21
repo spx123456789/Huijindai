@@ -12,5 +12,5 @@
 #define kDetailPhotoHeight (83.0 / 110.0 * kDetailPhotoWidth)
 
 @interface HJDHomeOrderDetailPhotoCell : HJDHomeOrderDetailTableViewCell
-@property(nonatomic, strong) NSArray *imgDataArray;
+@property(nonatomic, strong) NSMutableArray *imgDataArray;
 @end

@@ -12,12 +12,12 @@
 #import "HJDDeclarationModel.h"
 #import <MobileCoreServices/UTCoreTypes.h>
 #import "HJDHomeRoomDiDaiManager.h"
+#import "HJDHomeSelectPickerView.h"
 
-@interface HJDHomeDeclarationViewController ()<UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate, HJDHomeRoomDiDaiPhotoTableViewCellDelegate, HJDHomeRoomDiDaiTableViewCellDelegate>
+@interface HJDHomeDeclarationViewController ()<UITableViewDelegate, UITableViewDataSource, HJDHomeSelectPickerViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, HJDHomeRoomDiDaiPhotoTableViewCellDelegate>
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) HJDCustomerServiceView *customServiceView;
 @property(nonatomic, strong) UIButton *submitButton;
-@property(nonatomic, strong) UIPickerView *pickerView;
 @property(nonatomic, strong) UIImagePickerController *imgPickerController;
 @property(nonatomic, strong) HJDDeclarationModel *declarationModel;
 @property(nonatomic, strong) NSArray *pickerArray;
@@ -58,16 +58,6 @@
         [_submitButton addTarget:self action:@selector(submitButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _submitButton;
-}
-
-- (UIPickerView *)pickerView {
-    if (!_pickerView) {
-        _pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 150, kScreenWidth, 150)];
-        _pickerView.backgroundColor = kMainColor;
-        _pickerView.delegate = self;
-        _pickerView.dataSource = self;
-    }
-    return _pickerView;
 }
 
 - (UIImagePickerController *)imgPickerController {
@@ -173,12 +163,59 @@
 }
 
 - (void)showPickerView {
-    [self.view addSubview:self.pickerView];
+    HJDHomeSelectPickerView *picker = [[HJDHomeSelectPickerView alloc] initWithFrame:CGRectMake(0, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 180, kScreenWidth, 180)];
+    picker.delegate = self;
+    picker.dataSource = self.pickerArray;
+    [self.view addSubview:picker];
+}
+
+#pragma mark - HJDHomeSelectPickerViewDelegate
+- (void)selectPickerView:(HJDHomeSelectPickerView *)selectPickerView didSelecIndex:(NSInteger)index {
+    if (self.selectShowIndex == 0) {
+        self.declarationModel.loan_variety = index + 1;
+        [self.tableView reloadData];
+    } else if (self.selectShowIndex == 2) {
+        self.declarationModel.certificate_type = index + 1;
+        [self.tableView reloadData];
+    } else if (self.selectShowIndex == 4) {
+        self.declarationModel.indiv_marital = index + 1;
+        [self.tableView reloadData];
+    } else if (self.selectShowIndex == 6) {
+        self.declarationModel.loan_time_type = index + 1;
+        [self.tableView reloadData];
+    }
 }
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    switch (indexPath.row) {
+        case 0: {
+            self.selectShowIndex = indexPath.row;
+            self.pickerArray = @[ @"房屋抵押贷款", @"房屋抵押贷款（加案）", @"车辆抵押贷款" ];
+            [self showPickerView];
+            break;
+        }
+        case 2: {
+            self.selectShowIndex = indexPath.row;
+            self.pickerArray = @[ @"身份证", @"营业执照", @"护照", @"军官证", @"士兵证", @"港澳居民来往内地通行证", @"台湾居民来往大陆通行证", @"其他证件" ];
+            [self showPickerView];
+            break;
+        }
+        case 4: {
+            self.selectShowIndex = indexPath.row;
+            self.pickerArray = @[ @"未婚", @"已婚有子女", @"已婚无子女", @"丧偶", @"离异", @"再婚" ];
+            [self showPickerView];
+            break;
+        }
+        case 6: {
+            self.selectShowIndex = indexPath.row;
+            self.pickerArray = @[ @"月", @"天" ];
+            [self showPickerView];
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -245,7 +282,6 @@
             cell = [[HJDHomeRoomDiDaiTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        cell.delegate = self;
         [self setCellValue:cell indexPath:indexPath];
         return cell;
     } else {
@@ -467,39 +503,6 @@
     }
 }
 
-#pragma mark - HJDHomeRoomDiDaiTableViewCellDelegate
-- (void)roomDiDaiCellDidClick:(HJDHomeRoomDiDaiTableViewCell *)cell {
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    switch (indexPath.row) {
-        case 0: {
-            self.selectShowIndex = indexPath.row;
-            self.pickerArray = @[ @"房屋抵押贷款", @"房屋抵押贷款（加案）", @"车辆抵押贷款" ];
-            [self showPickerView];
-            break;
-        }
-        case 2: {
-            self.selectShowIndex = indexPath.row;
-            self.pickerArray = @[ @"身份证", @"营业执照", @"护照", @"军官证", @"士兵证", @"港澳居民来往内地通行证", @"台湾居民来往大陆通行证", @"其他证件" ];
-            [self showPickerView];
-            break;
-        }
-        case 4: {
-            self.selectShowIndex = indexPath.row;
-            self.pickerArray = @[ @"未婚", @"已婚有子女", @"已婚无子女", @"丧偶", @"离异", @"再婚" ];
-            [self showPickerView];
-            break;
-        }
-        case 6: {
-            self.selectShowIndex = indexPath.row;
-            self.pickerArray = @[ @"月", @"天" ];
-            [self showPickerView];
-            break;
-        }
-        default:
-            break;
-    }
-}
-
 #pragma mark - HJDHomeRoomDiDaiPhotoTableViewCellDelegate
 - (void)photoCell:(HJDHomeRoomDiDaiPhotoTableViewCell *)photoCell clickDeleteButtonAtIndex:(NSInteger)index {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:photoCell];
@@ -568,38 +571,6 @@
     NSIndexPath *indexPath = [self.tableView indexPathForCell:photoCell];
     self.selectShowIndex = indexPath.row;
     [self showImagePickerController];
-}
-
-#pragma mark - UIPickerViewDataSource
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView*)pickerView {
-    return 1; // 返回1表明该控件只包含1列
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return self.pickerArray.count;
-}
-
-#pragma mark - UIPickerViewDelegate
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return [self.pickerArray objectAtIndex:row];
-}
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    if (self.selectShowIndex == 0) {
-        self.declarationModel.loan_variety = row + 1;
-        [self.tableView reloadData];
-    } else if (self.selectShowIndex == 2) {
-        self.declarationModel.certificate_type = row + 1;
-        [self.tableView reloadData];
-    } else if (self.selectShowIndex == 4) {
-        self.declarationModel.indiv_marital = row + 1;
-        [self.tableView reloadData];
-    } else if (self.selectShowIndex == 6) {
-        self.declarationModel.loan_time_type = row + 1;
-        [self.tableView reloadData];
-    }
-    [pickerView removeFromSuperview];
-    self.pickerView = nil;
 }
 
 #pragma mark - 相册

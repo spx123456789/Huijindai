@@ -202,6 +202,13 @@
     self.areaLabel_1.text = [NSString stringWithFormat:@"%@m²", model.houseSpace];
 }
 
+- (void)setDetailCellValue:(NSDictionary *)dic {
+    self.cityLabel_1.text = dic[@"city"];
+    self.xiaoquLabel_1.text = dic[@"community_name"];
+    self.addressLabel_1.text = @"";
+    self.useLabel_1.text = dic[@"guihua"];
+    self.areaLabel_1.text = dic[@"area"];
+}
 @end
 
 #pragma mark - 保单信息
@@ -335,6 +342,17 @@
     }
     return self;
 }
+
+- (void)setCellDeclarationValue:(NSDictionary *)dic {
+    self.typeLabel_1.text = dic[@"loan_type"];
+    self.nameLabel_1.text = dic[@"customer_name"];
+    self.idLabel_1.text = dic[@"customer_type"];
+    self.idNumberLabel_1.text = dic[@"customer_number"];
+    self.moneyLabel_1.text = dic[@"loan_money"];
+    self.limitTimeLabel_1.text = dic[@"loan_time"];
+    self.yuELabel_1.text = dic[@"loan_yd"];
+}
+
 @end
 
 #pragma mark - 工单流程
@@ -358,7 +376,9 @@
     
     UIView *firstView = nil;
     for (int i = 0; i < processArray.count; i++) {
-        UIView *view = [self createViewWithTitle:@"报单" subTitle:@"经纪人" process:@"报单提交" time:@"2016-02-03 15:30:20" hideTop:(i == 0) hideBottom:(i == processArray.count - 1)];
+        NSDictionary *dictionary = processArray[i];
+        NSDictionary *subDic = dictionary[@"user"];
+        UIView *view = [self createViewWithTitle:dictionary[@"title"] subTitle:subDic[@"1"] process:dictionary[@"shot"] time:dictionary[@"ad_time"] hideTop:(i == 0) hideBottom:(i == processArray.count - 1)];
         [self.bgView addSubview:view];
         
         if (firstView == nil) {

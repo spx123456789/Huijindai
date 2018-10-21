@@ -63,12 +63,16 @@
     return self;
 }
 
-- (void)setImgDataArray:(NSArray *)imgDataArray {
-    _imgDataArray = imgDataArray;
+- (void)setImgDataArray:(NSMutableArray *)imgDataArray {
+    _imgDataArray = [NSMutableArray array];
     CGFloat collectionHeight = 0;
-    for (NSArray *sectionArray in imgDataArray) {
-        collectionHeight += 30;
-        collectionHeight += (12 + kDetailPhotoHeight * (sectionArray.count/3 + 1) + 8 * (sectionArray.count/3));
+    for (NSDictionary *infoDic in imgDataArray) {
+        NSArray *sectionArray = infoDic[@"list"];
+        if (sectionArray.count != 0) {
+            [_imgDataArray addObject:infoDic];
+            collectionHeight += 30;
+            collectionHeight += (12 + kDetailPhotoHeight * (sectionArray.count/3 + 1) + 8 * (sectionArray.count/3));
+        }
     }
     self.collectionView.frame = CGRectMake(0, 0, kScreenWidth, collectionHeight);
 }
@@ -77,16 +81,20 @@
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return self.imgDataArray.count;
 }
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    NSArray *sectionArray = self.imgDataArray[section];
+    NSDictionary *sectionDic = self.imgDataArray[section];
+    NSArray *sectionArray = sectionDic[@"list"];
     return sectionArray.count;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *cellIndentifer = @"HJDHomePhotoCollectionViewCell";
     HJDHomePhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIndentifer forIndexPath:indexPath];
     cell.backgroundColor = [UIColor cyanColor];
-    //cell.imageStr = _imagesArray[indexPath.item];
-    cell.imageView.image = kImage(@"添加证件");
+    NSDictionary *sectionDic = self.imgDataArray[indexPath.section];
+    NSArray *sectionArray = sectionDic[@"list"];
+    NSDictionary *imageDic = sectionArray[indexPath.row];
+    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:kHJDImage(imageDic[@"thumb_100"])] placeholderImage:kImage(@"添加证件")];
     cell.deleteButton.hidden = YES;
     return cell;
 }
@@ -94,26 +102,8 @@
     if (kind == UICollectionElementKindSectionHeader){
         HJDHomeCollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"HJDHomeCollectionReusableView" forIndexPath:indexPath];
         headerView.backgroundColor = kWithe;
-        //NSArray *sectionArray = self.imgDataArray[indexPath.section];
-        NSString *title = @"";
-        switch (indexPath.section) {
-            case 0:
-                title = @"借款人身份证";
-                break;
-            case 1:
-                title = @"借款人户口本";
-                break;
-            case 2:
-                title = @"借款人征信报告";
-                break;
-            case 3:
-                title = @"借款人婚姻证明";
-                break;
-            default:
-                title = @"房产证";
-                break;
-        }
-        headerView.titleLabel.text = title;
+        NSDictionary *sectionDic = self.imgDataArray[indexPath.section];
+        headerView.titleLabel.text = sectionDic[@"title"];
         return headerView;
     }
     return nil;

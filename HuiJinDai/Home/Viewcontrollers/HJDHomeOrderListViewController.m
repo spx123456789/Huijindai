@@ -46,15 +46,19 @@
     [self createSearchView];
     [self.view addSubview:self.tableView];
     
-    NSArray *arr = [HJDHomeManager getOrderListArray];
-    self.dataSource = [NSMutableArray arrayWithArray:arr];
-    [self.tableView reloadData];
+    self.dataSource = [NSMutableArray array];
     
+    [self searchKeyWord:nil];
+}
+
+- (void)searchKeyWord:(NSString *)keyWord {
     [MBProgressHUD showMessage:@"正在加载..."];
-    [HJDHomeManager getOrderAuditListChannelOrAgentWithUid:self.uid callBack:^(NSArray *data, BOOL result) {
+    [HJDHomeManager getOrderAuditListChannelOrAgentWithUid:self.uid keyWord:keyWord callBack:^(NSArray *data, BOOL result) {
         [MBProgressHUD hideHUD];
         if (result) {
-            
+            [self.dataSource removeAllObjects];
+            [self.dataSource addObjectsFromArray:data];
+            [self.tableView reloadData];
         } else {
             [MBProgressHUD showError:@"加载失败"];
         }
@@ -117,7 +121,7 @@
 }
 
 - (void)clickSureButton:(id)sender {
-    
+    [self searchKeyWord:self.textField.text];
 }
 
 #pragma mark - UITableViewDataSource

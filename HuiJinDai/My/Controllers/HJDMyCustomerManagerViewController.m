@@ -72,10 +72,20 @@
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.customServiceView];
     
+    [self searchWithKeyWord:nil];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)searchWithKeyWord:(NSString *)keyWord {
     [MBProgressHUD showMessage:@"正在加载..."];
-    [HJDMyManager getMyCustomerManagerWithCallBack:^(NSArray *arr, BOOL result) {
+    [HJDMyManager getMyCustomerManagerWithKeyWork:keyWord callBack:^(NSArray *arr, BOOL result) {
         [MBProgressHUD hideHUD];
         if (result) {
+            [self.dataSource removeAllObjects];
             for (int k = 0; k < arr.count; k++) {
                 HJDMyAgentModel *model = [[HJDMyAgentModel alloc] init];
                 [model hjd_loadDataFromkeyValues:arr[k]];
@@ -86,11 +96,6 @@
             [MBProgressHUD showError:@"请求失败"];
         }
     }];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - UITableViewDataSource
@@ -139,6 +144,6 @@
 }
 
 - (void)searchView:(HJDMyNavTextFieldSearchView *)searchView keyWord:(NSString *)keyWord sureButton:(id)sender {
-    
+    [self searchWithKeyWord:keyWord];
 }
 @end

@@ -56,15 +56,35 @@
     
     self.navigationItem.titleView = self.segmentView;
     
-    self.dataSource = [NSMutableArray arrayWithArray:[HJDHomeManager getOrderProcessArray]];
+    self.dataSource = [NSMutableArray array];
     
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.searchView;
+    
+    [self searchKeyWord:nil status:@"1"];
+}
+
+- (void)loadData {
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)searchKeyWord:(NSString *)keyWord status:(NSString *)status {
+    [MBProgressHUD showMessage:@"正在加载..."];
+    [HJDHomeManager getOrderManageListChannelOrAgentWithUid:self.uid status:status keyWord:keyWord callBack:^(NSArray *data, BOOL result) {
+        [MBProgressHUD hideHUD];
+        if (result) {
+            [self.dataSource removeAllObjects];
+            [self.dataSource addObjectsFromArray:data];
+            [self.tableView reloadData];
+        } else {
+            [MBProgressHUD showError:@"加载失败"];
+        }
+    }];
 }
 
 #pragma mark - UITableViewDataSource
@@ -102,9 +122,9 @@
 #pragma mark - HJDMessageSegmentViewDelegate
 - (void)segmentView:(HJDMessageSegmentView *)segmentView didSelectMessageType:(HJDMessageType)type {
     if (type == HJDMessageTypeMy) { //left
-        
+        [self searchKeyWord:nil status:@"1"];
     } else {
-        
+        [self searchKeyWord:nil status:@"2"];
     }
 }
 @end

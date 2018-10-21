@@ -65,17 +65,8 @@
 - (UIImageView *)rightImgView {
     if (!_rightImgView) {
         _rightImgView = [[UIImageView alloc] initWithImage:kImage(@"进入")];
-        _rightImgView.userInteractionEnabled = YES;
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
-        [_rightImgView addGestureRecognizer:tap];
     }
     return _rightImgView;
-}
-
-- (void)tapGesture:(id)sender {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(roomDiDaiCellDidClick:)]) {
-        [self.delegate roomDiDaiCellDidClick:self];
-    }
 }
 
 - (UILabel *)rightLabel {
@@ -146,8 +137,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.contentView.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
-        self.fieldCanEdit = YES;
         [self setUpUI];
+        self.fieldCanEdit = YES;
     }
     return self;
 }
@@ -155,6 +146,11 @@
 - (void)setPlaceholderString:(NSString *)placeholderString {
     _placeholderString = placeholderString;
     self.textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholderString attributes:@{ NSForegroundColorAttributeName : kRGB_Color(0xd4, 0xd4, 0xd4), NSFontAttributeName : kFont15 }];
+}
+
+- (void)setFieldCanEdit:(BOOL)fieldCanEdit {
+    _fieldCanEdit = fieldCanEdit;
+    self.textField.userInteractionEnabled = fieldCanEdit;
 }
 
 #pragma mark - UITextFieldDelegate

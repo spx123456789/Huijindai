@@ -102,6 +102,8 @@
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     HJDHomeOrderProcessViewController *controller = [[HJDHomeOrderProcessViewController alloc] init];
+    NSDictionary *dic = self.dataSource[indexPath.row];
+    controller.uid = dic[@"uid"];
     [self.navigationController pushViewController:controller animated:YES];
 }
 

@@ -15,14 +15,11 @@
 
 + (void)getOrderAuditListWithKeyWord:(NSString *)keyWord callBack:(void(^)(NSArray *data, BOOL result))callBack;
 
-+ (void)getOrderAuditListChannelOrAgentWithUid:(NSString *)uid callBack:(void(^)(NSArray *data, BOOL result))callBack;
++ (void)getOrderAuditListChannelOrAgentWithUid:(NSString *)uid keyWord:(NSString *)keyWord callBack:(void(^)(NSArray *data, BOOL result))callBack;
 
 + (void)getOrderManageListWithKeyWord:(NSString *)keyWord callBack:(void(^)(NSDictionary *data, BOOL result))callBack;
 
-+ (NSArray *)getOrderListArray;
-
-+ (NSArray *)getOrderProcessArray;
-
++ (void)getOrderManageListChannelOrAgentWithUid:(NSString *)uid status:(NSString *)status keyWord:(NSString *)keyWord callBack:(void(^)(NSArray *data, BOOL result))callBack;
 
 #pragma mark - 计算器
 + (void)getEndDateWithStartTime:(NSString *)startTime month:(NSString *)month callBack:(void(^)(NSString *dataStr, BOOL result))callBack;
