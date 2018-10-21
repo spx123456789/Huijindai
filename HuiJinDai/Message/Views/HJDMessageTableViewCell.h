@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HJDMessageModel.h"
 
 @interface HJDMessageTableViewCell : UITableViewCell
-@property(nonatomic, copy) NSString *number;
-@property(nonatomic, copy) NSString *type;
-@property(nonatomic, copy) NSString *status;
-@property(nonatomic, strong) UILabel *channelLabel;
+
+- (void)setCellValue:(HJDMessageModel *)message;
+
 @end

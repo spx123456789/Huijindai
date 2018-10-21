@@ -58,8 +58,17 @@
 - (UIImageView *)rightImgView {
     if (!_rightImgView) {
         _rightImgView = [[UIImageView alloc] initWithImage:kImage(@"我的经纪人拨打电话")];
+        _rightImgView.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
+        [_rightImgView addGestureRecognizer:tap];
     }
     return _rightImgView;
+}
+
+- (void)tapGesture:(UITapGestureRecognizer *)tap {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(myAgentCell:didClickPhone:)]) {
+        [self.delegate myAgentCell:self didClickPhone:tap];
+    }
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {

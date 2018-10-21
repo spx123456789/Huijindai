@@ -10,4 +10,8 @@
 
 @implementation HJDMessageModel
 
++ (NSDictionary *)mj_replacedKeyFromPropertyName {
+    return @{ @"mid" : @"id"};
+}
+
 @end

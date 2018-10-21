@@ -91,4 +91,26 @@
     }
     return mut;
 }
+
+
+#pragma mark - 计算器
++ (void)getEndDateWithStartTime:(NSString *)startTime month:(NSString *)month callBack:(void (^)(NSString *, BOOL))callBack {
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Loan/finance_data") requestParams:@{ @"start_date" : startTime, @"month" : month } networkMethod:GET callback:^(id data, NSError *error) {
+        if (error) {
+            callBack(nil, NO);
+        } else {
+            callBack([data getObjectByPath:@"data/end_date"], YES);
+        }
+    }];
+}
+
++ (void)getJiSuanResultWithStartTime:(NSString *)startTime month:(NSString *)month money:(NSString *)money callBack:(void (^)(NSDictionary *, BOOL))callBack {
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Loan/finance_submit") requestParams:@{ @"start_date" : startTime, @"month" : month, @"money" : money } networkMethod:GET callback:^(id data, NSError *error) {
+        if (error) {
+            callBack(nil, NO);
+        } else {
+            callBack([data getObjectByPath:@"data"], YES);
+        }
+    }];
+}
 @end

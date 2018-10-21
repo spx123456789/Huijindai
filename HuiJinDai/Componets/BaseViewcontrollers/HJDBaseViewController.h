@@ -36,4 +36,6 @@
 #pragma mark - 提示
 - (void)showToast:(NSString *)message;
 
+#pragma mark - 打电话
+- (void)phoneCall:(NSString *)phone;
 @end

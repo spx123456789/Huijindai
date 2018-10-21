@@ -12,7 +12,7 @@
 #import "HJDCustomerServiceView.h"
 #import "HJDMyManager.h"
 
-@interface HJDMyCustomerManagerViewController ()<UITableViewDelegate, UITableViewDataSource, HJDMyNavTextFieldSearchViewDelegate>
+@interface HJDMyCustomerManagerViewController ()<UITableViewDelegate, UITableViewDataSource, HJDMyNavTextFieldSearchViewDelegate, HJDMyAgentTableViewCellDelegate>
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSMutableArray *dataSource;
 @property(nonatomic, strong) HJDMyNavTextFieldSearchView *searchView;
@@ -108,6 +108,7 @@
     HJDMyAgentModel *model = self.dataSource[indexPath.row];
     cell.name = model.rename;
     cell.phone = model.phone;
+    cell.delegate = self;
     return cell;
 }
 
@@ -118,6 +119,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 88;
+}
+
+#pragma mark - HJDMyAgentTableViewCellDelegate
+- (void)myAgentCell:(HJDMyAgentTableViewCell *)agentCell didClickPhone:(id)sender {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:agentCell];
+    HJDMyAgentModel *model = self.dataSource[indexPath.row];
+    [self phoneCall:model.phone];
 }
 
 #pragma mark - HJDMyNavTextFieldSearchViewDelegate

@@ -32,5 +32,6 @@
 + (void)modifyMyInfoWithParams:(NSDictionary *)params callBack:(void(^)(BOOL result))callback;
 
 //重新更新一下我的信息
-+ (void)reUpdateMyInfo:(void(^)(BOOL result))callback;;
++ (void)reUpdateMyInfo:(void(^)(BOOL result))callback;
+
 @end

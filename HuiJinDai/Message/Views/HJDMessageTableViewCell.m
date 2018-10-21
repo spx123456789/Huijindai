@@ -12,6 +12,7 @@
 @property(nonatomic, strong) UIView *bgView;
 @property(nonatomic, strong) UILabel *titleLabel;
 @property(nonatomic, strong) UILabel *subLabel;
+@property(nonatomic, strong) UILabel *channelLabel;
 @property(nonatomic, strong) UIView *color_line;
 @property(nonatomic, strong) UIView *line;
 @property(nonatomic, strong) UILabel *numberLabel;
@@ -59,7 +60,6 @@
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.text = @"订单进度处理通知";
         _titleLabel.textColor = kRGB_Color(0x33, 0x33, 0x33);
         _titleLabel.font = [UIFont boldSystemFontOfSize:15];
     }
@@ -69,7 +69,6 @@
 - (UILabel *)subLabel {
     if (!_subLabel) {
         _subLabel = [[UILabel alloc] init];
-        _subLabel.text = @"张先生，你好";
         _subLabel.textColor = kRGB_Color(0x33, 0x33, 0x33);
         _subLabel.font = kFont14;
     }
@@ -288,30 +287,21 @@
     return self;
 }
 
-- (void)setNumber:(NSString *)number {
-    _number = number;
-    self.numberLabel_1.text = number;
-}
-
-- (void)setType:(NSString *)type {
-    _type = type;
-    self.typeLabel_1.text = type;
-}
-
-- (void)setStatus:(NSString *)status {
-    _status = status;
-    self.statusLabel_1.text = status;
-}
-
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (void)setCellValue:(HJDMessageModel *)message {
+    self.titleLabel.text = message.title;
+    self.subLabel.text = message.title_child;
+    self.numberLabel_1.text = message.loan_num;
+    self.typeLabel_1.text = message.loan_type;
+    self.statusLabel_1.text = message.loan_status_num;
+    if (message.type.integerValue == 1) {
+        self.channelLabel.hidden = YES;
+    } else {
+        self.channelLabel.hidden = NO;
+    }
 }
-
 @end

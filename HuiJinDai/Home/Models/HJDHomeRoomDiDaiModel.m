@@ -10,12 +10,41 @@
 
 @implementation HJDHomeRoomDiDaiModel
 
-//- (NSString *)address {
-//    return [NSString stringWithFormat:@"%@%@%@%@%@%@", self.provinceName, self.cityName, self.districtName, self.communityName, self.buildingUnitName, self.houseNo];
-//}
-
 - (NSDictionary *)getRoomEvaluateParams {
-    return @{ @"provinceId" : self.provinceId, @"provinceName" : self.provinceName, @"cityId" : self.cityId, @"cityName" : self.cityName, @"districtId" : self.districtId, @"districtName" : self.districtName, @"communityId" : self.communityId, @"communityName" : self.communityName, @"address" : self.address, @"buildingUnitId" : self.buildingUnitId, @"buildingUnitName" : self.buildingUnitName, @"houseId" : self.houseId, @"houseNo" : self.houseNo, @"houseSpace" : self.houseSpace, @"companyStr" : self.companyStr
-              };
+    NSDictionary *dictionary = @{ @"provinceId" : self.provinceId,
+                                  @"provinceName" : self.provinceName,
+                                  @"cityId" : self.cityId,
+                                  @"cityName" : self.cityName,
+                                  @"districtId" : self.districtId,
+                                  @"districtName" : self.districtName,
+                                  @"communityId" : self.communityId,
+                                  @"communityName" : self.communityName,
+                                  @"address" : self.address,
+                                  @"houseSpace" : self.houseSpace,
+                                  @"companyStr" : self.companyStr
+                                  };
+    NSMutableDictionary *mutDic = [NSMutableDictionary dictionary];
+    [mutDic addEntriesFromDictionary:dictionary];
+    
+    if ([NSString hjd_isBlankString:self.buildingUnitId]) {
+        [mutDic setObject:@"1" forKey:@"buildingUnitId"];
+        [mutDic setObject:@"一单元" forKey:@"buildingUnitName"];
+    } else {
+        [mutDic setObject:self.buildingUnitId forKey:@"buildingUnitId"];
+        [mutDic setObject:self.buildingUnitName forKey:@"buildingUnitName"];
+    }
+    
+    if ([NSString hjd_isBlankString:self.houseId]) {
+        [mutDic setObject:@"1" forKey:@"houseId"];
+        [mutDic setObject:@"1" forKey:@"houseNo"];
+    } else {
+        [mutDic setObject:self.houseId forKey:@"houseId"];
+        [mutDic setObject:self.houseNo forKey:@"houseNo"];
+    }
+    
+    if (self.planning != 0) {
+        [mutDic setObject:@(self.planning) forKey:@"planning"];
+    }
+    return mutDic;
 }
 @end

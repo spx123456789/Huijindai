@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HJDHomeQueryValueDetailModel.h"
 
 @interface HJDHomeOrderDetailTableViewCell : UITableViewCell
 @property(nonatomic, strong) UIView *bgView;
@@ -19,7 +20,7 @@
 
 //询值
 @interface HJDHomeOrderDetailQueryCell : HJDHomeOrderDetailTableViewCell
-
+- (void)setCellValue:(HJDHomeQueryValueDetailModel *)model;
 @end
 
 //报单
@@ -34,7 +35,7 @@
 
 //询值结果
 @interface HJDHomeOrderDetailQueryValueResultCell : HJDHomeOrderDetailTableViewCell
-@property(nonatomic, strong) NSMutableArray *dataSource;
+@property(nonatomic, strong) NSArray *dataSource;
 @end
 
 @class HJDHomeOrderDetailButtonCell;

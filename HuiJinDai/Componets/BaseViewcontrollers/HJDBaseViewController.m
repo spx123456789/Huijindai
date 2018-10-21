@@ -8,6 +8,8 @@
 
 #import "HJDBaseViewController.h"
 #import "UITableView+HJD.h"
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#import <CoreTelephony/CTCarrier.h>
 
 @interface HJDBaseViewController ()
 
@@ -145,4 +147,26 @@
     [MBProgressHUD showError:message];
 }
 
+#pragma mark - 打电话
+- (void)phoneCall:(NSString *)phone {
+    if ([self checkSIMCard]) {
+        NSString *mobile = [NSString stringWithFormat:@"tel://%@", phone];
+        NSURL *url = [NSURL URLWithString:mobile];
+        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:^(BOOL success) {
+                
+            }];
+        }
+    }
+}
+
+- (BOOL)checkSIMCard {
+    CTTelephonyNetworkInfo *info = [[CTTelephonyNetworkInfo alloc] init];
+    CTCarrier *carrier = [info subscriberCellularProvider];
+    if (!carrier.isoCountryCode && !carrier.mobileCountryCode && !carrier.mobileNetworkCode) {
+        [self showToast:@"SIM卡状态异常"];
+        return NO;
+    }
+    return YES;
+}
 @end

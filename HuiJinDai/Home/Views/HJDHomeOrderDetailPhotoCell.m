@@ -42,7 +42,7 @@
         _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 100) collectionViewLayout:layout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-        _collectionView.backgroundColor = [UIColor cyanColor];
+        _collectionView.backgroundColor = kWithe;
         [_collectionView registerClass:[HJDHomePhotoCollectionViewCell class] forCellWithReuseIdentifier:@"HJDHomePhotoCollectionViewCell"];
         [_collectionView registerClass:[HJDHomeCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HJDHomeCollectionReusableView"];
     }

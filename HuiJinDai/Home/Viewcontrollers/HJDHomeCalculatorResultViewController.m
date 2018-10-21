@@ -75,17 +75,17 @@
         cell.twoLabel.text = @"申请期限";
         cell.threeLabel.text = @"放款日期";
         cell.fourLabel.text = @"到期日期";
-        cell.firstLabel_1.text = @"1000000元";
-        cell.twoLabel_1.text = @"3月";
-        cell.threeLabel_1.text = @"2018-02-15";
-        cell.fourLabel_1.text = @"2019-04-12";
+        cell.firstLabel_1.text = [NSString stringWithFormat:@"%@元", self.resultModel.money];
+        cell.twoLabel_1.text = [NSString stringWithFormat:@"%@月", self.resultModel.month];
+        cell.threeLabel_1.text = self.resultModel.start_date;
+        cell.fourLabel_1.text = self.resultModel.end_date;
         [cell setCellOfNumber:4];
     } else if (indexPath.row == 1) {
         cell.titleLabel.text = @"计算结果";
         cell.firstLabel.text = @"年化利率";
         cell.twoLabel.text = @"利息总计";
-        cell.firstLabel_1.text = @"10%";
-        cell.twoLabel_1.text = @"24,999.99元";
+        cell.firstLabel_1.text = [NSString stringWithFormat:@"%@%%", self.resultModel.lilv];
+        cell.twoLabel_1.text = [NSString stringWithFormat:@"%@元", self.resultModel.lixi];
         [cell setCellOfNumber:2];
     }
     return cell;

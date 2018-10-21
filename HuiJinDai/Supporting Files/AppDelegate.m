@@ -16,14 +16,17 @@
 #import <UserNotifications/UserNotifications.h>
 #endif
 
-#define kGtAppId @"iMahVVxurw6BNr7XSn9EF2"
-#define kGtAppKey @"yIPfqwq6OMAPp6dkqgLpG5"
-#define kGtAppSecret @"G0aBqAD6t79JfzTB6Z5lo5"
+#define kGtAppId @"5cU1C08CCCAeZei6qpZ2a3"
+#define kGtAppKey @"Is4r9CsCg69gq0mUIle023"
+#define kGtAppSecret @"BvQ6TcyHGA6LwVSeGIpU28"
+
+#define kWeiXinAppId @"wxd930ea5d5a258f4f"
 
 #import "HJDNetAPIManager.h"
 #import "HJDMyManager.h"
+#import "WXApi.h"
 
-@interface AppDelegate ()<GeTuiSdkDelegate, UNUserNotificationCenterDelegate>
+@interface AppDelegate ()<GeTuiSdkDelegate, UNUserNotificationCenterDelegate, WXApiDelegate>
 
 @end
 
@@ -36,6 +39,7 @@
     self.window.backgroundColor = kWithe;
     [self.window makeKeyAndVisible];
     
+    [self registerWeiXin];
     [self registerGeTui];
     
     NSNumber *isLogin = [[NSUserDefaults standardUserDefaults] objectForKey:HJDLoginSuccess];
@@ -80,6 +84,51 @@
     [controller.tabBarItem setTitleTextAttributes:dictHome forState:UIControlStateSelected];
 }
 
+#pragma mark - 微信分享
+- (void)registerWeiXin {
+    [WXApi registerApp:kWeiXinAppId];
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    return [WXApi handleOpenURL:url delegate:self];
+}
+
+- (void)shareInviteCode:(NSDictionary *)shareDic scene:(int)scene {
+    WXMediaMessage *message = [WXMediaMessage message];
+    [message setThumbImage:[UIImage imageNamed:@"邀请码头像@2x.png"]];
+    
+    WXImageObject *ext = [WXImageObject object];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"邀请码头像@2x" ofType:@"png"];
+    NSLog(@"filepath :%@",filePath);
+    ext.imageData = [NSData dataWithContentsOfFile:filePath];
+    
+    //UIImage* image = [UIImage imageWithContentsOfFile:filePath];
+    UIImage *image = [UIImage imageWithData:ext.imageData];
+    ext.imageData = UIImagePNGRepresentation(image);
+    
+    //    UIImage* image = [UIImage imageNamed:@"res5thumb.png"];
+    //    ext.imageData = UIImagePNGRepresentation(image);
+    
+    message.mediaObject = ext;
+    
+    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+    req.bText = NO;
+    req.message = message;
+    //会话(WXSceneSession = 0)或者朋友圈(WXSceneTimeline = 1)
+    req.scene = scene;
+    [WXApi sendReq:req];
+}
+
+#pragma mark - WXApiDelegate
+- (void)onReq:(BaseReq *)req {
+    
+}
+//如果第三方程序向微信发送了sendReq的请求，那么onResp会被回调。sendReq请求调用后，会切到微信终端程序界面。
+- (void)onResp:(BaseResp *)resp {
+    
+}
+
+#pragma mark - 个推注册
 - (void)registerGeTui {
     // 通过个推平台分配的appId、 appKey 、appSecret 启动SDK，注:该⽅方法需要在主线程中调⽤用
     [GeTuiSdk startSdkWithAppId:kGtAppId appKey:kGtAppKey appSecret:kGtAppSecret delegate:self];

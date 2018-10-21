@@ -10,13 +10,27 @@
 #import <TPKeyboardAvoidingTableView.h>
 #import "HJDCalculatorTableViewCell.h"
 #import "HJDHomeCalculatorResultViewController.h"
+#import "HJDHomeManager.h"
+#import "HJDHomeDatePickerView.h"
 
-@interface HJDHomeCalculatorViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface HJDHomeCalculatorViewController ()<UITableViewDelegate, UITableViewDataSource, HJDHomeDatePickerViewDelegate, UITextFieldDelegate>
 @property (nonatomic, strong) TPKeyboardAvoidingTableView *tableView;
 @property(nonatomic, strong) UIView *bottomView;
+@property(nonatomic, strong) HJDHomeCalculatorModel *calculatorModel;
+
 @end
 
 @implementation HJDHomeCalculatorViewController
+
+- (TPKeyboardAvoidingTableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[TPKeyboardAvoidingTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    return _tableView;
+}
 
 - (UIView *)bottomView {
     if (!_bottomView) {
@@ -36,8 +50,37 @@
 }
 
 - (void)buttonClick:(id)sender {
-    HJDHomeCalculatorResultViewController *controller = [[HJDHomeCalculatorResultViewController alloc] init];
-    [self.navigationController pushViewController:controller animated:YES];
+    if ([NSString hjd_isBlankString:self.calculatorModel.money]) {
+        [self showToast:@"请填写借款金额"];
+        return;
+    }
+    
+    if ([NSString hjd_isBlankString:self.calculatorModel.month]) {
+        [self showToast:@"请填写申请期限"];
+        return;
+    }
+    
+    if ([NSString hjd_isBlankString:self.calculatorModel.start_date]) {
+        [self showToast:@"请选择放款日期"];
+        return;
+    }
+    
+    @weakify(self);
+    [MBProgressHUD showMessage:@"开始计算..."];
+    [HJDHomeManager getJiSuanResultWithStartTime:self.calculatorModel.start_date month:self.calculatorModel.month money:self.calculatorModel.money callBack:^(NSDictionary *dataDic, BOOL result) {
+        @strongify(self);
+        [MBProgressHUD hideHUD];
+        if (result) {
+            HJDHomeCalculatorResultViewController *controller = [[HJDHomeCalculatorResultViewController alloc] init];
+            self.calculatorModel.lilv = dataDic[@"lilv"];
+            self.calculatorModel.lixi = dataDic[@"lixi"];
+            controller.resultModel = self.calculatorModel;
+            [self.navigationController pushViewController:controller animated:YES];
+        } else {
+            [MBProgressHUD showError:@"计算失败"];
+        }
+    }];
+    
 }
 
 - (void)viewDidLoad {
@@ -52,6 +95,8 @@
     }];
     
     self.tableView.tableFooterView = self.bottomView;
+    
+    self.calculatorModel = [[HJDHomeCalculatorModel alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,8 +104,44 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - UITableView Datasource
+- (void)reloadEndTime {
+    if ([NSString hjd_isBlankString:self.calculatorModel.month]) {
+        return;
+    }
+    
+    if ([NSString hjd_isBlankString:self.calculatorModel.start_date]) {
+        return;
+    }
+    
+    [MBProgressHUD showMessage:@"加载到期日期..."];
+    [HJDHomeManager getEndDateWithStartTime:self.calculatorModel.start_date month:self.calculatorModel.month callBack:^(NSString *dataStr, BOOL result) {
+        [MBProgressHUD hideHUD];
+        if (result) {
+            self.calculatorModel.end_date = dataStr;
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
+            HJDCalculatorTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+            cell.textField.text = dataStr;
+        } else {
+            [MBProgressHUD showError:@"加载失败"];
+        }
+    }];
+}
 
+#pragma mark - HJDHomeDatePickerViewDelegate
+- (void)datePickerView:(HJDHomeDatePickerView *)datePickerView selectTime:(NSString *)selectTime {
+    self.calculatorModel.start_date = selectTime;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+    HJDCalculatorTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    cell.textField.text = selectTime;
+    [self reloadEndTime];
+}
+
+#pragma mark - UITextFieldDelegate
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [self reloadEndTime];
+}
+
+#pragma mark - UITableView Datasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -78,7 +159,7 @@
         cell = [[HJDCalculatorTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    NSString * placeHoderStr = @"";
+    NSString *placeHoderStr = @"";
     switch (indexPath.row) {
         case 0: {
             cell.titleLabel.text = @"借款金额";
@@ -87,6 +168,9 @@
             cell.moreImageView.hidden = YES;
             cell.subLabel.text = @"元";
             cell.subLabel.hidden = NO;
+            [cell.textField.rac_textSignal subscribeNext:^(NSString *x) {
+                self.calculatorModel.money = x;
+            }];
             break;
         }
         case 1: {
@@ -96,6 +180,10 @@
             cell.moreImageView.hidden = YES;
             cell.subLabel.text = @"月";
             cell.subLabel.hidden = NO;
+            [cell.textField.rac_textSignal subscribeNext:^(NSString *x) {
+                self.calculatorModel.month = x;
+            }];
+            cell.textField.delegate = self;
             break;
         }
         case 2: {
@@ -128,45 +216,14 @@
 #pragma mark - UITableView Delegate methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.row) {
-        case 0:
-        {
-            
-            break;
-        }
-        case 1:
-        {
-            
-            break;
-        }
-        case 2:
-        {
-            
-            break;
-        }
-        case 3:
-        {
-            
-            break;
-        }
-        default:
-            break;
+    if (indexPath.row == 2) {
+        HJDHomeDatePickerView *picker = [[HJDHomeDatePickerView alloc] initWithFrame:CGRectMake(0, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 180, kScreenWidth, 180)];
+        picker.delegate = self;
+        [self.view addSubview:picker];
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 60;
 }
-
-
-- (TPKeyboardAvoidingTableView *)tableView {
-    if (!_tableView) {
-        _tableView = [[TPKeyboardAvoidingTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    }
-    return _tableView;
-}
-
 @end

@@ -35,7 +35,7 @@ typedef void (^RoomDiDaiHttpCallback)(NSArray *data, BOOL result);
 + (void)getRoomEvaluateListWithCallBack:(RoomDiDaiHttpCallback)callback;
 
 //获取评值信息
-+ (void)getRoomEvaluateInfoWithXunid:(NSString *)xun_id callBack:(RoomDiDaiHttpCallback)callback;
++ (void)getRoomEvaluateInfoWithXunid:(NSString *)xun_id callBack:(void(^)(NSDictionary *dataDic, BOOL result))callback;
 
 //申请工单号
 + (void)getOrderIdWithCallBack:(void(^)(NSDictionary *data, BOOL result))callback;
@@ -45,4 +45,10 @@ typedef void (^RoomDiDaiHttpCallback)(NSArray *data, BOOL result);
 
 //工单详情
 + (void)getOrderDetailWithID:(NSString *)uid callBack:(void(^)(NSDictionary *data, BOOL result))callback;
+
+
+
+
+#pragma mark - 测试 只上传图片
++ (void)postRoomModel:(HJDDeclarationModel *)model callBack:(void(^)(NSDictionary *data, BOOL result))callback;
 @end

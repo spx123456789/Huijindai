@@ -9,5 +9,6 @@
 #import "HJDBaseViewController.h"
 
 @interface HJDHomeOrderProcessViewController : HJDBaseViewController
-
+//经纪人id
+@property(nonatomic, copy) NSString *uid;
 @end

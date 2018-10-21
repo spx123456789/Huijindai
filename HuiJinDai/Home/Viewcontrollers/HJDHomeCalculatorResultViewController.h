@@ -7,7 +7,8 @@
 //
 
 #import "HJDBaseViewController.h"
+#import "HJDHomeCalculatorModel.h"
 
 @interface HJDHomeCalculatorResultViewController : HJDBaseViewController
-
+@property(nonatomic, strong) HJDHomeCalculatorModel *resultModel;
 @end

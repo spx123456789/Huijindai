@@ -11,8 +11,10 @@
 
 @interface HJDMessageManager : NSObject
 
-+ (NSArray *)getMyMessage;
+//查询的站内信类型，1站内信，3渠道站内信
++ (void)getMyMessageWithType:(NSString *)type callBack:(void(^)(NSArray *data, BOOL result))callBack;
 
-+ (NSArray *)getChannelMessage;
++ (void)deleteMyMessageWithMsgId:(NSString *)msgId callBack:(void(^)(BOOL result))callback;
 
++ (BOOL)isTheSameDay:(NSString *)oneDay otherDay:(NSString *)otherDay;
 @end

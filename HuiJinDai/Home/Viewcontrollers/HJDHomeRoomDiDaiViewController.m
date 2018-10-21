@@ -10,7 +10,7 @@
 #import "HJDMessageSegmentView.h"
 #import "HJDHomeRoomDiDaiTableViewCell.h"
 #import "HJDHomeCalculatorResultTableCell.h"
-#import "HJDHomeQueryValueFailViewController.h"
+#import "HJDHomeQueryValueDetailViewController.h"
 #import "HJDHomeQueryValueResultViewController.h"
 #import "HJDCustomerServiceView.h"
 #import "HJDHomeRoomSelectViewController.h"
@@ -88,13 +88,8 @@ typedef enum : NSUInteger {
 }
 
 - (void)queryValueButtonClick:(id)sender {
-    HJDHomeQueryValueResultViewController *controller = [[HJDHomeQueryValueResultViewController alloc] init];
-    [self.navigationController pushViewController:controller animated:YES];
-    return;
-
-    
+    self.roomModel.companyStr = @"01,02,03";
     /*
-     
      houseId    string
      房间 Id
      
@@ -102,7 +97,8 @@ typedef enum : NSUInteger {
      门牌号，如：1702
      
      companyStr    string
-     询值类型， 01-世联,02-仁达,03-首佳*/
+     询值类型， 01-世联,02-仁达,03-首佳
+     */
     if ([NSString hjd_isBlankString:self.roomModel.provinceId]) {
         [self showToast:@"请选择城市"];
         return;
@@ -119,12 +115,6 @@ typedef enum : NSUInteger {
     }
     //单元门  门牌号
     
-    //规划用途
-    if (self.roomModel.useType == 0) {
-        [self showToast:@"请选择规划用途"];
-        return;
-    }
-    
     if ([NSString hjd_isBlankString:self.roomModel.houseSpace]) {
         [self showToast:@"请填写建筑面积"];
         return;
@@ -138,7 +128,11 @@ typedef enum : NSUInteger {
             controller.resultArray = [NSArray arrayWithArray:data];
             [self.navigationController pushViewController:controller animated:YES];
         } else {
-            [MBProgressHUD showError:@"询值失败"];
+            if (data) {
+                [MBProgressHUD showError:@"用户询值次数已达上限"];
+            } else {
+                [MBProgressHUD showError:@"询值失败"];
+            }
         }
     }];
 }
@@ -195,7 +189,7 @@ typedef enum : NSUInteger {
     } else {
         NSDictionary *dic = self.dataSource[indexPath.row];
         NSString *status = [NSString stringWithFormat:@"%@", dic[@"request"]];
-        HJDHomeQueryValueFailViewController *statusController = [[HJDHomeQueryValueFailViewController alloc] init];
+        HJDHomeQueryValueDetailViewController *statusController = [[HJDHomeQueryValueDetailViewController alloc] init];
         statusController.xun_id = dic[@"x_id"];
         if ([status isEqualToString:@"true"]) {
             statusController.isSuccess = YES;
@@ -340,6 +334,11 @@ typedef enum : NSUInteger {
             cell.rightLabel.hidden = NO;
             cell.rightLabel.text = @"m²";
             cell.lineView.hidden = YES;
+            @weakify(self);
+            [cell.textField.rac_textSignal subscribeNext:^(NSString *x) {
+                @strongify(self);
+                self.roomModel.houseSpace = x;
+            }];
             break;
         }
         default:

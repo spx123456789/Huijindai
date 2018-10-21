@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class HJDMyAgentTableViewCell;
+@protocol HJDMyAgentTableViewCellDelegate <NSObject>
+- (void)myAgentCell:(HJDMyAgentTableViewCell *)agentCell didClickPhone:(id)sender;
+@end
+
 @interface HJDMyAgentTableViewCell : UITableViewCell
 @property(nonatomic, copy) NSString *name;
 @property(nonatomic, copy) NSString *phone;
+
+@property(nonatomic, weak) id<HJDMyAgentTableViewCellDelegate> delegate;
 @end

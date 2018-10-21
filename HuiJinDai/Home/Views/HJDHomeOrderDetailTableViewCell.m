@@ -22,7 +22,7 @@
     UILabel *label_1 = [[UILabel alloc] init];
     label_1.textColor = kRGB_Color(0x33, 0x33, 0x33);
     label_1.font = kFont14;
-    label_1.textAlignment = NSTextAlignmentRight;
+    label_1.textAlignment = NSTextAlignmentLeft;
     return label_1;
 }
 
@@ -188,6 +188,18 @@
         }];
     }
     return self;
+}
+
+- (void)setCellValue:(HJDHomeQueryValueDetailModel *)model {
+    self.cityLabel_1.text = model.provinceName;
+    self.xiaoquLabel_1.text = model.communityName;
+    self.addressLabel_1.text = model.address;
+    if (model.planning.integerValue == 1) {
+        self.useLabel_1.text = @"住宅";
+    } else {
+        self.useLabel_1.text = @"别墅";
+    }
+    self.areaLabel_1.text = [NSString stringWithFormat:@"%@m²", model.houseSpace];
 }
 
 @end
@@ -587,8 +599,8 @@
     return self;
 }
 
-- (void)setDataSource:(NSMutableArray *)dataSource {
-    _dataSource = dataSource;
+- (void)setDataSource:(NSArray *)dataSource {
+    _dataSource = [NSMutableArray arrayWithArray:dataSource];
     [self.tableView reloadData];
 }
 

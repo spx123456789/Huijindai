@@ -10,4 +10,5 @@ pod 'MJRefresh'
 pod 'MBProgressHUD'
 pod 'FMDB'
 pod 'MJExtension'
+pod 'WechatOpenSDK'
 end

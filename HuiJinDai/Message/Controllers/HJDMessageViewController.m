@@ -16,6 +16,9 @@
 @property(nonatomic, strong) NSMutableArray *dataSource;
 @property(nonatomic, strong) HJDMessageSegmentView *segmentView;
 @property(nonatomic, assign) HJDMessageType selectType;
+@property(nonatomic, strong) NSMutableArray *myDataSource;
+@property(nonatomic, strong) NSMutableArray *channelDataSource;
+@property(nonatomic, assign) BOOL isFirstLoadChannel;
 @end
 
 @implementation HJDMessageViewController
@@ -44,6 +47,8 @@
     self = [super init];
     if (self) {
         self.selectType = HJDMessageTypeMy;
+        self.dataSource = [NSMutableArray array];
+        self.isFirstLoadChannel = YES;
     }
     return self;
 }
@@ -53,14 +58,31 @@
     
     self.navigationItem.titleView = self.segmentView;
     
-    self.dataSource = [NSMutableArray arrayWithArray:[HJDMessageManager getMyMessage]];
-    
     [self.view addSubview:self.tableView];
+    
+    [self getMessageData];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)getMessageData {
+    @weakify(self);
+    [MBProgressHUD showMessage:@"正在加载..."];
+    [HJDMessageManager getMyMessageWithType:@"1" callBack:^(NSArray *data, BOOL result) {
+        @strongify(self);
+        [MBProgressHUD hideHUD];
+        if (result) {
+            self.myDataSource = [NSMutableArray arrayWithArray:data];
+            [self.dataSource removeAllObjects];
+            [self.dataSource addObjectsFromArray:self.myDataSource];
+            [self.tableView reloadData];
+        } else {
+            [MBProgressHUD showError:@"加载失败"];
+        }
+    }];
 }
 
 #pragma mark - UITableViewDelegate
@@ -110,15 +132,7 @@
     }
     NSMutableArray *mut = self.dataSource[indexPath.section];
     HJDMessageModel *model = mut[indexPath.row];
-    cell.number = model.number;
-    cell.type = model.type;
-    cell.status = model.status;
-    if (self.selectType == HJDMessageTypeMy) {
-        cell.channelLabel.hidden = YES;
-    } else {
-        cell.channelLabel.hidden = NO;
-    }
-    
+    [cell setCellValue:model];
     return cell;
 }
 
@@ -135,7 +149,16 @@
     [view addSubview:timeLabel];
     NSMutableArray *mut = self.dataSource[section];
     HJDMessageModel *model = mut.firstObject;
-    timeLabel.text = model.time;
+    
+    //2018-10-20 22:34:39
+    NSString *month = [model.create_time substringWithRange:NSMakeRange(5, 2)];
+    NSString *day = [model.create_time substringWithRange:NSMakeRange(8, 2)];
+    NSString *timeStr = [NSString stringWithFormat:@"%@月%@日", month, day];
+    timeLabel.text = timeStr;
+    [timeLabel sizeToFit];
+    CGRect oldFrame = timeLabel.frame;
+    CGFloat LabelWidth = oldFrame.size.width + 16;
+    timeLabel.frame = CGRectMake(kScreenWidth/2 - LabelWidth/2, oldFrame.origin.y, LabelWidth, 15);
     return view;
 }
 
@@ -144,10 +167,28 @@
     self.selectType = type;
     [self.dataSource removeAllObjects];
     if (type == HJDMessageTypeMy) {
-        [self.dataSource addObjectsFromArray:[HJDMessageManager getMyMessage]];
+        [self.dataSource addObjectsFromArray:self.myDataSource];
+        [self.tableView reloadData];
     } else {
-        [self.dataSource addObjectsFromArray:[HJDMessageManager getChannelMessage]];
+        if (self.isFirstLoadChannel) {
+            self.isFirstLoadChannel = NO;
+            [MBProgressHUD showMessage:@"正在加载..."];
+            @weakify(self);
+            [HJDMessageManager getMyMessageWithType:@"3" callBack:^(NSArray *data, BOOL result) {
+                @strongify(self);
+                [MBProgressHUD hideHUD];
+                if (result) {
+                    self.channelDataSource = [NSMutableArray arrayWithArray:data];
+                    [self.dataSource addObjectsFromArray:self.channelDataSource];
+                    [self.tableView reloadData];
+                } else {
+                    [MBProgressHUD showError:@"加载失败"];
+                }
+            }];
+        } else {
+            [self.dataSource addObjectsFromArray:self.channelDataSource];
+            [self.tableView reloadData];
+        }
     }
-    [self.tableView reloadData];
 }
 @end

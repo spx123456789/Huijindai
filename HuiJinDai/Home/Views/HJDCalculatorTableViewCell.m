@@ -26,7 +26,7 @@
         [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(15);
             make.centerY.mas_equalTo(self.contentView.mas_centerY);
-            make.width.mas_equalTo(150);
+            make.right.mas_equalTo(self.contentView.mas_right).offset(-45);
             make.left.mas_equalTo(self.titleLabel.mas_right).offset(16);
         }];
         
@@ -85,7 +85,6 @@
         UITextField *textField = [[UITextField alloc]initWithFrame:CGRectZero];
         textField.font = [UIFont systemFontOfSize:15];
         textField.textColor = HMRGBHex(@"#333333");
-        textField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _textField = textField;
     }
     return _textField;

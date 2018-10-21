@@ -80,6 +80,21 @@
 }
 
 - (void)submitButtonClick:(id)sender {
+    //测试只上传图片
+    self.declarationModel.loan_id = @"158";
+    [MBProgressHUD showMessage:@"正在提交..."];
+    [HJDHomeRoomDiDaiManager postRoomModel:self.declarationModel callBack:^(NSDictionary *data, BOOL result) {
+        [MBProgressHUD hideHUD];
+        if (result) {
+            [MBProgressHUD showSuccess:@"提交成功"];
+        } else {
+            [MBProgressHUD showError:@"提交失败"];
+        }
+    }];
+    
+    
+    return;
+    
     if (self.declarationModel.loan_variety == 0) {
         [self showToast:@"请选择贷款品种"];
         return;

@@ -9,9 +9,8 @@
 #import "HJDBaseModel.h"
 
 typedef enum : NSUInteger {
-    HJDRoomUse_1,
-    HJDRoomUse_2,
-    HJDRoomUse_3,
+    HJDRoomUse_house = 1,    //住宅
+    HJDRoomUse_villa,       //别墅
 } HJDRoomUseType;
 
 @interface HJDHomeRoomDiDaiModel : HJDBaseModel
@@ -51,8 +50,8 @@ typedef enum : NSUInteger {
 @property(nonatomic, copy) NSString *houseSpace;
 //询值类型， 01-世联,02-仁达,03-首佳
 @property(nonatomic, copy) NSString *companyStr;
-//规划用途
-@property(nonatomic, assign) HJDRoomUseType useType;
+//规划用途 1住宅 2别墅[Default: 1]
+@property(nonatomic, assign) HJDRoomUseType planning;
 
 - (NSDictionary *)getRoomEvaluateParams;
 @end

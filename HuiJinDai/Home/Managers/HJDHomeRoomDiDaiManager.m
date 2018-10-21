@@ -87,11 +87,21 @@
 }
 
 + (void)postRoomEvaluateWithModel:(HJDHomeRoomDiDaiModel *)model callBack:(RoomDiDaiHttpCallback)callback {
-    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Assessment/evaluate") requestParams:[model getRoomEvaluateParams] networkMethod:POST callback:^(id data, NSError *error) {
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Assessment/evaluate") requestParams:[model getRoomEvaluateParams] networkMethod:POST callback:^(NSDictionary *data, NSError *error) {
         if (error) {
             callback(nil, NO);
         } else {
-            callback([data getObjectByPath:@"data/list"], YES);
+            NSArray *dataArray = [data getObjectByPath:@"data/list"];
+            if (dataArray && dataArray.count > 0) {
+                callback(dataArray, YES);
+            } else {
+                if ([[data getObjectByPath:@"string_code"] isEqualToString:@"ERROR_USER"]) {
+                    callback(@[ @"ERROR_USER" ], NO);
+                } else {
+                    callback(nil, NO);
+                }
+            }
+            
         }
     }];
 }
@@ -106,12 +116,12 @@
     }];
 }
 
-+ (void)getRoomEvaluateInfoWithXunid:(NSString *)xun_id callBack:(RoomDiDaiHttpCallback)callback {
++ (void)getRoomEvaluateInfoWithXunid:(NSString *)xun_id callBack:(void (^)(NSDictionary *, BOOL))callback {
     [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Assessment/get_price") requestParams:@{ @"xun_id" : xun_id } networkMethod:GET callback:^(id data, NSError *error) {
         if (error) {
             callback(nil, NO);
         } else {
-            callback([data getObjectByPath:@"data/list"], YES);
+            callback([data getObjectByPath:@"data"], YES);
         }
     }];
 }
@@ -129,18 +139,50 @@
 
 + (void)postRoomDeclarationWithModel:(HJDDeclarationModel *)model callBack:(void (^)(NSDictionary *, BOOL))callback {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    if (![NSString hjd_isBlankString:model.evaluation_id]) {
-        [params setObject:model.evaluation_id forKey:@"evaluation_id"];
-    }
+    NSDictionary *needDic = @{ @"loan_id" : model.loan_id,
+                            @"loan_variety" : @(model.loan_variety),
+                            @"loan_money" : model.loan_money,
+                            @"loan_time" : model.loan_time,
+                            @"loan_time_type" : @(model.loan_time_type) };
+    [params addEntriesFromDictionary:needDic];
+    
+    
     if (model.loan_variety == HJDLoanVarietyHouse_2) {
         [params setObject:model.loan_first forKey:@"loan_first"];
     }
-    [params addEntriesFromDictionary:@{ @"loan_id" : model.loan_id, @"name" : model.name, @"certificate_type" : @(model.certificate_type), @"certificate_number" : model.certificate_number, @"indiv_marital" : @(model.indiv_marital), @"loan_variety" : @(model.loan_variety), @"loan_money" : model.loan_money, @"loan_time" : model.loan_time, @"loan_time_type" : @(model.loan_time_type) }];
+    
+    /*
+     evaluation_id [选填]寻值编号[Default：0]
+     name [选填]客户姓名
+     certificate_type [选填]证件类型，1身份证，2营业执照，3护照，4军官证，5士兵证，6港澳居民来往内地通行证，台湾居民来往大陆通行证，8其他证件
+     certificate_number [选填]证件号码
+     indiv_marital [选填]婚姻情况，1未婚，2已婚有子女，3已婚无子女，4丧偶，5离异，6再婚
+     */
+    if (![NSString hjd_isBlankString:model.evaluation_id]) {
+        [params setObject:model.evaluation_id forKey:@"evaluation_id"];
+    }
+    
+    if (![NSString hjd_isBlankString:model.name]) {
+        [params setObject:model.name forKey:@"name"];
+    }
+    
+    if (model.certificate_type == 0) {
+        [params setObject:@(model.certificate_type) forKey:@"certificate_type"];
+    }
+    
+    if (![NSString hjd_isBlankString:model.certificate_number]) {
+        [params setObject:model.certificate_number forKey:@"certificate_number"];
+    }
+    
+    if (model.indiv_marital == 0) {
+        [params setObject:@(model.indiv_marital) forKey:@"indiv_marital"];
+    }
+    
     [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Loan/create") requestParams:params networkMethod:POST callback:^(id data, NSError *error) {
         if (error) {
             callback(nil, NO);
         } else {
-            NSLog(@"====文字成功");
+            NSLog(@"====文字成功 %@", params);
             [HJDHomeRoomDiDaiManager uploadPictureWithModel:model callBack:callback];
         }
     }];
@@ -153,34 +195,33 @@
 }
 
 #pragma mark - 上传图片
+static NSString *key1 = @"pictype";
+static NSString *key2 = @"imageInfo";
 + (void)uploadPictureWithModel:(HJDDeclarationModel *)model callBack:(void (^)(NSDictionary *, BOOL))callback {
+    //@[ @{ @"pictype" : pictype, @"imageInfo" : imageInfo } ]
     NSMutableArray *imageArray = [NSMutableArray array];
-    NSString *pic_type = @"";
-    if (model.idCardArray && model.idCardArray.count != 0) {
-        [imageArray addObjectsFromArray:model.idCardArray];
-        pic_type = @"1";
+    
+    for (NSDictionary *info in model.idCardArray) {
+        [imageArray addObject:@{ key1 : @"1", key2 : info }];
     }
     
-    if (model.bookArray && model.bookArray.count != 0) {
-        [imageArray addObjectsFromArray:model.bookArray];
-        pic_type = @"2";
+    for (NSDictionary *info in model.bookArray) {
+        [imageArray addObject:@{ key1 : @"2", key2 : info }];
     }
     
-    if (model.creditReportArray && model.creditReportArray.count != 0) {
-        [imageArray addObjectsFromArray:model.creditReportArray];
-        pic_type = @"3";
+    for (NSDictionary *info in model.creditReportArray) {
+        [imageArray addObject:@{ key1 : @"3", key2 : info }];
     }
     
-    if (model.marriageArray && model.marriageArray.count != 0) {
-        [imageArray addObjectsFromArray:model.marriageArray];
-        pic_type = @"4";
+    for (NSDictionary *info in model.marriageArray) {
+        [imageArray addObject:@{ key1 : @"4", key2 : info }];
     }
     
-    if (model.houseArry && model.houseArry.count != 0) {
-        [imageArray addObjectsFromArray:model.houseArry];
-        pic_type = @"5";
+    for (NSDictionary *info in model.houseArry) {
+        [imageArray addObject:@{ key1 : @"5", key2 : info }];
     }
     
+    NSLog(@"====开始上传图片 %lu", (unsigned long)imageArray.count);
     if (imageArray.count == 0) {
         callback(nil, YES);
     }
@@ -188,30 +229,48 @@
     __block NSInteger totalCount = 0;
     __block NSInteger uploadCount = 0;
     for (NSDictionary *dic in imageArray) {
-        UIImage *image = dic[UIImagePickerControllerEditedImage];
-        NSData *photo = UIImageJPEGRepresentation(image, 1);
-        NSDictionary *params = @{ @"loan_id" : model.loan_id, @"type_id" : pic_type };
-        [[HJDNetAPIManager sharedManager] POST:kAPIURL(@"/Loan/upload_file") parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-            [formData appendPartWithFileData:photo name:@"file" fileName:@"file" mimeType:@"image/jpg"];
-        } progress:^(NSProgress * _Nonnull uploadProgress) {
-            
-        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *imageInfo = dic[key2];
+        UIImage *image = imageInfo[UIImagePickerControllerEditedImage];
+        [HJDHomeRoomDiDaiManager uploadSinglePicture:image loanId:model.loan_id picType:dic[key1] uploadResult:^(BOOL result) {
             totalCount += 1;
-            uploadCount += 1;
-            if (totalCount == imageArray.count) {
-                if (totalCount == uploadCount) {
-                    callback(nil, YES);
-                } else {
+            if (result) {
+                uploadCount += 1;
+                if (totalCount == imageArray.count) {
+                    if (totalCount == uploadCount) {
+                        NSLog(@"====上传图片成功 %lu", (unsigned long)uploadCount);
+                        callback(nil, YES);
+                    } else {
+                        NSLog(@"====上传图片失败 %lu", (unsigned long)uploadCount);
+                        callback(nil, NO);
+                    }
+                }
+            } else {
+                if (totalCount == imageArray.count) {
+                    NSLog(@"====开始上传图片失败 %lu", (unsigned long)uploadCount);
                     callback(nil, NO);
                 }
             }
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            totalCount += 1;
-            if (totalCount == imageArray.count) {
-                callback(nil, NO);
-            }
         }];
     }
+}
+
++ (void)uploadSinglePicture:(UIImage *)image loanId:(NSString *)loanId picType:(NSString *)picType uploadResult:(void (^)(BOOL result))callback {
+    NSData *photoData = UIImageJPEGRepresentation(image, 1);
+    NSDictionary *params = @{ @"loan_id" : loanId, @"type_id" : picType };
     
+    [[HJDNetAPIManager sharedManager] POST:kAPIURL(@"/Loan/upload_file") parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithFileData:photoData name:@"file" fileName:@"file" mimeType:@"image/jpg"];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        callback(YES);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        callback(NO);
+    }];
+}
+
+#pragma mark - 测试 只上传图片
++ (void)postRoomModel:(HJDDeclarationModel *)model callBack:(void(^)(NSDictionary *data, BOOL result))callback {
+    [HJDHomeRoomDiDaiManager uploadPictureWithModel:model callBack:callback];
 }
 @end

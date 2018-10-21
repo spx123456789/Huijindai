@@ -13,5 +13,7 @@
 @property (strong, nonatomic) UIWindow *window;
 
 - (void)enterHomeController;
+
+- (void)shareInviteCode:(NSDictionary *)shareDic scene:(int)scene;
 @end
 

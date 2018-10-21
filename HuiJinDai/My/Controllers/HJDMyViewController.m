@@ -15,8 +15,9 @@
 #import "HJDMyManager.h"
 #import "HJDUserDefaultsManager.h"
 #import <MobileCoreServices/UTCoreTypes.h>
+#import "AppDelegate.h"
 
-@interface HJDMyViewController ()<UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface HJDMyViewController ()<UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate, HJDMyInviteCodeViewDelegate>
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSArray *dataSource;
 @property(nonatomic, strong) HJDMyTableHeaderView *headerView;
@@ -195,7 +196,8 @@ static NSString *key2 = @"title";
                     [MBProgressHUD hideHUD];
                     if (result) {
                         HJDMyInviteCodeView *inviteView = [[HJDMyInviteCodeView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-                        [inviteView.headImgView sd_setImageWithURL:[NSURL URLWithString:kHJDImage(dic[@"images"])] placeholderImage:kImage(@"邀请码头像")];
+                        inviteView.delegate = self;
+                        [inviteView.headImgView sd_setImageWithURL:[NSURL URLWithString:kHJDImage(self.userModel.avatar)] placeholderImage:kImage(@"邀请码头像")];
                         inviteView.nameLabel.text = dic[@"rename"];
                         inviteView.cityLabel.text = dic[@"city"];
                         inviteView.inviteCode = [NSString stringWithFormat:@"邀请码：%@", dic[@"code"]];
@@ -227,6 +229,12 @@ static NSString *key2 = @"title";
         return 51.f;
     }
     return 58.f;
+}
+
+#pragma mark - HJDMyInviteCodeViewDelegate
+- (void)myInviteCodeView:(HJDMyInviteCodeView *)codeView didSelectIndex:(NSInteger)index {
+    AppDelegate *appDelagate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [appDelagate shareInviteCode:codeView.shareDictionary scene:(int)index];
 }
 
 #pragma mark - UIImagePickerControllerDelegate
