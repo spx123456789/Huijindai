@@ -28,15 +28,20 @@ typedef void (^RoomDiDaiHttpCallback)(NSArray *data, BOOL result);
 
 + (void)getMenPaiListWithModel:(HJDHomeRoomDiDaiModel *)model keyWord:(NSString *)keyWord CallBack:(RoomDiDaiHttpCallback)callback;
 
+#pragma Mark - 评值
 //评值
 + (void)postRoomEvaluateWithModel:(HJDHomeRoomDiDaiModel *)model callBack:(RoomDiDaiHttpCallback)callback;
 
 //获取评值记录
 + (void)getRoomEvaluateListWithCallBack:(RoomDiDaiHttpCallback)callback;
 
-//获取评值信息
+//获取评值信息（已询值）
 + (void)getRoomEvaluateInfoWithXunid:(NSString *)xun_id callBack:(void(^)(NSDictionary *dataDic, BOOL result))callback;
 
+//获取评值信息（新询值）
++ (void)getNewRoomEvaluateInfoWithXunid:(NSString *)xun_id company:(NSString *)company callBack:(RoomDiDaiHttpCallback)callback;
+
+#pragma mark - 创建工单
 //申请工单号
 + (void)getOrderIdWithCallBack:(void(^)(NSDictionary *data, BOOL result))callback;
 

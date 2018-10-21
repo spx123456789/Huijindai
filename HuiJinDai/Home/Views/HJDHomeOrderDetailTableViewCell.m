@@ -191,7 +191,7 @@
 }
 
 - (void)setCellValue:(HJDHomeQueryValueDetailModel *)model {
-    self.cityLabel_1.text = model.provinceName;
+    self.cityLabel_1.text = [NSString stringWithFormat:@"%@%@%@", model.provinceName, model.cityName, model.districtName];
     self.xiaoquLabel_1.text = model.communityName;
     self.addressLabel_1.text = model.address;
     if (model.planning.integerValue == 1) {

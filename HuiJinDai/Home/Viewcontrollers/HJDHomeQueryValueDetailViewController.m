@@ -64,12 +64,28 @@
 }
 
 - (void)continueButtonClick:(id)sender {
-    HJDHomeQueryValueResultViewController *controller = [[HJDHomeQueryValueResultViewController alloc] init];
-    [self.navigationController pushViewController:controller animated:YES];
+    @weakify(self);
+    [MBProgressHUD showMessage:@"正在询值..."];
+    [HJDHomeRoomDiDaiManager getNewRoomEvaluateInfoWithXunid:self.xun_id company:@"01" callBack:^(NSArray *data, BOOL result) {
+        @strongify(self);
+        [MBProgressHUD hideHUD];
+        if (result) {
+            HJDHomeQueryValueResultViewController *controller = [[HJDHomeQueryValueResultViewController alloc] init];
+            controller.resultArray = [NSArray arrayWithArray:data];
+            [self.navigationController pushViewController:controller animated:YES];
+        } else {
+            if (data) {
+                [MBProgressHUD showError:@"用户询值次数已达上限"];
+            } else {
+                [MBProgressHUD showError:@"询值失败"];
+            }
+        }
+    }];
 }
 
 - (void)declarationButtonClick:(id)sender {
     HJDHomeDeclarationViewController *controller = [[HJDHomeDeclarationViewController alloc] init];
+    controller.xun_id = self.xun_id;
     [self.navigationController pushViewController:controller animated:YES];
 }
 

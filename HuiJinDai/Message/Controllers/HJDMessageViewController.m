@@ -101,9 +101,14 @@
 - ( UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath {
     //删除
     UIContextualAction *deleteRowAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:@"delete" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
-        //[self.titleArr removeObjectAtIndex:indexPath.row];
-        completionHandler (YES);
+        //修改数据
+        NSMutableArray *mut = self.dataSource[indexPath.section];
+        [mut removeObjectAtIndex:indexPath.row];
+        if (mut.count == 0) {
+            [self.dataSource removeObject:mut];
+        }
         [self.tableView reloadData];
+        completionHandler (YES);
     }];
     deleteRowAction.image = [UIImage imageNamed:@"删除"];
     deleteRowAction.backgroundColor = [UIColor redColor];

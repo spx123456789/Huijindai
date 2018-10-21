@@ -15,6 +15,4 @@
 + (void)getMyMessageWithType:(NSString *)type callBack:(void(^)(NSArray *data, BOOL result))callBack;
 
 + (void)deleteMyMessageWithMsgId:(NSString *)msgId callBack:(void(^)(BOOL result))callback;
-
-+ (BOOL)isTheSameDay:(NSString *)oneDay otherDay:(NSString *)otherDay;
 @end

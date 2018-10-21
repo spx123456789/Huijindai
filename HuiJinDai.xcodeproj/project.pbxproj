@@ -50,6 +50,7 @@
 		16A62F82217C40520079EAC3 /* NSDate+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 16A62F80217C40520079EAC3 /* NSDate+Extend.m */; };
 		16A62F85217C41CB0079EAC3 /* HJDHomeDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16A62F84217C41CB0079EAC3 /* HJDHomeDatePickerView.m */; };
 		16A62F88217C588F0079EAC3 /* HJDHomeQueryValueDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 16A62F87217C588F0079EAC3 /* HJDHomeQueryValueDetailModel.m */; };
+		16A62F8B217C94790079EAC3 /* HJDHomeSelectPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16A62F8A217C94790079EAC3 /* HJDHomeSelectPickerView.m */; };
 		16B42D3D215DD65500DE0D7A /* NSDictionary+HJD.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B42D3C215DD65500DE0D7A /* NSDictionary+HJD.m */; };
 		16B42D40215DFD1A00DE0D7A /* HJDUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B42D3F215DFD1A00DE0D7A /* HJDUserModel.m */; };
 		16B42D44215DFEF200DE0D7A /* HJDBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B42D43215DFEF200DE0D7A /* HJDBaseModel.m */; };
@@ -299,6 +300,8 @@
 		16A62F84217C41CB0079EAC3 /* HJDHomeDatePickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeDatePickerView.m; sourceTree = "<group>"; };
 		16A62F86217C588F0079EAC3 /* HJDHomeQueryValueDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeQueryValueDetailModel.h; sourceTree = "<group>"; };
 		16A62F87217C588F0079EAC3 /* HJDHomeQueryValueDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeQueryValueDetailModel.m; sourceTree = "<group>"; };
+		16A62F89217C94790079EAC3 /* HJDHomeSelectPickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeSelectPickerView.h; sourceTree = "<group>"; };
+		16A62F8A217C94790079EAC3 /* HJDHomeSelectPickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeSelectPickerView.m; sourceTree = "<group>"; };
 		16B42D3B215DD65500DE0D7A /* NSDictionary+HJD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+HJD.h"; sourceTree = "<group>"; };
 		16B42D3C215DD65500DE0D7A /* NSDictionary+HJD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+HJD.m"; sourceTree = "<group>"; };
 		16B42D3E215DFD1A00DE0D7A /* HJDUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDUserModel.h; sourceTree = "<group>"; };
@@ -1091,6 +1094,8 @@
 				1678DB5521722DB800B89E51 /* HJDHomePhotoCollectionViewCell.m */,
 				16A62F83217C41CB0079EAC3 /* HJDHomeDatePickerView.h */,
 				16A62F84217C41CB0079EAC3 /* HJDHomeDatePickerView.m */,
+				16A62F89217C94790079EAC3 /* HJDHomeSelectPickerView.h */,
+				16A62F8A217C94790079EAC3 /* HJDHomeSelectPickerView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1467,6 +1472,7 @@
 				169B9F0C215681D90013D47B /* HJDOrderProcessSearchView.m in Sources */,
 				16A62F81217C40520079EAC3 /* NSDate+FSExtension.m in Sources */,
 				16B42D4A215E1C7300DE0D7A /* UIView+HMCore.m in Sources */,
+				16A62F8B217C94790079EAC3 /* HJDHomeSelectPickerView.m in Sources */,
 				AA7D7FE3214358AA00E0D843 /* HJDButton.m in Sources */,
 				16B69952214E042D0086920C /* HJDHomeOrderDetailViewController.m in Sources */,
 				169A2F82216C73BD00AD495E /* MBProgressHUD+HJD.m in Sources */,

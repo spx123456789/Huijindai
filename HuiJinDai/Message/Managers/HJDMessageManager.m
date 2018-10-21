@@ -31,7 +31,6 @@
                     HJDMessageModel *lastMessage = lastMut.lastObject;
                     if ([HJDMessageManager isTheSameDay:message.create_time otherDay:lastMessage.create_time]) {
                         [lastMut addObject:message];
-                        //.....
                     } else {
                         NSMutableArray *mutArray = [NSMutableArray array];
                         [mutArray addObject:message];

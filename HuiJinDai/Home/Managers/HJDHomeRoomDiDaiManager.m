@@ -126,6 +126,21 @@
     }];
 }
 
++ (void)getNewRoomEvaluateInfoWithXunid:(NSString *)xun_id company:(NSString *)company callBack:(RoomDiDaiHttpCallback)callback {
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Assessment/get_newprice") requestParams:@{ @"xun_id" : xun_id, @"companyStr" : company } networkMethod:GET callback:^(id data, NSError *error) {
+        NSArray *dataArray = [data getObjectByPath:@"data/list"];
+        if (dataArray && dataArray.count > 0) {
+            callback(dataArray, YES);
+        } else {
+            if ([[data getObjectByPath:@"string_code"] isEqualToString:@"ERROR_USER"]) {
+                callback(@[ @"ERROR_USER" ], NO);
+            } else {
+                callback(nil, NO);
+            }
+        }
+    }];
+}
+
 #pragma mark - 工单
 + (void)getOrderIdWithCallBack:(void (^)(NSDictionary *, BOOL))callback {
     [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Loan/sq") requestParams:nil networkMethod:GET callback:^(NSDictionary *data, NSError *error) {
