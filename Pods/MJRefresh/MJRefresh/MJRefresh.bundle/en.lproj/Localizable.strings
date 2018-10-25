@@ -1,16 +1,16 @@
-"MJRefreshHeaderIdleText" = "下拉加载更多";
-"MJRefreshHeaderPullingText" = "松手刷新";
-"MJRefreshHeaderRefreshingText" = "加载中...";
+"MJRefreshHeaderIdleText" = "Pull down to refresh";
+"MJRefreshHeaderPullingText" = "Release to refresh";
+"MJRefreshHeaderRefreshingText" = "Loading...";
 
-"MJRefreshAutoFooterIdleText" = "点击或上滑加载更多";
-"MJRefreshAutoFooterRefreshingText" = "加载中...";
-"MJRefreshAutoFooterNoMoreDataText" = "没有更多数据";
+"MJRefreshAutoFooterIdleText" = "Tap or pull up to load more";
+"MJRefreshAutoFooterRefreshingText" = "Loading...";
+"MJRefreshAutoFooterNoMoreDataText" = "No more data";
 
 "MJRefreshBackFooterIdleText" = "Pull up to load more";
 "MJRefreshBackFooterPullingText" = "Release to load more.";
-"MJRefreshBackFooterRefreshingText" = "加载中...";
-"MJRefreshBackFooterNoMoreDataText" = "没有更多数据";
+"MJRefreshBackFooterRefreshingText" = "Loading...";
+"MJRefreshBackFooterNoMoreDataText" = "No more data";
 
-"MJRefreshHeaderLastTimeText" = "最后一次更新: ";
-"MJRefreshHeaderDateTodayText" = "今天";
-"MJRefreshHeaderNoneLastDateText" = "没有记录";
+"MJRefreshHeaderLastTimeText" = "Last updated: ";
+"MJRefreshHeaderDateTodayText" = "Today";
+"MJRefreshHeaderNoneLastDateText" = "No record";
