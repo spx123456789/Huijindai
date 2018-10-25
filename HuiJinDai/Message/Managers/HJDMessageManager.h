@@ -12,7 +12,7 @@
 @interface HJDMessageManager : NSObject
 
 //查询的站内信类型，1站内信，3渠道站内信
-+ (void)getMyMessageWithType:(NSString *)type callBack:(void(^)(NSArray *data, BOOL result))callBack;
++ (void)getMyMessageWithType:(NSString *)type page:(NSInteger)page callBack:(void(^)(NSArray *data, BOOL result))callBack;
 
 + (void)deleteMyMessageWithMsgId:(NSString *)msgId callBack:(void(^)(BOOL result))callback;
 @end

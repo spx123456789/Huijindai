@@ -37,7 +37,7 @@
 }
 
 + (void)getOrderAuditListChannelOrAgentWithUid:(NSString *)uid keyWord:(NSString *)keyWord page:(NSInteger)page callBack:(void (^)(NSArray *, BOOL))callBack {
-    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:@{ @"uid" : uid, @"status" : @"100", @"p0" : [NSString stringWithFormat:@"%ld", (long)page] }];
+    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:@{ @"uid" : uid, @"status" : @"100", @"p0" : @(page) }];
     if (![NSString hjd_isBlankString:keyWord]) {
         [param addEntriesFromDictionary:@{ @"address" : keyWord }];;
     }
@@ -64,11 +64,16 @@
     }];
 }
 
-+ (void)getOrderManageListChannelOrAgentWithUid:(NSString *)uid status:(NSString *)status keyWord:(NSString *)keyWord page:(NSInteger)page callBack:(void (^)(NSArray *, BOOL))callBack {
-    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:@{ @"uid" : uid, @"status" : status, @"p0" : [NSString stringWithFormat:@"%ld", (long)page],  @"p1" : @"100" }];
++ (void)getOrderManageListChannelOrAgentWithUid:(NSString *)uid status:(NSString *)status keyWord:(NSString *)keyWord step:(NSString *)step page:(NSInteger)page callBack:(void (^)(NSArray *, BOOL))callBack {
+    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:@{ @"uid" : uid, @"status" : status, @"p0" : @(page) }];
     if (![NSString hjd_isBlankString:keyWord]) {
         [param addEntriesFromDictionary:@{ @"address" : keyWord }];;
     }
+    
+    if (![NSString hjd_isBlankString:step]) {
+        [param addEntriesFromDictionary:@{ @"step" : step }];;
+    }
+    
     [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Loan/list_manage") requestParams:param networkMethod:GET callback:^(id data, NSError *error) {
         if (error) {
             callBack(nil, NO);

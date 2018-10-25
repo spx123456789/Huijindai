@@ -11,8 +11,8 @@
 
 @implementation HJDMessageManager
 
-+ (void)getMyMessageWithType:(NSString *)type callBack:(void (^)(NSArray *, BOOL))callBack {
-    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Msg/self") requestParams:@{ @"type" : type, @"p0" : @"100" } networkMethod:GET callback:^(id data, NSError *error) {
++ (void)getMyMessageWithType:(NSString *)type page:(NSInteger)page callBack:(void (^)(NSArray *, BOOL))callBack {
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Msg/self") requestParams:@{ @"type" : type, @"p0" : @(page) } networkMethod:GET callback:^(id data, NSError *error) {
         if (error) {
             callBack(nil, NO);
         } else {

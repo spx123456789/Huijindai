@@ -17,10 +17,8 @@
 @property(nonatomic, strong) NSMutableArray *dataSource;
 @property(nonatomic, strong) HJDMessageSegmentView *segmentView;
 @property(nonatomic, assign) HJDMessageType selectType;
-@property(nonatomic, strong) NSMutableArray *myDataSource;
-@property(nonatomic, strong) NSMutableArray *channelDataSource;
-@property(nonatomic, assign) BOOL isFirstLoadChannel;
 @property(nonatomic, strong) NSIndexPath *editingIndexPath;
+@property(nonatomic, assign) NSInteger messagePage;
 @end
 
 @implementation HJDMessageViewController
@@ -50,7 +48,7 @@
     if (self) {
         self.selectType = HJDMessageTypeMy;
         self.dataSource = [NSMutableArray array];
-        self.isFirstLoadChannel = YES;
+        self.messagePage = 1;
     }
     return self;
 }
@@ -71,8 +69,14 @@
     self.navigationItem.titleView = self.segmentView;
     self.view.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
     [self.view addSubview:self.tableView];
+
+    [self getMessageDataType:@"1"];
     
-    [self getMessageData];
+    @weakify(self);
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        @strongify(self);
+        [self getMessageDataType:self.selectType == HJDMessageTypeMy ? @"1" : @"3"];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,17 +84,20 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)getMessageData {
+- (void)getMessageDataType:(NSString *)type {
     @weakify(self);
     [MBProgressHUD showMessage:@"正在加载..."];
-    [HJDMessageManager getMyMessageWithType:@"1" callBack:^(NSArray *data, BOOL result) {
+    [HJDMessageManager getMyMessageWithType:type page:self.messagePage callBack:^(NSArray *data, BOOL result) {
         @strongify(self);
         [MBProgressHUD hideHUD];
+        [self.tableView.mj_footer endRefreshing];
         if (result) {
-            self.myDataSource = [NSMutableArray arrayWithArray:data];
-            [self.dataSource removeAllObjects];
-            [self.dataSource addObjectsFromArray:self.myDataSource];
+            [self.dataSource addObjectsFromArray:data];
             [self.tableView reloadData];
+            if (data.count == 0 || data.count < kHJDHttpRow) {
+                [self.tableView.mj_footer endRefreshingWithNoMoreData];
+            }
+            self.messagePage++;
         } else {
             [MBProgressHUD showError:@"加载失败"];
         }
@@ -201,11 +208,6 @@
         [mut removeObjectAtIndex:indexPath.row];
         if (mut.count == 0) {
             [self.dataSource removeObject:mut];
-            if (self.selectType == HJDMessageTypeMy) {
-                [self.myDataSource removeObject:mut];
-            } else {
-                [self.channelDataSource removeObject:mut];
-            }
         }
         [self.tableView reloadData];
         completionHandler (YES);
@@ -271,29 +273,7 @@
 - (void)segmentView:(HJDMessageSegmentView *)segmentView didSelectMessageType:(HJDMessageType)type {
     self.selectType = type;
     [self.dataSource removeAllObjects];
-    if (type == HJDMessageTypeMy) {
-        [self.dataSource addObjectsFromArray:self.myDataSource];
-        [self.tableView reloadData];
-    } else {
-        if (self.isFirstLoadChannel) {
-            self.isFirstLoadChannel = NO;
-            [MBProgressHUD showMessage:@"正在加载..."];
-            @weakify(self);
-            [HJDMessageManager getMyMessageWithType:@"3" callBack:^(NSArray *data, BOOL result) {
-                @strongify(self);
-                [MBProgressHUD hideHUD];
-                if (result) {
-                    self.channelDataSource = [NSMutableArray arrayWithArray:data];
-                    [self.dataSource addObjectsFromArray:self.channelDataSource];
-                    [self.tableView reloadData];
-                } else {
-                    [MBProgressHUD showError:@"加载失败"];
-                }
-            }];
-        } else {
-            [self.dataSource addObjectsFromArray:self.channelDataSource];
-            [self.tableView reloadData];
-        }
-    }
+    self.messagePage = 1;
+    [self getMessageDataType:type == HJDMessageTypeMy ? @"1" : @"3"];
 }
 @end

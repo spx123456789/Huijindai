@@ -8,10 +8,16 @@
 
 #import "HJDOrderProcessSearchView.h"
 
+@class HJDPopView;
+@protocol HJDPopViewDelegate <NSObject>
+- (void)popView:(HJDPopView *)popView didSelectIndec:(NSInteger)popSelectIndex;
+@end
+
 @interface HJDPopView : UIView<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UITableView *tableView;
-@property(nonatomic, strong) NSArray *dataSource;
+@property(nonatomic, strong) NSArray *dataArray;
 @property(nonatomic, strong) NSIndexPath *selectIndexPath;
+@property(nonatomic, weak) id<HJDPopViewDelegate> delegate;
 
 - (void)show;
 @end
@@ -29,14 +35,14 @@
     return _tableView;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame dataArray:(NSArray *)dataArray {
     self = [super initWithFrame:frame];
     if (self) {
+        _dataArray = dataArray;
         self.selectIndexPath = nil;
-        self.dataSource = @[ @"全部", @"客户经理审核中", @"风控分配中", @"审核岗处理中", @"合同/公证/抵押岗处理中", @"放款审核处理中", @"待放款" ];
         
-        CGFloat view_width = 170;
-        CGFloat view_height = 162 + 28 * 2;
+        CGFloat view_width = (self.dataArray.count > 2) ? 170 : 100;
+        CGFloat view_height = 22 + self.dataArray.count * 28;
         //imageView的superView
         UIView *fangkuanView1 = [[UIView alloc] initWithFrame:CGRectMake(16, 64 + 44, view_width, view_height)];
         //imageView的superView 的阴影view
@@ -60,8 +66,8 @@
         [shadowView addSubview:fangkuanView1];
         [self addSubview:shadowView];
         
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
-        [self addGestureRecognizer:tap];
+//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture:)];
+//        [self addGestureRecognizer:tap];
     }
     return self;
 }
@@ -79,17 +85,25 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.selectIndexPath != nil) {
         if (self.selectIndexPath == indexPath) {
+            [self removeFromSuperview];
             return;
         } else {
             UITableViewCell *cell = [tableView cellForRowAtIndexPath:self.selectIndexPath];
             cell.textLabel.textColor = kRGB_Color(0x66, 0x66, 0x66);
             self.selectIndexPath = indexPath;
+            if (self.delegate && [self.delegate respondsToSelector:@selector(popView:didSelectIndec:)]) {
+                [self.delegate popView:self didSelectIndec:indexPath.row];
+            }
         }
     } else {
         self.selectIndexPath = indexPath;
+        if (self.delegate && [self.delegate respondsToSelector:@selector(popView:didSelectIndec:)]) {
+            [self.delegate popView:self didSelectIndec:indexPath.row];
+        }
     }
     UITableViewCell *new_cell = [tableView cellForRowAtIndexPath:self.selectIndexPath];
     new_cell.textLabel.textColor = kMainColor;
+    [self removeFromSuperview];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -98,7 +112,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataSource.count;
+    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -108,7 +122,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    cell.textLabel.text = self.dataSource[indexPath.row];
+    cell.textLabel.text = self.dataArray[indexPath.row];
     cell.textLabel.font = kFont12;
     if (self.selectIndexPath != nil && self.selectIndexPath == indexPath) {
         cell.textLabel.textColor = kMainColor;
@@ -120,11 +134,13 @@
 @end
 
 #pragma mark - 搜索view
-@interface HJDOrderProcessSearchView()
+@interface HJDOrderProcessSearchView()<HJDPopViewDelegate>
 @property(nonatomic, strong) UIView *bgView;
 @property(nonatomic, strong) UIButton *selectButton;
-@property(nonatomic, strong) UITextField *textField;
 @property(nonatomic, strong) UIButton *sureButton;
+
+@property(nonatomic, strong) NSArray *dataSource;
+@property(nonatomic, strong) NSArray *stepArray;
 @end
 
 @implementation HJDOrderProcessSearchView
@@ -182,64 +198,69 @@
 }
 
 - (void)sureButtonClick:(id)sender {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(processSearchView:searchWord:)]) {
-        [self.delegate processSearchView:self searchWord:self.textField.text];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(processSearchView:searchWord:selectStatus:clickSureButton:)]) {
+        [self.delegate processSearchView:self searchWord:self.textField.text selectStatus:self.stepArray[self.selectIndex] clickSureButton:YES];
     }
+}
+
+- (void)setUpUI {
+    self.backgroundColor = kWithe;
+    
+    UIView *line1 = [self createLine];
+    UIView *line2 = [self createLine];
+    
+    [self addSubview:self.bgView];
+    [self.bgView addSubview:self.selectButton];
+    [self.bgView addSubview:line1];
+    [self.bgView addSubview:self.textField];
+    [self.bgView addSubview:line2];
+    [self.bgView addSubview:self.sureButton];
+    
+    [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self).offset(16);
+        make.right.equalTo(self).offset(-16);
+        make.centerY.equalTo(self);
+        make.height.equalTo(@36);
+    }];
+    
+    [self.selectButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.bgView);
+        make.width.equalTo(@84);
+        make.top.bottom.equalTo(self.bgView);
+    }];
+    
+    [line1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@1);
+        make.left.equalTo(self.selectButton.mas_right);
+        make.top.bottom.equalTo(self.bgView);
+    }];
+    
+    [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(line1.mas_right).offset(12);
+        make.right.equalTo(line2.mas_left).offset(-12);
+        make.top.bottom.equalTo(self.bgView);
+    }];
+    
+    [line2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@1);
+        make.right.equalTo(self.sureButton.mas_left);
+        make.top.bottom.equalTo(self.bgView);
+    }];
+    
+    [self.sureButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.bgView);
+        make.top.bottom.equalTo(self.bgView);
+        make.width.equalTo(@53);
+    }];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = kWithe;
+        self.showLeft = YES;
         self.selectIndex = 0;
         
-        UIView *line1 = [self createLine];
-        UIView *line2 = [self createLine];
-        
-        [self addSubview:self.bgView];
-        
-        [self.bgView addSubview:self.selectButton];
-        [self.bgView addSubview:line1];
-        [self.bgView addSubview:self.textField];
-        [self.bgView addSubview:line2];
-        [self.bgView addSubview:self.sureButton];
-        
-        [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self).offset(16);
-            make.right.equalTo(self).offset(-16);
-            make.centerY.equalTo(self);
-            make.height.equalTo(@36);
-        }];
-        
-        [self.selectButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.bgView);
-            make.width.equalTo(@84);
-            make.top.bottom.equalTo(self.bgView);
-        }];
-        
-        [line1 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(@1);
-            make.left.equalTo(self.selectButton.mas_right);
-            make.top.bottom.equalTo(self.bgView);
-        }];
-        
-        [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(line1.mas_right).offset(12);
-            make.right.equalTo(line2.mas_left).offset(-12);
-            make.top.bottom.equalTo(self.bgView);
-        }];
-        
-        [line2 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(@1);
-            make.right.equalTo(self.sureButton.mas_left);
-            make.top.bottom.equalTo(self.bgView);
-        }];
-        
-        [self.sureButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.bgView);
-            make.top.bottom.equalTo(self.bgView);
-            make.width.equalTo(@53);
-        }];
+        [self setUpUI];
     }
     return self;
 }
@@ -251,7 +272,8 @@
 }
 
 - (void)selectButtonClick:(id)sender {
-    HJDPopView *pop = [[HJDPopView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+    HJDPopView *pop = [[HJDPopView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) dataArray:self.dataSource];
+    pop.delegate = self;
     if (self.selectIndex == NSNotFound) {
         pop.selectIndexPath = nil;
     } else {
@@ -260,4 +282,25 @@
     [pop show];
 }
 
+- (void)setShowLeft:(BOOL)showLeft {
+    _showLeft = showLeft;
+    _selectIndex = NSNotFound;
+    if (showLeft) {
+        self.dataSource = @[ @"全部", @"客户经理审核中", @"风控分配中", @"审核岗处理中", @"合同/公证/抵押岗处理中", @"放款审核处理中", @"待放款" ];
+        self.stepArray = @[ @"0", @"3", @"4", @"5", @"6", @"7", @"8" ];
+    } else {
+        self.dataSource = @[ @"已拒单", @"已放款" ];
+        self.stepArray = @[ @"1", @"9"];
+    }
+    //0全部1已拒单2渠道审核中3客户经理审核中4风控分配中5审核岗处理中6合同抵押公正处理中7放款审核处理中8待放款9已放款
+}
+
+#pragma mark - HJDPopViewDelegate
+- (void)popView:(HJDPopView *)popView didSelectIndec:(NSInteger)popSelectIndex {
+    self.selectIndex = popSelectIndex;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(processSearchView:searchWord:selectStatus:clickSureButton:)]) {
+        [self.delegate processSearchView:self searchWord:self.textField.text selectStatus:self.stepArray[popSelectIndex] clickSureButton:NO];
+    }
+    popView = nil;
+}
 @end

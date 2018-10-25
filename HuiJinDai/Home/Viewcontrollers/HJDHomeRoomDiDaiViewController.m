@@ -32,6 +32,7 @@ typedef enum : NSUInteger {
 @property(nonatomic, strong) HJDCustomerServiceView *customServiceView;
 @property(nonatomic, strong) HJDHomeRoomDiDaiModel *roomModel;
 @property(nonatomic, strong) HJDHomeRoomDiDaiPickerView *cityPickerView;
+@property(nonatomic, assign) NSInteger diDaiPage;
 @end
 
 @implementation HJDHomeRoomDiDaiViewController
@@ -144,6 +145,7 @@ typedef enum : NSUInteger {
         self.selectType = HJDRomeQueryValue;
         self.roomModel = [[HJDHomeRoomDiDaiModel alloc] init];
         self.dataSource = [NSMutableArray array];
+        self.diDaiPage = 1;
     }
     return self;
 }
@@ -186,11 +188,10 @@ typedef enum : NSUInteger {
     }
 }
 
-static NSInteger page = 1;
 - (void)loadMoreData {
     @weakify(self);
     [MBProgressHUD showMessage:@"正在加载..."];
-    [HJDHomeRoomDiDaiManager getRoomEvaluateListWithPage:page callBack:^(NSArray *data, BOOL result) {
+    [HJDHomeRoomDiDaiManager getRoomEvaluateListWithPage:self.diDaiPage callBack:^(NSArray *data, BOOL result) {
         @strongify(self);
         [MBProgressHUD hideHUD];
         [self.tableView.mj_footer endRefreshing];
@@ -200,7 +201,7 @@ static NSInteger page = 1;
             if (data.count == 0 || data.count < kHJDHttpRow) {
                 [self.tableView.mj_footer endRefreshingWithNoMoreData];
             }
-            page++;
+            self.diDaiPage++;
         } else {
             [MBProgressHUD showError:@"加载失败"];
         }
@@ -479,7 +480,7 @@ static NSInteger page = 1;
         [self.dataSource removeAllObjects];
         [self.tableView reloadData];
         //请求数据
-        page = 1;
+        self.diDaiPage = 1;
         [self loadMoreData];
     } else {
         //刷新数据

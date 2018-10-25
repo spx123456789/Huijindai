@@ -19,7 +19,7 @@
 
 + (void)getOrderManageListWithKeyWord:(NSString *)keyWord callBack:(void(^)(NSDictionary *data, BOOL result))callBack;
 
-+ (void)getOrderManageListChannelOrAgentWithUid:(NSString *)uid status:(NSString *)status keyWord:(NSString *)keyWord page:(NSInteger)page callBack:(void(^)(NSArray *data, BOOL result))callBack;
++ (void)getOrderManageListChannelOrAgentWithUid:(NSString *)uid status:(NSString *)status keyWord:(NSString *)keyWord step:(NSString *)step page:(NSInteger)page callBack:(void(^)(NSArray *data, BOOL result))callBack;
 
 #pragma mark - 计算器
 + (void)getEndDateWithStartTime:(NSString *)startTime month:(NSString *)month callBack:(void(^)(NSString *dataStr, BOOL result))callBack;

@@ -15,6 +15,7 @@
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSMutableArray *dataSource;
 @property(nonatomic, strong) UITextField *textField;
+@property(nonatomic, assign) NSInteger orderListPage;
 @end
 
 @implementation HJDHomeOrderListViewController
@@ -46,6 +47,7 @@
     [self createSearchView];
     [self.view addSubview:self.tableView];
     
+    self.orderListPage = 1;
     self.dataSource = [NSMutableArray array];
     
     [self searchKeyWord:nil];
@@ -57,10 +59,9 @@
     }];
 }
 
-static NSInteger orderListPage = 1;
 - (void)searchKeyWord:(NSString *)keyWord {
     [MBProgressHUD showMessage:@"正在加载..."];
-    [HJDHomeManager getOrderAuditListChannelOrAgentWithUid:self.uid keyWord:keyWord page:orderListPage callBack:^(NSArray *data, BOOL result) {
+    [HJDHomeManager getOrderAuditListChannelOrAgentWithUid:self.uid keyWord:keyWord page:self.orderListPage callBack:^(NSArray *data, BOOL result) {
         [MBProgressHUD hideHUD];
         [self.tableView.mj_footer endRefreshing];
         if (result) {
@@ -74,7 +75,7 @@ static NSInteger orderListPage = 1;
             if (data.count == 0 || data.count < kHJDHttpRow) {
                 [self.tableView.mj_footer endRefreshingWithNoMoreData];
             }
-            orderListPage++;
+            self.orderListPage++;
         } else {
             [MBProgressHUD showError:@"加载失败"];
         }
@@ -137,7 +138,7 @@ static NSInteger orderListPage = 1;
 }
 
 - (void)clickSureButton:(id)sender {
-    orderListPage = 1;
+    self.orderListPage = 1;
     [self searchKeyWord:self.textField.text];
 }
 

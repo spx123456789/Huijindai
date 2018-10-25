@@ -18,7 +18,8 @@
 @property(nonatomic, strong) NSMutableArray *dataSource;
 @property(nonatomic, strong) HJDMessageSegmentView *segmentView;
 @property(nonatomic, strong) HJDOrderProcessSearchView *searchView;
-@property(nonatomic, copy) NSString *order_status;
+@property(nonatomic, copy) NSString *order_step;
+@property(nonatomic, assign) NSInteger orderManagePage;
 @end
 
 @implementation HJDHomeOrderProcessViewController
@@ -49,6 +50,7 @@
         _searchView = [[HJDOrderProcessSearchView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 36 + 16)];
         _searchView.selectIndex = 0;
         _searchView.delegate = self;
+        _searchView.showLeft = YES;
     }
     return _searchView;
 }
@@ -58,14 +60,19 @@
     
     self.navigationItem.titleView = self.segmentView;
     
+    self.orderManagePage = 1;
     self.dataSource = [NSMutableArray array];
     
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.searchView;
     
-    self.order_status = @"1";
+    [self searchKeyWord:nil status:@"1" step:nil];
     
-    [self searchKeyWord:nil status:@"1"];
+    @weakify(self);
+    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        @strongify(self);
+        [self searchKeyWord:self.searchView.textField.text status:(self.searchView.showLeft ? @"1" : @"2") step:self.order_step];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -73,17 +80,24 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)searchKeyWord:(NSString *)keyWord status:(NSString *)status {
+- (void)searchKeyWord:(NSString *)keyWord status:(NSString *)status step:(NSString *)step {
+    @weakify(self);
     [MBProgressHUD showMessage:@"正在加载..."];
-    [HJDHomeManager getOrderManageListChannelOrAgentWithUid:self.uid status:status keyWord:keyWord page:1 callBack:^(NSArray *data, BOOL result) {[MBProgressHUD hideHUD];
+    [HJDHomeManager getOrderManageListChannelOrAgentWithUid:self.uid status:status keyWord:keyWord step:step page:self.orderManagePage callBack:^(NSArray *data, BOOL result) {
+        @strongify(self);
+        [self.tableView.mj_footer endRefreshing];
+        [MBProgressHUD hideHUD];
         if (result) {
-            [self.dataSource removeAllObjects];
             for (int k = 0; k < data.count; k++) {
                 HJDOrderListModel *model = [[HJDOrderListModel alloc] init];
                 [model hjd_loadDataFromkeyValues:data[k]];
                 [self.dataSource addObject:model];
             }
+            if (data.count == 0 || data.count < kHJDHttpRow) {
+                [self.tableView.mj_footer endRefreshingWithNoMoreData];
+            }
             [self.tableView reloadData];
+            self.orderManagePage++;
         } else {
             [MBProgressHUD showError:@"加载失败"];
         }
@@ -126,22 +140,31 @@
 
 #pragma mark - HJDMessageSegmentViewDelegate
 - (void)segmentView:(HJDMessageSegmentView *)segmentView didSelectMessageType:(HJDMessageType)type {
+    self.searchView.textField.text = @"";
+    self.orderManagePage = 1;
+    [self.dataSource removeAllObjects];
     if (type == HJDMessageTypeMy) { //left
-        self.order_status = @"1";
-        [self searchKeyWord:nil status:@"1"];
+        [self searchKeyWord:nil status:@"1" step:nil];
+        _searchView.showLeft = YES;
     } else {
-        self.order_status = @"2";
-        [self searchKeyWord:nil status:@"2"];
+        [self searchKeyWord:nil status:@"2" step:nil];
+        _searchView.showLeft = NO;
     }
 }
 
 #pragma mark - HJDOrderProcessSearchViewDelegate
-- (void)processSearchView:(HJDOrderProcessSearchView *)searchView searchWord:(NSString *)keyWord {
-    if ([NSString hjd_isBlankString:keyWord]) {
+- (void)processSearchView:(HJDOrderProcessSearchView *)searchView searchWord:(NSString *)keyWord selectStatus:(NSString *)status clickSureButton:(BOOL)isClick {
+    if (isClick && [NSString hjd_isBlankString:keyWord]) {
         [self showToast:@"请输入搜索关键词"];
         return;
     }
     
-    [self searchKeyWord:keyWord status:self.order_status];
+    if (![NSString hjd_isBlankString:status]) {
+        self.order_step = status;
+    }
+    
+    self.orderManagePage = 1;
+    [self.dataSource removeAllObjects];
+    [self searchKeyWord:keyWord status:(searchView.showLeft ? @"1" : @"2") step:self.order_step];
 }
 @end
