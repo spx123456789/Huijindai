@@ -120,7 +120,13 @@ static NSString *key2 = @"title";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.dataSource = @[ @{ key1 : kImage(@"我的页客户经理"), key2 : @"我的客户经理" }, @{ key1 : kImage(@"我的页经纪人"), key2 : @"我的经纪人" }, @{ key1 : kImage(@"我的页邀请码"), key2 : @"我的邀请码" }, @{ key1 : kImage(@"我的页设置"), key2 : @"设置" } ];
+    self.userModel = (HJDUserModel *)[[HJDUserDefaultsManager shareInstance] loadObject:kUserModelKey];
+    if (self.userModel.type.integerValue == HJDUserTypeChannel) {
+        self.dataSource = @[ @{ key1 : kImage(@"我的页客户经理"), key2 : @"我的客户经理" }, @{ key1 : kImage(@"我的页经纪人"), key2 : @"我的经纪人" }, @{ key1 : kImage(@"我的页邀请码"), key2 : @"我的邀请码" }, @{ key1 : kImage(@"我的页设置"), key2 : @"设置" } ];
+    } else {
+        self.dataSource = @[ @{ key1 : kImage(@"我的页设置"), key2 : @"设置" } ];
+    }
+    
     [self.view addSubview:self.tableView];
     self.tableView.tableHeaderView = self.headerView;
     
@@ -167,30 +173,21 @@ static NSString *key2 = @"title";
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSInteger userType = self.userModel.type.integerValue;
-    switch (indexPath.row) {
-        case 0: {
-            if (userType == HJDUserTypeChannel) {
+    if (self.userModel.type.integerValue == HJDUserTypeChannel) {
+        switch (indexPath.row) {
+            case 0: {
                 HJDMyCustomerManagerViewController *customerController = [[HJDMyCustomerManagerViewController alloc] init];
                 customerController.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:customerController animated:YES];
-            } else {
-                [MBProgressHUD showError:@"无访问权限"];
+                break;
             }
-            break;
-        }
-        case 1: {
-            if (userType == HJDUserTypeChannel) {
+            case 1: {
                 HJDMyAgentViewController *agentController = [[HJDMyAgentViewController alloc] init];
                 agentController.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:agentController animated:YES];
-            } else {
-                [MBProgressHUD showError:@"无访问权限"];
+                break;
             }
-            break;
-        }
-        case 2: {
-            if (userType == HJDUserTypeChannel) {
+            case 2: {
                 [MBProgressHUD showMessage:@"正在加载..."];
                 [HJDMyManager getUserInviteCodeWithCallBack:^(NSDictionary *dic, BOOL result) {
                     [MBProgressHUD hideHUD];
@@ -207,28 +204,32 @@ static NSString *key2 = @"title";
                         [MBProgressHUD showError:@"请求失败"];
                     }
                 }];
-                
-            } else {
-                [MBProgressHUD showError:@"无访问权限"];
+                break;
             }
-            break;
+            case 3: {
+                HJDMySettingViewController *settingController = [[HJDMySettingViewController alloc] init];
+                settingController.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:settingController animated:YES];
+                break;
+            }
+            default:
+                break;
         }
-        case 3: {
+    } else {
+        if (indexPath.row == 0) {
             HJDMySettingViewController *settingController = [[HJDMySettingViewController alloc] init];
             settingController.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:settingController animated:YES];
-            break;
         }
-        default:
-            break;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         return 51.f;
+    } else {
+        return 58.f;
     }
-    return 58.f;
 }
 
 #pragma mark - HJDMyInviteCodeViewDelegate

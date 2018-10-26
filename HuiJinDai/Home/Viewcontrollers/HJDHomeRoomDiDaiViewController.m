@@ -90,16 +90,13 @@ typedef enum : NSUInteger {
 }
 
 - (void)queryValueButtonClick:(id)sender {
-    self.roomModel.companyStr = @"01,02,03";
+    self.roomModel.companyStr = @"01";
     /*
      houseId    string
      房间 Id
      
      houseNo    string
      门牌号，如：1702
-     
-     companyStr    string
-     询值类型， 01-世联,02-仁达,03-首佳
      */
     if ([NSString hjd_isBlankString:self.roomModel.provinceId]) {
         [self showToast:@"请选择城市"];
@@ -377,6 +374,8 @@ typedef enum : NSUInteger {
             cell.twoLabel.text = @"房产地址";
             cell.firstLabel_1.text = dic[@"ad_time"];
             cell.twoLabel_1.text = dic[@"addr"];
+            cell.firstLabel_1.textAlignment = NSTextAlignmentRight;
+            cell.twoLabel_1.textAlignment = NSTextAlignmentRight;
             [cell setCellOfNumber:2];
             cell.statusLabel.hidden = NO;
             cell.nextImgView.hidden = NO;

@@ -48,7 +48,7 @@ typedef enum : NSUInteger {
 @property(nonatomic, copy) NSString *houseNo;
 //建筑面积
 @property(nonatomic, copy) NSString *houseSpace;
-//询值类型， 01-世联,02-仁达,03-首佳
+//询值类型， 01-世联,02-仁达,03-首佳  (当前只询世联一家)
 @property(nonatomic, copy) NSString *companyStr;
 //规划用途 1住宅 2别墅[Default: 1]
 @property(nonatomic, assign) HJDRoomUseType planning;

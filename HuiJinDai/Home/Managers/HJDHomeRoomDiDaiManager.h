@@ -45,6 +45,9 @@ typedef void (^RoomDiDaiHttpCallback)(NSArray *data, BOOL result);
 //申请工单号
 + (void)getOrderIdWithCallBack:(void(^)(NSDictionary *data, BOOL result))callback;
 
+//获取工单附件类型
++ (void)getOrderFileWithCallBack:(void(^)(NSArray *dataArray, BOOL result))callback;
+
 //提交工单
 + (void)postRoomDeclarationWithModel:(HJDDeclarationModel *)model callBack:(void(^)(NSDictionary *data, BOOL result))callback;
 

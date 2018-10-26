@@ -39,6 +39,7 @@ typedef enum : NSUInteger {
     HJDLoanMarriage_remarried,      //再婚
 } HJDLoanMarriageType;
 
+
 @interface HJDDeclarationModel : HJDBaseModel
 //之前申请的工单唯一标识
 @property(nonatomic, copy) NSString *loan_id;
@@ -63,15 +64,18 @@ typedef enum : NSUInteger {
 //一抵余额，单位：元
 @property(nonatomic, copy) NSString *loan_first;
 
-//身份证图片
-@property(nonatomic, strong) NSArray *idCardArray;
-//户口本图片
-@property(nonatomic, strong) NSArray *bookArray;
-//征信报告
-@property(nonatomic, strong) NSArray *creditReportArray;
-//婚姻证明
-@property(nonatomic, strong) NSArray *marriageArray;
-//房产证图片
-@property(nonatomic, strong) NSArray *houseArry;
+//@[ @{ @"type" : @"21", @"title" : @"身份证资料", @"imageArray" : @[ image ] } ]
+@property(nonatomic, strong) NSMutableArray *fileMutArray;
 
+#define kDeclarationLoanFileType @"kDeclarationLoanFileType"
+#define kDeclarationLoanFileTitle @"kDeclarationLoanFileTitle"
+#define kDeclarationLoanFileImage @"kDeclarationLoanFileImage"
+
+//借款人身份资料 21
+//抵（质）押物资料 22
+//贷款申请文件 23
+//其他文件 24
+//批贷函 19
+//合同 25
+//放款前补充资料 26
 @end

@@ -63,6 +63,11 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self showNavigationBar];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

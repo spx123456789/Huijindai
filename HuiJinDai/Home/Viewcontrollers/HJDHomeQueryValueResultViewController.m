@@ -48,10 +48,11 @@
         [_topView addSubview:label];
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
-        [button setFrame:CGRectMake(0, 20, 44, 44)];
-        [button setImage:kImage(@"返回按钮") forState:UIControlStateNormal];
-        [button setImage:kImage(@"返回按钮") forState:UIControlStateSelected];
+        [button addTarget:self action:@selector(closeButton:) forControlEvents:UIControlEventTouchUpInside];
+        [button setFrame:CGRectMake(kScreenWidth - 50, 20, 44, 44)];
+        [button setTitle:@"关闭" forState:UIControlStateNormal];
+        [button setTitle:@"关闭" forState:UIControlStateSelected];
+        button.titleLabel.font = kFont15;
         [_topView addSubview:button];
     }
     return _topView;
@@ -77,6 +78,10 @@
         [_declarationBtn addTarget:self action:@selector(declarationButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _declarationBtn;
+}
+
+- (void)closeButton:(id)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)declarationButtonClick:(id)sender {

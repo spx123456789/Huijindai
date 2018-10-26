@@ -155,6 +155,16 @@
     }];
 }
 
++ (void)getOrderFileWithCallBack:(void (^)(NSArray *, BOOL))callback {
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Loan/get_file_type") requestParams:nil networkMethod:GET callback:^(id data, NSError *error) {
+        if (error) {
+            callback(nil, NO);
+        } else {
+            callback([data getObjectByPath:@"data/list"], YES);
+        }
+    }];
+}
+
 + (void)postRoomDeclarationWithModel:(HJDDeclarationModel *)model callBack:(void (^)(NSDictionary *, BOOL))callback {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     NSDictionary *needDic = @{ @"loan_id" : model.loan_id,
@@ -243,24 +253,13 @@ static NSString *key2 = @"imageInfo";
     //@[ @{ @"pictype" : pictype, @"imageInfo" : imageInfo } ]
     NSMutableArray *imageArray = [NSMutableArray array];
     
-    for (NSDictionary *info in model.idCardArray) {
-        [imageArray addObject:@{ key1 : @"1", key2 : info }];
-    }
-    
-    for (NSDictionary *info in model.bookArray) {
-        [imageArray addObject:@{ key1 : @"2", key2 : info }];
-    }
-    
-    for (NSDictionary *info in model.creditReportArray) {
-        [imageArray addObject:@{ key1 : @"3", key2 : info }];
-    }
-    
-    for (NSDictionary *info in model.marriageArray) {
-        [imageArray addObject:@{ key1 : @"4", key2 : info }];
-    }
-    
-    for (NSDictionary *info in model.houseArry) {
-        [imageArray addObject:@{ key1 : @"5", key2 : info }];
+    for (NSDictionary *tempDic in model.fileMutArray) {
+        NSMutableArray *tempImageArray = tempDic[kDeclarationLoanFileImage];
+        if (tempImageArray.count > 0) {
+            for (NSDictionary *imageInfo in tempImageArray) {
+                [imageArray addObject:@{ key1 : tempDic[kDeclarationLoanFileType], key2 : imageInfo }];
+            }
+        }
     }
     
     NSLog(@"====开始上传图片 %lu", (unsigned long)imageArray.count);

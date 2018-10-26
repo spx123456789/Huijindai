@@ -107,8 +107,11 @@
             [MBProgressHUD hideHUD];
             if (result) {
                 [MBProgressHUD showSuccess:@"提交成功"];
-                //退回首页
-                [self.navigationController popToRootViewControllerAnimated:YES];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    @strongify(self);
+                    //退回首页
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                });
             } else {
                 [MBProgressHUD showError:@"提交失败"];
             }
@@ -131,6 +134,28 @@
     [self setNavTitle:@"报单"];
     self.view.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
     
+    @weakify(self);
+    [MBProgressHUD showMessage:@"正在加载..."];
+    [HJDHomeRoomDiDaiManager getOrderFileWithCallBack:^(NSArray *dataArray, BOOL result) {
+        @strongify(self);
+        [MBProgressHUD hideHUD];
+        if (result) {
+            NSMutableArray *tempMutArray = [NSMutableArray array];
+            for (int k = 0; k < dataArray.count; k++) {
+                NSDictionary *dic = dataArray[k];
+                NSMutableArray *mutArray = [NSMutableArray array];
+                NSDictionary *tempDic = @{ kDeclarationLoanFileType : dic[@"type_id"], kDeclarationLoanFileTitle : dic[@"file_name"], kDeclarationLoanFileImage : mutArray };
+                [tempMutArray addObject:tempDic];
+            }
+            self.declarationModel.fileMutArray = [NSMutableArray arrayWithArray:tempMutArray];
+            [self setUpUI];
+        } else {
+            [MBProgressHUD showError:@"加载失败"];
+        }
+    }];
+}
+
+- (void)setUpUI {
     [self.view addSubview:self.tableView];
     
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 60 + 44 + 25)];
@@ -217,31 +242,9 @@
     if (indexPath.row < cellCount) {
         return 44;
     } else {
-        NSInteger pictureCount = 0;
-        switch (indexPath.row - cellCount) {
-            case 0: {
-                pictureCount = self.declarationModel.idCardArray.count;
-                break;
-            }
-            case 1: {
-                pictureCount = self.declarationModel.bookArray.count;
-                break;
-            }
-            case 2: {
-                pictureCount = self.declarationModel.creditReportArray.count;
-                break;
-            }
-            case 3: {
-                pictureCount = self.declarationModel.marriageArray.count;
-                break;
-            }
-            case 4: {
-                pictureCount = self.declarationModel.houseArry.count;
-                break;
-            }
-            default:
-                break;
-        }
+        NSMutableDictionary *tempDic = self.declarationModel.fileMutArray[indexPath.row - cellCount];
+        NSMutableArray *tempImageArr = tempDic[kDeclarationLoanFileImage];
+        NSInteger pictureCount = tempImageArr.count;
         return 4 + 44 + 1 + 16 + kPhotoHeight * (pictureCount/3 + 1) + 8 * (pictureCount/3) + 16;
     }
 }
@@ -249,9 +252,9 @@
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.declarationModel.loan_variety == HJDLoanVarietyHouse_2) {
-        return 9 + 5;
+        return 9 + self.declarationModel.fileMutArray.count;
     }
-    return 8 + 5;
+    return 8 + self.declarationModel.fileMutArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -277,36 +280,11 @@
             cell = [[HJDHomeRoomDiDaiPhotoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellPhotoIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
+        NSMutableDictionary *tempDic = self.declarationModel.fileMutArray[indexPath.row - cellCount];
+        NSMutableArray *tempImageArr = tempDic[kDeclarationLoanFileImage];
+        cell.title = tempDic[kDeclarationLoanFileTitle];
+        cell.imageArray = tempImageArr;
         cell.delegate  = self;
-        switch (indexPath.row - cellCount) {
-            case 0: {
-                cell.title = @"借款人身份证";
-                cell.imageArray = self.declarationModel.idCardArray;
-                break;
-            }
-            case 1: {
-                cell.title = @"借款人户口本";
-                cell.imageArray = self.declarationModel.bookArray;
-                break;
-            }
-            case 2: {
-                cell.title = @"借款人征信报告";
-                cell.imageArray = self.declarationModel.creditReportArray;
-                break;
-            }
-            case 3: {
-                cell.title = @"借款人婚姻证明";
-                cell.imageArray = self.declarationModel.marriageArray;
-                break;
-            }
-            case 4: {
-                cell.title = @"房产证";
-                cell.imageArray = self.declarationModel.houseArry;
-                break;
-            }
-            default:
-                break;
-        }
         return cell;
     }
     
@@ -498,58 +476,13 @@
     if (self.declarationModel.loan_variety == HJDLoanVarietyHouse_2) {
         cellCount = 9;
     }
-    NSArray *pictureArray = nil;
-    switch (indexPath.row - cellCount) {
-        case 0: {
-            pictureArray = self.declarationModel.idCardArray;
-            break;
-        }
-        case 1: {
-            pictureArray = self.declarationModel.bookArray;
-            break;
-        }
-        case 2: {
-            pictureArray = self.declarationModel.creditReportArray;
-            break;
-        }
-        case 3: {
-            pictureArray = self.declarationModel.marriageArray;
-            break;
-        }
-        case 4: {
-            pictureArray = self.declarationModel.houseArry;
-            break;
-        }
-        default:
-            break;
-    }
-    if (pictureArray != nil && index < pictureArray.count) {
-        NSMutableArray *mutPicture = [NSMutableArray arrayWithArray:pictureArray];
-        [mutPicture removeObjectAtIndex:index];
-        switch (indexPath.row - cellCount) {
-            case 0: {
-                self.declarationModel.idCardArray = mutPicture;
-                break;
-            }
-            case 1: {
-                self.declarationModel.bookArray = mutPicture;
-                break;
-            }
-            case 2: {
-                self.declarationModel.creditReportArray = mutPicture;
-                break;
-            }
-            case 3: {
-                self.declarationModel.marriageArray = mutPicture;
-                break;
-            }
-            case 4: {
-                self.declarationModel.houseArry = mutPicture;
-                break;
-            }
-            default:
-                break;
-        }
+    
+    NSMutableDictionary *tempDic = self.declarationModel.fileMutArray[indexPath.row - cellCount];
+    NSMutableArray *tempImageArr = tempDic[kDeclarationLoanFileImage];
+    
+    if (tempImageArr != nil && index < tempImageArr.count) {
+        [tempImageArr removeObjectAtIndex:index];
+        //....
         [self.tableView reloadRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
@@ -609,40 +542,11 @@
         if (self.declarationModel.loan_variety == HJDLoanVarietyHouse_2) {
             cellCount = 9;
         }
-        switch (self.selectShowIndex - cellCount) {
-            case 0: {
-                NSMutableArray *mut = [NSMutableArray arrayWithArray:self.declarationModel.idCardArray];
-                [mut addObject:info];
-                self.declarationModel.idCardArray = mut;
-                break;
-            }
-            case 1: {
-                NSMutableArray *mut = [NSMutableArray arrayWithArray:self.declarationModel.bookArray];
-                [mut addObject:info];
-                self.declarationModel.bookArray = mut;
-                break;
-            }
-            case 2: {
-                NSMutableArray *mut = [NSMutableArray arrayWithArray:self.declarationModel.creditReportArray];
-                [mut addObject:info];
-                self.declarationModel.creditReportArray = mut;
-                break;
-            }
-            case 3: {
-                NSMutableArray *mut = [NSMutableArray arrayWithArray:self.declarationModel.marriageArray];
-                [mut addObject:info];
-                self.declarationModel.marriageArray = mut;
-                break;
-            }
-            case 4: {
-                NSMutableArray *mut = [NSMutableArray arrayWithArray:self.declarationModel.houseArry];
-                [mut addObject:info];
-                self.declarationModel.houseArry = mut;
-                break;
-            }
-            default:
-                break;
-        }
+        
+        NSMutableDictionary *tempDic = self.declarationModel.fileMutArray[self.selectShowIndex - cellCount];
+        NSMutableArray *tempImageArr = tempDic[kDeclarationLoanFileImage];
+        [tempImageArr addObject:info];
+        
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.selectShowIndex inSection:0];
         [self.tableView reloadRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationFade];
     }

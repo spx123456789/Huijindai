@@ -94,7 +94,7 @@
     NSDictionary *sectionDic = self.imgDataArray[indexPath.section];
     NSArray *sectionArray = sectionDic[@"list"];
     NSDictionary *imageDic = sectionArray[indexPath.row];
-    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:kHJDImage(imageDic[@"path"])] placeholderImage:kImage(@"添加证件")];
+    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:kHJDImage(imageDic[@"thumb_200"])] placeholderImage:kImage(@"添加证件")];
     cell.deleteButton.hidden = YES;
     return cell;
 }
