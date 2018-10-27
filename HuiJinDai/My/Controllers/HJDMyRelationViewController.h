@@ -1,5 +1,5 @@
 //
-//  HJDMyAgentViewController.h
+//  HJDMyRelationViewController.h
 //  HuiJinDai
 //
 //  Created by GXW on 2018/9/2.
@@ -8,6 +8,6 @@
 
 #import "HJDBaseViewController.h"
 
-@interface HJDMyAgentViewController : HJDBaseViewController
-
+@interface HJDMyRelationViewController : HJDBaseViewController
+@property(nonatomic, assign) HJDUserType searchType;
 @end

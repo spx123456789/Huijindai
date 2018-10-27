@@ -16,14 +16,14 @@
 #import "HJDHomeRoomSelectViewController.h"
 #import "HJDHomeRoomDiDaiPickerView.h"
 #import "HJDHomeRoomDiDaiManager.h"
-#import "HJDHomeSelectPickerView.h"
+#import "HJDHomeSelectToastView.h"
 
 typedef enum : NSUInteger {
     HJDRomeQueryValue = 0,  //极速询值
     HJDRomeQueryRecord      //询值记录
 } HJDRomeDiDaiType;
 
-@interface HJDHomeRoomDiDaiViewController ()<UITableViewDelegate, UITableViewDataSource, HJDMessageSegmentViewDelegate, HJDHomeRoomDiDaiPickerViewDelegate, HJDHomeSelectPickerViewDelegate>
+@interface HJDHomeRoomDiDaiViewController ()<UITableViewDelegate, UITableViewDataSource, HJDMessageSegmentViewDelegate, HJDHomeRoomDiDaiPickerViewDelegate, HJDHomeSelectToastViewDelegate>
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSMutableArray *dataSource;
 @property(nonatomic, strong) HJDMessageSegmentView *segmentView;
@@ -108,11 +108,15 @@ typedef enum : NSUInteger {
         return;
     }
     
-    if ([NSString hjd_isBlankString:self.roomModel.buildingUnitId]) {
+    if ([NSString hjd_isBlankString:self.roomModel.buildingId]) {
         [self showToast:@"请选择楼栋名称"];
         return;
     }
-    //单元门  门牌号
+    
+    if ([NSString hjd_isBlankString:self.roomModel.houseId]) {
+        [self showToast:@"请选择门牌号"];
+        return;
+    }
     
     if ([NSString hjd_isBlankString:self.roomModel.houseSpace]) {
         [self showToast:@"请填写建筑面积"];
@@ -195,6 +199,10 @@ typedef enum : NSUInteger {
         if (result) {
             [self.dataSource addObjectsFromArray:data];
             [self.tableView reloadData];
+            if (self.diDaiPage == 1 && data.count == 0) {
+                [self showNodataViewFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight)];
+            }
+            
             if (data.count == 0 || data.count < kHJDHttpRow) {
                 [self.tableView.mj_footer endRefreshingWithNoMoreData];
             }
@@ -210,8 +218,8 @@ typedef enum : NSUInteger {
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - HJDHomeSelectPickerViewDelegate
-- (void)selectPickerView:(HJDHomeSelectPickerView *)selectPickerView didSelecIndex:(NSInteger)index {
+#pragma mark - HJDHomeSelectToastViewDelegate
+- (void)selectToastView:(HJDHomeSelectToastView *)selectToastView didSelecIndex:(NSInteger)index {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:5 inSection:0];
     HJDHomeRoomDiDaiTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     NSArray *arr = @[ @"住宅", @"别墅" ];
@@ -257,7 +265,8 @@ typedef enum : NSUInteger {
                 self.roomModel.communityName = dic[@"communityName"];
                 self.roomModel.communityCompany = dic[@"company"];
                 self.roomModel.address = dic[@"address"];
-                cell.textField.text = dic[@"communityName"];
+                [self.roomModel clearRoomModelType:HJDRoomModelClear_building];
+                [self.tableView reloadData];
             };
             [self.navigationController pushViewController:controller animated:YES];
             break;
@@ -271,16 +280,17 @@ typedef enum : NSUInteger {
             controller.diDaiModel = self.roomModel;
             controller.searchType = HJDRoomSearchBuilding;
             controller.callback = ^(NSDictionary *dic) {
-                self.roomModel.buildingUnitId = dic[@"buildingId"];
-                self.roomModel.buildingUnitName = dic[@"buildingName"];
+                self.roomModel.buildingId = dic[@"buildingId"];
+                self.roomModel.buildingName = dic[@"buildingName"];
                 self.roomModel.buildingCompany = dic[@"company"];
-                cell.textField.text = dic[@"buildingName"];
+                [self.roomModel clearRoomModelType:HJDRoomModelClear_unit];
+                [self.tableView reloadData];
             };
             [self.navigationController pushViewController:controller animated:YES];
             break;
         }
         case 3: { //单元门
-            if ([NSString hjd_isBlankString:self.roomModel.buildingUnitId]) {
+            if ([NSString hjd_isBlankString:self.roomModel.buildingId]) {
                 [self showToast:@"请先选择楼栋名称"];
                 return;
             }
@@ -288,30 +298,44 @@ typedef enum : NSUInteger {
             controller.diDaiModel = self.roomModel;
             controller.searchType = HJDRoomSearchUnit;
             controller.callback = ^(NSDictionary *dic) {
-                self.roomModel.buildingUnitId = dic[@"buildingId"];
-                self.roomModel.buildingUnitName = dic[@"buildingName"];
-                self.roomModel.buildingCompany = dic[@"company"];
-                cell.textField.text = dic[@"buildingName"];
+                self.roomModel.unitId = dic[@"unitId"];
+                self.roomModel.unitName = dic[@"unitName"];
+                self.roomModel.unitCompany = dic[@"company"];
+                [self.roomModel clearRoomModelType:HJDRoomModelClear_house];
+                [self.tableView reloadData];
             };
             [self.navigationController pushViewController:controller animated:YES];
             break;
         }
         case 4: { //门牌号
-            if ([NSString hjd_isBlankString:self.roomModel.houseId]) {
-                [self showToast:@"请先选择单元"];
+            if ([NSString hjd_isBlankString:self.roomModel.buildingId]) {
+                [self showToast:@"请先选择楼栋名称"];
                 return;
             }
+
             HJDHomeRoomSelectViewController *controller = [[HJDHomeRoomSelectViewController alloc] init];
             controller.diDaiModel = self.roomModel;
             controller.searchType = HJDRoomSearchHouse;
+            controller.callback = ^(NSDictionary *dic) {
+                self.roomModel.houseId = dic[@"houseId"];
+                self.roomModel.houseNo = dic[@"houseNo"];
+                self.roomModel.houseCompany = dic[@"company"];
+                cell.textField.text = self.roomModel.houseNo;
+            };
             [self.navigationController pushViewController:controller animated:YES];
             break;
         }
         case 5: { //规划用途
-            HJDHomeSelectPickerView *picker = [[HJDHomeSelectPickerView alloc] initWithFrame:CGRectMake(0, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 180, kScreenWidth, 180)];
+            HJDHomeSelectToastView *picker = [[HJDHomeSelectToastView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
             picker.delegate = self;
+            //先赋值selectIndexpath
+            if (self.roomModel.planning == 0) {
+                picker.selectIndexPath = nil;
+            } else {
+                picker.selectIndexPath = [NSIndexPath indexPathForRow:self.roomModel.planning - 1 inSection:0];
+            }
             picker.dataSource = @[ @"住宅", @"别墅" ];
-            [self.view addSubview:picker];
+            [picker showView];
             break;
         }
         case 6: {
@@ -404,6 +428,9 @@ typedef enum : NSUInteger {
             cell.rightLabel.hidden = YES;
             cell.lineView.hidden = NO;
             cell.fieldCanEdit = NO;
+            if (![NSString hjd_isBlankString:self.roomModel.provinceName]) {
+                cell.textField.text = [NSString stringWithFormat:@"%@ %@ %@", self.roomModel.provinceName, self.roomModel.cityName, self.roomModel.districtName];
+            }
             break;
         }
         case 1: {
@@ -413,6 +440,7 @@ typedef enum : NSUInteger {
             cell.rightLabel.hidden = YES;
             cell.lineView.hidden = NO;
             cell.fieldCanEdit = NO;
+            cell.textField.text = self.roomModel.communityName;
             break;
         }
         case 2: {
@@ -422,6 +450,7 @@ typedef enum : NSUInteger {
             cell.rightLabel.hidden = YES;
             cell.lineView.hidden = NO;
             cell.fieldCanEdit = NO;
+            cell.textField.text = self.roomModel.buildingName;
             break;
         }
         case 3: {
@@ -431,6 +460,7 @@ typedef enum : NSUInteger {
             cell.rightLabel.hidden = YES;
             cell.lineView.hidden = NO;
             cell.fieldCanEdit = NO;
+            cell.textField.text = self.roomModel.unitName;
             break;
         }
         case 4: {
@@ -440,6 +470,7 @@ typedef enum : NSUInteger {
             cell.rightLabel.hidden = YES;
             cell.lineView.hidden = YES;
             cell.fieldCanEdit = NO;
+            cell.textField.text = self.roomModel.houseNo;
             break;
         }
         case 5: {
@@ -449,6 +480,12 @@ typedef enum : NSUInteger {
             cell.rightLabel.hidden = YES;
             cell.lineView.hidden = NO;
             cell.fieldCanEdit = NO;
+            if (self.roomModel.planning == 0) {
+                
+            } else {
+                NSArray *arr = @[ @"住宅", @"别墅" ];
+                cell.textField.text = arr[self.roomModel.planning - 1];
+            }
             break;
         }
         case 6: {
@@ -473,6 +510,7 @@ typedef enum : NSUInteger {
 #pragma mark - HJDMessageSegmentViewDelegate
 - (void)segmentView:(HJDMessageSegmentView *)segmentView didSelectMessageType:(HJDMessageType)type {
     self.selectType = (NSUInteger)type;
+    [self hideHttpResultView];
     
     if (self.selectType == HJDRomeQueryRecord) {
         [self reloadView];
@@ -491,8 +529,8 @@ typedef enum : NSUInteger {
 #pragma mark - HJDHomeRoomDiDaiPickerViewDelegate
 - (void)roomDiDaiPickerView:(HJDHomeRoomDiDaiPickerView *)pickerView didSelectedCity:(HJDHomeRoomDiDaiModel *)cityModel {
     self.roomModel = cityModel;
-    HJDHomeRoomDiDaiTableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    cell.textField.text = [NSString stringWithFormat:@"%@ %@ %@", cityModel.provinceName, cityModel.cityName, cityModel.districtName];
+    [self.roomModel clearRoomModelType:HJDRoomModelClear_communit];
+    [self.tableView reloadData];
     self.cityPickerView = nil;
 }
 

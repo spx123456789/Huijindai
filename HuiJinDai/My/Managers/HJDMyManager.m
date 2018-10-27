@@ -12,26 +12,12 @@
 
 @implementation HJDMyManager
 
-+ (void)getMyCustomerManagerWithKeyWork:(NSString *)keyWord callBack:(void (^)(NSArray *, BOOL))callback {
++ (void)getMyRelationWithUrl:(NSString *)url keyWork:(NSString *)keyWord callBack:(void (^)(NSArray *, BOOL))callback {
     NSDictionary *param = nil;
     if (keyWord != nil) {
         param = @{ @"keywords" : keyWord };
     }
-    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/User/get_customer") requestParams:param networkMethod:GET callback:^(NSDictionary *data, NSError *error) {
-        if (error) {
-            callback(nil, NO);
-        } else {
-            callback([data getObjectByPath:@"data/list"], YES);
-        }
-    }];
-}
-
-+ (void)getMyAgentWithKeyWork:(NSString *)keyWord callBack:(void (^)(NSArray *, BOOL))callback {
-    NSDictionary *param = nil;
-    if (keyWord != nil) {
-        param = @{ @"keywords" : keyWord };
-    }
-    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/User/get_agent") requestParams:param networkMethod:GET callback:^(NSDictionary *data, NSError *error) {
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(url) requestParams:param networkMethod:GET callback:^(NSDictionary *data, NSError *error) {
         if (error) {
             callback(nil, NO);
         } else {

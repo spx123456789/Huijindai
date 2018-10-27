@@ -8,8 +8,7 @@
 
 #import "HJDMyViewController.h"
 #import "HJDMyTableViewCell.h"
-#import "HJDMyCustomerManagerViewController.h"
-#import "HJDMyAgentViewController.h"
+#import "HJDMyRelationViewController.h"
 #import "HJDMyInviteCodeView.h"
 #import "HJDMySettingViewController.h"
 #import "HJDMyManager.h"
@@ -123,6 +122,8 @@ static NSString *key2 = @"title";
     self.userModel = (HJDUserModel *)[[HJDUserDefaultsManager shareInstance] loadObject:kUserModelKey];
     if (self.userModel.type.integerValue == HJDUserTypeChannel) {
         self.dataSource = @[ @{ key1 : kImage(@"我的页客户经理"), key2 : @"我的客户经理" }, @{ key1 : kImage(@"我的页经纪人"), key2 : @"我的经纪人" }, @{ key1 : kImage(@"我的页邀请码"), key2 : @"我的邀请码" }, @{ key1 : kImage(@"我的页设置"), key2 : @"设置" } ];
+    } else if (self.userModel.type.integerValue == HJDUserTypeManager) {
+        self.dataSource = @[ @{ key1 : kImage(@"我的页客户经理"), key2 : @"我的渠道" }, @{ key1 : kImage(@"我的页设置"), key2 : @"设置" } ];
     } else {
         self.dataSource = @[ @{ key1 : kImage(@"我的页设置"), key2 : @"设置" } ];
     }
@@ -173,54 +174,44 @@ static NSString *key2 = @"title";
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.userModel.type.integerValue == HJDUserTypeChannel) {
-        switch (indexPath.row) {
-            case 0: {
-                HJDMyCustomerManagerViewController *customerController = [[HJDMyCustomerManagerViewController alloc] init];
-                customerController.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:customerController animated:YES];
-                break;
+    HJDMyTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    NSString *cellTitle = cell.titleLabel.text;
+    if ([cellTitle isEqualToString:@"我的客户经理"]) {
+        HJDMyRelationViewController *customerController = [[HJDMyRelationViewController alloc] init];
+        customerController.hidesBottomBarWhenPushed = YES;
+        customerController.searchType = HJDUserTypeManager;
+        [self.navigationController pushViewController:customerController animated:YES];
+    } else if ([cellTitle isEqualToString:@"我的经纪人"]) {
+        HJDMyRelationViewController *agentController = [[HJDMyRelationViewController alloc] init];
+        agentController.hidesBottomBarWhenPushed = YES;
+        agentController.searchType = HJDUserTypeAgent;
+        [self.navigationController pushViewController:agentController animated:YES];
+    } else if ([cellTitle isEqualToString:@"我的渠道"]) {
+        HJDMyRelationViewController *channelController = [[HJDMyRelationViewController alloc] init];
+        channelController.hidesBottomBarWhenPushed = YES;
+        channelController.searchType = HJDUserTypeChannel;
+        [self.navigationController pushViewController:channelController animated:YES];
+    } else if ([cellTitle isEqualToString:@"我的邀请码"]) {
+        [MBProgressHUD showMessage:@"正在加载..."];
+        [HJDMyManager getUserInviteCodeWithCallBack:^(NSDictionary *dic, BOOL result) {
+            [MBProgressHUD hideHUD];
+            if (result) {
+                HJDMyInviteCodeView *inviteView = [[HJDMyInviteCodeView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+                inviteView.delegate = self;
+                [inviteView.headImgView sd_setImageWithURL:[NSURL URLWithString:kHJDImage(self.userModel.avatar)] placeholderImage:kImage(@"邀请码头像")];
+                inviteView.nameLabel.text = dic[@"rename"];
+                inviteView.cityLabel.text = dic[@"city"];
+                inviteView.inviteCode = [NSString stringWithFormat:@"邀请码：%@", dic[@"code"]];
+                UIWindow *window = [UIApplication sharedApplication].keyWindow;
+                [window addSubview:inviteView];
+            } else {
+                [MBProgressHUD showError:@"请求失败"];
             }
-            case 1: {
-                HJDMyAgentViewController *agentController = [[HJDMyAgentViewController alloc] init];
-                agentController.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:agentController animated:YES];
-                break;
-            }
-            case 2: {
-                [MBProgressHUD showMessage:@"正在加载..."];
-                [HJDMyManager getUserInviteCodeWithCallBack:^(NSDictionary *dic, BOOL result) {
-                    [MBProgressHUD hideHUD];
-                    if (result) {
-                        HJDMyInviteCodeView *inviteView = [[HJDMyInviteCodeView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-                        inviteView.delegate = self;
-                        [inviteView.headImgView sd_setImageWithURL:[NSURL URLWithString:kHJDImage(self.userModel.avatar)] placeholderImage:kImage(@"邀请码头像")];
-                        inviteView.nameLabel.text = dic[@"rename"];
-                        inviteView.cityLabel.text = dic[@"city"];
-                        inviteView.inviteCode = [NSString stringWithFormat:@"邀请码：%@", dic[@"code"]];
-                        UIWindow *window = [UIApplication sharedApplication].keyWindow;
-                        [window addSubview:inviteView];
-                    } else {
-                        [MBProgressHUD showError:@"请求失败"];
-                    }
-                }];
-                break;
-            }
-            case 3: {
-                HJDMySettingViewController *settingController = [[HJDMySettingViewController alloc] init];
-                settingController.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:settingController animated:YES];
-                break;
-            }
-            default:
-                break;
-        }
-    } else {
-        if (indexPath.row == 0) {
-            HJDMySettingViewController *settingController = [[HJDMySettingViewController alloc] init];
-            settingController.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:settingController animated:YES];
-        }
+        }];
+    } else if ([cellTitle isEqualToString:@"设置"]) {
+        HJDMySettingViewController *settingController = [[HJDMySettingViewController alloc] init];
+        settingController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:settingController animated:YES];
     }
 }
 

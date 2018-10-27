@@ -33,6 +33,12 @@
 - (void)setBackBarButton;
 - (void)goBack:(UIButton *)sender;
 
+#pragma mark - 暂无数据 暂无网络
+- (void)showNodataViewFrame:(CGRect)frame;
+
+- (void)showNoNetworkViewFrame:(CGRect)frame callback:(void(^)(void))callback;
+
+- (void)hideHttpResultView;
 #pragma mark - 提示
 - (void)showToast:(NSString *)message;
 

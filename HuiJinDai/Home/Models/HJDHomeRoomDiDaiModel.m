@@ -20,31 +20,47 @@
                                   @"communityId" : self.communityId,
                                   @"communityName" : self.communityName,
                                   @"address" : self.address,
+                                  @"buildingUnitId" : self.buildingId,
+                                  @"buildingUnitName" : self.buildingName,
+                                  @"houseId" : self.houseId,
+                                  @"houseNo" : self.houseNo,
                                   @"houseSpace" : self.houseSpace,
                                   @"companyStr" : self.companyStr
                                   };
     NSMutableDictionary *mutDic = [NSMutableDictionary dictionary];
     [mutDic addEntriesFromDictionary:dictionary];
     
-    if ([NSString hjd_isBlankString:self.buildingUnitId]) {
-        [mutDic setObject:@"1" forKey:@"buildingUnitId"];
-        [mutDic setObject:@"一单元" forKey:@"buildingUnitName"];
-    } else {
-        [mutDic setObject:self.buildingUnitId forKey:@"buildingUnitId"];
-        [mutDic setObject:self.buildingUnitName forKey:@"buildingUnitName"];
-    }
-    
-    if ([NSString hjd_isBlankString:self.houseId]) {
-        [mutDic setObject:@"1" forKey:@"houseId"];
-        [mutDic setObject:@"1" forKey:@"houseNo"];
-    } else {
-        [mutDic setObject:self.houseId forKey:@"houseId"];
-        [mutDic setObject:self.houseNo forKey:@"houseNo"];
-    }
-    
     if (self.planning != 0) {
         [mutDic setObject:@(self.planning) forKey:@"planning"];
     }
     return mutDic;
+}
+
+- (void)clearRoomModelType:(HJDRoomModelClearType)clearType {
+    switch (clearType) {
+        case HJDRoomModelClear_communit: {
+            self.communityId = @"";
+            self.communityName = @"";
+            self.communityCompany = @"";
+        }
+        case HJDRoomModelClear_building: {
+            self.buildingId = @"";
+            self.buildingName = @"";
+            self.buildingCompany = @"";
+        }
+        case HJDRoomModelClear_unit: {
+            self.unitId = @"";
+            self.unitName = @"";
+            self.unitCompany = @"";
+        }
+        case HJDRoomModelClear_house: {
+            self.houseId = @"";
+            self.houseNo = @"";
+            self.houseCompany = @"";
+            break;
+        }
+        default:
+            break;
+    }
 }
 @end

@@ -79,6 +79,7 @@
     if (!_searchView) {
         _searchView = [[HJDMyNavTextFieldSearchView alloc] initWithFrame:CGRectMake(0, 20, kScreenWidth, 44)];
         _searchView.delegate = self;
+        _searchView.isHaveSureButton = NO;
         NSString *str = @"";
         switch (self.searchType) {
             case HJDRoomSearchCommunity:
@@ -170,7 +171,7 @@
             str = dic[@"buildingName"];
             break;
         default:
-            str = @"请输入门牌号";
+            str = dic[@"houseNo"];
             break;
     }
     cell.label.text = str;
@@ -188,15 +189,20 @@
 }
 
 - (void)searchView:(HJDMyNavTextFieldSearchView *)searchView keyWord:(NSString *)keyWord sureButton:(id)sender {
+    [self hideHttpResultView];
     switch (self.searchType) {
         case HJDRoomSearchCommunity: {
             [MBProgressHUD showMessage:@"正在加载..."];
             [HJDHomeRoomDiDaiManager getXiaoquListWithShiId:self.diDaiModel.cityId quId:self.diDaiModel.districtId keyWord:keyWord CallBack:^(NSArray *data, BOOL result) {
                 [MBProgressHUD hideHUD];
                 if (result) {
-                    [self.dataSource removeAllObjects];
-                    [self.dataSource addObjectsFromArray:data];
-                    [self.tableView reloadData];
+                    if (data.count == 0) {
+                        [self showNodataViewFrame:CGRectMake(0, kSafeAreaTopHeight, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight)];
+                    } else {
+                        [self.dataSource removeAllObjects];
+                        [self.dataSource addObjectsFromArray:data];
+                        [self.tableView reloadData];
+                    }
                 } else {
                     [MBProgressHUD showError:@"请求失败"];
                 }
@@ -208,9 +214,13 @@
             [HJDHomeRoomDiDaiManager getLouDongListWithModel:self.diDaiModel keyWord:keyWord CallBack:^(NSArray *data, BOOL result) {
                 [MBProgressHUD hideHUD];
                 if (result) {
-                    [self.dataSource removeAllObjects];
-                    [self.dataSource addObjectsFromArray:data];
-                    [self.tableView reloadData];
+                    if (data.count == 0) {
+                        [self showNodataViewFrame:CGRectMake(0, kSafeAreaTopHeight, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight)];
+                    } else {
+                        [self.dataSource removeAllObjects];
+                        [self.dataSource addObjectsFromArray:data];
+                        [self.tableView reloadData];
+                    }
                 } else {
                     [MBProgressHUD showError:@"请求失败"];
                 }
@@ -222,9 +232,13 @@
             [HJDHomeRoomDiDaiManager getDanYuanListWithModel:self.diDaiModel keyWord:keyWord CallBack:^(NSArray *data, BOOL result) {
                 [MBProgressHUD hideHUD];
                 if (result) {
-                    [self.dataSource removeAllObjects];
-                    [self.dataSource addObjectsFromArray:data];
-                    [self.tableView reloadData];
+                    if (data.count == 0) {
+                        [self showNodataViewFrame:CGRectMake(0, kSafeAreaTopHeight, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight)];
+                    } else {
+                        [self.dataSource removeAllObjects];
+                        [self.dataSource addObjectsFromArray:data];
+                        [self.tableView reloadData];
+                    }
                 } else {
                     [MBProgressHUD showError:@"请求失败"];
                 }
@@ -236,9 +250,13 @@
             [HJDHomeRoomDiDaiManager getMenPaiListWithModel:self.diDaiModel keyWord:keyWord CallBack:^(NSArray *data, BOOL result) {
                 [MBProgressHUD hideHUD];
                 if (result) {
-                    [self.dataSource removeAllObjects];
-                    [self.dataSource addObjectsFromArray:data];
-                    [self.tableView reloadData];
+                    if (data.count == 0) {
+                        [self showNodataViewFrame:CGRectMake(0, kSafeAreaTopHeight, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight)];
+                    } else {
+                        [self.dataSource removeAllObjects];
+                        [self.dataSource addObjectsFromArray:data];
+                        [self.tableView reloadData];
+                    }
                 } else {
                     [MBProgressHUD showError:@"请求失败"];
                 }

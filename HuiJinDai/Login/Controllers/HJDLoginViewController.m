@@ -199,7 +199,7 @@
     }
     
     [MBProgressHUD showMessage:@"登陆中..."];
-    [HJDRegisterHttpManager loginWithPhone:phone verifiCode:verifiCode callBack:^(NSDictionary *data, NSError *error, BOOL result) {
+    [HJDRegisterHttpManager loginWithPhone:phone verifiCode:verifiCode callBack:^(NSDictionary *dataDic, NSError *error, BOOL result) {
         [MBProgressHUD hideHUD];
         if (self.myTimer) {
             [self.myTimer invalidate];
@@ -209,16 +209,22 @@
             self.verifiCodeButton.enabled = YES;
         }
         if (result) {
-            HJDUserModel *userModel = [[HJDUserModel alloc] init];
-            [userModel hjd_loadDataFromkeyValues:data];
-            [[HJDUserDefaultsManager shareInstance] saveObject:userModel key:kUserModelKey];
-
-            [[HJDNetAPIManager sharedManager] setAuthorization:userModel.token];
-            
-            AppDelegate *appDelagate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-            [appDelagate enterHomeController];
-            
-            [[NSUserDefaults standardUserDefaults] setObject:@(1) forKey:HJDLoginSuccess];
+            NSString *code = [dataDic getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                HJDUserModel *userModel = [[HJDUserModel alloc] init];
+                [userModel hjd_loadDataFromkeyValues:[dataDic getObjectByPath:@"data"]];
+                [[HJDUserDefaultsManager shareInstance] saveObject:userModel key:kUserModelKey];
+                
+                [[HJDNetAPIManager sharedManager] setAuthorization:userModel.token];
+                
+                AppDelegate *appDelagate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+                [appDelagate enterHomeController];
+                
+                [[NSUserDefaults standardUserDefaults] setObject:@(1) forKey:HJDLoginSuccess];
+            } else {
+                [MBProgressHUD showError:[dataDic getObjectByPath:@"error_msg"]];
+                [[NSUserDefaults standardUserDefaults] setObject:@(2) forKey:HJDLoginSuccess];
+            }
         } else {
             [MBProgressHUD showError:@"登录失败"];
             [[NSUserDefaults standardUserDefaults] setObject:@(2) forKey:HJDLoginSuccess];

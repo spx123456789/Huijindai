@@ -54,7 +54,7 @@
         if (error) {
             callBack(nil, error, NO);
         } else {
-            callBack([data getObjectByPath:@"data"], nil, YES);
+            callBack(data, nil, YES);
         }
     }];
 }

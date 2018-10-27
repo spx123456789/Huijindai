@@ -65,13 +65,16 @@
         [MBProgressHUD hideHUD];
         [self.tableView.mj_footer endRefreshing];
         if (result) {
-            [self.dataSource removeAllObjects];
             for (int k = 0; k < data.count; k++) {
                 HJDOrderListModel *listModel = [[HJDOrderListModel alloc] init];
                 [listModel hjd_loadDataFromkeyValues:data[k]];
                 [self.dataSource addObject:listModel];
             }
             [self.tableView reloadData];
+            if (self.orderListPage == 1 && data.count == 0) {
+                [self showNodataViewFrame:CGRectMake(0, 52, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 52)];
+            }
+            
             if (data.count == 0 || data.count < kHJDHttpRow) {
                 [self.tableView.mj_footer endRefreshingWithNoMoreData];
             }
@@ -139,6 +142,8 @@
 
 - (void)clickSureButton:(id)sender {
     self.orderListPage = 1;
+    [self.dataSource removeAllObjects];
+    [self hideHttpResultView];
     [self searchKeyWord:self.textField.text];
 }
 

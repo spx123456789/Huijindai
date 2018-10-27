@@ -13,11 +13,8 @@
 
 @interface HJDMyManager : NSObject
 
-//获取我的客户经理数据
-+ (void)getMyCustomerManagerWithKeyWork:(NSString *)keyWord callBack:(void(^)(NSArray *arr, BOOL result))callback;
-
-//获取我的经纪人数据
-+ (void)getMyAgentWithKeyWork:(NSString *)keyWord callBack:(void(^)(NSArray *arr, BOOL result))callback;
+//获取我的客户经理数据 获取我的经纪人数据 获取渠道信息
++ (void)getMyRelationWithUrl:(NSString *)url keyWork:(NSString *)keyWord callBack:(void(^)(NSArray *arr, BOOL result))callback;
 
 //获取用户邀请码
 + (void)getUserInviteCodeWithCallBack:(void(^)(NSDictionary *dic, BOOL result))callback;

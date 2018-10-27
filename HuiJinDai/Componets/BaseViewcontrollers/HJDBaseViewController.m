@@ -10,9 +10,10 @@
 #import "UITableView+HJD.h"
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCarrier.h>
+#import "HJDHttpResultView.h"
 
 @interface HJDBaseViewController ()
-
+@property(nonatomic, strong) HJDHttpResultView *resultView;
 @end
 
 @implementation HJDBaseViewController
@@ -140,6 +141,44 @@
 
 - (void)goBack:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - 暂无数据 暂无网络
+- (void)showNodataViewFrame:(CGRect)frame {
+    HJDHttpResultView *resultView11 = [[HJDHttpResultView alloc] initWithFrame:frame];
+    resultView11.showType = HJDHttpResultNoData;
+    resultView11.backgroundColor = [UIColor redColor];
+    
+    if (self.resultView == nil) {
+        self.resultView = resultView11;
+        [self.view addSubview:resultView11];
+    } else {
+        self.resultView.showType = HJDHttpResultNoData;
+        self.resultView.hidden = NO;
+    }
+}
+
+- (void)showNoNetworkViewFrame:(CGRect)frame callback:(void (^)(void))callback {
+    HJDHttpResultView *resultView22 = [[HJDHttpResultView alloc] initWithFrame:frame];
+    resultView22.showType = HJDHttpResultNoNetwork;
+    resultView22.backgroundColor = [UIColor redColor];
+    resultView22.callBack = ^{
+        callback();
+    };
+    
+    if (self.resultView == nil) {
+        self.resultView = resultView22;
+        [self.view addSubview:resultView22];
+    } else {
+        self.resultView.showType = HJDHttpResultNoNetwork;
+        self.resultView.hidden = NO;
+    }
+}
+
+- (void)hideHttpResultView {
+    if (self.resultView != nil) {
+        self.resultView.hidden = YES;
+    }
 }
 
 #pragma mark - 提示

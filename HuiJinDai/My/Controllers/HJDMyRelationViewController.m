@@ -1,32 +1,32 @@
 //
-//  HJDMyCustomerManagerViewController.m
+//  HJDMyRelationViewController.m
 //  HuiJinDai
 //
 //  Created by GXW on 2018/9/2.
 //  Copyright © 2018年 shanpx. All rights reserved.
 //
 
-#import "HJDMyCustomerManagerViewController.h"
+#import "HJDMyRelationViewController.h"
 #import "HJDMyAgentTableViewCell.h"
 #import "HJDMyNavTextFieldSearchView.h"
 #import "HJDCustomerServiceView.h"
 #import "HJDMyManager.h"
 
-@interface HJDMyCustomerManagerViewController ()<UITableViewDelegate, UITableViewDataSource, HJDMyNavTextFieldSearchViewDelegate, HJDMyAgentTableViewCellDelegate>
+@interface HJDMyRelationViewController ()<UITableViewDelegate, UITableViewDataSource, HJDMyNavTextFieldSearchViewDelegate, HJDMyAgentTableViewCellDelegate>
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSMutableArray *dataSource;
 @property(nonatomic, strong) HJDMyNavTextFieldSearchView *searchView;
 @property(nonatomic, strong) HJDCustomerServiceView *customServiceView;
 @end
 
-@implementation HJDMyCustomerManagerViewController
+@implementation HJDMyRelationViewController
 
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 64) style:UITableViewStylePlain];
         _tableView.dataSource = self;
         _tableView.delegate = self;
-        _tableView.backgroundColor = kRGB_Color(244, 244, 244);
+        _tableView.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _tableView;
@@ -61,7 +61,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     self.dataSource = [NSMutableArray array];
     
     UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight - 170, kScreenWidth, 170)];
@@ -81,17 +81,37 @@
 }
 
 - (void)searchWithKeyWord:(NSString *)keyWord {
+    NSString *url = @"";
+    switch (self.searchType) {
+        case HJDUserTypeManager:
+            url = @"/User/get_customer";
+            break;
+        case HJDUserTypeAgent:
+            url = @"/User/get_agent";
+            break;
+        case HJDUserTypeChannel:
+            url = @"/User/get_channel";
+            break;
+        default:
+            break;
+    }
     [MBProgressHUD showMessage:@"正在加载..."];
-    [HJDMyManager getMyCustomerManagerWithKeyWork:keyWord callBack:^(NSArray *arr, BOOL result) {
+    @weakify(self);
+    [HJDMyManager getMyRelationWithUrl:url keyWork:keyWord callBack:^(NSArray *arr, BOOL result) {
         [MBProgressHUD hideHUD];
+        @strongify(self);
         if (result) {
             [self.dataSource removeAllObjects];
-            for (int k = 0; k < arr.count; k++) {
-                HJDMyAgentModel *model = [[HJDMyAgentModel alloc] init];
-                [model hjd_loadDataFromkeyValues:arr[k]];
-                [self.dataSource addObject:model];
+            if (arr.count == 0) {
+                [self showNodataViewFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight)];
+            } else {
+                for (int k = 0; k < arr.count; k++) {
+                    HJDMyAgentModel *model = [[HJDMyAgentModel alloc] init];
+                    [model hjd_loadDataFromkeyValues:arr[k]];
+                    [self.dataSource addObject:model];
+                }
+                [self.tableView reloadData];
             }
-            [self.tableView reloadData];
         } else {
             [MBProgressHUD showError:@"请求失败"];
         }

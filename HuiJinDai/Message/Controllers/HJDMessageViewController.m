@@ -94,6 +94,10 @@
         if (result) {
             [self.dataSource addObjectsFromArray:data];
             [self.tableView reloadData];
+            if (self.messagePage == 1 && data.count == 0) {
+                [self showNodataViewFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight)];
+            }
+            
             if (data.count == 0 || data.count < kHJDHttpRow) {
                 [self.tableView.mj_footer endRefreshingWithNoMoreData];
             }
@@ -274,6 +278,7 @@
     self.selectType = type;
     [self.dataSource removeAllObjects];
     self.messagePage = 1;
+    [self hideHttpResultView];
     [self getMessageDataType:type == HJDMessageTypeMy ? @"1" : @"3"];
 }
 @end

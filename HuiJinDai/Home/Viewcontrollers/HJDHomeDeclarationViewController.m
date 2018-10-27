@@ -12,9 +12,9 @@
 #import "HJDDeclarationModel.h"
 #import <MobileCoreServices/UTCoreTypes.h>
 #import "HJDHomeRoomDiDaiManager.h"
-#import "HJDHomeSelectPickerView.h"
+#import "HJDHomeSelectToastView.h"
 
-@interface HJDHomeDeclarationViewController ()<UITableViewDelegate, UITableViewDataSource, HJDHomeSelectPickerViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, HJDHomeRoomDiDaiPhotoTableViewCellDelegate>
+@interface HJDHomeDeclarationViewController ()<UITableViewDelegate, UITableViewDataSource, HJDHomeSelectToastViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, HJDHomeRoomDiDaiPhotoTableViewCellDelegate>
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) HJDCustomerServiceView *customServiceView;
 @property(nonatomic, strong) UIButton *submitButton;
@@ -175,14 +175,31 @@
 }
 
 - (void)showPickerView {
-    HJDHomeSelectPickerView *picker = [[HJDHomeSelectPickerView alloc] initWithFrame:CGRectMake(0, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 180, kScreenWidth, 180)];
+    HJDHomeSelectToastView *picker = [[HJDHomeSelectToastView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
     picker.delegate = self;
+    //先赋值selectIndexpath
+    NSInteger modelInterger = 0;
+    if (self.selectShowIndex == 0) {
+        modelInterger = self.declarationModel.loan_variety;
+    } else if (self.selectShowIndex == 2) {
+        modelInterger = self.declarationModel.certificate_type;
+    } else if (self.selectShowIndex == 4) {
+        modelInterger = self.declarationModel.indiv_marital;
+    } else if (self.selectShowIndex == 6) {
+        modelInterger = self.declarationModel.loan_time_type;
+    }
+    
+    if (modelInterger == 0) {
+        picker.selectIndexPath = nil;
+    } else {
+        picker.selectIndexPath = [NSIndexPath indexPathForRow:modelInterger - 1 inSection:0];
+    }
     picker.dataSource = self.pickerArray;
-    [self.view addSubview:picker];
+    [picker showView];
 }
 
-#pragma mark - HJDHomeSelectPickerViewDelegate
-- (void)selectPickerView:(HJDHomeSelectPickerView *)selectPickerView didSelecIndex:(NSInteger)index {
+#pragma mark - HJDHomeSelectToastViewDelegate
+- (void)selectToastView:(HJDHomeSelectToastView *)selectToastView didSelecIndex:(NSInteger)index {
     if (self.selectShowIndex == 0) {
         self.declarationModel.loan_variety = index + 1;
         [self.tableView reloadData];
@@ -203,7 +220,7 @@
     switch (indexPath.row) {
         case 0: {
             self.selectShowIndex = indexPath.row;
-            self.pickerArray = @[ @"房屋抵押贷款", @"房屋抵押贷款（加案）", @"车辆抵押贷款" ];
+            self.pickerArray = @[ @"房屋抵押贷款", @"房屋抵押贷款（加案）" ];
             [self showPickerView];
             break;
         }
@@ -351,7 +368,7 @@
                     cell.textField.text = @"台湾居民来往大陆通行证";
                     break;
                 case HJDLoanCertificate_other:
-                    cell.textField.text = @"其他";
+                    cell.textField.text = @"其他证件";
                     break;
                 default:
                     break;

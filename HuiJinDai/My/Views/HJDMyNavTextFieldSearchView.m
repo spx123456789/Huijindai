@@ -108,7 +108,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = kControllerBackgroundColor;
-        
+        _isHaveSureButton = YES;
         [self setUpUI];
         
         @weakify(self);
@@ -118,10 +118,23 @@
                 self.clearButton.hidden = YES;
             } else {
                 self.clearButton.hidden = NO;
+                if (!self.isHaveSureButton) {
+                    if (self.delegate && [self.delegate respondsToSelector:@selector(searchView:keyWord:sureButton:)]) {
+                        [self.delegate searchView:self keyWord:self.textField.text sureButton:nil];
+                    }
+                }
             }
         }];
     }
     return self;
+}
+
+- (void)setIsHaveSureButton:(BOOL)isHaveSureButton {
+    _isHaveSureButton = isHaveSureButton;
+    [self.sureButton mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(0, 0));
+    }];
+    
 }
 
 - (void)backButtonClick:(id)sender {

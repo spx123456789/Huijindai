@@ -13,6 +13,13 @@ typedef enum : NSUInteger {
     HJDRoomUse_villa,       //别墅
 } HJDRoomUseType;
 
+typedef enum : NSUInteger {
+    HJDRoomModelClear_communit = 0,
+    HJDRoomModelClear_building,
+    HJDRoomModelClear_unit,
+    HJDRoomModelClear_house,
+} HJDRoomModelClearType;
+
 @interface HJDHomeRoomDiDaiModel : HJDBaseModel
 //省份ID
 @property(nonatomic, copy) NSString *provinceId;
@@ -36,16 +43,24 @@ typedef enum : NSUInteger {
 //详细地址
 @property(nonatomic, copy) NSString *address;
 //楼栋Id
-@property(nonatomic, copy) NSString *buildingUnitId;
+@property(nonatomic, copy) NSString *buildingId;
 //楼栋名称
-@property(nonatomic, copy) NSString *buildingUnitName;
+@property(nonatomic, copy) NSString *buildingName;
 //楼栋来源
 @property(nonatomic, copy) NSString *buildingCompany;
+
+//单元Id
+@property(nonatomic, copy) NSString *unitId;
+//单元名称
+@property(nonatomic, copy) NSString *unitName;
+//单元来源
+@property(nonatomic, copy) NSString *unitCompany;
 
 //房间 Id
 @property(nonatomic, copy) NSString *houseId;
 //门牌号，如：1702
 @property(nonatomic, copy) NSString *houseNo;
+@property(nonatomic, copy) NSString *houseCompany;
 //建筑面积
 @property(nonatomic, copy) NSString *houseSpace;
 //询值类型， 01-世联,02-仁达,03-首佳  (当前只询世联一家)
@@ -54,4 +69,6 @@ typedef enum : NSUInteger {
 @property(nonatomic, assign) HJDRoomUseType planning;
 
 - (NSDictionary *)getRoomEvaluateParams;
+
+- (void)clearRoomModelType:(HJDRoomModelClearType)clearType;
 @end

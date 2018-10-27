@@ -62,7 +62,7 @@
 }
 
 + (void)getDanYuanListWithModel:(HJDHomeRoomDiDaiModel *)model keyWord:(NSString *)keyWord CallBack:(RoomDiDaiHttpCallback)callback {
-    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Assessment/unit") requestParams:@{ @"qu" : model.districtId, @"community_id" : model.communityId, @"building_id" : model.buildingUnitId, @"unit" : keyWord, @"companyStr" : model.buildingCompany } networkMethod:GET callback:^(id data, NSError *error) {
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Assessment/unit") requestParams:@{ @"qu" : model.districtId, @"community_id" : model.communityId, @"building_id" : model.buildingId, @"unit" : keyWord, @"companyStr" : model.communityCompany } networkMethod:GET callback:^(id data, NSError *error) {
         if (error) {
             callback(nil, NO);
         } else {
@@ -72,12 +72,18 @@
 }
 
 + (void)getMenPaiListWithModel:(HJDHomeRoomDiDaiModel *)model keyWord:(NSString *)keyWord CallBack:(RoomDiDaiHttpCallback)callback {
-    /*
-     unit_id    string 单元编号[选填]
-     unit    string 单元名称[选填]
-     companyStr 字段有问题
-     */
-    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Assessment/house") requestParams:@{ @"qu" : model.districtId, @"community_id" : model.communityId, @"building_id" : model.buildingUnitId, @"building" : model.buildingUnitName, @"house" : keyWord, @"companyStr" : model.communityCompany } networkMethod:GET callback:^(id data, NSError *error) {
+    
+    NSMutableDictionary *mutParam = [NSMutableDictionary dictionaryWithDictionary:@{ @"qu" : model.districtId, @"community_id" : model.communityId, @"building_id" : model.buildingId, @"building" : model.buildingName, @"house" : keyWord, @"companyStr" : model.communityCompany }];
+    
+    if (![NSString hjd_isBlankString:model.unitId]) {
+        [mutParam setObject:model.unitId forKey:@"unit_id"];
+    }
+    
+    if (![NSString hjd_isBlankString:model.unitName]) {
+        [mutParam setObject:model.unitName forKey:@"unit"];
+    }
+    
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Assessment/house") requestParams:mutParam networkMethod:GET callback:^(id data, NSError *error) {
         if (error) {
             callback(nil, NO);
         } else {
