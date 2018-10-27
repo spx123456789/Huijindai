@@ -15,7 +15,6 @@
 
 @interface HJDOrderProcessSearchView : UIView
 @property(nonatomic, strong) UITextField *textField;
-@property(nonatomic, assign) NSInteger selectIndex;
 @property(nonatomic, weak) id<HJDOrderProcessSearchViewDelegate> delegate;
 @property(nonatomic, assign) BOOL showLeft;
 @end

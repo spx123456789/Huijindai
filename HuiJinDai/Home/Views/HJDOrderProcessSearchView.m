@@ -43,10 +43,12 @@
         
         CGFloat view_width = (self.dataArray.count > 2) ? 170 : 100;
         CGFloat view_height = 22 + self.dataArray.count * 28;
-        //imageView的superView
-        UIView *fangkuanView1 = [[UIView alloc] initWithFrame:CGRectMake(16, 64 + 44, view_width, view_height)];
+        
         //imageView的superView 的阴影view
-        UIView *shadowView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, view_width, view_height)];//这里的大小将不影响fangkuanView1 的显示（即这里只起 设置frame.origin的作用）
+        UIView *shadowView = [[UIView alloc] initWithFrame:CGRectMake(16, 64 + 45, view_width, view_height)];
+        
+        //imageView的superView
+        UIView *fangkuanView1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, view_width, view_height)];
         
         self.tableView.frame = CGRectMake(0, 11, view_width, view_height - 11 * 2);
         //阴影设置
@@ -134,11 +136,11 @@
 @end
 
 #pragma mark - 搜索view
-@interface HJDOrderProcessSearchView()<HJDPopViewDelegate>
+@interface HJDOrderProcessSearchView()<HJDPopViewDelegate, UITextFieldDelegate>
 @property(nonatomic, strong) UIView *bgView;
 @property(nonatomic, strong) UIButton *selectButton;
 @property(nonatomic, strong) UIButton *sureButton;
-
+@property(nonatomic, assign) NSInteger selectIndex;
 @property(nonatomic, strong) NSArray *dataSource;
 @property(nonatomic, strong) NSArray *stepArray;
 @end
@@ -180,7 +182,8 @@
         _textField.textColor = kRGB_Color(0x33, 0x33, 0x33);
         _textField.font = kFont14;
         _textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入房产地址/申请人姓名" attributes:@{ NSForegroundColorAttributeName : kRGB_Color(0xd4, 0xd4, 0xd4), NSFontAttributeName : kFont14 }];
-        //_textField.delegate = self;
+        _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        _textField.delegate = self;
     }
     return _textField;
 }
@@ -198,8 +201,12 @@
 }
 
 - (void)sureButtonClick:(id)sender {
+    NSString *step = nil;
+    if (self.selectIndex != NSNotFound && self.selectIndex < self.stepArray.count) {
+        step = self.stepArray[self.selectIndex];
+    }
     if (self.delegate && [self.delegate respondsToSelector:@selector(processSearchView:searchWord:selectStatus:clickSureButton:)]) {
-        [self.delegate processSearchView:self searchWord:self.textField.text selectStatus:self.stepArray[self.selectIndex] clickSureButton:YES];
+        [self.delegate processSearchView:self searchWord:self.textField.text selectStatus:step clickSureButton:YES];
     }
 }
 
@@ -284,7 +291,11 @@
 
 - (void)setShowLeft:(BOOL)showLeft {
     _showLeft = showLeft;
-    _selectIndex = NSNotFound;
+    if (showLeft) {
+        _selectIndex = 0;
+    } else {
+        _selectIndex = NSNotFound;
+    }
     if (showLeft) {
         self.dataSource = @[ @"全部", @"客户经理审核中", @"风控分配中", @"审核岗处理中", @"合同/公证/抵押岗处理中", @"放款审核处理中", @"待放款" ];
         self.stepArray = @[ @"0", @"3", @"4", @"5", @"6", @"7", @"8" ];
@@ -298,9 +309,18 @@
 #pragma mark - HJDPopViewDelegate
 - (void)popView:(HJDPopView *)popView didSelectIndec:(NSInteger)popSelectIndex {
     self.selectIndex = popSelectIndex;
+    self.textField.text = @"";
     if (self.delegate && [self.delegate respondsToSelector:@selector(processSearchView:searchWord:selectStatus:clickSureButton:)]) {
-        [self.delegate processSearchView:self searchWord:self.textField.text selectStatus:self.stepArray[popSelectIndex] clickSureButton:NO];
+        [self.delegate processSearchView:self searchWord:nil selectStatus:self.stepArray[popSelectIndex] clickSureButton:NO];
     }
     popView = nil;
+}
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(processSearchView:searchWord:selectStatus:clickSureButton:)]) {
+        [self.delegate processSearchView:self searchWord:nil selectStatus:self.stepArray[self.selectIndex] clickSureButton:NO];
+    }
+    return YES;
 }
 @end

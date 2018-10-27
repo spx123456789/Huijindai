@@ -37,6 +37,7 @@
 //询值结果
 @interface HJDHomeOrderDetailQueryValueResultCell : HJDHomeOrderDetailTableViewCell
 @property(nonatomic, strong) NSArray *dataSource;
+@property(nonatomic, assign) BOOL isFail;
 @end
 
 @class HJDHomeOrderDetailButtonCell;

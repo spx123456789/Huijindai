@@ -201,8 +201,10 @@ typedef enum : NSUInteger {
             [self.tableView reloadData];
             if (self.diDaiPage == 1 && data.count == 0) {
                 [self showNodataViewFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight)];
+            } else {
+                [self hideHttpResultView];
             }
-            
+
             if (data.count == 0 || data.count < kHJDHttpRow) {
                 [self.tableView.mj_footer endRefreshingWithNoMoreData];
             }
@@ -510,7 +512,6 @@ typedef enum : NSUInteger {
 #pragma mark - HJDMessageSegmentViewDelegate
 - (void)segmentView:(HJDMessageSegmentView *)segmentView didSelectMessageType:(HJDMessageType)type {
     self.selectType = (NSUInteger)type;
-    [self hideHttpResultView];
     
     if (self.selectType == HJDRomeQueryRecord) {
         [self reloadView];

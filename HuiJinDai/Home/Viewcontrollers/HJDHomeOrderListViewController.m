@@ -37,6 +37,7 @@
         _textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入房产地址/申请人姓名查询" attributes:@{ NSFontAttributeName : kFont14, NSForegroundColorAttributeName : kRGB_Color(0xd4, 0xd4, 0xd4)}];
         _textField.font = kFont14;
         _textField.textColor = kRGB_Color(0x33, 0x33, 0x33);
+        _textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     }
     return _textField;
 }
@@ -73,6 +74,8 @@
             [self.tableView reloadData];
             if (self.orderListPage == 1 && data.count == 0) {
                 [self showNodataViewFrame:CGRectMake(0, 52, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 52)];
+            } else {
+                [self hideHttpResultView];
             }
             
             if (data.count == 0 || data.count < kHJDHttpRow) {
@@ -143,7 +146,6 @@
 - (void)clickSureButton:(id)sender {
     self.orderListPage = 1;
     [self.dataSource removeAllObjects];
-    [self hideHttpResultView];
     [self searchKeyWord:self.textField.text];
 }
 

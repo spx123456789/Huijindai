@@ -667,31 +667,43 @@
         cell = [[HJDHomeOrderDetailQueryValueResultSubCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    NSDictionary *dic = self.dataSource[indexPath.row];
-    NSString *company = dic[@"assessCompany"];
-    NSString *title = @"";
-    switch (company.integerValue) {
-        case 01: {
-            title = @"世联";
-            break;
-        }
-        case 02: {
-            title = @"仁达";
-            break;
-        }
-        default: {
-            title = @"首佳";
-            break;
-        }
-    }
-    cell.priceLabel.text = [NSString stringWithFormat:@"%@单价：",title];
-    cell.totalPriceLabel.text = [NSString stringWithFormat:@"%@总价：",title];
-    cell.priceLabel_1.text = dic[@"unitPrice"];
-    cell.totalPriceLabel_1.text = dic[@"totalPrice"];
-    if (indexPath.row == self.dataSource.count - 1) {
+
+    if (self.isFail) {
+        cell.priceLabel.text = [NSString stringWithFormat:@"%@单价：",@"世联"];
+        cell.totalPriceLabel.text = [NSString stringWithFormat:@"%@总价：",@"世联"];
+        cell.priceLabel_1.text = @"失败";
+        cell.priceLabel_1.textColor = kRGB_Color(0xff, 0x52, 0x52);
+        cell.totalPriceLabel_1.text = @"失败";
+        cell.totalPriceLabel_1.textColor = kRGB_Color(0xff, 0x52, 0x52);
         cell.lineView.hidden = YES;
     } else {
-        cell.lineView.hidden = NO;
+        NSDictionary *dic = self.dataSource[indexPath.row];
+        NSString *company = dic[@"assessCompany"];
+        NSString *title = @"";
+        switch (company.integerValue) {
+            case 01: {
+                title = @"世联";
+                break;
+            }
+            case 02: {
+                title = @"仁达";
+                break;
+            }
+            default: {
+                title = @"首佳";
+                break;
+            }
+        }
+        
+        cell.priceLabel.text = [NSString stringWithFormat:@"%@单价：",title];
+        cell.totalPriceLabel.text = [NSString stringWithFormat:@"%@总价：",title];
+        cell.priceLabel_1.text = dic[@"unitPrice"];
+        cell.totalPriceLabel_1.text = dic[@"totalPrice"];
+        if (indexPath.row == self.dataSource.count - 1) {
+            cell.lineView.hidden = YES;
+        } else {
+            cell.lineView.hidden = NO;
+        }
     }
     return cell;
 }

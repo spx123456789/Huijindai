@@ -103,8 +103,9 @@
         if (result) {
             [self.dataSource removeAllObjects];
             if (arr.count == 0) {
-                [self showNodataViewFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight)];
+                [self showNodataViewFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight)];
             } else {
+                [self hideHttpResultView];
                 for (int k = 0; k < arr.count; k++) {
                     HJDMyAgentModel *model = [[HJDMyAgentModel alloc] init];
                     [model hjd_loadDataFromkeyValues:arr[k]];
@@ -159,8 +160,7 @@
 }
 
 - (void)searchView:(HJDMyNavTextFieldSearchView *)searchView clearButton:(id)sender {
-    [self.dataSource removeAllObjects];
-    [self.tableView reloadData];
+    [self searchWithKeyWord:nil];
 }
 
 - (void)searchView:(HJDMyNavTextFieldSearchView *)searchView keyWord:(NSString *)keyWord sureButton:(id)sender {

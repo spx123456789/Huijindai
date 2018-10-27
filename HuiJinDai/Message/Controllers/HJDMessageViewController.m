@@ -96,6 +96,8 @@
             [self.tableView reloadData];
             if (self.messagePage == 1 && data.count == 0) {
                 [self showNodataViewFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight)];
+            } else {
+                [self hideHttpResultView];
             }
             
             if (data.count == 0 || data.count < kHJDHttpRow) {
@@ -278,7 +280,6 @@
     self.selectType = type;
     [self.dataSource removeAllObjects];
     self.messagePage = 1;
-    [self hideHttpResultView];
     [self getMessageDataType:type == HJDMessageTypeMy ? @"1" : @"3"];
 }
 @end

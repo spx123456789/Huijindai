@@ -153,8 +153,7 @@
 }
 
 - (void)searchView:(HJDMyNavTextFieldSearchView *)searchView clearButton:(id)sender {
-    [self.dataSource removeAllObjects];
-    [self.tableView reloadData];
+    [self searchWithKeyWord:nil];
 }
 
 - (void)searchView:(HJDMyNavTextFieldSearchView *)searchView keyWord:(NSString *)keyWord sureButton:(id)sender {

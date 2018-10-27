@@ -274,6 +274,12 @@
 - (void)setStatus:(NSString *)status {
     _status = status;
     self.statusLabel.text = status;
+    [self.statusLabel sizeToFit];
+    CGRect newFrame = self.statusLabel.frame;
+    [self.statusLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@(newFrame.size.width + 10));
+        make.height.equalTo(@(16));
+    }];
 }
 
 - (void)setOrderTime:(NSString *)orderTime {

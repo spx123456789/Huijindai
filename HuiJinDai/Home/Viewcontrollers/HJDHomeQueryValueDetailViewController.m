@@ -142,7 +142,10 @@
             return 44 + 1 + 16 + 14 * 5 + 12 * 4 + 16 + 4;
             break;
         case 1: {
-            NSArray *arr = self.detailModel.list;
+            NSArray *arr = @[ @"" ];
+            if (self.isSuccess) {
+                arr = self.detailModel.list;
+            }
             return 44 + 1 + (16 + 14 + 12 + 14 + 16) * arr.count + 4;
             break;
         }
@@ -179,7 +182,13 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             cell.titleLabel.text = @"询值结果";
-            cell.dataSource = self.detailModel.list;
+            cell.isFail = !self.isSuccess;
+            if (self.isSuccess) {
+                cell.dataSource = self.detailModel.list;
+            } else {
+                cell.dataSource = @[ @"" ];
+            }
+            
             return cell;
             break;
         }

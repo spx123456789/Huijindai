@@ -48,7 +48,6 @@
 - (HJDOrderProcessSearchView *)searchView {
     if (!_searchView) {
         _searchView = [[HJDOrderProcessSearchView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 36 + 16)];
-        _searchView.selectIndex = 0;
         _searchView.delegate = self;
         _searchView.showLeft = YES;
     }
@@ -97,6 +96,12 @@
                 [self.tableView.mj_footer endRefreshingWithNoMoreData];
             }
             [self.tableView reloadData];
+            
+            if (self.orderManagePage == 1 && data.count == 0) {
+                [self showNodataViewFrame:CGRectMake(0, 52, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 52)];
+            } else {
+                [self hideHttpResultView];
+            }
             self.orderManagePage++;
         } else {
             [MBProgressHUD showError:@"加载失败"];
