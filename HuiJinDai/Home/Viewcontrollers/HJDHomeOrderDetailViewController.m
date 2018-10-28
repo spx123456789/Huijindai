@@ -53,9 +53,9 @@
             [self.dataSource addObject:data[@"fujian"]];
             [self.dataSource addObject:data[@"status_log"]];
             
-            HJDUserModel *userModel = (HJDUserModel *)[[HJDUserDefaultsManager shareInstance] loadObject:kUserModelKey];
-            if (userModel.type.integerValue == 2 || userModel.type.integerValue == 3) {
-                [self.dataSource addObject:@""];
+            NSDictionary *status_aggregate = data[@"status_aggregate"];
+            if ([status_aggregate[@"channel"] integerValue] == 1 || [status_aggregate[@"manager"] integerValue] == 1) {
+                [self.dataSource addObject:status_aggregate];
             }
             [self setTabelViewTopView:data];
             [self.tableView reloadData];
@@ -67,19 +67,6 @@
 
 - (void)setTabelViewTopView:(NSDictionary *)resultDic {
     self.topDictionary = [NSMutableDictionary dictionaryWithDictionary:resultDic];
-    //拒单原因
-    NSString *refuseStr = resultDic[@"refuse"];
-    // 审查报告文件位置,PDF文件
-    NSString *presentation = resultDic[@"presentation"];
-    // 审批函文件位置,PDF文件
-    //NSString *approval = resultDic[@"approval"];
-    // 还款计划信息，该信息为字典形式，目前暂时未定义
-    //NSString *plan = resultDic[@"plan"];
-    
-    if ([NSString hjd_isBlankString:refuseStr] && [NSString hjd_isBlankString:presentation]) {
-        return;
-    }
-    
     
     UIView *topView = [[UIView alloc] init];
     topView.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
@@ -88,12 +75,18 @@
     topBtn.frame = CGRectMake(16, 10, kScreenWidth - 32, 53);
     [topView addSubview:topBtn];
     
-    if (![NSString hjd_isBlankString:refuseStr]) {
+    NSDictionary *status_aggregate = resultDic[@"status_aggregate"];
+    if ([status_aggregate[@"credit"] integerValue] == 1) { //是否已放款 1是 2否
+        [topBtn setBackgroundImage:kImage(@"工单详情已放款") forState:UIControlStateNormal];
+        [topBtn setBackgroundImage:kImage(@"工单详情已放款") forState:UIControlStateHighlighted];
+        [topBtn addTarget:self action:@selector(planButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 + 3 + 5);
+    } else if ([status_aggregate[@"refuse"] integerValue] == 1) { //是否已拒绝
         [topBtn setBackgroundImage:kImage(@"共党详情已拒单") forState:UIControlStateNormal];
         [topBtn setBackgroundImage:kImage(@"共党详情已拒单") forState:UIControlStateHighlighted];
         [topBtn addTarget:self action:@selector(refuseButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 + 3 + 5);
-    } else if (![NSString hjd_isBlankString:presentation]) {
+    } else if ([status_aggregate[@"letter"] integerValue] == 1) { //是否显示批贷函、审查报告
         [topBtn setBackgroundImage:kImage(@"工单详情查看批贷函") forState:UIControlStateNormal];
         [topBtn setBackgroundImage:kImage(@"工单详情查看批贷函") forState:UIControlStateHighlighted];
         [topBtn addTarget:self action:@selector(presentationButtonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -105,12 +98,8 @@
         [bottomBtn addTarget:self action:@selector(approvalButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [topView addSubview:bottomBtn];
         topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 * 2 + 3 + 5);
-    } else {
-        [topBtn setBackgroundImage:kImage(@"工单详情已放款") forState:UIControlStateNormal];
-        [topBtn setBackgroundImage:kImage(@"工单详情已放款") forState:UIControlStateHighlighted];
-        [topBtn addTarget:self action:@selector(planButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 + 3 + 5);
     }
+    
     self.tableView.tableHeaderView = topView;
 }
 

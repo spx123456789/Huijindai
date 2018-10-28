@@ -13,7 +13,7 @@
 #import "HJDHomeManager.h"
 #import "HJDHomeDatePickerView.h"
 
-@interface HJDHomeCalculatorViewController ()<UITableViewDelegate, UITableViewDataSource, HJDHomeDatePickerViewDelegate, UITextFieldDelegate>
+@interface HJDHomeCalculatorViewController ()<UITableViewDelegate, UITableViewDataSource, HJDHomeDatePickerViewDelegate>
 @property (nonatomic, strong) TPKeyboardAvoidingTableView *tableView;
 @property(nonatomic, strong) UIView *bottomView;
 @property(nonatomic, strong) HJDHomeCalculatorModel *calculatorModel;
@@ -113,18 +113,30 @@
         return;
     }
     
-    [MBProgressHUD showMessage:@"加载到期日期..."];
-    [HJDHomeManager getEndDateWithStartTime:self.calculatorModel.start_date month:self.calculatorModel.month callBack:^(NSString *dataStr, BOOL result) {
-        [MBProgressHUD hideHUD];
-        if (result) {
-            self.calculatorModel.end_date = dataStr;
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
-            HJDCalculatorTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-            cell.textField.text = dataStr;
-        } else {
-            [MBProgressHUD showError:@"加载失败"];
-        }
-    }];
+    NSInteger loan_month = self.calculatorModel.month.integerValue;
+    
+    NSInteger year = loan_month/12;
+    NSInteger month = loan_month % 12;
+    
+    NSArray *dateArray = [self.calculatorModel.start_date componentsSeparatedByString:@"-"];
+    
+    NSInteger newDay = [dateArray.lastObject integerValue] - 1;
+
+    NSInteger newMonth = [dateArray[1] integerValue] + month;
+    
+    NSInteger newYear = [dateArray.firstObject integerValue] + year;
+    if (newMonth > 12) {
+        newMonth = newMonth - 12;
+        newYear += 1;
+    }
+    
+    NSString *newDate = [NSString stringWithFormat:@"%02ld-%02ld-%02ld", (long)newYear, (long)newMonth, (long)newDay];
+    
+    self.calculatorModel.end_date = newDate;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
+    HJDCalculatorTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    cell.textField.text = newDate;
+
 }
 
 #pragma mark - HJDHomeDatePickerViewDelegate
@@ -133,11 +145,6 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
     HJDCalculatorTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     cell.textField.text = selectTime;
-    [self reloadEndTime];
-}
-
-#pragma mark - UITextFieldDelegate
-- (void)textFieldDidEndEditing:(UITextField *)textField {
     [self reloadEndTime];
 }
 
@@ -168,8 +175,13 @@
             cell.moreImageView.hidden = YES;
             cell.subLabel.text = @"元";
             cell.subLabel.hidden = NO;
+            cell.textField.keyboardType = UIKeyboardTypePhonePad;
             [cell.textField.rac_textSignal subscribeNext:^(NSString *x) {
-                self.calculatorModel.money = x;
+                if ([x isNumber]) {
+                    self.calculatorModel.money = x;
+                } else {
+                    cell.textField.text = self.calculatorModel.money;
+                }
             }];
             break;
         }
@@ -180,10 +192,15 @@
             cell.moreImageView.hidden = YES;
             cell.subLabel.text = @"月";
             cell.subLabel.hidden = NO;
+            cell.textField.keyboardType = UIKeyboardTypePhonePad;
             [cell.textField.rac_textSignal subscribeNext:^(NSString *x) {
-                self.calculatorModel.month = x;
+                if ([x isNumber]) {
+                    self.calculatorModel.month = x;
+                    [self reloadEndTime];
+                } else {
+                    cell.textField.text = self.calculatorModel.month;
+                }
             }];
-            cell.textField.delegate = self;
             break;
         }
         case 2: {

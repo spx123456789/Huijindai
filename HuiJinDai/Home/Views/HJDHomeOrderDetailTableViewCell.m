@@ -494,7 +494,8 @@
     [label1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(bgView).offset(12);
         make.left.equalTo(bgView).offset(12);
-        make.size.mas_equalTo(CGSizeMake(40, 17));
+        make.right.equalTo(timeLabel.mas_left).offset(-12);
+        make.height.equalTo(@17);
     }];
     
     [label2 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -513,9 +514,9 @@
     
     [timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(label1);
-        make.left.equalTo(label1.mas_right).offset(12);
         make.right.equalTo(bgView).offset(-12);
         make.height.equalTo(@12);
+        make.width.equalTo(@125);
     }];
     
     topView.hidden = hideTop;

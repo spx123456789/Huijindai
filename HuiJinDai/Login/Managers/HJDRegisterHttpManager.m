@@ -16,8 +16,12 @@
         if (error) {
             callBack(nil, error, NO);
         } else {
-            //NSString *randCode = [data getObjectByPath:@"data/rand_code"];
-            callBack(data, nil, YES);
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                callBack(data, nil, YES);
+            } else {
+                callBack(data, nil, NO);
+            }
         }
     }];
 }

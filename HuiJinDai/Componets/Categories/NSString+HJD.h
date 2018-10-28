@@ -31,4 +31,10 @@
  */
 - (BOOL)hjd_isVaildPhoneNumber;
 
+/**
+ *  @brief  是否全部是数字
+ *
+ *  @return 如果是纯数字则返回YES；否则返回NO
+ */
+- (BOOL)isNumber;
 @end
