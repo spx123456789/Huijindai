@@ -11,4 +11,6 @@
 @interface HJDButton : UIView
 @property(nonatomic, strong) UIImageView *imageView;
 @property(nonatomic, strong) UILabel *titleLabel;
+
+@property(nonatomic, assign) NSInteger unreadCount;
 @end

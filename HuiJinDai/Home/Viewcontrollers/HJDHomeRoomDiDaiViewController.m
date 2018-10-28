@@ -129,6 +129,7 @@ typedef enum : NSUInteger {
         if (result) {
             HJDHomeQueryValueResultViewController *controller = [[HJDHomeQueryValueResultViewController alloc] init];
             controller.resultDic = [NSDictionary dictionaryWithDictionary:dataDic];
+            controller.didaiModel = self.roomModel;
             [self.navigationController pushViewController:controller animated:YES];
         } else {
             if (dataDic) {

@@ -9,10 +9,24 @@
 #import "HJDButton.h"
 
 @interface HJDButton()
-
+@property(nonatomic, strong) UILabel *unreadCountLabel;
 @end
 
 @implementation HJDButton
+
+- (UILabel *)unreadCountLabel {
+    if (!_unreadCountLabel) {
+        _unreadCountLabel = [[UILabel alloc] init];
+        _unreadCountLabel.text = @"99";
+        _unreadCountLabel.textColor = kRGB_Color(0xff, 0xff, 0xff);
+        _unreadCountLabel.font = kFont10;
+        _unreadCountLabel.backgroundColor = [UIColor redColor];
+        _unreadCountLabel.textAlignment = NSTextAlignmentCenter;
+        _unreadCountLabel.layer.masksToBounds = YES;
+        _unreadCountLabel.layer.cornerRadius = 8.f;
+    }
+    return _unreadCountLabel;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -37,8 +51,29 @@
             make.top.mas_equalTo(self.imageView.mas_bottom).offset(12);
         }];
         
+        [self addSubview:self.unreadCountLabel];
+        [self.unreadCountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(self.imageView.mas_top).offset(7);
+            make.left.equalTo(self.imageView.mas_right).offset(-9);
+            make.size.mas_equalTo(CGSizeMake(16, 16));
+        }];
+        
+        self.unreadCountLabel.hidden = YES;
     }
     return self;
 }
 
+- (void)setUnreadCount:(NSInteger)unreadCount {
+    _unreadCount = unreadCount;
+    if (unreadCount == 0) {
+        self.unreadCountLabel.hidden = YES;
+    } else {
+        self.unreadCountLabel.hidden = NO;
+        if (unreadCount > 99) {
+            self.unreadCountLabel.text = @"..";
+        } else {
+            self.unreadCountLabel.text = [NSString stringWithFormat:@"%ld", (long)unreadCount];
+        }
+    }
+}
 @end

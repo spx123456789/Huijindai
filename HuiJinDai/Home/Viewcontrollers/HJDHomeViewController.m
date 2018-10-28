@@ -28,6 +28,9 @@
 @property(strong, nonatomic) HKScrollView *netWorkScrollView;
 @property(nonatomic, strong) NSMutableArray *imageArray;
 @property(nonatomic, strong) HJDUserModel *userModel;
+
+@property(nonatomic, copy) NSString *manageCount;
+@property(nonatomic, copy) NSString *auditCount;
 @end
 
 @implementation HJDHomeViewController
@@ -106,6 +109,27 @@
         HJDHomeLocationManager *locationManager = [HJDHomeLocationManager sharedManager];
         locationManager.delegate = self;
         [locationManager startLocation];
+    }
+    
+    //获取未读消息数
+    if (self.userModel.type.integerValue == HJDUserTypeChannel || self.userModel.type.integerValue == HJDUserTypeManager) {
+        @weakify(self);
+        [HJDHomeManager getOrderMessageUnreadCount:^(NSInteger manageCount, NSInteger auditCount) {
+            @strongify(self);
+            if (manageCount == 0) {
+                self.manageCount = nil;
+            } else {
+                self.manageCount = [NSString stringWithFormat:@"%ld", manageCount];
+            }
+            
+            if (auditCount == 0) {
+                self.auditCount = nil;
+            } else {
+                self.auditCount = [NSString stringWithFormat:@"%ld", auditCount];
+            }
+            self.dataSource = nil;
+            [self.tableView reloadData];
+        }];
     }
 }
 
@@ -290,9 +314,11 @@
                     HJDHomeModel * model3 = [HJDHomeModel new];
                     model3.title = @"工单审核";
                     model3.imageName = @"首页工单审核";
+                    model3.unreadCount = self.auditCount;
                     HJDHomeModel * model4 = [HJDHomeModel new];
                     model4.title = @"工单管理";
                     model4.imageName = @"首页工单管理";
+                    model4.unreadCount = self.manageCount;
                     HJDHomeModel * model5 = [HJDHomeModel new];
                     model5.title = @"还款计算器";
                     model5.imageName = @"首页还款计算器";
@@ -308,9 +334,11 @@
                     HJDHomeModel * model3 = [HJDHomeModel new];
                     model3.title = @"工单审核";
                     model3.imageName = @"首页工单审核";
+                    model3.unreadCount = self.auditCount;
                     HJDHomeModel * model4 = [HJDHomeModel new];
                     model4.title = @"工单管理";
                     model4.imageName = @"首页工单管理";
+                    model4.unreadCount = self.manageCount;
                     HJDHomeModel * model5 = [HJDHomeModel new];
                     model5.title = @"还款计算器";
                     model5.imageName = @"首页还款计算器";

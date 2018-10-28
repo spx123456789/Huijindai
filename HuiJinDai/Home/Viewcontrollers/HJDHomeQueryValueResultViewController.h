@@ -7,7 +7,9 @@
 //
 
 #import "HJDBaseViewController.h"
+#import "HJDHomeRoomDiDaiModel.h"
 
 @interface HJDHomeQueryValueResultViewController : HJDBaseViewController
 @property(nonatomic, strong) NSDictionary *resultDic;
+@property(nonatomic, strong) HJDHomeRoomDiDaiModel *didaiModel;
 @end

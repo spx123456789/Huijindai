@@ -10,6 +10,7 @@
 #import "HJDCustomerServiceView.h"
 #import "HJDHomeDeclarationViewController.h"
 #import "HJDHomeQueryValueResultTableViewCell.h"
+#import "HJDHomeRoomDiDaiManager.h"
 
 @interface HJDHomeQueryValueResultViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UITableView *tableView;
@@ -17,7 +18,7 @@
 @property(nonatomic, strong) HJDCustomerServiceView *customServiceView;
 @property(nonatomic, strong) UIButton *declarationBtn;
 @property(nonatomic, strong) NSMutableArray *companyArray;
-@property(nonatomic, strong) NSArray *dataSource;
+@property(nonatomic, strong) NSMutableArray *dataSource;
 @end
 
 @implementation HJDHomeQueryValueResultViewController
@@ -86,7 +87,10 @@
 
 - (void)declarationButtonClick:(id)sender {
     HJDHomeDeclarationViewController *vc = [[HJDHomeDeclarationViewController alloc] init];
-    vc.xun_id = @"";
+    NSDictionary *dictionary = self.dataSource.firstObject;
+    if (dictionary != nil && [dictionary[@"assessCompany"] integerValue] == 01) {
+        vc.xun_id = dictionary[@"x_id"];
+    }
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -100,9 +104,9 @@
     [self showNavigationBar];
 }
 
-- (void)setDataSource:(NSArray *)dataSource {
+- (void)setDataSource:(NSMutableArray *)dataSource {
     _dataSource = dataSource;
-    self.companyArray = [NSMutableArray arrayWithArray:@[ @"世联", @"仁达", @"首佳" ]];
+    self.companyArray = [NSMutableArray arrayWithArray:@[ @"世联", @"首佳", @"仁达" ]];
     for (NSDictionary *dic in self.dataSource) {
         NSString *company = dic[@"assessCompany"];
         switch (company.integerValue) {
@@ -124,7 +128,7 @@
 
 - (void)setResultDic:(NSDictionary *)resultDic {
     _resultDic = resultDic;
-    self.dataSource = [NSArray arrayWithArray:[resultDic getObjectByPath:@"data/list"]];
+    self.dataSource = [NSMutableArray arrayWithArray:[resultDic getObjectByPath:@"data/list"]];
 }
 
 - (void)viewDidLoad {
@@ -153,7 +157,35 @@
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *company = nil;
+    if (indexPath.row == 1) { //首佳
+        company = @"03";
+    } else if (indexPath.row == 2) { //仁达
+        company = @"02";
+    }
     
+    if (company == nil) {
+        return;
+    }
+    
+    if (self.didaiModel == nil) {
+        [self showToast:@"询值失败"];
+        return;
+    }
+    
+    self.didaiModel.companyStr = company;
+    [MBProgressHUD showMessage:@"正在询值..."];
+    @weakify(self);
+    [HJDHomeRoomDiDaiManager postRoomEvaluateWithModel:nil callBack:^(NSDictionary *dataDic, BOOL result) {
+        @strongify(self);
+        [MBProgressHUD hideHUD];
+        if (result) {
+            [self.dataSource addObjectsFromArray:[dataDic getObjectByPath:@"data/list"]];
+            [self.tableView reloadData];
+        } else {
+            [MBProgressHUD showError:@"询值失败"];
+        }
+    }];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

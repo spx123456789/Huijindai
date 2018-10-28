@@ -128,4 +128,52 @@
         }
     }];
 }
+
+#pragma mark - 消息数
++ (void)getOrderMessageUnreadCount:(void (^)(NSInteger, NSInteger))callBack {
+    [HJDHomeManager getOrderManageMessageCount:^(NSInteger managecount) {
+        [HJDHomeManager getOrderAuditMessageCount:^(NSInteger auditcount) {
+            callBack(managecount, auditcount);
+        }];
+    }];
+}
+
++ (void)getOrderManageMessageCount:(void(^)(NSInteger count))callBack {
+    [HJDHomeManager getOrderManageListWithKeyWord:nil callBack:^(NSDictionary *data, BOOL result) {
+        if (result) {
+            NSInteger total_count = 0;
+            NSArray *selfArray = [data objectForKey:@"self"];
+            NSArray *subArray = [data objectForKey:@"sub"];
+            
+            for (NSDictionary *dic in selfArray) {
+                NSString *number = dic[@"count"];
+                total_count += number.integerValue;
+            }
+            
+            for (NSDictionary *dic in subArray) {
+                NSString *number = dic[@"count"];
+                total_count += number.integerValue;
+            }
+            callBack(total_count);
+        } else {
+            callBack(0);
+        }
+    }];
+}
+
++ (void)getOrderAuditMessageCount:(void (^)(NSInteger count))callBack {
+    [HJDHomeManager getOrderAuditListWithKeyWord:nil callBack:^(NSArray *data, BOOL result) {
+        if (result) {
+            NSInteger total_count = 0;
+            for (NSDictionary *dic in data) {
+                NSString *number = dic[@"new_count"];
+                total_count += number.integerValue;
+            }
+            callBack(total_count);
+        } else {
+            callBack(0);
+        }
+        
+    }];
+}
 @end
