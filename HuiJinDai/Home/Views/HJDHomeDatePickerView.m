@@ -20,16 +20,30 @@
 
 @implementation HJDHomeDatePickerView
 
-- (instancetype)initWithFrame:(CGRect)frame {
+- (UIPickerView *)pickerView {
+    if (!_pickerView) {
+        _pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 30, kScreenWidth, 200)];
+        _pickerView.backgroundColor = kWithe;
+        _pickerView.dataSource = self;
+        _pickerView.delegate = self;
+        _pickerView.showsSelectionIndicator = NO;
+        _pickerView.layer.masksToBounds = YES;
+        _pickerView.layer.cornerRadius = 8.f;
+    }
+    return _pickerView;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame selectDate:(NSDate *)selectDate {
     self = [super initWithFrame:frame];
     if (self) {
-        self.selectDatetime = [NSDate date];
+        _selectDatetime = selectDate;
+        if (self.selectDatetime == nil) {
+            self.selectDatetime = [NSDate date];
+        }
         
-        self.pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 30, kScreenWidth, 150)];
-        self.pickerView.backgroundColor = [UIColor clearColor];
-        self.pickerView.dataSource = self;
-        self.pickerView.delegate = self;
-        self.pickerView.showsSelectionIndicator = NO;
+        self.backgroundColor = kRGBA_Color(0x00, 0x00, 0x00, 0.4);
+        
+        self.pickerView.frame = CGRectMake(12, frame.size.height/2 - 140, frame.size.width - 24, 240);
         [self addSubview:self.pickerView];
         
         [self.pickerView reloadAllComponents];
@@ -39,17 +53,20 @@
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setTitle:@"确定" forState:UIControlStateNormal];
-        button.backgroundColor = kMainColor;
+        button.titleLabel.font = kFont17;
+        button.backgroundColor = kWithe;
         [button setTitleColor:kRGB_Color(0x66, 0x66, 0x66) forState:UIControlStateNormal];
-        button.frame = CGRectMake(kScreenWidth - 50 - 16, 0, 50, 25);
         [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-        button.layer.cornerRadius = 5.f;
+        button.layer.cornerRadius = 8.f;
         button.layer.masksToBounds = YES;
         [self addSubview:button];
         
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 29, kScreenWidth, 1)];
-        line.backgroundColor = kLineColor;
-        [self addSubview:line];
+        [button mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self).offset(-12);
+            make.left.equalTo(self).offset(12);
+            make.height.equalTo(@44);
+            make.top.equalTo(self.pickerView.mas_bottom).offset(12);
+        }];
     }
     return self;
 }
@@ -62,6 +79,11 @@
         [self.delegate datePickerView:self selectTime:[formatter stringFromDate:self.selectDatetime]];
     }
     [self removeFromSuperview];
+}
+
+- (void)showDatePicker {
+    UIWindow *keyWindow = (UIWindow *)[UIApplication sharedApplication].keyWindow;
+    [keyWindow addSubview:self];
 }
 
 #pragma mark - UIPickerViewDataSource
@@ -123,8 +145,8 @@
         pickerLabel = [[UILabel alloc] initWithFrame:frame];
         [pickerLabel setTextAlignment:NSTextAlignmentCenter];
         [pickerLabel setBackgroundColor:[UIColor clearColor]];
-        [pickerLabel setFont:kFont18];
-        [pickerLabel setTextColor:kRGB_Color(0x66, 0x66, 0x66)];
+        [pickerLabel setFont:kFont17];
+        [pickerLabel setTextColor:kRGB_Color(0x33, 0x33, 0x33)];
     }
     pickerLabel.text = @"";
     switch (component) {

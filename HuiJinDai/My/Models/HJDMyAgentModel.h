@@ -9,6 +9,7 @@
 #import "HJDBaseModel.h"
 
 @interface HJDMyAgentModel : HJDBaseModel
+@property(nonatomic, copy) NSString *uid;
 @property(nonatomic, copy) NSString *rename;
 @property(nonatomic, copy) NSString *phone;
 @end

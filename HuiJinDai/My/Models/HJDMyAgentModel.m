@@ -9,5 +9,7 @@
 #import "HJDMyAgentModel.h"
 
 @implementation HJDMyAgentModel
-
++ (NSDictionary *)mj_replacedKeyFromPropertyName {
+    return @{ @"uid" : @"id"};
+}
 @end

@@ -17,7 +17,7 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(12, 140, kScreenWidth - 12*2, 200) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(12, 140, kScreenWidth - 12*2, 220) style:UITableViewStylePlain];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.backgroundColor = [UIColor clearColor];
@@ -55,13 +55,25 @@
         
         [self addSubview:self.tableView];
         [self addSubview:self.cancelButton];
-    
     }
     return self;
 }
 
+- (void)setDataSource:(NSArray *)dataSource {
+    _dataSource = dataSource;
+    [self.tableView reloadData];
+}
+
+- (void)showApprovedView {
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    [window addSubview:self];
+}
+
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.callBack) {
+        self.callBack(self.dataSource[indexPath.row]);
+    }
     [self removeFromSuperview];
 }
 
@@ -71,7 +83,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 8;
+    return self.dataSource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -81,7 +93,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    cell.textLabel.text = @"王东鹏";
+    HJDMyAgentModel *model = self.dataSource[indexPath.row];
+    cell.textLabel.text = model.rename;
     cell.textLabel.font = kFont17;
     cell.textLabel.textColor = kRGB_Color(0x33, 0x33, 0x33);
     return cell;

@@ -22,7 +22,7 @@
 + (void)getOrderManageListChannelOrAgentWithUid:(NSString *)uid status:(NSString *)status keyWord:(NSString *)keyWord step:(NSString *)step page:(NSInteger)page callBack:(void(^)(NSArray *data, BOOL result))callBack;
 
 #pragma mark - 计算器
-+ (void)getEndDateWithStartTime:(NSString *)startTime month:(NSString *)month callBack:(void(^)(NSString *dataStr, BOOL result))callBack;
+//+ (void)getEndDateWithStartTime:(NSString *)startTime month:(NSString *)month callBack:(void(^)(NSString *dataStr, BOOL result))callBack;
 
 + (void)getJiSuanResultWithStartTime:(NSString *)startTime month:(NSString *)month money:(NSString *)money callBack:(void(^)(NSDictionary *dataDic, BOOL result))callBack;
 @end

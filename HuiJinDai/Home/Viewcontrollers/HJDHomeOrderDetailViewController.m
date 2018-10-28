@@ -13,8 +13,7 @@
 #import "HJDHomeOrderApprovedView.h"
 #import "HJDHomeRoomDiDaiManager.h"
 #import "HJDHomeOrderDetailResultViewController.h"
-#import "HJDUserModel.h"
-#import "HJDUserDefaultsManager.h"
+#import "HJDMyManager.h"
 
 @interface HJDHomeOrderDetailViewController ()<UITableViewDelegate, UITableViewDataSource, HJDHomeOrderDetailButtonCellDelegate>
 @property(nonatomic, strong) UITableView *tableView;
@@ -53,9 +52,8 @@
             [self.dataSource addObject:data[@"fujian"]];
             [self.dataSource addObject:data[@"status_log"]];
             
-            NSDictionary *status_aggregate = data[@"status_aggregate"];
-            if ([status_aggregate[@"channel"] integerValue] == 1 || [status_aggregate[@"manager"] integerValue] == 1) {
-                [self.dataSource addObject:status_aggregate];
+            if ([data[@"channel_type"] integerValue] == 2 || [data[@"manager_type"] integerValue] == 2) {
+                [self.dataSource addObject:data];
             }
             [self setTabelViewTopView:data];
             [self.tableView reloadData];
@@ -75,18 +73,17 @@
     topBtn.frame = CGRectMake(16, 10, kScreenWidth - 32, 53);
     [topView addSubview:topBtn];
     
-    NSDictionary *status_aggregate = resultDic[@"status_aggregate"];
-    if ([status_aggregate[@"credit"] integerValue] == 1) { //是否已放款 1是 2否
+    if ([resultDic[@"credit_type"] integerValue] == 1) { //是否已放款 1是 2否
         [topBtn setBackgroundImage:kImage(@"工单详情已放款") forState:UIControlStateNormal];
         [topBtn setBackgroundImage:kImage(@"工单详情已放款") forState:UIControlStateHighlighted];
         [topBtn addTarget:self action:@selector(planButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 + 3 + 5);
-    } else if ([status_aggregate[@"refuse"] integerValue] == 1) { //是否已拒绝
+    } else if ([resultDic[@"refuse_type"] integerValue] == 1) { //是否已拒绝
         [topBtn setBackgroundImage:kImage(@"共党详情已拒单") forState:UIControlStateNormal];
         [topBtn setBackgroundImage:kImage(@"共党详情已拒单") forState:UIControlStateHighlighted];
         [topBtn addTarget:self action:@selector(refuseButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 + 3 + 5);
-    } else if ([status_aggregate[@"letter"] integerValue] == 1) { //是否显示批贷函、审查报告
+    } else if ([resultDic[@"letter_type"] integerValue] == 1) { //是否显示批贷函、审查报告
         [topBtn setBackgroundImage:kImage(@"工单详情查看批贷函") forState:UIControlStateNormal];
         [topBtn setBackgroundImage:kImage(@"工单详情查看批贷函") forState:UIControlStateHighlighted];
         [topBtn addTarget:self action:@selector(presentationButtonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -254,18 +251,39 @@
         controller.order_id = self.order_id;
         [self.navigationController pushViewController:controller animated:YES];
     } else { //通过
-        [MBProgressHUD showMessage:@"正在提交..."];
-        [HJDHomeRoomDiDaiManager auditOrderWithID:self.order_id step:@"1" content:nil callBack:^(BOOL result) {
-            [MBProgressHUD hideHUD];
-            if (result) {
-                [MBProgressHUD showSuccess:@"提交成功"];
-            } else {
-                [MBProgressHUD showError:@"提交失败"];
-            }
-        }];
-//        HJDHomeOrderApprovedView *view = [[HJDHomeOrderApprovedView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-//        UIWindow *window = [UIApplication sharedApplication].keyWindow;
-//        [window addSubview:view];
+        HJDUserModel *userModel = (HJDUserModel *)[[HJDUserDefaultsManager shareInstance] loadObject:kUserModelKey];
+        if (userModel.type.integerValue == HJDUserTypeChannel) {
+            @weakify(self);
+            [MBProgressHUD showMessage:@""];
+            [HJDMyManager getMyRelationWithUrl:@"/User/get_customer" keyWork:nil callBack:^(NSArray *arr, BOOL result) {
+                [MBProgressHUD hideHUD];
+                if (result) {
+                    HJDHomeOrderApprovedView *approveView = [[HJDHomeOrderApprovedView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+                    approveView.dataSource = arr;
+                    [approveView showApprovedView];
+                    approveView.callBack = ^(HJDMyAgentModel *model) {
+                        @strongify(self);
+                        [self postAuditManagerId:model.uid];
+                    };
+                } else {
+                    [MBProgressHUD showError:@"加载失败"];
+                }
+            }];
+        } else {
+            [self postAuditManagerId:nil];
+        }
     }
+}
+
+- (void)postAuditManagerId:(NSString *)managerID {
+    [MBProgressHUD showMessage:@"正在提交..."];
+    [HJDHomeRoomDiDaiManager auditOrderWithID:self.order_id step:@"1" content:nil managerId:managerID callBack:^(BOOL result) {
+        [MBProgressHUD hideHUD];
+        if (result) {
+            [MBProgressHUD showSuccess:@"提交成功"];
+        } else {
+            [MBProgressHUD showError:@"提交失败"];
+        }
+    }];
 }
 @end

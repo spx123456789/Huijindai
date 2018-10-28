@@ -84,7 +84,6 @@
 
 @interface HJDHomeSelectToastView()<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UITableView *tableView;
-@property(nonatomic, strong) UIPickerView *pickerView;
 @property(nonatomic, assign) CGRect gFrame;
 @end
 

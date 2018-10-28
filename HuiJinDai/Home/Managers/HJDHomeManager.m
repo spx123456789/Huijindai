@@ -31,7 +31,12 @@
         if (error) {
             callBack(nil, NO);
         } else {
-            callBack([data getObjectByPath:@"data/list"], YES);
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                callBack([data getObjectByPath:@"data/list"], YES);
+            } else {
+                callBack(nil, NO);
+            }
         }
     }];
 }
@@ -45,7 +50,12 @@
         if (error) {
             callBack(nil, NO);
         } else {
-            callBack([data getObjectByPath:@"data/list"], YES);
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                callBack([data getObjectByPath:@"data/list"], YES);
+            } else {
+                callBack(nil, NO);
+            }
         }
     }];
 }
@@ -59,7 +69,12 @@
         if (error) {
             callBack(nil, NO);
         } else {
-            callBack([data getObjectByPath:@"data"], YES);
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                callBack([data getObjectByPath:@"data"], YES);
+            } else {
+                callBack(nil, NO);
+            }
         }
     }];
 }
@@ -78,7 +93,12 @@
         if (error) {
             callBack(nil, NO);
         } else {
-            callBack([data getObjectByPath:@"data/list"], YES);
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                callBack([data getObjectByPath:@"data/list"], YES);
+            } else {
+                callBack(nil, NO);
+            }
         }
     }];
 }
@@ -99,7 +119,12 @@
         if (error) {
             callBack(nil, NO);
         } else {
-            callBack([data getObjectByPath:@"data"], YES);
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                callBack([data getObjectByPath:@"data"], YES);
+            } else {
+                callBack(nil, NO);
+            }
         }
     }];
 }

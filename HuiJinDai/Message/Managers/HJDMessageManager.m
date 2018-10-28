@@ -16,28 +16,33 @@
         if (error) {
             callBack(nil, NO);
         } else {
-            NSArray *arr = [data getObjectByPath:@"data/list"];
-            NSMutableArray *resultArray = [NSMutableArray array];
-            for (int k = 0; k < arr.count; k++) {
-                HJDMessageModel *message = [[HJDMessageModel alloc] init];
-                [message hjd_loadDataFromkeyValues:arr[k]];
-                if (k == 0) {
-                    NSMutableArray *mutArr = [NSMutableArray array];
-                    [mutArr addObject:message];
-                    [resultArray addObject:mutArr];
-                } else {
-                    NSMutableArray *lastMut = resultArray.lastObject;
-                    HJDMessageModel *lastMessage = lastMut.lastObject;
-                    if ([HJDMessageManager isTheSameDay:message.create_time otherDay:lastMessage.create_time]) {
-                        [lastMut addObject:message];
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                NSArray *arr = [data getObjectByPath:@"data/list"];
+                NSMutableArray *resultArray = [NSMutableArray array];
+                for (int k = 0; k < arr.count; k++) {
+                    HJDMessageModel *message = [[HJDMessageModel alloc] init];
+                    [message hjd_loadDataFromkeyValues:arr[k]];
+                    if (k == 0) {
+                        NSMutableArray *mutArr = [NSMutableArray array];
+                        [mutArr addObject:message];
+                        [resultArray addObject:mutArr];
                     } else {
-                        NSMutableArray *mutArray = [NSMutableArray array];
-                        [mutArray addObject:message];
-                        [resultArray addObject:mutArray];
+                        NSMutableArray *lastMut = resultArray.lastObject;
+                        HJDMessageModel *lastMessage = lastMut.lastObject;
+                        if ([HJDMessageManager isTheSameDay:message.create_time otherDay:lastMessage.create_time]) {
+                            [lastMut addObject:message];
+                        } else {
+                            NSMutableArray *mutArray = [NSMutableArray array];
+                            [mutArray addObject:message];
+                            [resultArray addObject:mutArray];
+                        }
                     }
                 }
+                callBack(resultArray, YES);
+            } else {
+                callBack(nil, NO);
             }
-            callBack(resultArray, YES);
         }
     }];
 }
@@ -47,7 +52,12 @@
         if (error) {
             callback(NO);
         } else {
-            callback(YES);
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                callback(YES);
+            } else {
+                callback(NO);
+            }
         }
     }];
 }

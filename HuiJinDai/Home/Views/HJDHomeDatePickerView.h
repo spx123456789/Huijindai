@@ -17,4 +17,8 @@
 
 @interface HJDHomeDatePickerView : UIView
 @property(nonatomic, weak) id<HJDHomeDatePickerViewDelegate> delegate;
+
+- (instancetype)initWithFrame:(CGRect)frame selectDate:(NSDate *)selectDate;
+
+- (void)showDatePicker;
 @end

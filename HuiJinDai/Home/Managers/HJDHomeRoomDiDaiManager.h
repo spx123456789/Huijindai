@@ -55,6 +55,6 @@ typedef void (^RoomDiDaiHttpCallback)(NSArray *data, BOOL result);
 + (void)getOrderDetailWithID:(NSString *)uid callBack:(void(^)(NSDictionary *data, BOOL result))callback;
 
 //工单审核
-+ (void)auditOrderWithID:(NSString *)uid step:(NSString *)step content:(NSString *)content callBack:(void(^)(BOOL result))callback;
++ (void)auditOrderWithID:(NSString *)uid step:(NSString *)step content:(NSString *)content managerId:(NSString *)managerId callBack:(void(^)(BOOL result))callback;
 
 @end

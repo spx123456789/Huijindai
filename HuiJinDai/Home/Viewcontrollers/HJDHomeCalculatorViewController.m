@@ -234,9 +234,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 2) {
-        HJDHomeDatePickerView *picker = [[HJDHomeDatePickerView alloc] initWithFrame:CGRectMake(0, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 180, kScreenWidth, 180)];
+        NSDate *date = nil;
+        if (![NSString hjd_isBlankString:self.calculatorModel.start_date]) {
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"YYYY-MM-dd"];
+            date = [dateFormatter dateFromString:self.calculatorModel.start_date];
+        }
+        HJDHomeDatePickerView *picker = [[HJDHomeDatePickerView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) selectDate:date];
         picker.delegate = self;
-        [self.view addSubview:picker];
+        [picker showDatePicker];
     }
 }
 

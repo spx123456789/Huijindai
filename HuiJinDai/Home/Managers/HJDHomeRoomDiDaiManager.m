@@ -16,7 +16,12 @@
         if (error) {
             callback(nil, NO);
         } else {
-            callback([data getObjectByPath:@"data/list"], YES);
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                callback([data getObjectByPath:@"data/list"], YES);
+            } else {
+                callback(nil, NO);
+            }
         }
     }];
 }
@@ -26,7 +31,12 @@
         if (error) {
             callback(nil, NO);
         } else {
-            callback([data getObjectByPath:@"data/child"], YES);
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                callback([data getObjectByPath:@"data/child"], YES);
+            } else {
+                callback(nil, NO);
+            }
         }
     }];
 }
@@ -36,7 +46,12 @@
         if (error) {
             callback(nil, NO);
         } else {
-            callback([data getObjectByPath:@"data/child"], YES);
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                callback([data getObjectByPath:@"data/child"], YES);
+            } else {
+                callback(nil, NO);
+            }
         }
     }];
 }
@@ -46,7 +61,12 @@
         if (error) {
             callback(nil, NO);
         } else {
-            callback([data getObjectByPath:@"data/list"], YES);
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                callback([data getObjectByPath:@"data/list"], YES);
+            } else {
+                callback(nil, NO);
+            }
         }
     }];
 }
@@ -56,7 +76,12 @@
         if (error) {
             callback(nil, NO);
         } else {
-            callback([data getObjectByPath:@"data/list"], YES);
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                callback([data getObjectByPath:@"data/list"], YES);
+            } else {
+                callback(nil, NO);
+            }
         }
     }];
 }
@@ -66,7 +91,12 @@
         if (error) {
             callback(nil, NO);
         } else {
-            callback([data getObjectByPath:@"data/list"], YES);
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                callback([data getObjectByPath:@"data/list"], YES);
+            } else {
+                callback(nil, NO);
+            }
         }
     }];
 }
@@ -87,7 +117,12 @@
         if (error) {
             callback(nil, NO);
         } else {
-            callback([data getObjectByPath:@"data/list"], YES);
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                callback([data getObjectByPath:@"data/list"], YES);
+            } else {
+                callback(nil, NO);
+            }
         }
     }];
 }
@@ -116,7 +151,12 @@
         if (error) {
             callback(nil, NO);
         } else {
-            callback([data getObjectByPath:@"data/list"], YES);
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                callback([data getObjectByPath:@"data/list"], YES);
+            } else {
+                callback(nil, NO);
+            }
         }
     }];
 }
@@ -126,7 +166,12 @@
         if (error) {
             callback(nil, NO);
         } else {
-            callback([data getObjectByPath:@"data"], YES);
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                callback([data getObjectByPath:@"data"], YES);
+            } else {
+                callback(nil, NO);
+            }
         }
     }];
 }
@@ -156,7 +201,12 @@
         if (error) {
             callback(nil, NO);
         } else {
-            callback([data getObjectByPath:@"data"], YES);
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                callback([data getObjectByPath:@"data"], YES);
+            } else {
+                callback(nil, NO);
+            }
         }
     }];
 }
@@ -166,7 +216,12 @@
         if (error) {
             callback(nil, NO);
         } else {
-            callback([data getObjectByPath:@"data/list"], YES);
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                callback([data getObjectByPath:@"data/list"], YES);
+            } else {
+                callback(nil, NO);
+            }
         }
     }];
 }
@@ -216,8 +271,13 @@
         if (error) {
             callback(nil, NO);
         } else {
-            NSLog(@"====文字成功 %@", params);
-            [HJDHomeRoomDiDaiManager uploadPictureWithModel:model callBack:callback];
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                NSLog(@"====文字成功 %@", params);
+                [HJDHomeRoomDiDaiManager uploadPictureWithModel:model callBack:callback];
+            } else {
+                callback(nil, NO);
+            }
         }
     }];
 }
@@ -237,17 +297,26 @@
     }];
 }
 
-+ (void)auditOrderWithID:(NSString *)uid step:(NSString *)step content:(NSString *)content callBack:(void (^)(BOOL))callback {
++ (void)auditOrderWithID:(NSString *)uid step:(NSString *)step content:(NSString *)content managerId:(NSString *)managerId callBack:(void (^)(BOOL))callback {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{ @"loan_id" : uid, @"step" : step }];
     if (step.integerValue == 2) {
         [params setObject:content forKey:@"content"];
+    }
+    
+    if (![NSString hjd_isBlankString:managerId]) {
+        [params setObject:managerId forKey:@"jingli_id"];
     }
     
     [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Loan/examine") requestParams:params networkMethod:GET callback:^(id data, NSError *error) {
         if (error) {
             callback(NO);
         } else {
-            callback(YES);
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                callback(YES);
+            } else {
+                callback(NO);
+            }
         }
     }];
 }

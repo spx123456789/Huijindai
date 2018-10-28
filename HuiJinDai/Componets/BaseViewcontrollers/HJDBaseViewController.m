@@ -147,7 +147,7 @@
 - (void)showNodataViewFrame:(CGRect)frame {
     HJDHttpResultView *resultView11 = [[HJDHttpResultView alloc] initWithFrame:frame];
     resultView11.showType = HJDHttpResultNoData;
-    resultView11.backgroundColor = [UIColor redColor];
+    //resultView11.backgroundColor = [UIColor redColor];
     
     if (self.resultView == nil) {
         self.resultView = resultView11;
@@ -161,7 +161,7 @@
 - (void)showNoNetworkViewFrame:(CGRect)frame callback:(void (^)(void))callback {
     HJDHttpResultView *resultView22 = [[HJDHttpResultView alloc] initWithFrame:frame];
     resultView22.showType = HJDHttpResultNoNetwork;
-    resultView22.backgroundColor = [UIColor redColor];
+    //resultView22.backgroundColor = [UIColor redColor];
     resultView22.callBack = ^{
         callback();
     };

@@ -28,7 +28,7 @@
     [super viewDidLoad];
     
     [self.view addSubview:self.webView];
-    
+        
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.wordUrl]]];
 }
 

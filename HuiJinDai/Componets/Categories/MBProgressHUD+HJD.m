@@ -96,6 +96,7 @@
     // 隐藏时候从父控件中移除
     hud.removeFromSuperViewOnHide = YES;
     
+    [UIActivityIndicatorView appearanceWhenContainedInInstancesOfClasses:@[ [MBProgressHUD class] ]].color = kMainColor;
     return hud;
 }
 

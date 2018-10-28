@@ -240,28 +240,32 @@
 #pragma mark - 城市数据网络请求
 - (void)getFirstLevelCityList {
     [HJDRegisterHttpManager getCityListWithCodeId:@"0" CallBack:^(NSDictionary *data, NSError *error, BOOL result) {
-        NSArray *cityArray = [data getObjectByPath:@"data/list"];
-        for (int k = 0; k < cityArray.count; k++) {
-            NSDictionary *dic = cityArray[k];
-            HJDCityModel *city = [[HJDCityModel alloc] init];
-            [city hjd_loadDataFromkeyValues:dic];
-            [self.oneDataSource addObject:city];
+        if (result) {
+            NSArray *cityArray = [data getObjectByPath:@"data/list"];
+            for (int k = 0; k < cityArray.count; k++) {
+                NSDictionary *dic = cityArray[k];
+                HJDCityModel *city = [[HJDCityModel alloc] init];
+                [city hjd_loadDataFromkeyValues:dic];
+                [self.oneDataSource addObject:city];
+            }
+            [self.tableView reloadData];
         }
-        [self.tableView reloadData];
     }];
 }
 
 - (void)getSecondLevelCityWithID:(NSString *)cityId {
     [HJDRegisterHttpManager getCityListWithCodeId:cityId CallBack:^(NSDictionary *data, NSError *error, BOOL result) {
-        NSArray *cityArray = [data getObjectByPath:@"data/list"];
-        [self.twoDataSource removeAllObjects];
-        for (int k = 0; k < cityArray.count; k++) {
-            NSDictionary *dic = cityArray[k];
-            HJDCityModel *city = [[HJDCityModel alloc] init];
-            [city hjd_loadDataFromkeyValues:dic];
-            [self.twoDataSource addObject:city];
+        if (result) {
+            NSArray *cityArray = [data getObjectByPath:@"data/list"];
+            [self.twoDataSource removeAllObjects];
+            for (int k = 0; k < cityArray.count; k++) {
+                NSDictionary *dic = cityArray[k];
+                HJDCityModel *city = [[HJDCityModel alloc] init];
+                [city hjd_loadDataFromkeyValues:dic];
+                [self.twoDataSource addObject:city];
+            }
+            [self.tableView reloadData];
         }
-        [self.tableView reloadData];
     }];
 }
 @end

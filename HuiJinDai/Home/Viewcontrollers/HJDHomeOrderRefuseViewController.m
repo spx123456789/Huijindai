@@ -68,7 +68,7 @@
     }
     
     [MBProgressHUD showMessage:@"正在提交..."];
-    [HJDHomeRoomDiDaiManager auditOrderWithID:self.order_id step:@"2" content:self.textView.text callBack:^(BOOL result) {
+    [HJDHomeRoomDiDaiManager auditOrderWithID:self.order_id step:@"2" content:self.textView.text managerId:nil callBack:^(BOOL result) {
         [MBProgressHUD hideHUD];
         if (result) {
             [MBProgressHUD showSuccess:@"提交成功"];

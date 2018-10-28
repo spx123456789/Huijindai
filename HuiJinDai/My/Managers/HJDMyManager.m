@@ -21,7 +21,12 @@
         if (error) {
             callback(nil, NO);
         } else {
-            callback([data getObjectByPath:@"data/list"], YES);
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                callback([data getObjectByPath:@"data/list"], YES);
+            } else {
+                callback(nil, NO);
+            }
         }
     }];
 }
@@ -31,7 +36,12 @@
         if (error) {
             callback(nil, NO);
         } else {
-            callback([data getObjectByPath:@"data"], YES);
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                callback([data getObjectByPath:@"data"], YES);
+            } else {
+                callback(nil, NO);
+            }
         }
     }];
 }
@@ -41,7 +51,12 @@
         if (error) {
             callback(nil, NO);
         } else {
-            callback([data getObjectByPath:@"data"], YES);
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                callback([data getObjectByPath:@"data"], YES);
+            } else {
+                callback(nil, NO);
+            }
         }
     }];
 }
@@ -67,7 +82,12 @@
         if (error) {
             callback(NO);
         } else {
-            callback(YES);
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                callback(YES);
+            } else {
+                callback(NO);
+            }
         }
     }];
 }
