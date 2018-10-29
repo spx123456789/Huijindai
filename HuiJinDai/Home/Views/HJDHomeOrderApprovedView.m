@@ -8,6 +8,31 @@
 
 #import "HJDHomeOrderApprovedView.h"
 
+@interface HJDHomeOrderApprovedTableCell : UITableViewCell
+@property(nonatomic, strong) UIView *lineView;
+@end
+
+@implementation HJDHomeOrderApprovedTableCell
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        _lineView = [[UIView alloc] init];
+        _lineView.backgroundColor = kLineColor;
+        [self.contentView addSubview:self.lineView];
+        
+        @weakify(self);
+        [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            @strongify(self);
+            make.left.right.bottom.equalTo(self.contentView);
+            make.height.equalTo(@1);
+        }];
+    }
+    return self;
+}
+
+@end
+
 @interface HJDHomeOrderApprovedView()<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) UIButton *cancelButton;
@@ -17,7 +42,7 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(12, 140, kScreenWidth - 12*2, 220) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(12, 204, kScreenWidth - 12*2, 200) style:UITableViewStylePlain];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.backgroundColor = [UIColor clearColor];
@@ -32,7 +57,7 @@
 - (UIButton *)cancelButton {
     if (!_cancelButton) {
         _cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _cancelButton.frame = CGRectMake(12, 340 + 15, kScreenWidth - 12*2, 44);
+        _cancelButton.frame = CGRectMake(12, 404 + 15, kScreenWidth - 12*2, 44);
         [_cancelButton setTitle:@"取消" forState:UIControlStateNormal];
         [_cancelButton setBackgroundColor:kWithe];
         [_cancelButton setTitleColor:kRGB_Color(0x66, 0x66, 0x66) forState:UIControlStateNormal];
@@ -55,6 +80,7 @@
         
         [self addSubview:self.tableView];
         [self addSubview:self.cancelButton];
+        self.tableView.bounces = NO;
     }
     return self;
 }
@@ -62,6 +88,14 @@
 - (void)setDataSource:(NSArray *)dataSource {
     _dataSource = dataSource;
     [self.tableView reloadData];
+    if (dataSource.count < 5) {
+        CGFloat newHeight = 44 * self.dataSource.count;
+        CGRect btnFrame = self.cancelButton.frame;
+        
+        CGFloat totalHeight = newHeight + 15 + btnFrame.size.height;
+        self.tableView.frame = CGRectMake(12, kScreenHeight/2 - totalHeight/2, kScreenWidth - 24, newHeight);
+        self.cancelButton.frame = CGRectMake(btnFrame.origin.x, self.tableView.frame.origin.y + self.tableView.frame.size.height + 15, btnFrame.size.width, btnFrame.size.height);
+    }
 }
 
 - (void)showApprovedView {
@@ -88,15 +122,20 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"indentifier";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    HJDHomeOrderApprovedTableCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell = [[HJDHomeOrderApprovedTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     HJDMyAgentModel *model = self.dataSource[indexPath.row];
     cell.textLabel.text = model.rename;
     cell.textLabel.font = kFont17;
     cell.textLabel.textColor = kRGB_Color(0x33, 0x33, 0x33);
+    if (indexPath.row == self.dataSource.count - 1) {
+        cell.lineView.hidden = YES;
+    } else {
+        cell.lineView.hidden = NO;
+    }
     return cell;
 }
 @end

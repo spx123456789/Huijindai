@@ -48,6 +48,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
         [self addSubview:self.imgView];
         [self addSubview:self.textLabel];
         [self addSubview:self.subLabel];

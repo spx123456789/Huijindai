@@ -52,7 +52,7 @@
             [self.dataSource addObject:data[@"fujian"]];
             [self.dataSource addObject:data[@"status_log"]];
             
-            if ([data[@"channel_type"] integerValue] == 2 || [data[@"manager_type"] integerValue] == 2) {
+            if ([data[@"channel_type"] integerValue] == 1 || [data[@"manager_type"] integerValue] == 1) {
                 [self.dataSource addObject:data];
             }
             [self setTabelViewTopView:data];
@@ -258,13 +258,23 @@
             [HJDMyManager getMyRelationWithUrl:@"/User/get_customer" keyWork:nil callBack:^(NSArray *arr, BOOL result) {
                 [MBProgressHUD hideHUD];
                 if (result) {
-                    HJDHomeOrderApprovedView *approveView = [[HJDHomeOrderApprovedView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-                    approveView.dataSource = arr;
-                    [approveView showApprovedView];
-                    approveView.callBack = ^(HJDMyAgentModel *model) {
-                        @strongify(self);
-                        [self postAuditManagerId:model.uid];
-                    };
+                    if (arr == nil || arr.count == 0) {
+                        [MBProgressHUD showError:@"暂无审核的客户经理"];
+                    } else {
+                        HJDHomeOrderApprovedView *approveView = [[HJDHomeOrderApprovedView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+                        NSMutableArray *tempArray = [NSMutableArray array];
+                        for (NSDictionary *modelDic in arr) {
+                            HJDMyAgentModel *model = [[HJDMyAgentModel alloc] init];
+                            [model hjd_loadDataFromkeyValues:modelDic];
+                            [tempArray addObject:model];
+                        }
+                        approveView.dataSource = tempArray;
+                        [approveView showApprovedView];
+                        approveView.callBack = ^(HJDMyAgentModel *model) {
+                            @strongify(self);
+                            [self postAuditManagerId:model.uid];
+                        };
+                    }
                 } else {
                     [MBProgressHUD showError:@"加载失败"];
                 }

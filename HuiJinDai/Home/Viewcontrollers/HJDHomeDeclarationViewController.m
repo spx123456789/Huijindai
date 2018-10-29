@@ -13,9 +13,10 @@
 #import <MobileCoreServices/UTCoreTypes.h>
 #import "HJDHomeRoomDiDaiManager.h"
 #import "HJDHomeSelectToastView.h"
+#import <TPKeyboardAvoidingTableView.h>
 
 @interface HJDHomeDeclarationViewController ()<UITableViewDelegate, UITableViewDataSource, HJDHomeSelectToastViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, HJDHomeRoomDiDaiPhotoTableViewCellDelegate>
-@property(nonatomic, strong) UITableView *tableView;
+@property(nonatomic, strong) TPKeyboardAvoidingTableView *tableView;
 @property(nonatomic, strong) HJDCustomerServiceView *customServiceView;
 @property(nonatomic, strong) UIButton *submitButton;
 @property(nonatomic, strong) UIImagePickerController *imgPickerController;
@@ -26,9 +27,9 @@
 
 @implementation HJDHomeDeclarationViewController
 
-- (UITableView *)tableView {
+- (TPKeyboardAvoidingTableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight) style:UITableViewStylePlain];
+        _tableView = [[TPKeyboardAvoidingTableView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight) style:UITableViewStylePlain];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.backgroundColor = [UIColor clearColor];
@@ -175,6 +176,7 @@
 }
 
 - (void)showPickerView {
+    [self.view endEditing:YES];
     HJDHomeSelectToastView *picker = [[HJDHomeSelectToastView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
     picker.delegate = self;
     //先赋值selectIndexpath

@@ -48,9 +48,9 @@ static HJDHomeLocationManager *_sharedManager = nil;
     CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
     [geoCoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         for (CLPlacemark *placemark in placemarks) {
-            NSLog(@"%@", placemark.country);
+            NSLog(@"%@", placemark.locality);
             if (self.delegate && [self.delegate respondsToSelector:@selector(locationManagerDidUpdateLocation:)]) {
-                [self.delegate locationManagerDidUpdateLocation:placemark.country];
+                [self.delegate locationManagerDidUpdateLocation:placemark.locality];
             }
         }
     }];

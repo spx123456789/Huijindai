@@ -36,7 +36,7 @@
 }
 
 - (void)tapGesture:(UITapGestureRecognizer *)tap {
-    [self phoneCall:@"400-250-1234"];
+    //[self phoneCall:@"400-250-1234"];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {

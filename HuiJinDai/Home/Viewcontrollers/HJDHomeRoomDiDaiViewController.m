@@ -17,6 +17,7 @@
 #import "HJDHomeRoomDiDaiPickerView.h"
 #import "HJDHomeRoomDiDaiManager.h"
 #import "HJDHomeSelectToastView.h"
+#import <TPKeyboardAvoidingTableView.h>
 
 typedef enum : NSUInteger {
     HJDRomeQueryValue = 0,  //极速询值
@@ -24,7 +25,7 @@ typedef enum : NSUInteger {
 } HJDRomeDiDaiType;
 
 @interface HJDHomeRoomDiDaiViewController ()<UITableViewDelegate, UITableViewDataSource, HJDMessageSegmentViewDelegate, HJDHomeRoomDiDaiPickerViewDelegate, HJDHomeSelectToastViewDelegate>
-@property(nonatomic, strong) UITableView *tableView;
+@property(nonatomic, strong) TPKeyboardAvoidingTableView *tableView;
 @property(nonatomic, strong) NSMutableArray *dataSource;
 @property(nonatomic, strong) HJDMessageSegmentView *segmentView;
 @property(nonatomic, assign) HJDRomeDiDaiType selectType;
@@ -37,9 +38,9 @@ typedef enum : NSUInteger {
 
 @implementation HJDHomeRoomDiDaiViewController
 
-- (UITableView *)tableView {
+- (TPKeyboardAvoidingTableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 60) style:UITableViewStylePlain];
+        _tableView = [[TPKeyboardAvoidingTableView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 60) style:UITableViewStylePlain];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.backgroundColor = [UIColor clearColor];
@@ -267,7 +268,11 @@ typedef enum : NSUInteger {
                 self.roomModel.communityId = dic[@"communityId"];
                 self.roomModel.communityName = dic[@"communityName"];
                 self.roomModel.communityCompany = dic[@"company"];
-                self.roomModel.address = dic[@"address"];
+                if (dic[@"address"] == nil) {
+                    self.roomModel.address = [NSString stringWithFormat:@"%@%@%@%@", self.roomModel.provinceName, self.roomModel.cityName, self.roomModel.districtName, self.roomModel.communityName];
+                } else {
+                    self.roomModel.address = dic[@"address"];
+                }
                 [self.roomModel clearRoomModelType:HJDRoomModelClear_building];
                 [self.tableView reloadData];
             };
@@ -523,6 +528,7 @@ typedef enum : NSUInteger {
         [self loadMoreData];
     } else {
         //刷新数据
+        [self hideHttpResultView];
         [self reloadView];
         [self.tableView reloadData];
     }

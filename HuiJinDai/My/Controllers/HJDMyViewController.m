@@ -192,7 +192,7 @@ static NSString *key2 = @"title";
         channelController.searchType = HJDUserTypeChannel;
         [self.navigationController pushViewController:channelController animated:YES];
     } else if ([cellTitle isEqualToString:@"我的邀请码"]) {
-        [MBProgressHUD showMessage:@"正在加载..."];
+        [MBProgressHUD showMessage:@""];
         [HJDMyManager getUserInviteCodeWithCallBack:^(NSDictionary *dic, BOOL result) {
             [MBProgressHUD hideHUD];
             if (result) {

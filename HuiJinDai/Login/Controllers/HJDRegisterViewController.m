@@ -170,6 +170,7 @@
     
     topHeight += 63;
     _phoneView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight, kScreenWidth, 63) text:@"手机号" fieldPlaceholder:@"请输入手机号码" tag:11];
+    _phoneView.textField.keyboardType = UIKeyboardTypePhonePad;
     [self.bgView addSubview:_phoneView];
   
     self.verifiCodeButton.frame = CGRectMake(kScreenWidth - 105, topHeight + 28, 80, 20);
@@ -177,6 +178,7 @@
     
     topHeight += 63;
     _verifiCodeView = [[HJDTextFieldView alloc] initWithFrame:CGRectMake(0, topHeight, kScreenWidth, 63) text:@"验证码" fieldPlaceholder:@"请输入验证码" tag:12];
+    _verifiCodeView.textField.keyboardType = UIKeyboardTypePhonePad;
     [self.bgView addSubview:_verifiCodeView];
     
     topHeight += 63;
@@ -233,6 +235,7 @@
 }
 
 - (void)selectCity:(id)selector {
+    [self.view endEditing:YES];
     [self.cityPickerView show];
 }
 

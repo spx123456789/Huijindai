@@ -32,6 +32,7 @@
 - (TPKeyboardAvoidingScrollView *)bgView {
     if (!_bgView) {
         _bgView = [[TPKeyboardAvoidingScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        _bgView.showsVerticalScrollIndicator = NO;
     }
     return _bgView;
 }
@@ -184,6 +185,7 @@
     textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder attributes:@{ NSFontAttributeName : kFont15, NSForegroundColorAttributeName : kRGB_Color(0xd4, 0xd4, 0xd4)}];
     textField.textColor = kRGB_Color(0x33, 0x33, 0x33);
     textField.font = kFont15;
+    textField.keyboardType = UIKeyboardTypePhonePad;
     return textField;
 }
 

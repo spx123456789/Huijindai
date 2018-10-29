@@ -167,7 +167,7 @@
         [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self);
             make.top.equalTo(self.headImgView.mas_bottom).offset(12);
-            make.size.mas_equalTo(CGSizeMake(68, 20));
+            make.size.mas_equalTo(CGSizeMake(168, 20));
         }];
     }
     return self;
