@@ -202,7 +202,6 @@
 		AAD24F6D21394D8400298386 /* HJDBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD24F6C21394D8400298386 /* HJDBaseViewController.m */; };
 		AAD24F7021394EA900298386 /* UITableView+HJD.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD24F6F21394EA900298386 /* UITableView+HJD.m */; };
 		AAD24F77213ADE3200298386 /* UIAlertController+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = AAD24F76213ADE3200298386 /* UIAlertController+Blocks.m */; };
-		AAD24F79213AE0B000298386 /* hk_timeline_image_loading.png in Resources */ = {isa = PBXBuildFile; fileRef = AAD24F78213AE0AF00298386 /* hk_timeline_image_loading.png */; };
 		D6432F235E81DD89E31E1B21 /* libPods-HuiJinDai.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 758AEEDFDB9B291E6C91EBA5 /* libPods-HuiJinDai.a */; };
 /* End PBXBuildFile section */
 
@@ -509,7 +508,6 @@
 		AAD24F6F21394EA900298386 /* UITableView+HJD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+HJD.m"; sourceTree = "<group>"; };
 		AAD24F75213ADE3200298386 /* UIAlertController+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+Blocks.h"; sourceTree = "<group>"; };
 		AAD24F76213ADE3200298386 /* UIAlertController+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+Blocks.m"; sourceTree = "<group>"; };
-		AAD24F78213AE0AF00298386 /* hk_timeline_image_loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hk_timeline_image_loading.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -971,7 +969,6 @@
 				AA7D7F252143585400E0D843 /* 暂无网络@3x.png */,
 				AA7D7F682143586100E0D843 /* 注册页对勾@2x.png */,
 				AA7D7F602143586000E0D843 /* 注册页对勾@3x.png */,
-				AAD24F78213AE0AF00298386 /* hk_timeline_image_loading.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -1309,7 +1306,6 @@
 				AA7D7F7A2143586100E0D843 /* 首页选择城市@2x.png in Resources */,
 				AA7D7F802143586100E0D843 /* 邀请码朋友圈@2x.png in Resources */,
 				AA7D7F8A2143586100E0D843 /* 工单审核（渠道权限）经纪人@2x.png in Resources */,
-				AAD24F79213AE0B000298386 /* hk_timeline_image_loading.png in Resources */,
 				AA7D7F892143586100E0D843 /* 启动页左下@2x.png in Resources */,
 				AA7D7F822143586100E0D843 /* 我的页背景@3x.png in Resources */,
 				AA7D7FA62143586100E0D843 /* 启动页右下@3x.png in Resources */,

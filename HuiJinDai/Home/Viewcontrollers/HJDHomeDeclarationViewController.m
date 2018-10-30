@@ -501,7 +501,6 @@
     
     if (tempImageArr != nil && index < tempImageArr.count) {
         [tempImageArr removeObjectAtIndex:index];
-        //....
         [self.tableView reloadRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
@@ -509,6 +508,7 @@
 - (void)photoCell:(HJDHomeRoomDiDaiPhotoTableViewCell *)photoCell clickAddButton:(id)sender {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:photoCell];
     self.selectShowIndex = indexPath.row;
+    [self.view endEditing:YES];
     [self showImagePickerController];
 }
 

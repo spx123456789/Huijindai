@@ -125,7 +125,7 @@ static NSString *key2 = @"title";
     } else if (self.userModel.type.integerValue == HJDUserTypeManager) {
         self.dataSource = @[ @{ key1 : kImage(@"我的页客户经理"), key2 : @"我的渠道" }, @{ key1 : kImage(@"我的页设置"), key2 : @"设置" } ];
     } else {
-        self.dataSource = @[ @{ key1 : kImage(@"我的页设置"), key2 : @"设置" } ];
+        self.dataSource = @[ @{ key1 : kImage(@"我的页客户经理"), key2 : @"我的渠道" }, @{ key1 : kImage(@"我的页设置"), key2 : @"设置" } ];
     }
     
     [self.view addSubview:self.tableView];
@@ -216,11 +216,14 @@ static NSString *key2 = @"title";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        return 51.f;
-    } else {
-        return 58.f;
+    if (self.dataSource.count == 4) {
+        if (indexPath.row == 0) {
+            return 51.f;
+        } else {
+            return 58.f;
+        }
     }
+    return 58.f;
 }
 
 #pragma mark - HJDMyInviteCodeViewDelegate
