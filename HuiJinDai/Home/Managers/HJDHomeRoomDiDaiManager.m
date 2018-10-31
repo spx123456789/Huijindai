@@ -132,8 +132,8 @@
         if (error) {
             callback(nil, NO);
         } else {
-            NSArray *dataArray = [data getObjectByPath:@"data/list"];
-            if (dataArray && dataArray.count > 0) {
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
                 callback(data, YES);
             } else {
                 if ([[data getObjectByPath:@"string_code"] isEqualToString:@"ERROR_USER"]) {
@@ -297,7 +297,7 @@
     }];
 }
 
-+ (void)auditOrderWithID:(NSString *)uid step:(NSString *)step content:(NSString *)content managerId:(NSString *)managerId callBack:(void (^)(BOOL))callback {
++ (void)auditOrderWithID:(NSString *)uid step:(NSString *)step content:(NSString *)content managerId:(NSString *)managerId callBack:(void (^)(NSString *, BOOL))callback {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{ @"loan_id" : uid, @"step" : step }];
     if (step.integerValue == 2) {
         [params setObject:content forKey:@"content"];
@@ -309,13 +309,13 @@
     
     [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Loan/examine") requestParams:params networkMethod:GET callback:^(id data, NSError *error) {
         if (error) {
-            callback(NO);
+            callback(nil, NO);
         } else {
             NSString *code = [data getObjectByPath:@"code"];
             if (code.integerValue == 0) {
-                callback(YES);
+                callback(nil, YES);
             } else {
-                callback(NO);
+                callback([data getObjectByPath:@"error_msg"] ,NO);
             }
         }
     }];
@@ -380,6 +380,7 @@ static NSString *key2 = @"imageInfo";
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"上传成功----%@", responseObject);
         callback(YES);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         callback(NO);

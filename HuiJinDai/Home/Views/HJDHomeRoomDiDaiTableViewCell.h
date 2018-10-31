@@ -18,6 +18,7 @@
 @property(nonatomic, strong) UILabel *rightLabel;
 @property(nonatomic, strong) UIView *lineView;
 @property(nonatomic, copy) NSString *placeholderString;
+@property(nonatomic, strong) UIView *redView;
 
 @property(nonatomic, assign) BOOL fieldCanEdit;
 @end

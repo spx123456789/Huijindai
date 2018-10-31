@@ -34,11 +34,24 @@
 @end
 
 @interface HJDHomeOrderApprovedView()<UITableViewDelegate, UITableViewDataSource>
+@property(nonatomic, strong) UILabel *titleLabel;
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) UIButton *cancelButton;
 @end
 
 @implementation HJDHomeOrderApprovedView
+
+- (UILabel *)titleLabel {
+    if (!_titleLabel) {
+        _titleLabel = [[UILabel alloc] init];
+        _titleLabel.text = @"请选择客户经理";
+        _titleLabel.textColor = kMainColor;
+        _titleLabel.font = kFont16;
+        _titleLabel.textAlignment = NSTextAlignmentCenter;
+        _titleLabel.backgroundColor = kWithe;
+    }
+    return _titleLabel;
+}
 
 - (UITableView *)tableView {
     if (!_tableView) {
@@ -78,6 +91,13 @@
     if (self) {
         self.backgroundColor = kRGBA_Color(0x00, 0x00, 0x00, 0.4);
         
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 39, kScreenWidth - 24, 1)];
+        line.backgroundColor = kLineColor;
+        [self.titleLabel addSubview:line];
+        self.titleLabel.frame = CGRectMake(0, 0, kScreenWidth - 24, 40);
+        
+        self.tableView.tableHeaderView = self.titleLabel;
+        
         [self addSubview:self.tableView];
         [self addSubview:self.cancelButton];
         self.tableView.bounces = NO;
@@ -88,14 +108,18 @@
 - (void)setDataSource:(NSArray *)dataSource {
     _dataSource = dataSource;
     [self.tableView reloadData];
+    
+    NSInteger dataArrayCount = 5;
     if (dataSource.count < 5) {
-        CGFloat newHeight = 44 * self.dataSource.count;
-        CGRect btnFrame = self.cancelButton.frame;
-        
-        CGFloat totalHeight = newHeight + 15 + btnFrame.size.height;
-        self.tableView.frame = CGRectMake(12, kScreenHeight/2 - totalHeight/2, kScreenWidth - 24, newHeight);
-        self.cancelButton.frame = CGRectMake(btnFrame.origin.x, self.tableView.frame.origin.y + self.tableView.frame.size.height + 15, btnFrame.size.width, btnFrame.size.height);
+        dataArrayCount = dataSource.count;
     }
+    
+    CGFloat newHeight = 44 * dataArrayCount + 40;
+    CGRect btnFrame = self.cancelButton.frame;
+    
+    CGFloat totalHeight = newHeight + 15 + btnFrame.size.height;
+    self.tableView.frame = CGRectMake(12, kScreenHeight/2 - totalHeight/2, kScreenWidth - 24, newHeight);
+    self.cancelButton.frame = CGRectMake(btnFrame.origin.x, self.tableView.frame.origin.y + self.tableView.frame.size.height + 15, btnFrame.size.width, btnFrame.size.height);
 }
 
 - (void)showApprovedView {

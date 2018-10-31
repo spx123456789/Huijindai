@@ -390,6 +390,11 @@ typedef enum : NSUInteger {
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             [self setCellValue:cell indexPath:indexPath];
+            if (indexPath.row == 3 || indexPath.row == 5) {
+                cell.redView.hidden = YES;
+            } else {
+                cell.redView.hidden = NO;
+            }
             return cell;
             break;
         }

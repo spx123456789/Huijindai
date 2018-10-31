@@ -42,7 +42,6 @@
 - (UITextView *)textView {
     if (!_textView) {
         _textView = [[UITextView alloc] init];
-        
     }
     return _textView;
 }
@@ -68,12 +67,16 @@
     }
     
     [MBProgressHUD showMessage:@"正在提交..."];
-    [HJDHomeRoomDiDaiManager auditOrderWithID:self.order_id step:@"2" content:self.textView.text managerId:nil callBack:^(BOOL result) {
+    [HJDHomeRoomDiDaiManager auditOrderWithID:self.order_id step:@"2" content:self.textView.text managerId:nil callBack:^(NSString *msg, BOOL result) {
         [MBProgressHUD hideHUD];
         if (result) {
             [MBProgressHUD showSuccess:@"提交成功"];
         } else {
-            [MBProgressHUD showError:@"提交失败"];
+            if (msg) {
+                [MBProgressHUD showError:msg];
+            } else {
+                [MBProgressHUD showError:@"提交失败"];
+            }
         }
     }];
 }

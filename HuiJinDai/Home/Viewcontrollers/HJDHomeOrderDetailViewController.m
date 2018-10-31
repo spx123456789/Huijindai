@@ -287,12 +287,16 @@
 
 - (void)postAuditManagerId:(NSString *)managerID {
     [MBProgressHUD showMessage:@"正在提交..."];
-    [HJDHomeRoomDiDaiManager auditOrderWithID:self.order_id step:@"1" content:nil managerId:managerID callBack:^(BOOL result) {
+    [HJDHomeRoomDiDaiManager auditOrderWithID:self.order_id step:@"1" content:nil managerId:managerID callBack:^(NSString *msg, BOOL result) {
         [MBProgressHUD hideHUD];
         if (result) {
             [MBProgressHUD showSuccess:@"提交成功"];
         } else {
-            [MBProgressHUD showError:@"提交失败"];
+            if (msg) {
+                [MBProgressHUD showError:msg];
+            } else {
+                [MBProgressHUD showError:@"提交失败"];
+            }
         }
     }];
 }

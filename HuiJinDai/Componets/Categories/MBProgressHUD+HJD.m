@@ -19,7 +19,7 @@
 + (void)show:(NSString *)text icon:(NSString *)icon view:(UIView *)view
 {
     if (view == nil)
-        view = [[UIApplication sharedApplication].windows lastObject];
+        view = [[UIApplication sharedApplication] keyWindow];
     // 快速显示一个提示信息
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
     hud.label.text = text;
@@ -89,14 +89,14 @@
  *  @return 直接返回一个MBProgressHUD，需要手动关闭
  */
 + (MBProgressHUD *)showMessage:(NSString *)message toView:(UIView *)view {
-    if (view == nil) view = [[UIApplication sharedApplication].windows lastObject];
+    if (view == nil) view = [[UIApplication sharedApplication] keyWindow];
     // 快速显示一个提示信息
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
     hud.label.text = message;
     // 隐藏时候从父控件中移除
     hud.removeFromSuperViewOnHide = YES;
     
-    [UIActivityIndicatorView appearanceWhenContainedInInstancesOfClasses:@[ [MBProgressHUD class] ]].color = kMainColor;
+    //[UIActivityIndicatorView appearanceWhenContainedInInstancesOfClasses:@[ [MBProgressHUD class] ]].color = kMainColor;
     return hud;
 }
 
@@ -113,7 +113,7 @@
 + (void)hideHUDForView:(UIView *)view
 {
     if (view == nil)
-        view = [[UIApplication sharedApplication].windows lastObject];
+        view = [[UIApplication sharedApplication] keyWindow];
     
     [self hideHUDForView:view animated:YES];
 }

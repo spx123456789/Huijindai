@@ -11,7 +11,6 @@
 
 @interface HJDHomeRoomDiDaiTableViewCell()<UITextFieldDelegate>
 @property(nonatomic, strong) UIView *bgView;
-@property(nonatomic, strong) UIView *redView;
 @end
 
 @implementation HJDHomeRoomDiDaiTableViewCell

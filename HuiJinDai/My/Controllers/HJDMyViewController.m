@@ -234,30 +234,27 @@ static NSString *key2 = @"title";
 
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(nonnull NSDictionary<NSString *,id> *)info {
-    
-    NSString *mediaType = info[UIImagePickerControllerMediaType];
-    if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
-        UIImage *theImage = info[UIImagePickerControllerEditedImage];
-        //NSURL *imageUrl = info[UIImagePickerControllerImageURL];
-        [self uploadImage:theImage];
-    }
-    
     [picker dismissViewControllerAnimated:YES completion:^{
-        
+        NSString *mediaType = info[UIImagePickerControllerMediaType];
+        if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
+            UIImage *theImage = info[UIImagePickerControllerEditedImage];
+            //NSURL *imageUrl = info[UIImagePickerControllerImageURL];
+            [self uploadImage:theImage];
+        }
     }];
-    
 }
 
 - (void)uploadImage:(UIImage *)head {
-    [MBProgressHUD showMessage:@"正在上传..."];
+    [MBProgressHUD showMessage:@"正在修改..."];
     [HJDMyManager setMyAvatarWithImage:head callBack:^(NSString *path, BOOL result) {
         [MBProgressHUD hideHUD];
         if (result) {
             self.userModel.avatar = path;
             [[HJDUserDefaultsManager shareInstance] saveObject:self.userModel key:kUserModelKey];
             [self updateMyInfo];
+            [MBProgressHUD showError:@"修改成功"];
         } else {
-            [MBProgressHUD showError:@"上传失败"];
+            [MBProgressHUD showError:@"修改失败"];
         }
     }];
 }
