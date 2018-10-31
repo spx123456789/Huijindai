@@ -59,6 +59,7 @@
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSMutableArray *dataSource;
 @property(nonatomic, strong) HJDMyNavTextFieldSearchView *searchView;
+@property(nonatomic, strong) NSURLSessionDataTask *httpTask;
 @end
 
 @implementation HJDHomeRoomSelectViewController
@@ -192,9 +193,10 @@
     [self hideHttpResultView];
     switch (self.searchType) {
         case HJDRoomSearchCommunity: {
-            //[MBProgressHUD showMessage:@"正在加载..."];
-            [HJDHomeRoomDiDaiManager getXiaoquListWithShiId:self.diDaiModel.cityId quId:self.diDaiModel.districtId keyWord:keyWord CallBack:^(NSArray *data, BOOL result) {
-               // [MBProgressHUD hideHUD];
+            if (self.httpTask != nil) {
+                [self.httpTask cancel];
+            }
+            self.httpTask = [HJDHomeRoomDiDaiManager getXiaoquListWithShiId:self.diDaiModel.cityId quId:self.diDaiModel.districtId keyWord:keyWord CallBack:^(NSArray *data, BOOL result) {
                 if (result) {
                     if (data.count == 0) {
                         [self showNodataViewFrame:CGRectMake(0, kSafeAreaTopHeight, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight)];
@@ -204,15 +206,15 @@
                         [self.tableView reloadData];
                     }
                 } else {
-                    //[MBProgressHUD showError:@"请求失败"];
                 }
             }];
             break;
         }
         case HJDRoomSearchBuilding: {
-            //[MBProgressHUD showMessage:@"正在加载..."];
-            [HJDHomeRoomDiDaiManager getLouDongListWithModel:self.diDaiModel keyWord:keyWord CallBack:^(NSArray *data, BOOL result) {
-                //[MBProgressHUD hideHUD];
+            if (self.httpTask != nil) {
+                [self.httpTask cancel];
+            }
+            self.httpTask = [HJDHomeRoomDiDaiManager getLouDongListWithModel:self.diDaiModel keyWord:keyWord CallBack:^(NSArray *data, BOOL result) {
                 if (result) {
                     if (data.count == 0) {
                         [self showNodataViewFrame:CGRectMake(0, kSafeAreaTopHeight, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight)];
@@ -222,15 +224,15 @@
                         [self.tableView reloadData];
                     }
                 } else {
-                    //[MBProgressHUD showError:@"请求失败"];
                 }
             }];
             break;
         }
         case HJDRoomSearchUnit: {
-            //[MBProgressHUD showMessage:@"正在加载..."];
-            [HJDHomeRoomDiDaiManager getDanYuanListWithModel:self.diDaiModel keyWord:keyWord CallBack:^(NSArray *data, BOOL result) {
-                //[MBProgressHUD hideHUD];
+            if (self.httpTask != nil) {
+                [self.httpTask cancel];
+            }
+            self.httpTask = [HJDHomeRoomDiDaiManager getDanYuanListWithModel:self.diDaiModel keyWord:keyWord CallBack:^(NSArray *data, BOOL result) {
                 if (result) {
                     if (data.count == 0) {
                         [self showNodataViewFrame:CGRectMake(0, kSafeAreaTopHeight, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight)];
@@ -240,15 +242,15 @@
                         [self.tableView reloadData];
                     }
                 } else {
-                    //[MBProgressHUD showError:@"请求失败"];
                 }
             }];
             break;
         }
         case HJDRoomSearchHouse: {
-            //[MBProgressHUD showMessage:@"正在加载..."];
-            [HJDHomeRoomDiDaiManager getMenPaiListWithModel:self.diDaiModel keyWord:keyWord CallBack:^(NSArray *data, BOOL result) {
-                //[MBProgressHUD hideHUD];
+            if (self.httpTask != nil) {
+                [self.httpTask cancel];
+            }
+            self.httpTask = [HJDHomeRoomDiDaiManager getMenPaiListWithModel:self.diDaiModel keyWord:keyWord CallBack:^(NSArray *data, BOOL result) {
                 if (result) {
                     if (data.count == 0) {
                         [self showNodataViewFrame:CGRectMake(0, kSafeAreaTopHeight, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight)];
@@ -258,7 +260,6 @@
                         [self.tableView reloadData];
                     }
                 } else {
-                    //[MBProgressHUD showError:@"请求失败"];
                 }
             }];
             break;

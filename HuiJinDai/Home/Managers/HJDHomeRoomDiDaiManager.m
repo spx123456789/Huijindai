@@ -56,8 +56,8 @@
     }];
 }
 
-+ (void)getXiaoquListWithShiId:(NSString *)shiId quId:(NSString *)quId keyWord:(NSString *)keyWord CallBack:(RoomDiDaiHttpCallback)callback {
-    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Assessment/community") requestParams:@{ @"shi" : shiId, @"qu" : quId, @"community" : keyWord } networkMethod:GET callback:^(id data, NSError *error) {
++ (NSURLSessionDataTask *)getXiaoquListWithShiId:(NSString *)shiId quId:(NSString *)quId keyWord:(NSString *)keyWord CallBack:(RoomDiDaiHttpCallback)callback {
+    return [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Assessment/community") requestParams:@{ @"shi" : shiId, @"qu" : quId, @"community" : keyWord } networkMethod:GET callback:^(id data, NSError *error) {
         if (error) {
             callback(nil, NO);
         } else {
@@ -71,8 +71,8 @@
     }];
 }
 
-+ (void)getLouDongListWithModel:(HJDHomeRoomDiDaiModel *)model keyWord:(NSString *)keyWord CallBack:(RoomDiDaiHttpCallback)callback {
-    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Assessment/building") requestParams:@{ @"qu" : model.districtId, @"community_id" : model.communityId, @"building" : keyWord, @"companyStr" : model.communityCompany } networkMethod:GET callback:^(id data, NSError *error) {
++ (NSURLSessionDataTask *)getLouDongListWithModel:(HJDHomeRoomDiDaiModel *)model keyWord:(NSString *)keyWord CallBack:(RoomDiDaiHttpCallback)callback {
+    return [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Assessment/building") requestParams:@{ @"qu" : model.districtId, @"community_id" : model.communityId, @"building" : keyWord, @"companyStr" : model.communityCompany } networkMethod:GET callback:^(id data, NSError *error) {
         if (error) {
             callback(nil, NO);
         } else {
@@ -86,8 +86,8 @@
     }];
 }
 
-+ (void)getDanYuanListWithModel:(HJDHomeRoomDiDaiModel *)model keyWord:(NSString *)keyWord CallBack:(RoomDiDaiHttpCallback)callback {
-    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Assessment/unit") requestParams:@{ @"qu" : model.districtId, @"community_id" : model.communityId, @"building_id" : model.buildingId, @"unit" : keyWord, @"companyStr" : model.communityCompany } networkMethod:GET callback:^(id data, NSError *error) {
++ (NSURLSessionDataTask *)getDanYuanListWithModel:(HJDHomeRoomDiDaiModel *)model keyWord:(NSString *)keyWord CallBack:(RoomDiDaiHttpCallback)callback {
+    return [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Assessment/unit") requestParams:@{ @"qu" : model.districtId, @"community_id" : model.communityId, @"building_id" : model.buildingId, @"unit" : keyWord, @"companyStr" : model.communityCompany } networkMethod:GET callback:^(id data, NSError *error) {
         if (error) {
             callback(nil, NO);
         } else {
@@ -101,7 +101,7 @@
     }];
 }
 
-+ (void)getMenPaiListWithModel:(HJDHomeRoomDiDaiModel *)model keyWord:(NSString *)keyWord CallBack:(RoomDiDaiHttpCallback)callback {
++ (NSURLSessionDataTask *)getMenPaiListWithModel:(HJDHomeRoomDiDaiModel *)model keyWord:(NSString *)keyWord CallBack:(RoomDiDaiHttpCallback)callback {
     
     NSMutableDictionary *mutParam = [NSMutableDictionary dictionaryWithDictionary:@{ @"qu" : model.districtId, @"community_id" : model.communityId, @"building_id" : model.buildingId, @"building" : model.buildingName, @"house" : keyWord, @"companyStr" : model.communityCompany }];
     
@@ -113,7 +113,7 @@
         [mutParam setObject:model.unitName forKey:@"unit"];
     }
     
-    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Assessment/house") requestParams:mutParam networkMethod:GET callback:^(id data, NSError *error) {
+    return [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Assessment/house") requestParams:mutParam networkMethod:GET callback:^(id data, NSError *error) {
         if (error) {
             callback(nil, NO);
         } else {
