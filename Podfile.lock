@@ -21,6 +21,7 @@ PODS:
   - MBProgressHUD (1.1.0)
   - MJExtension (3.0.15.1)
   - MJRefresh (3.1.15.6)
+  - QBImagePickerController (3.4.0)
   - ReactiveCocoa (2.5):
     - ReactiveCocoa/UI (= 2.5)
   - ReactiveCocoa/Core (2.5):
@@ -43,6 +44,7 @@ DEPENDENCIES:
   - MBProgressHUD
   - MJExtension
   - MJRefresh
+  - QBImagePickerController
   - ReactiveCocoa
   - ReactiveViewModel
   - SDWebImage
@@ -57,6 +59,7 @@ SPEC REPOS:
     - MBProgressHUD
     - MJExtension
     - MJRefresh
+    - QBImagePickerController
     - ReactiveCocoa
     - ReactiveViewModel
     - SDWebImage
@@ -70,12 +73,13 @@ SPEC CHECKSUMS:
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MJExtension: 19bc33ce2eee2d319760f5622562cf581a6ff756
   MJRefresh: 0efa19656679d70a0f47cbe76e56c2271fe53a97
+  QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
   ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
   ReactiveViewModel: 58918dcbcec2d3151195ab1ed9163c57a8163999
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   TPKeyboardAvoiding: cb69d5ddbe90ce0170e4bc2db1e5e41d4a3ad9a4
   WechatOpenSDK: 676feec516a11173eafd1fe64b10d27babf28701
 
-PODFILE CHECKSUM: c7340f5d05a9c3b296fa95cf1fe49f5233bf9726
+PODFILE CHECKSUM: 61121e972f8ea76a043486b68ec0e137c9af879b
 
 COCOAPODS: 1.5.3

@@ -8,6 +8,7 @@
 
 #import "HJDHomeRoomDiDaiManager.h"
 #import "HJDNetAPIManager.h"
+#import "UIImage+HJD.h"
 
 @implementation HJDHomeRoomDiDaiManager
 
@@ -371,7 +372,7 @@ static NSString *key2 = @"imageInfo";
 }
 
 + (void)uploadSinglePicture:(UIImage *)image loanId:(NSString *)loanId picType:(NSString *)picType uploadResult:(void (^)(BOOL result))callback {
-    NSData *photoData = UIImageJPEGRepresentation(image, 1);
+    NSData *photoData = [image compressedImage];
     NSDictionary *params = @{ @"loan_id" : loanId, @"type_id" : picType };
     
     [[HJDNetAPIManager sharedManager] POST:kAPIURL(@"/Loan/upload_file") parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {

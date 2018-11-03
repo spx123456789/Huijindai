@@ -14,8 +14,9 @@
 #import "HJDHomeRoomDiDaiManager.h"
 #import "HJDHomeOrderDetailResultViewController.h"
 #import "HJDMyManager.h"
+#import "HJDPhotoBrowseViewController.h"
 
-@interface HJDHomeOrderDetailViewController ()<UITableViewDelegate, UITableViewDataSource, HJDHomeOrderDetailButtonCellDelegate>
+@interface HJDHomeOrderDetailViewController ()<UITableViewDelegate, UITableViewDataSource, HJDHomeOrderDetailButtonCellDelegate, HJDHomeOrderDetailPhotoCellDelegate>
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSMutableArray *dataSource;
 @property(nonatomic, strong) NSMutableDictionary *topDictionary;
@@ -180,6 +181,7 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             cell.titleLabel.text = @"照片信息";
+            cell.delegate = self;
             cell.imgDataArray = self.dataSource[indexPath.row];
             return cell;
             break;
@@ -242,6 +244,23 @@
             return 49;
             break;
     }
+}
+
+#pragma mark - HJDHomeOrderDetailPhotoCellDelegate
+- (void)detailPhotoCell:(HJDHomeOrderDetailPhotoCell *)detailPhotoCell didSelectIndexPath:(NSIndexPath *)indexPath {
+    //大图浏览
+    HJDPhotoBrowseViewController *controller = [[HJDPhotoBrowseViewController alloc] init];
+    NSArray *allImageArray = self.dataSource[2];
+    
+    NSMutableArray *mutArray = [NSMutableArray array];
+    for (NSDictionary *sectionDic in allImageArray) {
+        NSArray *sectionArray = sectionDic[@"list"];
+        if (sectionArray.count != 0) {
+            [mutArray addObject:sectionDic];
+        }
+    }
+    controller.dataSource = mutArray;
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark - HJDHomeOrderDetailButtonCellDelegate

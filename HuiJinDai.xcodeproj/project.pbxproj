@@ -15,6 +15,7 @@
 		163D4DC021455F3D0012CB53 /* HJDMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 163D4DBF21455F3D0012CB53 /* HJDMessageTableViewCell.m */; };
 		16477E7921844C8100782FD0 /* HJDHttpResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16477E7821844C8100782FD0 /* HJDHttpResultView.m */; };
 		164C7E28216E2774002FD2E5 /* HJDHomeNavBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 164C7E27216E2774002FD2E5 /* HJDHomeNavBarButton.m */; };
+		166D3F0F21897DBE00F09EA5 /* UIImage+HJD.m in Sources */ = {isa = PBXBuildFile; fileRef = 166D3F0E21897DBE00F09EA5 /* UIImage+HJD.m */; };
 		1678DB502171D7C200B89E51 /* HJDHomeQueryValueResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1678DB4F2171D7C200B89E51 /* HJDHomeQueryValueResultTableViewCell.m */; };
 		1678DB532171E9A700B89E51 /* HJDDeclarationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1678DB522171E9A700B89E51 /* HJDDeclarationModel.m */; };
 		1678DB5621722DB800B89E51 /* HJDHomePhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1678DB5521722DB800B89E51 /* HJDHomePhotoCollectionViewCell.m */; };
@@ -87,6 +88,7 @@
 		16EDD32A213C176000E21AB2 /* HJDHomeOrderListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD329213C176000E21AB2 /* HJDHomeOrderListTableViewCell.m */; };
 		16EDD32D213C2E8900E21AB2 /* HJDHomeOrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD32C213C2E8900E21AB2 /* HJDHomeOrderListViewController.m */; };
 		16EDD330213C318100E21AB2 /* HJDHomeOrderAuditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD32F213C318100E21AB2 /* HJDHomeOrderAuditViewController.m */; };
+		16F8DBE2218D854F007674F1 /* HJDPhotoBrowseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16F8DBE1218D854F007674F1 /* HJDPhotoBrowseViewController.m */; };
 		16FFC519213973A2008BCABC /* HJDRegisterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FFC518213973A2008BCABC /* HJDRegisterModel.m */; };
 		AA1CEC9921454C2B00249692 /* HJDHomeCalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CEC9821454C2B00249692 /* HJDHomeCalculatorViewController.m */; };
 		AA1CECB22145614000249692 /* HJDCalculatorTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1CECB12145614000249692 /* HJDCalculatorTableViewCell.m */; };
@@ -239,6 +241,8 @@
 		16477E7821844C8100782FD0 /* HJDHttpResultView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHttpResultView.m; sourceTree = "<group>"; };
 		164C7E26216E2774002FD2E5 /* HJDHomeNavBarButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeNavBarButton.h; sourceTree = "<group>"; };
 		164C7E27216E2774002FD2E5 /* HJDHomeNavBarButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeNavBarButton.m; sourceTree = "<group>"; };
+		166D3F0D21897DBE00F09EA5 /* UIImage+HJD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+HJD.h"; sourceTree = "<group>"; };
+		166D3F0E21897DBE00F09EA5 /* UIImage+HJD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+HJD.m"; sourceTree = "<group>"; };
 		1678DB4E2171D7C200B89E51 /* HJDHomeQueryValueResultTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeQueryValueResultTableViewCell.h; sourceTree = "<group>"; };
 		1678DB4F2171D7C200B89E51 /* HJDHomeQueryValueResultTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeQueryValueResultTableViewCell.m; sourceTree = "<group>"; };
 		1678DB512171E9A700B89E51 /* HJDDeclarationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDDeclarationModel.h; sourceTree = "<group>"; };
@@ -376,6 +380,8 @@
 		16EDD32C213C2E8900E21AB2 /* HJDHomeOrderListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeOrderListViewController.m; sourceTree = "<group>"; };
 		16EDD32E213C318100E21AB2 /* HJDHomeOrderAuditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeOrderAuditViewController.h; sourceTree = "<group>"; };
 		16EDD32F213C318100E21AB2 /* HJDHomeOrderAuditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeOrderAuditViewController.m; sourceTree = "<group>"; };
+		16F8DBE0218D854F007674F1 /* HJDPhotoBrowseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDPhotoBrowseViewController.h; sourceTree = "<group>"; };
+		16F8DBE1218D854F007674F1 /* HJDPhotoBrowseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDPhotoBrowseViewController.m; sourceTree = "<group>"; };
 		16FFC517213973A2008BCABC /* HJDRegisterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDRegisterModel.h; sourceTree = "<group>"; };
 		16FFC518213973A2008BCABC /* HJDRegisterModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDRegisterModel.m; sourceTree = "<group>"; };
 		3934C1A1D46330E827334147 /* Pods-HuiJinDai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuiJinDai.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HuiJinDai/Pods-HuiJinDai.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1049,6 +1055,8 @@
 				16BDE862215C9621008EF899 /* HJDHomeDeclarationViewController.m */,
 				16A0CB932160DB8700133DA7 /* HJDHomeRoomSelectViewController.h */,
 				16A0CB942160DB8700133DA7 /* HJDHomeRoomSelectViewController.m */,
+				16F8DBE0218D854F007674F1 /* HJDPhotoBrowseViewController.h */,
+				16F8DBE1218D854F007674F1 /* HJDPhotoBrowseViewController.m */,
 			);
 			path = Viewcontrollers;
 			sourceTree = "<group>";
@@ -1138,6 +1146,8 @@
 				16B42D46215E085000DE0D7A /* NSString+HJD.m */,
 				169A2F80216C73BD00AD495E /* MBProgressHUD+HJD.h */,
 				169A2F81216C73BD00AD495E /* MBProgressHUD+HJD.m */,
+				166D3F0D21897DBE00F09EA5 /* UIImage+HJD.h */,
+				166D3F0E21897DBE00F09EA5 /* UIImage+HJD.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -1394,10 +1404,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-HuiJinDai/Pods-HuiJinDai-resources.sh",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/QBImagePickerController/QBImagePicker.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QBImagePicker.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1443,6 +1455,7 @@
 				16B6994C214BE8110086920C /* HJDMessageManager.m in Sources */,
 				16B42D50215E659E00DE0D7A /* HJDUserDefaultsManager.m in Sources */,
 				16477E7921844C8100782FD0 /* HJDHttpResultView.m in Sources */,
+				166D3F0F21897DBE00F09EA5 /* UIImage+HJD.m in Sources */,
 				16B69955214E04970086920C /* HJDHomeOrderDetailTableViewCell.m in Sources */,
 				16B69948214BE77B0086920C /* HJDMessageModel.m in Sources */,
 				16A62F8E217CCD260079EAC3 /* HJDHomeOrderDetailResultViewController.m in Sources */,
@@ -1464,6 +1477,7 @@
 				AA7D7FDE2143589300E0D843 /* HJDHomeModel.m in Sources */,
 				164C7E28216E2774002FD2E5 /* HJDHomeNavBarButton.m in Sources */,
 				AA1CEC9921454C2B00249692 /* HJDHomeCalculatorViewController.m in Sources */,
+				16F8DBE2218D854F007674F1 /* HJDPhotoBrowseViewController.m in Sources */,
 				16B42D44215DFEF200DE0D7A /* HJDBaseModel.m in Sources */,
 				169B9F0C215681D90013D47B /* HJDOrderProcessSearchView.m in Sources */,
 				16A62F81217C40520079EAC3 /* NSDate+FSExtension.m in Sources */,
@@ -1642,9 +1656,9 @@
 			baseConfigurationReference = 3934C1A1D46330E827334147 /* Pods-HuiJinDai.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = HNVCTBR54T;
+				DEVELOPMENT_TEAM = TPJ5P5T4S9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HuiJinDai/Componets/ThirdPart/GtSdkLib-noidfa",
@@ -1656,9 +1670,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hfax.houseloan.inhourse;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hfax.houseloan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "houseloan-inhourse";
+				PROVISIONING_PROFILE_SPECIFIER = "hourseloan-iOS Development";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1668,9 +1682,9 @@
 			baseConfigurationReference = 716329259416E7FBB66B2DF9 /* Pods-HuiJinDai.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = HNVCTBR54T;
+				DEVELOPMENT_TEAM = TPJ5P5T4S9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HuiJinDai/Componets/ThirdPart/GtSdkLib-noidfa",
@@ -1683,9 +1697,9 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.hfax.houseloan.inhourse;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hfax.houseloan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "houseloan-inhourse";
+				PROVISIONING_PROFILE_SPECIFIER = "hourseloan-iOS Development";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

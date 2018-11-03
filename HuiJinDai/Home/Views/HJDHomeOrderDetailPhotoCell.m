@@ -9,7 +9,7 @@
 #import "HJDHomeOrderDetailPhotoCell.h"
 #import "HJDHomePhotoCollectionViewCell.h"
 
-@interface HJDHomeOrderDetailPhotoCell()<UICollectionViewDelegate, UICollectionViewDataSource>
+@interface HJDHomeOrderDetailPhotoCell()<UICollectionViewDelegate, UICollectionViewDataSource, HJDHomePhotoCollectionViewCellDelegate>
 @property(nonatomic, strong) UIView *photoView;
 @property(nonatomic, strong) UICollectionView *collectionView;
 @end
@@ -90,7 +90,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *cellIndentifer = @"HJDHomePhotoCollectionViewCell";
     HJDHomePhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIndentifer forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor cyanColor];
+    cell.delegate = self;
     NSDictionary *sectionDic = self.imgDataArray[indexPath.section];
     NSArray *sectionArray = sectionDic[@"list"];
     NSDictionary *imageDic = sectionArray[indexPath.row];
@@ -109,8 +109,11 @@
     return nil;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"点击了第%ld分item",(long)indexPath.item);
+#pragma mark - HJDHomePhotoCollectionViewCellDelegate
+- (void)photoCollectionCell:(HJDHomePhotoCollectionViewCell *)photoCollectionCell clickImageView:(id)sender {
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:photoCollectionCell];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(detailPhotoCell:didSelectIndexPath:)]) {
+        [self.delegate detailPhotoCell:self didSelectIndexPath:indexPath];
+    }
 }
-
 @end

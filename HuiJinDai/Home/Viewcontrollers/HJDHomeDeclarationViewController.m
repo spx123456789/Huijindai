@@ -14,12 +14,14 @@
 #import "HJDHomeRoomDiDaiManager.h"
 #import "HJDHomeSelectToastView.h"
 #import <TPKeyboardAvoidingTableView.h>
+#import "QBImagePickerController.h"
+#import "UIImage+HJD.h"
 
-@interface HJDHomeDeclarationViewController ()<UITableViewDelegate, UITableViewDataSource, HJDHomeSelectToastViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, HJDHomeRoomDiDaiPhotoTableViewCellDelegate>
+@interface HJDHomeDeclarationViewController ()<UITableViewDelegate, UITableViewDataSource, HJDHomeSelectToastViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, HJDHomeRoomDiDaiPhotoTableViewCellDelegate, UIScrollViewDelegate, QBImagePickerControllerDelegate>
 @property(nonatomic, strong) TPKeyboardAvoidingTableView *tableView;
 @property(nonatomic, strong) HJDCustomerServiceView *customServiceView;
 @property(nonatomic, strong) UIButton *submitButton;
-@property(nonatomic, strong) UIImagePickerController *imgPickerController;
+@property(nonatomic, strong) QBImagePickerController *imgPickerController;
 @property(nonatomic, strong) HJDDeclarationModel *declarationModel;
 @property(nonatomic, strong) NSArray *pickerArray;
 @property(nonatomic, assign) NSInteger selectShowIndex;
@@ -61,11 +63,15 @@
     return _submitButton;
 }
 
-- (UIImagePickerController *)imgPickerController {
+- (QBImagePickerController *)imgPickerController {
     if (!_imgPickerController) {
-        _imgPickerController = [[UIImagePickerController alloc] init];
+        _imgPickerController = [[QBImagePickerController alloc] init];
+        _imgPickerController.prompt = @"请选择图片";
+        _imgPickerController.mediaType = QBImagePickerMediaTypeImage;
+        _imgPickerController.maximumNumberOfSelection = 9;
         _imgPickerController.delegate = self;
-        _imgPickerController.allowsEditing = YES;
+        _imgPickerController.allowsMultipleSelection = YES;
+        _imgPickerController.showsNumberOfSelectedAssets = YES;
     }
     return _imgPickerController;
 }
@@ -518,8 +524,11 @@
     
     UIAlertAction *photoAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-            self.imgPickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-            [self presentViewController:self.imgPickerController animated:YES completion:nil];
+            UIImagePickerController *imgController = [[UIImagePickerController alloc] init];
+            imgController.delegate = self;
+            imgController.allowsEditing = YES;
+            imgController.sourceType = UIImagePickerControllerSourceTypeCamera;
+            [self presentViewController:imgController animated:YES completion:nil];
         } else {
             UIAlertController *aler = [UIAlertController alertControllerWithTitle:@"提示" message:@"请在设置-->隐私-->相机，中开启本应用的相机访问权限！" preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { }];
@@ -530,7 +539,7 @@
     
     UIAlertAction *albumAction = [UIAlertAction actionWithTitle:@"从手机相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]) {
-            self.imgPickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            //UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.imgPickerController];
             [self presentViewController:self.imgPickerController animated:YES completion:nil];
         } else {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请在设置-->隐私-->相机，中开启本应用的相册访问权限！" preferredStyle:UIAlertControllerStyleAlert];
@@ -557,26 +566,56 @@
     
     NSString *mediaType = info[UIImagePickerControllerMediaType];
     if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
-        NSInteger cellCount = 8;
-        if (self.declarationModel.loan_variety == HJDLoanVarietyHouse_2) {
-            cellCount = 9;
-        }
-        
-        NSMutableDictionary *tempDic = self.declarationModel.fileMutArray[self.selectShowIndex - cellCount];
-        NSMutableArray *tempImageArr = tempDic[kDeclarationLoanFileImage];
-        [tempImageArr addObject:info];
-        
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.selectShowIndex inSection:0];
-        [self.tableView reloadRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationFade];
+        [self saveImage:info reloadTableView:YES];
     }
-    
-}
-
-- (void)uploadImage:(UIImage *)head {
-    
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - QBImagePickerControllerDelegate
+- (void)qb_imagePickerController:(QBImagePickerController *)imagePickerController didFinishPickingAssets:(NSArray *)assets {
+    __block NSInteger imgCount = assets.count;
+    for (PHAsset *asset in assets) {
+        if (asset.mediaType == PHAssetMediaTypeImage) {
+            @weakify(self);
+            [[PHImageManager defaultManager] requestImageDataForAsset:asset options:nil resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
+                @strongify(self);
+                UIImage *image = [UIImage imageWithData:imageData];
+                UIImage *new_image = [UIImage fixOrientation:image];
+                NSDictionary *imageInfo = @{ UIImagePickerControllerEditedImage : new_image };
+                
+                imgCount -= 1;
+                [self saveImage:imageInfo reloadTableView:(imgCount == 0)];
+            }];
+        }
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)qb_imagePickerControllerDidCancel:(QBImagePickerController *)imagePickerController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)saveImage:(NSDictionary *)imageInfo reloadTableView:(BOOL)reload {
+    NSInteger cellCount = 8;
+    if (self.declarationModel.loan_variety == HJDLoanVarietyHouse_2) {
+        cellCount = 9;
+    }
+    
+    NSMutableDictionary *tempDic = self.declarationModel.fileMutArray[self.selectShowIndex - cellCount];
+    NSMutableArray *tempImageArr = tempDic[kDeclarationLoanFileImage];
+    [tempImageArr addObject:imageInfo];
+    
+    if (reload) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.selectShowIndex inSection:0];
+        [self.tableView reloadRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self.view endEditing:YES];
 }
 @end

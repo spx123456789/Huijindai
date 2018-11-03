@@ -11,4 +11,5 @@ pod 'MBProgressHUD'
 pod 'FMDB'
 pod 'MJExtension'
 pod 'WechatOpenSDK'
+pod 'QBImagePickerController'
 end
