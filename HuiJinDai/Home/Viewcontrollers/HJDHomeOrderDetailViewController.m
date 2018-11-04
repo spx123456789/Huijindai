@@ -260,6 +260,7 @@
         }
     }
     controller.dataSource = mutArray;
+    controller.currentIndexPath = indexPath;
     [self.navigationController pushViewController:controller animated:YES];
 }
 

@@ -201,6 +201,7 @@
 }
 
 - (void)sureButtonClick:(id)sender {
+    [self.textField endEditing:YES];
     NSString *step = nil;
     if (self.selectIndex != NSNotFound && self.selectIndex < self.stepArray.count) {
         step = self.stepArray[self.selectIndex];
@@ -279,6 +280,7 @@
 }
 
 - (void)selectButtonClick:(id)sender {
+    [self.textField endEditing:YES];
     HJDPopView *pop = [[HJDPopView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight) dataArray:self.dataSource];
     pop.delegate = self;
     if (self.selectIndex == NSNotFound) {

@@ -201,7 +201,7 @@
 - (void)setDetailCellValue:(NSDictionary *)dic {
     self.cityLabel_1.text = dic[@"city"];
     self.xiaoquLabel_1.text = dic[@"community_name"];
-    self.addressLabel_1.text = @"";
+    self.addressLabel_1.text = dic[@"address"];
     self.useLabel_1.text = dic[@"guihua"];
     self.areaLabel_1.text = dic[@"area"];
 }

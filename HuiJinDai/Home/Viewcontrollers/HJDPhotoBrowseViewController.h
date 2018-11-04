@@ -10,5 +10,5 @@
 
 @interface HJDPhotoBrowseViewController : HJDBaseViewController
 @property(nonatomic, strong) NSArray *dataSource;
-@property(nonatomic, assign) NSInteger currentIndex;
+@property(nonatomic, strong) NSIndexPath *currentIndexPath;
 @end

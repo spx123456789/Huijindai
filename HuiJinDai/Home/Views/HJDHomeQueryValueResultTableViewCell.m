@@ -146,7 +146,8 @@
     [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(bgView).offset(40);
         make.size.mas_equalTo(CGSizeMake(90, 17));
-        make.right.equalTo(self.total_priceLabel2.mas_left).offset(-30);
+        //make.right.equalTo(self.total_priceLabel2.mas_left).offset(-30);
+        make.left.equalTo(self.iconImgView.mas_right).offset(20);
     }];
     
     [self.priceLabel2 mas_makeConstraints:^(MASConstraintMaker *make) {

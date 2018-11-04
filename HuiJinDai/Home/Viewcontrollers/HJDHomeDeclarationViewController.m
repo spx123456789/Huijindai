@@ -539,7 +539,7 @@
     
     UIAlertAction *albumAction = [UIAlertAction actionWithTitle:@"从手机相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]) {
-            //UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.imgPickerController];
+            self.imgPickerController = nil;
             [self presentViewController:self.imgPickerController animated:YES completion:nil];
         } else {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请在设置-->隐私-->相机，中开启本应用的相册访问权限！" preferredStyle:UIAlertControllerStyleAlert];
@@ -580,7 +580,10 @@
     for (PHAsset *asset in assets) {
         if (asset.mediaType == PHAssetMediaTypeImage) {
             @weakify(self);
-            [[PHImageManager defaultManager] requestImageDataForAsset:asset options:nil resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
+            PHImageRequestOptions *option = [[PHImageRequestOptions alloc] init];
+            option.networkAccessAllowed = YES;
+            
+            [[PHImageManager defaultManager] requestImageDataForAsset:asset options:option resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
                 @strongify(self);
                 UIImage *image = [UIImage imageWithData:imageData];
                 UIImage *new_image = [UIImage fixOrientation:image];

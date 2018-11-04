@@ -77,6 +77,7 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     [self setUpToolbarItems];
     [self resetCachedAssets];
     
+    [self setBackBarButton];
     // Register observer
     [[PHPhotoLibrary sharedPhotoLibrary] registerChangeObserver:self];
 }
@@ -87,7 +88,7 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     
     // Configure navigation item
     self.navigationItem.title = self.assetCollection.localizedTitle;
-    self.navigationItem.prompt = self.imagePickerController.prompt;
+    self.navigationItem.title = self.imagePickerController.prompt;
     
     // Configure collection view
     self.collectionView.allowsMultipleSelection = self.imagePickerController.allowsMultipleSelection;
@@ -146,6 +147,21 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     [[PHPhotoLibrary sharedPhotoLibrary] unregisterChangeObserver:self];
 }
 
+//返回按钮
+- (void)setBackBarButton {
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
+    [button setFrame:CGRectMake(0, 0, 44, 44)];
+    [button setImage:[UIImage imageNamed:@"返回按钮"] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"返回按钮"] forState:UIControlStateSelected];
+    button.imageEdgeInsets = UIEdgeInsetsMake(4, -10, 4, 20);
+    UIBarButtonItem *leftbutton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    self.navigationItem.leftBarButtonItem = leftbutton;
+}
+
+- (void)goBack:(UIButton *)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 #pragma mark - Accessors
 

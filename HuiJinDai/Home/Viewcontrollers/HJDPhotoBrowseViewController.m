@@ -44,11 +44,12 @@
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
+        layout.minimumLineSpacing = 0.f;
+        layout.minimumInteritemSpacing = 0.f;
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         layout.itemSize = CGSizeMake(kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight);
         
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight) collectionViewLayout:layout];
-        _collectionView.contentInset = UIEdgeInsetsMake(0, kScreenWidth * self.currentIndex, 0, 0);
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.pagingEnabled = YES;
@@ -60,7 +61,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _currentIndex = 0;
+        _currentIndexPath = nil;
     }
     return self;
 }
@@ -69,6 +70,10 @@
     [super viewDidLoad];
     
     [self.view addSubview:self.collectionView];
+    
+    if (self.currentIndexPath != nil) {
+        [self.collectionView scrollToItemAtIndexPath:self.currentIndexPath atScrollPosition:UICollectionViewScrollPositionLeft animated:NO];
+    }
 }
 
 #pragma mark - UICollectionViewDataSource

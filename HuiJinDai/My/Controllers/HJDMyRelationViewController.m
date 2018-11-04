@@ -12,7 +12,7 @@
 #import "HJDCustomerServiceView.h"
 #import "HJDMyManager.h"
 
-@interface HJDMyRelationViewController ()<UITableViewDelegate, UITableViewDataSource, HJDMyNavTextFieldSearchViewDelegate, HJDMyAgentTableViewCellDelegate>
+@interface HJDMyRelationViewController ()<UITableViewDelegate, UITableViewDataSource, HJDMyNavTextFieldSearchViewDelegate, HJDMyAgentTableViewCellDelegate, UIScrollViewDelegate>
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSMutableArray *dataSource;
 @property(nonatomic, strong) HJDMyNavTextFieldSearchView *searchView;
@@ -165,5 +165,10 @@
 
 - (void)searchView:(HJDMyNavTextFieldSearchView *)searchView keyWord:(NSString *)keyWord sureButton:(id)sender {
     [self searchWithKeyWord:keyWord];
+}
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self.view endEditing:YES];
 }
 @end

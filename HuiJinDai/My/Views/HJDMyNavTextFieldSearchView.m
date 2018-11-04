@@ -155,6 +155,7 @@
     if ([NSString hjd_isBlankString:self.textField.text]) {
         return;
     }
+    [self.textField endEditing:YES];
     if (self.delegate && [self.delegate respondsToSelector:@selector(searchView:keyWord:sureButton:)]) {
         [self.delegate searchView:self keyWord:self.textField.text sureButton:sender];
     }

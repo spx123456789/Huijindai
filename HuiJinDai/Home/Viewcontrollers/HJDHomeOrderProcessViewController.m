@@ -13,7 +13,7 @@
 #import "HJDOrderProcessSearchView.h"
 #import "HJDHomeManager.h"
 
-@interface HJDHomeOrderProcessViewController ()<UITableViewDelegate, UITableViewDataSource, HJDMessageSegmentViewDelegate, HJDOrderProcessSearchViewDelegate>
+@interface HJDHomeOrderProcessViewController ()<UITableViewDelegate, UITableViewDataSource, HJDMessageSegmentViewDelegate, HJDOrderProcessSearchViewDelegate, UIScrollViewDelegate>
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSMutableArray *dataSource;
 @property(nonatomic, strong) HJDMessageSegmentView *segmentView;
@@ -171,5 +171,10 @@
     self.orderManagePage = 1;
     [self.dataSource removeAllObjects];
     [self searchKeyWord:keyWord status:(searchView.showLeft ? @"1" : @"2") step:self.order_step];
+}
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self.view endEditing:YES];
 }
 @end

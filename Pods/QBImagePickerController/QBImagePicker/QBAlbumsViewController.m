@@ -60,7 +60,7 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     
     // Configure navigation item
     self.navigationItem.title = NSLocalizedStringFromTableInBundle(@"albums.title", @"QBImagePicker", self.imagePickerController.assetBundle, nil);
-    self.navigationItem.prompt = self.imagePickerController.prompt;
+    self.navigationItem.title = self.imagePickerController.prompt;
     
     // Show/hide 'Done' button
     if (self.imagePickerController.allowsMultipleSelection) {
