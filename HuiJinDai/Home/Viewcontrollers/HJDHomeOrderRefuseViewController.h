@@ -11,4 +11,5 @@
 @interface HJDHomeOrderRefuseViewController : HJDBaseViewController
 @property(nonatomic, copy) NSString *order_id;
 @property(nonatomic, copy) NSString *refuseContent;
+@property(nonatomic, assign) BOOL isView;   //是否是查看拒单原因，默认NO
 @end

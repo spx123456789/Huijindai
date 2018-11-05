@@ -107,6 +107,7 @@
     HJDHomeOrderRefuseViewController *controller = [[HJDHomeOrderRefuseViewController alloc] init];
     controller.order_id = self.order_id;
     controller.refuseContent = refuseStr;
+    controller.isView = YES;
     [self.navigationController pushViewController:controller animated:YES];
 }
 

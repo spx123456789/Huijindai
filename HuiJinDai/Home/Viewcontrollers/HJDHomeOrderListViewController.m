@@ -58,6 +58,8 @@
         @strongify(self);
         [self searchKeyWord:self.textField.text];
     }];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notification) name:kHJDOrderAuditNotificationName object:nil];
 }
 
 - (void)searchKeyWord:(NSString *)keyWord {

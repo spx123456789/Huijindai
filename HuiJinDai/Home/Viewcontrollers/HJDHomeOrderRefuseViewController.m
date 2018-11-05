@@ -66,11 +66,17 @@
         return;
     }
     
+    @weakify(self);
     [MBProgressHUD showMessage:@"正在提交..."];
     [HJDHomeRoomDiDaiManager auditOrderWithID:self.order_id step:@"2" content:self.textView.text managerId:nil callBack:^(NSString *msg, BOOL result) {
         [MBProgressHUD hideHUD];
         if (result) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kHJDOrderAuditNotificationName object:nil];
             [MBProgressHUD showSuccess:@"提交成功"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                @strongify(self);
+                [self.navigationController popViewControllerAnimated:YES];
+            });
         } else {
             if (msg) {
                 [MBProgressHUD showError:msg];
@@ -118,6 +124,14 @@
     }];
 }
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.isView = NO;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -127,12 +141,11 @@
     
     [self setUpUI];
     
-    if (![NSString hjd_isBlankString:self.refuseContent]) {
+    if (self.isView) {
         self.textView.text = self.refuseContent;
         self.sureButton.hidden = YES;
         self.textView.userInteractionEnabled = NO;
     }
-    
 }
 
 - (void)didReceiveMemoryWarning {

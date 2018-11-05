@@ -38,6 +38,8 @@ typedef enum : NSUInteger {
 
 #define kHJDHttpRow 20
 
+#define kHJDOrderAuditNotificationName @"kHJDOrderAuditNotificationName"
+
 #pragma mark - 字体宏
 #define kFont9 [UIFont systemFontOfSize:9]
 #define kFont10 [UIFont systemFontOfSize:10]

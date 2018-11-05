@@ -11,6 +11,8 @@
 #import "HJDMessageManager.h"
 #import "HJDMessageSegmentView.h"
 #import "HJDHomeOrderDetailViewController.h"
+#import "HJDUserDefaultsManager.h"
+#import "HJDUserModel.h"
 
 @interface HJDMessageViewController ()<UITableViewDelegate, UITableViewDataSource, HJDMessageSegmentViewDelegate>
 @property(nonatomic, strong) UITableView *tableView;
@@ -66,7 +68,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.titleView = self.segmentView;
+    HJDUserModel *userModel = (HJDUserModel *)[[HJDUserDefaultsManager shareInstance] loadObject:kUserModelKey];
+    if (userModel.type.integerValue == HJDUserTypeManager) {
+        self.navigationItem.titleView = self.segmentView;
+    } else {
+        [self setNavTitle:@"我的通知"];
+    }
     self.view.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
     [self.view addSubview:self.tableView];
 
