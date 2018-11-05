@@ -72,6 +72,8 @@
         @strongify(self);
         [self searchKeyWord:self.searchView.textField.text status:(self.searchView.showLeft ? @"1" : @"2") step:self.order_step];
     }];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderAuditNotifi:) name:kHJDOrderAuditNotificationName object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -79,7 +81,17 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)orderAuditNotifi:(NSNotification *)noti {
+    self.orderManagePage = 1;
+    [self.dataSource removeAllObjects];
+    [self searchKeyWord:self.searchView.textField.text status:(self.searchView.showLeft ? @"1" : @"2") step:self.order_step showLoading:NO];
+}
+
 - (void)searchKeyWord:(NSString *)keyWord status:(NSString *)status step:(NSString *)step {
+    [self searchKeyWord:keyWord status:status step:step showLoading:YES];
+}
+
+- (void)searchKeyWord:(NSString *)keyWord status:(NSString *)status step:(NSString *)step showLoading:(BOOL)showLoading {
     @weakify(self);
     [MBProgressHUD showMessage:@"正在加载..."];
     [HJDHomeManager getOrderManageListChannelOrAgentWithUid:self.uid status:status keyWord:keyWord step:step page:self.orderManagePage callBack:^(NSArray *data, BOOL result) {

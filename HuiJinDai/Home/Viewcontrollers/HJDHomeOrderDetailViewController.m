@@ -44,17 +44,23 @@
     self.dataSource = [NSMutableArray array];
     [self.view addSubview:self.tableView];
     
+    @weakify(self);
     [MBProgressHUD showMessage:@"正在加载..."];
     [HJDHomeRoomDiDaiManager getOrderDetailWithID:self.order_id callBack:^(NSDictionary *data, BOOL result) {
         [MBProgressHUD hideHUD];
+        @strongify(self);
         if (result) {
             [self.dataSource addObject:data[@"xunzhi"]];
             [self.dataSource addObject:data[@"baodan"]];
             [self.dataSource addObject:data[@"fujian"]];
             [self.dataSource addObject:data[@"status_log"]];
             
-            if ([data[@"channel_type"] integerValue] == 1 || [data[@"manager_type"] integerValue] == 1) {
-                [self.dataSource addObject:data];
+            HJDUserModel *userModel = (HJDUserModel *)[[HJDUserDefaultsManager shareInstance] loadObject:kUserModelKey];
+            BOOL isChannel = ([data[@"channel_type"] integerValue] == 1) && (userModel.type.integerValue == HJDUserTypeChannel);
+            BOOL isManager = ([data[@"manager_type"] integerValue] == 1) && (userModel.type.integerValue == HJDUserTypeManager);
+            
+            if (isChannel || isManager) {
+                [self.dataSource addObject:@(1)];
             }
             [self setTabelViewTopView:data];
             [self.tableView reloadData];
@@ -62,6 +68,12 @@
             [MBProgressHUD showError:@"加载失败"];
         }
     }];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(auditNotificationName:) name:kHJDOrderAuditNotificationName object:nil];
+}
+
+- (void)auditNotificationName:(NSNotification *)noti {
+    [self hideAuditButton];
 }
 
 - (void)setTabelViewTopView:(NSDictionary *)resultDic {
@@ -112,13 +124,13 @@
 }
 
 - (void)presentationButtonClick:(id)sender {
-    // 审查报告文件位置,PDF文件
+    // 审批函文件位置,PDF文件
     NSString *presentation = self.topDictionary[@"presentation"];
     [self goToNextController:presentation];
 }
 
 - (void)approvalButtonClick:(id)sender {
-    // 审批函文件位置,PDF文件
+    // 审查报告文件位置,PDF文件
     NSString *approval = self.topDictionary[@"approval"];
     [self goToNextController:approval];
 }
@@ -312,6 +324,7 @@
         [MBProgressHUD hideHUD];
         if (result) {
             [MBProgressHUD showSuccess:@"提交成功"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kHJDOrderAuditNotificationName object:nil];
         } else {
             if (msg) {
                 [MBProgressHUD showError:msg];
@@ -320,5 +333,14 @@
             }
         }
     }];
+}
+
+#pragma mark - 审核通过或拒绝 隐藏下方按钮
+- (void)hideAuditButton {
+    NSNumber *last = self.dataSource.lastObject;
+    if ([last isKindOfClass:[NSNumber class]] && last.integerValue == 1) {
+        [self.dataSource removeObject:last];
+        [self.tableView deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:self.dataSource.count inSection:0] ] withRowAnimation:UITableViewRowAnimationFade];
+    }
 }
 @end

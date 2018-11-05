@@ -59,13 +59,23 @@
         [self searchKeyWord:self.textField.text];
     }];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notification) name:kHJDOrderAuditNotificationName object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderAuditNotification:) name:kHJDOrderAuditNotificationName object:nil];
 }
 
-- (void)searchKeyWord:(NSString *)keyWord {
-    [MBProgressHUD showMessage:@"正在加载..."];
+- (void)orderAuditNotification:(NSNotification *)noti {
+    self.orderListPage = 1;
+    [self.dataSource removeAllObjects];
+    [self searchKeyWord:self.textField.text showLoading:NO];
+}
+
+- (void)searchKeyWord:(NSString *)keyWord showLoading:(BOOL)showLoading {
+    if (showLoading) {
+        [MBProgressHUD showMessage:@"正在加载..."];
+    }
     [HJDHomeManager getOrderAuditListChannelOrAgentWithUid:self.uid keyWord:keyWord page:self.orderListPage callBack:^(NSArray *data, BOOL result) {
-        [MBProgressHUD hideHUD];
+        if (showLoading) {
+            [MBProgressHUD hideHUD];
+        }
         [self.tableView.mj_footer endRefreshing];
         if (result) {
             for (int k = 0; k < data.count; k++) {
@@ -85,9 +95,15 @@
             }
             self.orderListPage++;
         } else {
-            [MBProgressHUD showError:@"加载失败"];
+            if (showLoading) {
+                [MBProgressHUD showError:@"加载失败"];
+            }
         }
     }];
+}
+
+- (void)searchKeyWord:(NSString *)keyWord {
+    [self searchKeyWord:keyWord showLoading:YES];
 }
 
 - (void)didReceiveMemoryWarning {
