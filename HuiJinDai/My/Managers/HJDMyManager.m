@@ -92,6 +92,21 @@
     }];
 }
 
++ (void)postGeTuiCid:(NSString *)cid callback:(void (^)(BOOL))callback {
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/User/set_cid") requestParams:@{ @"client_id" : cid, @"phone" : @"13500001111" } networkMethod:POST callback:^(id data, NSError *error) {
+        if (error) {
+            callback(NO);
+        } else {
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                callback(YES);
+            } else {
+                callback(NO);
+            }
+        }
+    }];
+}
+
 #pragma mark - 重新更新一下我的信息
 + (void)reUpdateMyInfo:(void (^)(BOOL))callback {
     [HJDMyManager getMyInfoWithCallBack:^(NSDictionary *dic, BOOL result) {
@@ -107,5 +122,4 @@
         }
     }];
 }
-
 @end

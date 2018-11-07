@@ -214,6 +214,9 @@
 - (void)GeTuiSdkDidRegisterClient:(NSString *)clientId {
     //个推SDK已注册，返回clientId
     NSLog(@"\n>>>[GeTuiSdk RegisterClient]:%@\n\n", clientId);
+    [HJDMyManager postGeTuiCid:clientId callback:^(BOOL result) {
+        
+    }];
 }
 
 /** SDK收到透传消息回调 */
