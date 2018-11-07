@@ -283,8 +283,8 @@
     }];
 }
 
-+ (void)getOrderDetailWithID:(NSString *)uid callBack:(void (^)(NSDictionary *, BOOL))callback {
-    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Loan/get_info") requestParams:@{ @"loan_id" : uid } networkMethod:GET callback:^(id data, NSError *error) {
++ (void)getOrderDetailWithID:(NSString *)uid from:(NSString *)from callBack:(void (^)(NSDictionary *, BOOL))callback {
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Loan/get_info") requestParams:@{ @"loan_id" : uid, @"loan_from" : from } networkMethod:GET callback:^(id data, NSError *error) {
         if (error) {
             callback(nil, NO);
         } else {

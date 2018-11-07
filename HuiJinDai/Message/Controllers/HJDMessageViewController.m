@@ -202,6 +202,7 @@
     HJDMessageModel *message = mut[indexPath.row];
     HJDHomeOrderDetailViewController *detailController = [[HJDHomeOrderDetailViewController alloc] init];
     detailController.order_id = message.lid;
+    detailController.controller_from = @"1";
     [self.navigationController pushViewController:detailController animated:YES];
 }
 

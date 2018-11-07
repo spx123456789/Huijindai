@@ -46,7 +46,7 @@
     
     @weakify(self);
     [MBProgressHUD showMessage:@"正在加载..."];
-    [HJDHomeRoomDiDaiManager getOrderDetailWithID:self.order_id callBack:^(NSDictionary *data, BOOL result) {
+    [HJDHomeRoomDiDaiManager getOrderDetailWithID:self.order_id from:self.controller_from callBack:^(NSDictionary *data, BOOL result) {
         [MBProgressHUD hideHUD];
         @strongify(self);
         if (result) {

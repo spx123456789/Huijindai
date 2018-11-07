@@ -148,6 +148,7 @@
     HJDOrderListModel *listModel = self.dataSource[indexPath.row];
     HJDHomeOrderDetailViewController *controller = [[HJDHomeOrderDetailViewController alloc] init];
     controller.order_id = listModel.order_id;
+    controller.controller_from = @"1";
     [self.navigationController pushViewController:controller animated:YES];
 }
 

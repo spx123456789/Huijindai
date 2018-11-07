@@ -52,7 +52,7 @@ typedef void (^RoomDiDaiHttpCallback)(NSArray *data, BOOL result);
 + (void)postRoomDeclarationWithModel:(HJDDeclarationModel *)model callBack:(void(^)(NSDictionary *data, BOOL result))callback;
 
 //工单详情
-+ (void)getOrderDetailWithID:(NSString *)uid callBack:(void(^)(NSDictionary *data, BOOL result))callback;
++ (void)getOrderDetailWithID:(NSString *)uid  from:(NSString *)from callBack:(void(^)(NSDictionary *data, BOOL result))callback;
 
 //工单审核
 + (void)auditOrderWithID:(NSString *)uid step:(NSString *)step content:(NSString *)content managerId:(NSString *)managerId callBack:(void(^)(NSString *msg, BOOL result))callback;

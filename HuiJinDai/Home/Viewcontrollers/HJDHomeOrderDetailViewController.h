@@ -10,4 +10,5 @@
 
 @interface HJDHomeOrderDetailViewController : HJDBaseViewController
 @property(nonatomic, copy) NSString *order_id;
+@property(nonatomic, copy) NSString *controller_from;
 @end

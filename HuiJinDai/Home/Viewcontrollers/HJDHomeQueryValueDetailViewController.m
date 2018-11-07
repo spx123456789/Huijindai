@@ -12,8 +12,6 @@
 #import "HJDHomeQueryValueResultViewController.h"
 #import "HJDHomeDeclarationViewController.h"
 
-#import "HJDHomeOrderDetailViewController.h"
-
 @interface HJDHomeQueryValueDetailViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) UIButton *continueButton;
