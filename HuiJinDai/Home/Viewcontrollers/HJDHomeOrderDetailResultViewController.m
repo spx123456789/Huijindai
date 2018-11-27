@@ -28,8 +28,9 @@
     [super viewDidLoad];
     
     [self.view addSubview:self.webView];
-        
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.wordUrl]]];
+    
+    NSURL *url = [[NSURL alloc] initWithString:kAPIURL(self.wordUrl)];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
 }
 
 

@@ -103,7 +103,7 @@
         if (result) {
             [self.dataSource removeAllObjects];
             if (arr.count == 0) {
-                [self showNodataViewFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight)];
+                [self showNodataViewFrame:CGRectMake(0, kSafeAreaTopHeight, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight)];
             } else {
                 [self hideHttpResultView];
                 for (int k = 0; k < arr.count; k++) {

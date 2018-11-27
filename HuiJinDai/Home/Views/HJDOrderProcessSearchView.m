@@ -45,7 +45,7 @@
         CGFloat view_height = 22 + self.dataArray.count * 28;
         
         //imageView的superView 的阴影view
-        UIView *shadowView = [[UIView alloc] initWithFrame:CGRectMake(16, 64 + 45, view_width, view_height)];
+        UIView *shadowView = [[UIView alloc] initWithFrame:CGRectMake(16, kSafeAreaTopHeight + 45, view_width, view_height)];
         
         //imageView的superView
         UIView *fangkuanView1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, view_width, view_height)];
