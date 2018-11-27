@@ -67,6 +67,7 @@
     UINavigationController *nav2 = [[UINavigationController alloc] initWithRootViewController:myController];
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    [[UITabBar appearance] setTranslucent:NO];
     tabBarController.viewControllers = @[ nav1, nav2 ];
     
     self.window.rootViewController = tabBarController;
