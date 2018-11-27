@@ -176,7 +176,9 @@
 }
 
 - (void)logoutButtonClick:(id)selector {
-    
+    [HJDMyManager logoutWithCallBack:^(BOOL result) {
+        
+    }];
     [[HJDNetAPIManager sharedManager] setAuthorization:nil];
     [[NSUserDefaults standardUserDefaults] setObject:@(2) forKey:HJDLoginSuccess];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kUserModelKey];

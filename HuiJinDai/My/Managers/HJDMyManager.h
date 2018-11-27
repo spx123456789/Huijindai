@@ -31,6 +31,9 @@
 //上传个推ClientID
 + (void)postGeTuiCid:(NSString *)cid callback:(void(^)(BOOL result))callback;
 
+//退出登录
++ (void)logoutWithCallBack:(void(^)(BOOL result))callback;
+
 //重新更新一下我的信息
 + (void)reUpdateMyInfo:(void(^)(BOOL result))callback;
 

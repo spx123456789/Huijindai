@@ -93,7 +93,32 @@
 }
 
 + (void)postGeTuiCid:(NSString *)cid callback:(void (^)(BOOL))callback {
-    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/User/set_cid") requestParams:@{ @"client_id" : cid, @"phone" : @"13500001111" } networkMethod:POST callback:^(id data, NSError *error) {
+    HJDUserModel *userModel = (HJDUserModel *)[[HJDUserDefaultsManager shareInstance] loadObject:kUserModelKey];
+    if (userModel.phone.length == 0) {
+        callback(NO);
+        return;
+    }
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/User/set_cid") requestParams:@{ @"client_id" : cid, @"phone" : userModel.phone } networkMethod:POST callback:^(id data, NSError *error) {
+        if (error) {
+            callback(NO);
+        } else {
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                callback(YES);
+            } else {
+                callback(NO);
+            }
+        }
+    }];
+}
+
++ (void)logoutWithCallBack:(void (^)(BOOL))callback {
+    HJDUserModel *userModel = (HJDUserModel *)[[HJDUserDefaultsManager shareInstance] loadObject:kUserModelKey];
+    if (userModel.phone.length == 0) {
+        callback(NO);
+        return;
+    }
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/User/logout") requestParams:@{ @"phone" : userModel.phone } networkMethod:POST callback:^(id data, NSError *error) {
         if (error) {
             callback(NO);
         } else {

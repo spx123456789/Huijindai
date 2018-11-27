@@ -23,7 +23,7 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 64) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kSafeAreaTopHeight, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 44) style:UITableViewStylePlain];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
@@ -34,7 +34,7 @@
 
 - (HJDMyNavTextFieldSearchView *)searchView {
     if (!_searchView) {
-        _searchView = [[HJDMyNavTextFieldSearchView alloc] initWithFrame:CGRectMake(0, 20, kScreenWidth, 44)];
+        _searchView = [[HJDMyNavTextFieldSearchView alloc] initWithFrame:CGRectMake(0, kStatusBarHeight, kScreenWidth, 44)];
         _searchView.delegate = self;
         _searchView.placeholderStr = @"请输入姓名和手机号搜索";
     }
@@ -43,7 +43,7 @@
 
 - (HJDCustomerServiceView *)customServiceView {
     if (!_customServiceView) {
-        _customServiceView = [[HJDCustomerServiceView alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 70, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight, 140, 30)];
+        _customServiceView = [[HJDCustomerServiceView alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 70, kScreenHeight - kSafeAreaBottomHeight - 40, 140, 30)];
         _customServiceView.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
     }
     return _customServiceView;

@@ -25,7 +25,7 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 76, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 76) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kSafeAreaTopHeight + 8, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 8 - 44) style:UITableViewStylePlain];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.backgroundColor = kWithe;
@@ -37,9 +37,9 @@
 
 - (UIView *)topView {
     if (!_topView) {
-        _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 64 + 12 + 260)];
+        _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSafeAreaTopHeight + 12 + 260)];
         _topView.backgroundColor = kMainColor;
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 75, 20, 150, 44)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 75, kStatusBarHeight, 150, 44)];
         label.text = @"询值结果";
         label.textColor = kRGB_Color(0xff, 0xff, 0xff);
         label.backgroundColor = [UIColor clearColor];
@@ -50,7 +50,7 @@
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button addTarget:self action:@selector(closeButton:) forControlEvents:UIControlEventTouchUpInside];
-        [button setFrame:CGRectMake(kScreenWidth - 50, 20, 44, 44)];
+        [button setFrame:CGRectMake(kScreenWidth - 50, kStatusBarHeight, 44, 44)];
         [button setTitle:@"关闭" forState:UIControlStateNormal];
         [button setTitle:@"关闭" forState:UIControlStateSelected];
         button.titleLabel.font = kFont15;
@@ -61,7 +61,7 @@
 
 - (HJDCustomerServiceView *)customServiceView {
     if (!_customServiceView) {
-        _customServiceView = [[HJDCustomerServiceView alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 70, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight, 140, 30)];
+        _customServiceView = [[HJDCustomerServiceView alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 70, kScreenHeight - kSafeAreaBottomHeight - 40, 140, 30)];
         _customServiceView.backgroundColor = kWithe;
     }
     return _customServiceView;

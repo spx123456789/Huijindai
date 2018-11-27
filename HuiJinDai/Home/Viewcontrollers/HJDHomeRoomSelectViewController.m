@@ -66,7 +66,7 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kSafeAreaTopHeight, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight) style:UITableViewStylePlain];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
@@ -78,7 +78,7 @@
 
 - (HJDMyNavTextFieldSearchView *)searchView {
     if (!_searchView) {
-        _searchView = [[HJDMyNavTextFieldSearchView alloc] initWithFrame:CGRectMake(0, 20, kScreenWidth, 44)];
+        _searchView = [[HJDMyNavTextFieldSearchView alloc] initWithFrame:CGRectMake(0, kStatusBarHeight, kScreenWidth, 44)];
         _searchView.delegate = self;
         _searchView.isHaveSureButton = NO;
         NSString *str = @"";
