@@ -41,7 +41,7 @@
         _dataArray = dataArray;
         self.selectIndexPath = nil;
         
-        CGFloat view_width = (self.dataArray.count > 2) ? 170 : 100;
+        CGFloat view_width = (self.dataArray.count > 2) ? 120 : 100;
         CGFloat view_height = 22 + self.dataArray.count * 28;
         
         //imageView的superView 的阴影view
@@ -299,7 +299,7 @@
         _selectIndex = NSNotFound;
     }
     if (showLeft) {
-        self.dataSource = @[ @"全部", @"客户经理审核中", @"风控分配中", @"审核岗处理中", @"合同/公证/抵押岗处理中", @"放款审核处理中", @"待放款" ];
+        self.dataSource = @[ @"全部", @"客户经理审核中", @"风控分配中", @"审核岗处理中", @"合同岗处理中", @"放款审核处理中", @"待放款" ];
         self.stepArray = @[ @"0", @"3", @"4", @"5", @"6", @"7", @"8" ];
     } else {
         self.dataSource = @[ @"已拒单", @"已放款" ];

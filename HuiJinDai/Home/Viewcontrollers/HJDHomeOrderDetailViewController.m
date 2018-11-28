@@ -101,13 +101,15 @@
         [topBtn setBackgroundImage:kImage(@"工单详情查看批贷函") forState:UIControlStateHighlighted];
         [topBtn addTarget:self action:@selector(presentationButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         
-        UIButton *bottomBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        bottomBtn.frame = CGRectMake(16, 10 + 53 + 3, kScreenWidth - 32, 53);
-        [bottomBtn setBackgroundImage:kImage(@"工单详情查看审查报告") forState:UIControlStateNormal];
-        [bottomBtn setBackgroundImage:kImage(@"工单详情查看审查报告") forState:UIControlStateHighlighted];
-        [bottomBtn addTarget:self action:@selector(approvalButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [topView addSubview:bottomBtn];
-        topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 * 2 + 3 + 5);
+//        UIButton *bottomBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        bottomBtn.frame = CGRectMake(16, 10 + 53 + 3, kScreenWidth - 32, 53);
+//        [bottomBtn setBackgroundImage:kImage(@"工单详情查看审查报告") forState:UIControlStateNormal];
+//        [bottomBtn setBackgroundImage:kImage(@"工单详情查看审查报告") forState:UIControlStateHighlighted];
+//        [bottomBtn addTarget:self action:@selector(approvalButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+//        [topView addSubview:bottomBtn];
+//        topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 * 2 + 3 + 5);
+        topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 + 3 + 5);
+
     }
     
     self.tableView.tableHeaderView = topView;
