@@ -2,7 +2,7 @@
 //  HJDPhotoBrowseViewController.m
 //  HuiJinDai
 //
-//  Created by 耿笑威 on 2018/11/3.
+//  Created by GXW on 2018/11/3.
 //  Copyright © 2018 shanpx. All rights reserved.
 //
 

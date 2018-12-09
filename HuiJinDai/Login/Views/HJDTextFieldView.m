@@ -87,7 +87,7 @@
 - (UILabel *)label {
     if (!_label) {
         _label = [[UILabel alloc] init];
-        _label.text = @"同意亚投行金服用户协议";
+        _label.text = @"同意惠金小贷用户注册协议";
         _label.textColor = kRGB_Color(0x99, 0x99, 0x99);
         _label.font = kFont12;
     }

@@ -56,8 +56,9 @@
 @interface HJDMyInviteCodeView()
 @property(nonatomic, strong) UIView *bgView;
 @property(nonatomic, strong) UILabel *inviteCodeLabel;
-@property(nonatomic, strong) HJDMyShareButton *weixinButton;
-@property(nonatomic, strong) HJDMyShareButton *circelButton;
+//@property(nonatomic, strong) HJDMyShareButton *weixinButton;
+//@property(nonatomic, strong) HJDMyShareButton *circelButton;
+@property(nonatomic, strong) UIButton *copyButton;
 @end
 
 @implementation HJDMyInviteCodeView
@@ -105,25 +106,38 @@
     return _inviteCodeLabel;
 }
 
-- (HJDMyShareButton *)weixinButton {
-    if (!_weixinButton) {
-        _weixinButton = [HJDMyShareButton buttonWithType:UIButtonTypeCustom];
-        _weixinButton.imgView.image = kImage(@"邀请码微信");
-        _weixinButton.label.text = @"微信";
-        [_weixinButton addTarget:self action:@selector(weixinButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+- (UIButton *)copyButton {
+    if (!_copyButton) {
+        _copyButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_copyButton setTitle:@"复制分享链接" forState:UIControlStateNormal];
+        [_copyButton setTitleColor:kRGB_Color(0xff, 0xff, 0xff) forState:UIControlStateNormal];
+        [_copyButton setBackgroundColor:kMainColor];
+        _copyButton.titleLabel.font = kFont15;
+        _copyButton.layer.masksToBounds = YES;
+        _copyButton.layer.cornerRadius = 4.f;
+        [_copyButton addTarget:self action:@selector(copyButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
-    return _weixinButton;
+    return _copyButton;
 }
-
-- (HJDMyShareButton *)circelButton {
-    if (!_circelButton) {
-        _circelButton = [HJDMyShareButton buttonWithType:UIButtonTypeCustom];
-        _circelButton.imgView.image = kImage(@"邀请码朋友圈");
-        _circelButton.label.text = @"朋友圈";
-        [_circelButton addTarget:self action:@selector(circelButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _circelButton;
-}
+//- (HJDMyShareButton *)weixinButton {
+//    if (!_weixinButton) {
+//        _weixinButton = [HJDMyShareButton buttonWithType:UIButtonTypeCustom];
+//        _weixinButton.imgView.image = kImage(@"邀请码微信");
+//        _weixinButton.label.text = @"微信";
+//        [_weixinButton addTarget:self action:@selector(weixinButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+//    }
+//    return _weixinButton;
+//}
+//
+//- (HJDMyShareButton *)circelButton {
+//    if (!_circelButton) {
+//        _circelButton = [HJDMyShareButton buttonWithType:UIButtonTypeCustom];
+//        _circelButton.imgView.image = kImage(@"邀请码朋友圈");
+//        _circelButton.label.text = @"朋友圈";
+//        [_circelButton addTarget:self action:@selector(circelButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+//    }
+//    return _circelButton;
+//}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -146,8 +160,9 @@
     [self.bgView addSubview:self.nameLabel];
     [self.bgView addSubview:self.cityLabel];
     [self.bgView addSubview:self.inviteCodeLabel];
-    [self.bgView addSubview:self.weixinButton];
-    [self.bgView addSubview:self.circelButton];
+    [self.bgView addSubview:self.copyButton];
+    //[self.bgView addSubview:self.weixinButton];
+    //[self.bgView addSubview:self.circelButton];
     
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(130);
@@ -182,17 +197,24 @@
         make.height.equalTo(@20);
     }];
     
-    [self.weixinButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.bgView.mas_centerX).offset(-30);
-        make.bottom.equalTo(self.bgView).offset(-25);
-        make.size.mas_equalTo(CGSizeMake(40, 65));
+    [self.copyButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.bgView).offset(35);
+        make.right.equalTo(self.bgView).offset(-35);
+        make.bottom.equalTo(self.bgView).offset(-32);
+        make.height.equalTo(@36);
     }];
     
-    [self.circelButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.bgView.mas_centerX).offset(30);
-        make.bottom.equalTo(self.weixinButton);
-        make.size.mas_equalTo(CGSizeMake(50, 65));
-    }];
+//    [self.weixinButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.equalTo(self.bgView.mas_centerX).offset(-30);
+//        make.bottom.equalTo(self.bgView).offset(-25);
+//        make.size.mas_equalTo(CGSizeMake(40, 65));
+//    }];
+//
+//    [self.circelButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.bgView.mas_centerX).offset(30);
+//        make.bottom.equalTo(self.weixinButton);
+//        make.size.mas_equalTo(CGSizeMake(50, 65));
+//    }];
     
 }
 
@@ -213,4 +235,15 @@
     [self removeFromSuperview];
 }
 
+- (void)copyButtonClick:(id)sender {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(myInviteCodeView:didSelectIndex:)]) {
+        [self.delegate myInviteCodeView:self didSelectIndex:0];
+    }
+    
+    @weakify(self);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        @strongify(self);
+        [self removeFromSuperview];
+    });
+}
 @end

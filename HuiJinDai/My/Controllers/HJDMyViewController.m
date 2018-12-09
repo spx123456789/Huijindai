@@ -22,6 +22,7 @@
 @property(nonatomic, strong) HJDMyTableHeaderView *headerView;
 @property(nonatomic, strong) HJDUserModel *userModel;
 @property(nonatomic, strong) UIImagePickerController *imgPickerController;
+@property(nonatomic, copy) NSString *inviteString;
 @end
 
 @implementation HJDMyViewController
@@ -193,8 +194,10 @@ static NSString *key2 = @"title";
         [self.navigationController pushViewController:channelController animated:YES];
     } else if ([cellTitle isEqualToString:@"我的邀请码"]) {
         [MBProgressHUD showMessage:@""];
+        @weakify(self);
         [HJDMyManager getUserInviteCodeWithCallBack:^(NSDictionary *dic, BOOL result) {
             [MBProgressHUD hideHUD];
+            @strongify(self);
             if (result) {
                 HJDMyInviteCodeView *inviteView = [[HJDMyInviteCodeView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
                 inviteView.delegate = self;
@@ -202,6 +205,8 @@ static NSString *key2 = @"title";
                 inviteView.nameLabel.text = dic[@"rename"];
                 inviteView.cityLabel.text = dic[@"city"];
                 inviteView.inviteCode = [NSString stringWithFormat:@"邀请码：%@", dic[@"code"]];
+                //域名/wap/User/reg/邀请码
+                self.inviteString = [NSString stringWithFormat:@"%@wap/User/reg/%@", kAPIMainURL, dic[@"code"]];
                 UIWindow *window = [UIApplication sharedApplication].keyWindow;
                 [window addSubview:inviteView];
             } else {
@@ -228,8 +233,21 @@ static NSString *key2 = @"title";
 
 #pragma mark - HJDMyInviteCodeViewDelegate
 - (void)myInviteCodeView:(HJDMyInviteCodeView *)codeView didSelectIndex:(NSInteger)index {
-    AppDelegate *appDelagate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [appDelagate shareInviteCode:codeView.shareDictionary scene:(int)index];
+//    AppDelegate *appDelagate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+//    [appDelagate shareInviteCode:codeView.shareDictionary scene:(int)index];
+    
+    //复制分享链接
+    if ([NSString hjd_isBlankString:self.inviteString]) {
+        [MBProgressHUD showError:@"复制分享链接失败"];
+        return;
+    }
+    UIPasteboard *pab = [UIPasteboard generalPasteboard];
+    if (pab == nil) {
+        [MBProgressHUD showError:@"复制分享链接失败"];
+    } else {
+        [pab setString:self.inviteString];
+        [MBProgressHUD showError:@"复制分享链接成功"];
+    }
 }
 
 #pragma mark - UIImagePickerControllerDelegate

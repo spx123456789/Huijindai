@@ -9,9 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
 
-#define kAPIMainURL @"http://hanhouxiong.hjxd.xiaoyutab.cn/api"
-#define kAPIURL(url) [NSString stringWithFormat:@"%@%@", kAPIMainURL, url]
-
 typedef NS_ENUM(NSUInteger, NetworkMethod) {
     GET = 0,  // get请求
     POST,     // post请求

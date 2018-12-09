@@ -275,7 +275,7 @@
     }
     
     if (!self.agreementView.selected) {
-        [self showToast:@"请同意亚投行金服用户协议"];
+        [self showToast:@"请同意惠金小贷用户注册协议"];
         return;
     }
     [MBProgressHUD showMessage:@"注册中..."];

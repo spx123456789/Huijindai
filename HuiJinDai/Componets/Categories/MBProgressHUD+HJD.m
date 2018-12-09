@@ -13,33 +13,33 @@
 /**
  *  =======显示信息
  *  @param text 信息内容
- *  @param icon 图标
  *  @param view 显示的视图
  */
-+ (void)show:(NSString *)text icon:(NSString *)icon view:(UIView *)view
-{
-    if (view == nil)
++ (void)show:(NSString *)text view:(UIView *)view {
+    if (view == nil) {
         view = [[UIApplication sharedApplication] keyWindow];
-    // 快速显示一个提示信息
+    }
+    
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
-    hud.label.text = text;
     
-    hud.label.textColor = kRGB_Color(0x33, 0x33, 0x33);
-    //hud.bezelView.style = MBProgressHUDBackgroundStyleSolidCo;
-    hud.label.font = [UIFont systemFontOfSize:17.0];
-    hud.userInteractionEnabled= NO;
+    UILabel *customLabel = [[UILabel alloc] init];
+    customLabel.text = text;
+    customLabel.textColor = kRGB_Color(0xff, 0xff, 0xff);
+    customLabel.font = [UIFont boldSystemFontOfSize:16];
+    hud.customView = customLabel;
     
-    hud.customView = [[UIImageView alloc] initWithImage:kImage(icon)];  // 设置图片
-    hud.bezelView.backgroundColor = [UIColor lightGrayColor];    //背景颜色
-    // 设置图片
-    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"MBProgressHUD.bundle/%@", icon]]];
-    // 再设置模式
+    hud.userInteractionEnabled = NO;
+    
+    //背景颜色
+    hud.bezelView.backgroundColor = [UIColor blackColor];
+    //hud.bezelView.alpha = 0.8f;
+    //设置模式
     hud.mode = MBProgressHUDModeCustomView;
     
-    // 隐藏时候从父控件中移除
+    //隐藏时候从父控件中移除
     hud.removeFromSuperViewOnHide = YES;
     
-    // 1秒之后再消失
+    //1.5秒之后再消失
     [hud hideAnimated:YES afterDelay:1.5];
 }
 
@@ -49,16 +49,7 @@
  */
 + (void)showSuccess:(NSString *)success
 {
-    [self showSuccess:success toView:nil];
-}
-
-/**
- *  =======显示
- *  @param success 信息内容
- */
-+ (void)showSuccess:(NSString *)success toView:(UIView *)view
-{
-    [self show:success icon:@"success.png" view:view];
+    [self show:success view:nil];
 }
 
 /**
@@ -66,12 +57,9 @@
  */
 + (void)showError:(NSString *)error
 {
-    [self showError:error toView:nil];
+    [self show:error view:nil];
 }
 
-+ (void)showError:(NSString *)error toView:(UIView *)view{
-    [self show:error icon:@"error.png" view:view];
-}
 /**
  *  显示提示 + 菊花
  *  @param message 信息内容
