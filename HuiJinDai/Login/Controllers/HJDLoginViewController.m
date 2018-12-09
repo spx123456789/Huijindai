@@ -8,7 +8,6 @@
 
 #import "HJDLoginViewController.h"
 #import "HJDRegisterViewController.h"
-#import "HJDTextFieldView.h"
 #import "HJDCustomerServiceView.h"
 #import "AppDelegate.h"
 #import "HJDRegisterHttpManager.h"
@@ -186,6 +185,7 @@
     textField.textColor = kRGB_Color(0x33, 0x33, 0x33);
     textField.font = kFont15;
     textField.keyboardType = UIKeyboardTypePhonePad;
+    textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     return textField;
 }
 
@@ -202,11 +202,13 @@
 - (void)loginButtonClick:(id)selector {
     NSString *phone = self.phoneView.text;
     if (![phone hjd_isVaildPhoneNumber]) {
+        [self showToast:@"请输入正确手机号"];
         return;
     }
     
     NSString *verifiCode = self.verifiCodeView.text;
     if ([NSString hjd_isBlankString:verifiCode]) {
+        [self showToast:@"请输入验证码"];
         return;
     }
     

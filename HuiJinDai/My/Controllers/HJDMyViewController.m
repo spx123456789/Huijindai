@@ -243,10 +243,10 @@ static NSString *key2 = @"title";
     }
     UIPasteboard *pab = [UIPasteboard generalPasteboard];
     if (pab == nil) {
-        [MBProgressHUD showError:@"复制分享链接失败"];
+        [self showToast:@"复制分享链接失败"];
     } else {
         [pab setString:self.inviteString];
-        [MBProgressHUD showError:@"复制分享链接成功"];
+        [self showToast:@"复制分享链接成功"];
     }
 }
 
