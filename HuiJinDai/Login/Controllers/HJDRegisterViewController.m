@@ -208,10 +208,10 @@
     [self.bgView addSubview:self.loginButton];
 
     topHeight += (44 + 24);
-    _customServiceView = [[HJDCustomerServiceView alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 70, topHeight, 100, 30)];
-    [self.bgView addSubview:_customServiceView];
+    //_customServiceView = [[HJDCustomerServiceView alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 70, topHeight, 100, 30)];
+    //[self.bgView addSubview:_customServiceView];
     
-    self.bgView.contentSize = CGSizeMake(kScreenWidth, topHeight + 58);
+    self.bgView.contentSize = CGSizeMake(kScreenWidth, topHeight);
 }
 
 - (instancetype)init {

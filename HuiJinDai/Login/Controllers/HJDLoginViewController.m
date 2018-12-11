@@ -147,7 +147,7 @@
     label1.textColor = kRGB_Color(0x33, 0x33, 0x33);
     [self.bgView addSubview:label1];
     
-    UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(24, 136, kScreenWidth - 48, 40)];
+    UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(24, 136, kScreenWidth - 30, 40)];
     label2.text = @"未注册的用户可以点击右上角注册按钮来\n注册您的账号";
     label2.textColor = kRGB_Color(0x99, 0x99, 0x99);
     label2.font = kFont15;
@@ -174,8 +174,8 @@
     self.loginButton.frame = CGRectMake(24, 350, kScreenWidth - 48, 44);
     [self.bgView addSubview:self.loginButton];
     
-    _customServiceView = [[HJDCustomerServiceView alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 70, kScreenHeight - kStatusBarHeight - 60, 140, 30)];
-    [self.bgView addSubview:_customServiceView];
+    //_customServiceView = [[HJDCustomerServiceView alloc] initWithFrame:CGRectMake(kScreenWidth/2 - 70, kScreenHeight - kStatusBarHeight - 60, 140, 30)];
+    //[self.bgView addSubview:_customServiceView];
     
 }
 

@@ -169,7 +169,7 @@ typedef enum : NSUInteger {
         
         self.tableView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 60);
         [self.view addSubview:self.tableView];
-        [self.view addSubview:self.customServiceView];
+        //[self.view addSubview:self.customServiceView];
         self.customServiceView.hidden = NO;
         
         UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44 + 20)];

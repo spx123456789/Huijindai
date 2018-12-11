@@ -23,7 +23,7 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kSafeAreaTopHeight, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 44) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kSafeAreaTopHeight, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight) style:UITableViewStylePlain];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
@@ -70,7 +70,7 @@
     
     [self.view addSubview:self.searchView];
     [self.view addSubview:self.tableView];
-    [self.view addSubview:self.customServiceView];
+    //[self.view addSubview:self.customServiceView];
     
     [self searchWithKeyWord:nil];
 }

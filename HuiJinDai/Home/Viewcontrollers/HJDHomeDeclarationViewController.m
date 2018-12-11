@@ -165,13 +165,13 @@
 - (void)setUpUI {
     [self.view addSubview:self.tableView];
     
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 60 + 44 + 25)];
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 40 + 44)];
     
     self.submitButton.frame = CGRectMake(16, 20, kScreenWidth - 32, 44);
     [footerView addSubview:self.submitButton];
     
-    self.customServiceView.frame = CGRectMake(kScreenWidth/2 - 70, 40 + 44, 140, 25);
-    [footerView addSubview:self.customServiceView];
+    //self.customServiceView.frame = CGRectMake(kScreenWidth/2 - 70, 40 + 44, 140, 25);
+    //[footerView addSubview:self.customServiceView];
     
     self.tableView.tableFooterView = footerView;
 }

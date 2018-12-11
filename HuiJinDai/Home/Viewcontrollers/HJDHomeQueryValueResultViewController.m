@@ -25,7 +25,7 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kSafeAreaTopHeight + 8, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight - 8 - 44) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kSafeAreaTopHeight + 8, kScreenWidth, kScreenHeight - kSafeAreaTopHeight - kSafeAreaBottomHeight) style:UITableViewStylePlain];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.backgroundColor = kWithe;
@@ -136,7 +136,7 @@
     
     [self.view addSubview:self.topView];
     [self.view addSubview:self.tableView];
-    [self.view addSubview:self.customServiceView];
+    //[self.view addSubview:self.customServiceView];
     
     UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:self.tableView.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(16 , 16)];
     CAShapeLayer *shapeLayer = [[CAShapeLayer alloc] init];
