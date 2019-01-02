@@ -13,6 +13,8 @@
 
 + (void)getHomeBannerCallBack:(void(^)(NSArray *data, BOOL result))callBack;
 
++ (void)getHomePageInfoCallBack:(void(^)(NSArray *data, BOOL result))callBack;
+
 + (void)getOrderAuditListWithKeyWord:(NSString *)keyWord callBack:(void(^)(NSArray *data, BOOL result))callBack;
 
 + (void)getOrderAuditListChannelOrAgentWithUid:(NSString *)uid keyWord:(NSString *)keyWord page:(NSInteger)page callBack:(void(^)(NSArray *data, BOOL result))callBack;

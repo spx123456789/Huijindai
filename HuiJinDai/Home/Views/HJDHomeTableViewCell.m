@@ -65,20 +65,22 @@
         self.button1.userInteractionEnabled = NO;
     }
     
-    HJDHomeModel *model2 = [array objectAtIndex:1];
-    if (model2) {
-        self.button2.titleLabel.text = model2.title;
-        self.button2.imageView.image = [UIImage imageNamed:model2.imageName];
-        self.button2.userInteractionEnabled = YES;
-        self.button2.unreadCount = model2.unreadCount.integerValue;
-    } else {
-        self.button2.titleLabel.text = nil;
-        self.button2.imageView.image = nil;
-        self.button2.userInteractionEnabled = NO;
+    if (array.count > 1) {
+        HJDHomeModel *model2 = [array objectAtIndex:1];
+        if (model2) {
+            self.button2.titleLabel.text = model2.title;
+            self.button2.imageView.image = [UIImage imageNamed:model2.imageName];
+            self.button2.userInteractionEnabled = YES;
+            self.button2.unreadCount = model2.unreadCount.integerValue;
+        } else {
+            self.button2.titleLabel.text = nil;
+            self.button2.imageView.image = nil;
+            self.button2.userInteractionEnabled = NO;
+        }
     }
     
-    if (array.count>2){
-        HJDHomeModel * model3 = [array objectAtIndex:2];
+    if (array.count > 2){
+        HJDHomeModel *model3 = [array objectAtIndex:2];
         if (model3) {
             self.button3.titleLabel.text = model3.title;
             self.button3.userInteractionEnabled = YES;

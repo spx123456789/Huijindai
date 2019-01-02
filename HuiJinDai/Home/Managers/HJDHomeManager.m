@@ -22,6 +22,12 @@
     }];
 }
 
++ (void)getHomePageInfoCallBack:(void (^)(NSArray *, BOOL))callBack {
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/get_home_page") requestParams:nil networkMethod:GET callback:^(id data, NSError *error) {
+        
+    }];
+}
+
 + (void)getOrderAuditListWithKeyWord:(NSString *)keyWord callBack:(void (^)(NSArray *, BOOL))callBack {
     NSDictionary *param = nil;
     if (![NSString hjd_isBlankString:keyWord]) {

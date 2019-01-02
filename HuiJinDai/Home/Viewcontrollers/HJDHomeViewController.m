@@ -21,6 +21,7 @@
 #import "HJDHomeLocationManager.h"
 #import "HJDHomeNavBarButton.h"
 #import "HJDHomeOrderProcessViewController.h"
+#import "HJDHomeBankViewController.h"
 
 @interface HJDHomeViewController ()<UITableViewDelegate, UITableViewDataSource, HKScrollViewNetDelegate, HJDHomeTableViewCellDelegate, HJDHomeLocationManagerDelegate>
 @property(strong, nonatomic) UITableView *tableView;
@@ -78,6 +79,7 @@
     self.imageArray = [NSMutableArray new];
     [self setupSubViews];
     
+    @weakify(self);
     [HJDHomeManager getHomeBannerCallBack:^(NSArray *data, BOOL result) {
         [self.imageArray removeAllObjects];
         for (NSDictionary * dic in data) {
@@ -96,6 +98,11 @@
          src = "../images/banner_default_2.png";
          }
          */
+    }];
+    
+    [HJDHomeManager getHomePageInfoCallBack:^(NSArray *data, BOOL result) {
+        @strongify(self);
+        
     }];
     
     if (![CLLocationManager locationServicesEnabled]) {//判断定位操作是否被允许
@@ -242,6 +249,10 @@
             controller.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:controller animated:YES];
         }
+    } else if ([model.title isEqualToString:@"绑定银行卡"]) {
+        HJDHomeBankViewController *bankController = [[HJDHomeBankViewController alloc] init];
+        bankController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:bankController animated:YES];
     } else if ([model.title isEqualToString:@"还款计算器"]) {
         HJDHomeCalculatorViewController *calcuController = [[HJDHomeCalculatorViewController alloc]init];
         calcuController.hidesBottomBarWhenPushed = YES;
@@ -289,7 +300,7 @@
                     model5.imageName = @"首页还款计算器";
                     NSArray * array2 = @[model4,model5];
                     
-                    NSDictionary * dic2 = [NSDictionary dictionaryWithObjectsAndKeys:array2,@"sectionValue",@"功能模块",@"sectionTitle", nil];
+                    NSDictionary * dic2 = [NSDictionary dictionaryWithObjectsAndKeys:array2,@"sectionValue",@"工单管理",@"sectionTitle", nil];
                     
                     [_dataSource addObject:dic2];
                     
@@ -320,13 +331,22 @@
                     model4.imageName = @"首页工单管理";
                     model4.unreadCount = self.manageCount;
                     HJDHomeModel * model5 = [HJDHomeModel new];
-                    model5.title = @"还款计算器";
-                    model5.imageName = @"首页还款计算器";
+                    model5.title = @"绑定银行卡";
+                    model5.imageName = @"首页银行卡";
                     NSArray * array2 = @[model3,model4,model5];
                     
-                    NSDictionary * dic2 = [NSDictionary dictionaryWithObjectsAndKeys:array2,@"sectionValue",@"功能模块",@"sectionTitle", nil];
+                    NSDictionary * dic2 = [NSDictionary dictionaryWithObjectsAndKeys:array2,@"sectionValue",@"工单管理",@"sectionTitle", nil];
                     
                     [_dataSource addObject:dic2];
+                    
+                    HJDHomeModel *model6 = [HJDHomeModel new];
+                    model6.title = @"还款计算器";
+                    model6.imageName = @"首页还款计算器";
+                    NSArray *array3 = @[ model6 ];
+                    
+                    NSDictionary *dic3 = [NSDictionary dictionaryWithObjectsAndKeys:array3, @"sectionValue", @"其他功能", @"sectionTitle", nil];
+                    
+                    [_dataSource addObject:dic3];
                     break;
                 }
                 case HJDUserTypeChannel: {
@@ -344,7 +364,7 @@
                     model5.imageName = @"首页还款计算器";
                     NSArray * array2 = @[model3,model4,model5];
                     
-                    NSDictionary * dic2 = [NSDictionary dictionaryWithObjectsAndKeys:array2,@"sectionValue",@"功能模块",@"sectionTitle", nil];
+                    NSDictionary * dic2 = [NSDictionary dictionaryWithObjectsAndKeys:array2,@"sectionValue",@"工单管理",@"sectionTitle", nil];
                     
                     [_dataSource addObject:dic2];
                     break;

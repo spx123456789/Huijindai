@@ -21,6 +21,7 @@
 @property(nonatomic, strong) UILabel *nameLabel_1;
 @property(nonatomic, strong) UILabel *moneyLabel;
 @property(nonatomic, strong) UILabel *moneyLabel_1;
+@property(nonatomic, strong) UIButton *copyButton;
 @end
 
 @implementation HJDHomeOrderListTableViewCell
@@ -40,6 +41,21 @@
         _numberLabel.font = [UIFont boldSystemFontOfSize:15];
     }
     return _numberLabel;
+}
+
+- (UIButton *)copyButton {
+    if (!_copyButton) {
+        _copyButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_copyButton setTitle:@"复制" forState:UIControlStateNormal];
+        _copyButton.titleLabel.font = kFont12;
+        [_copyButton setTitleColor:kMainColor forState:UIControlStateNormal];
+        [_copyButton addTarget:self action:@selector(copyButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        _copyButton.layer.borderColor = kMainColor.CGColor;
+        _copyButton.layer.borderWidth = 1.f;
+        _copyButton.layer.masksToBounds = YES;
+        _copyButton.layer.cornerRadius = 8.f;
+    }
+    return _copyButton;
 }
 
 - (UILabel *)statusLabel {
@@ -138,6 +154,13 @@
     return label_1;
 }
 
+- (void)copyButtonClick:(id)sender {
+    UIPasteboard *pastboard = [UIPasteboard generalPasteboard];
+    pastboard.string = self.orderNumber;
+
+    [MBProgressHUD showError:@"复制报单编号成功"];
+}
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -151,6 +174,7 @@
     [self.contentView addSubview:self.bgView];
     [self.bgView addSubview:self.numberLabel];
     [self.bgView addSubview:self.statusLabel];
+    [self.bgView addSubview:self.copyButton];
     [self.bgView addSubview:self.rightImgView];
     [self.bgView addSubview:self.timeLabel];
     [self.bgView addSubview:self.addressLabel];
@@ -187,8 +211,14 @@
         make.centerY.equalTo(self.numberLabel);
     }];
     
+    [self.copyButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.numberLabel.mas_right);
+        make.centerY.equalTo(self.numberLabel);
+        make.size.mas_equalTo(CGSizeMake(50, 17));
+    }];
+    
     [self.statusLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.numberLabel.mas_right).offset(10);
+        make.left.equalTo(self.copyButton.mas_right).offset(10);
         make.centerY.equalTo(self.numberLabel);
         make.width.equalTo(@49);
         make.height.equalTo(@14);

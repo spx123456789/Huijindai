@@ -42,6 +42,7 @@
 		169B9F1521590DA20013D47B /* HJDHomeCalculatorResultTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 169B9F1421590DA20013D47B /* HJDHomeCalculatorResultTableCell.m */; };
 		169B9F1821591B200013D47B /* HJDHomeQueryValueResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 169B9F1721591B200013D47B /* HJDHomeQueryValueResultViewController.m */; };
 		169C07842141744900E9CDD0 /* HJDMyInviteCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 169C07832141744900E9CDD0 /* HJDMyInviteCodeView.m */; };
+		169DCD0921D3C93200F41F9B /* HJDHomeBankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 169DCD0821D3C93200F41F9B /* HJDHomeBankViewController.m */; };
 		16A0CB8C2160BF2B00133DA7 /* HJDHomeRoomDiDaiPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16A0CB8B2160BF2B00133DA7 /* HJDHomeRoomDiDaiPickerView.m */; };
 		16A0CB8F2160C22000133DA7 /* HJDHomeRoomDiDaiModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 16A0CB8E2160C22000133DA7 /* HJDHomeRoomDiDaiModel.m */; };
 		16A0CB922160D02000133DA7 /* HJDHomeRoomDiDaiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 16A0CB912160D02000133DA7 /* HJDHomeRoomDiDaiManager.m */; };
@@ -77,6 +78,8 @@
 		16C4E1B721381BFE004268C4 /* HuiJinDaiUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E1B621381BFE004268C4 /* HuiJinDaiUITests.m */; };
 		16C4E1D52138255B004268C4 /* HJDRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E1D42138255B004268C4 /* HJDRegisterViewController.m */; };
 		16C4E1D8213826D0004268C4 /* HJDTextFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4E1D7213826D0004268C4 /* HJDTextFieldView.m */; };
+		16CE4EF921DCF01600EED3ED /* 首页银行卡@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 16CE4EF721DCF01600EED3ED /* 首页银行卡@2x.png */; };
+		16CE4EFA21DCF01600EED3ED /* 首页银行卡@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 16CE4EF821DCF01600EED3ED /* 首页银行卡@3x.png */; };
 		16EDD2BF213AC4A000E21AB2 /* HJDLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD2BE213AC4A000E21AB2 /* HJDLoginViewController.m */; };
 		16EDD2C4213AD7EC00E21AB2 /* HJDMyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD2C3213AD7EC00E21AB2 /* HJDMyViewController.m */; };
 		16EDD309213C06DC00E21AB2 /* HJDMyRelationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EDD303213C06DC00E21AB2 /* HJDMyRelationViewController.m */; };
@@ -285,6 +288,8 @@
 		169B9F1721591B200013D47B /* HJDHomeQueryValueResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeQueryValueResultViewController.m; sourceTree = "<group>"; };
 		169C07822141744900E9CDD0 /* HJDMyInviteCodeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDMyInviteCodeView.h; sourceTree = "<group>"; };
 		169C07832141744900E9CDD0 /* HJDMyInviteCodeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDMyInviteCodeView.m; sourceTree = "<group>"; };
+		169DCD0721D3C93200F41F9B /* HJDHomeBankViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeBankViewController.h; sourceTree = "<group>"; };
+		169DCD0821D3C93200F41F9B /* HJDHomeBankViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeBankViewController.m; sourceTree = "<group>"; };
 		16A0CB8A2160BF2B00133DA7 /* HJDHomeRoomDiDaiPickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeRoomDiDaiPickerView.h; sourceTree = "<group>"; };
 		16A0CB8B2160BF2B00133DA7 /* HJDHomeRoomDiDaiPickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeRoomDiDaiPickerView.m; sourceTree = "<group>"; };
 		16A0CB8D2160C22000133DA7 /* HJDHomeRoomDiDaiModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeRoomDiDaiModel.h; sourceTree = "<group>"; };
@@ -358,6 +363,8 @@
 		16C4E1D42138255B004268C4 /* HJDRegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDRegisterViewController.m; sourceTree = "<group>"; };
 		16C4E1D6213826D0004268C4 /* HJDTextFieldView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDTextFieldView.h; sourceTree = "<group>"; };
 		16C4E1D7213826D0004268C4 /* HJDTextFieldView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDTextFieldView.m; sourceTree = "<group>"; };
+		16CE4EF721DCF01600EED3ED /* 首页银行卡@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页银行卡@2x.png"; sourceTree = "<group>"; };
+		16CE4EF821DCF01600EED3ED /* 首页银行卡@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页银行卡@3x.png"; sourceTree = "<group>"; };
 		16EDD2BD213AC4A000E21AB2 /* HJDLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDLoginViewController.h; sourceTree = "<group>"; };
 		16EDD2BE213AC4A000E21AB2 /* HJDLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDLoginViewController.m; sourceTree = "<group>"; };
 		16EDD2C2213AD7EC00E21AB2 /* HJDMyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDMyViewController.h; sourceTree = "<group>"; };
@@ -877,6 +884,8 @@
 		16FFC51A21397FCE008BCABC /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				16CE4EF721DCF01600EED3ED /* 首页银行卡@2x.png */,
+				16CE4EF821DCF01600EED3ED /* 首页银行卡@3x.png */,
 				AA7D7F642143586000E0D843 /* 报单删除上传图片@2x.png */,
 				AA7D7F572143585E00E0D843 /* 报单删除上传图片@3x.png */,
 				AA7D7F3E2143585900E0D843 /* 底部导航首页选中@2x.png */,
@@ -1057,6 +1066,8 @@
 				16A0CB942160DB8700133DA7 /* HJDHomeRoomSelectViewController.m */,
 				16F8DBE0218D854F007674F1 /* HJDPhotoBrowseViewController.h */,
 				16F8DBE1218D854F007674F1 /* HJDPhotoBrowseViewController.m */,
+				169DCD0721D3C93200F41F9B /* HJDHomeBankViewController.h */,
+				169DCD0821D3C93200F41F9B /* HJDHomeBankViewController.m */,
 			);
 			path = Viewcontrollers;
 			sourceTree = "<group>";
@@ -1280,6 +1291,7 @@
 				AA7D7FBD2143586100E0D843 /* 我的默认头像@3x.png in Resources */,
 				AA7D7FAC2143586100E0D843 /* 邀请码头像@3x.png in Resources */,
 				AA7D7FBE2143586100E0D843 /* 邀请码朋友圈@3x.png in Resources */,
+				16CE4EFA21DCF01600EED3ED /* 首页银行卡@3x.png in Resources */,
 				AA7D7F902143586100E0D843 /* 订单管理页搜索删除@3x.png in Resources */,
 				AA7D7FC52143586100E0D843 /* 我的默认头像@2x.png in Resources */,
 				AA7D7F932143586100E0D843 /* 我的经纪人电话小图标@2x.png in Resources */,
@@ -1298,6 +1310,7 @@
 				AA7D7F912143586100E0D843 /* 启动页右下@2x.png in Resources */,
 				AA7D7FAA2143586100E0D843 /* 返回按钮@3x.png in Resources */,
 				AA7D7F7F2143586100E0D843 /* 首页车抵贷@2x.png in Resources */,
+				16CE4EF921DCF01600EED3ED /* 首页银行卡@2x.png in Resources */,
 				AA7D7FC72143586100E0D843 /* 首页信贷@3x.png in Resources */,
 				AA7D7FA92143586100E0D843 /* 启动页logo@3x.png in Resources */,
 				AA7D7FC12143586100E0D843 /* 工单详情拒单@3x.png in Resources */,
@@ -1491,6 +1504,7 @@
 				AA7D7FED2143A07E00E0D843 /* UIColor+HMCore.m in Sources */,
 				16C4E1D8213826D0004268C4 /* HJDTextFieldView.m in Sources */,
 				AAD24F6721394BA200298386 /* HJDHomeViewController.m in Sources */,
+				169DCD0921D3C93200F41F9B /* HJDHomeBankViewController.m in Sources */,
 				16B6DEA5213988BB00CF8C8D /* HJDCityPickerView.m in Sources */,
 				16B42D40215DFD1A00DE0D7A /* HJDUserModel.m in Sources */,
 				16B6994F214DF72C0086920C /* HJDMessageSegmentView.m in Sources */,
