@@ -1670,9 +1670,9 @@
 			baseConfigurationReference = 3934C1A1D46330E827334147 /* Pods-HuiJinDai.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Guangzhou HuiJin small loan co., LTD (TPJ5P5T4S9)";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = HNVCTBR54T;
+				DEVELOPMENT_TEAM = TPJ5P5T4S9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HuiJinDai/Componets/ThirdPart/GtSdkLib-noidfa",
@@ -1684,10 +1684,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hfax.houseloan.inhourse;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hfax.houseloan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "houseloan-inhourse";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				PROVISIONING_PROFILE_SPECIFIER = "hourseloan-iOS Distribution";
+				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "arm64 arm64e";
 			};
 			name = Debug;
 		};
@@ -1696,9 +1697,9 @@
 			baseConfigurationReference = 716329259416E7FBB66B2DF9 /* Pods-HuiJinDai.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Guangzhou HuiJin small loan co., LTD (TPJ5P5T4S9)";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = HNVCTBR54T;
+				DEVELOPMENT_TEAM = TPJ5P5T4S9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HuiJinDai/Componets/ThirdPart/GtSdkLib-noidfa",
@@ -1711,10 +1712,11 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.hfax.houseloan.inhourse;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hfax.houseloan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "houseloan-inhourse";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				PROVISIONING_PROFILE_SPECIFIER = "hourseloan-iOS Distribution";
+				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "arm64 arm64e";
 			};
 			name = Release;
 		};

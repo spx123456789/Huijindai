@@ -117,15 +117,18 @@
         if (result) {
             [self showTimer];
             [MBProgressHUD showSuccess:@"验证码发送成功"];
-            
+            NSString * rand_code = [data getObjectByPath:@"data/rand_code"];
             //test
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                @strongify(self);
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"验证码为：%@", [data getObjectByPath:@"data/rand_code"]] preferredStyle:UIAlertControllerStyleAlert];
-                UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { }];
-                [alert addAction:okAction];
-                [self presentViewController:alert animated:YES completion:nil];
-            });
+            if (rand_code) {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    @strongify(self);
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"验证码为：%@", [data getObjectByPath:@"data/rand_code"]] preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { }];
+                    [alert addAction:okAction];
+                    [self presentViewController:alert animated:YES completion:nil];
+                });
+            }
+            
         } else {
             [MBProgressHUD showError:@"验证码发送失败"];
         }
