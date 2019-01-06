@@ -70,6 +70,13 @@
 		16B69958214E9AF30086920C /* HJDHomeOrderDetailPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B69957214E9AF30086920C /* HJDHomeOrderDetailPhotoCell.m */; };
 		16B6995B214EA4400086920C /* HJDHomeOrderRefuseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B6995A214EA4400086920C /* HJDHomeOrderRefuseViewController.m */; };
 		16B6DEA5213988BB00CF8C8D /* HJDCityPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B6DEA4213988BB00CF8C8D /* HJDCityPickerView.m */; };
+		16B74D8821E23C6900E3AE6D /* HJDHomeBankOrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B74D8721E23C6900E3AE6D /* HJDHomeBankOrderListViewController.m */; };
+		16B74D8D21E246D000E3AE6D /* !f@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 16B74D8921E246CF00E3AE6D /* !f@3x.png */; };
+		16B74D8E21E246D000E3AE6D /* !f@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 16B74D8A21E246CF00E3AE6D /* !f@2x.png */; };
+		16B74D8F21E246D000E3AE6D /* !w@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 16B74D8B21E246CF00E3AE6D /* !w@3x.png */; };
+		16B74D9021E246D000E3AE6D /* !w@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 16B74D8C21E246D000E3AE6D /* !w@2x.png */; };
+		16B74D9321E246D900E3AE6D /* 矩形1148拷贝@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 16B74D9121E246D800E3AE6D /* 矩形1148拷贝@2x.png */; };
+		16B74D9421E246D900E3AE6D /* 矩形1148拷贝@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 16B74D9221E246D800E3AE6D /* 矩形1148拷贝@3x.png */; };
 		16B91D842143A61500AC1661 /* HJDCustomerServiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B91D832143A61500AC1661 /* HJDCustomerServiceView.m */; };
 		16BDE863215C9621008EF899 /* HJDHomeDeclarationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BDE862215C9621008EF899 /* HJDHomeDeclarationViewController.m */; };
 		16BDE866215D1FD7008EF899 /* HJDRegisterHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BDE865215D1FD7008EF899 /* HJDRegisterHttpManager.m */; };
@@ -344,6 +351,14 @@
 		16B6995A214EA4400086920C /* HJDHomeOrderRefuseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeOrderRefuseViewController.m; sourceTree = "<group>"; };
 		16B6DEA3213988BB00CF8C8D /* HJDCityPickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDCityPickerView.h; sourceTree = "<group>"; };
 		16B6DEA4213988BB00CF8C8D /* HJDCityPickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDCityPickerView.m; sourceTree = "<group>"; };
+		16B74D8621E23C6900E3AE6D /* HJDHomeBankOrderListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeBankOrderListViewController.h; sourceTree = "<group>"; };
+		16B74D8721E23C6900E3AE6D /* HJDHomeBankOrderListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeBankOrderListViewController.m; sourceTree = "<group>"; };
+		16B74D8921E246CF00E3AE6D /* !f@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "!f@3x.png"; sourceTree = "<group>"; };
+		16B74D8A21E246CF00E3AE6D /* !f@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "!f@2x.png"; sourceTree = "<group>"; };
+		16B74D8B21E246CF00E3AE6D /* !w@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "!w@3x.png"; sourceTree = "<group>"; };
+		16B74D8C21E246D000E3AE6D /* !w@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "!w@2x.png"; sourceTree = "<group>"; };
+		16B74D9121E246D800E3AE6D /* 矩形1148拷贝@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矩形1148拷贝@2x.png"; sourceTree = "<group>"; };
+		16B74D9221E246D800E3AE6D /* 矩形1148拷贝@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "矩形1148拷贝@3x.png"; sourceTree = "<group>"; };
 		16B91D822143A61500AC1661 /* HJDCustomerServiceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDCustomerServiceView.h; sourceTree = "<group>"; };
 		16B91D832143A61500AC1661 /* HJDCustomerServiceView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDCustomerServiceView.m; sourceTree = "<group>"; };
 		16BDE861215C9621008EF899 /* HJDHomeDeclarationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeDeclarationViewController.h; sourceTree = "<group>"; };
@@ -884,6 +899,12 @@
 		16FFC51A21397FCE008BCABC /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				16B74D9121E246D800E3AE6D /* 矩形1148拷贝@2x.png */,
+				16B74D9221E246D800E3AE6D /* 矩形1148拷贝@3x.png */,
+				16B74D8A21E246CF00E3AE6D /* !f@2x.png */,
+				16B74D8921E246CF00E3AE6D /* !f@3x.png */,
+				16B74D8C21E246D000E3AE6D /* !w@2x.png */,
+				16B74D8B21E246CF00E3AE6D /* !w@3x.png */,
 				16CE4EF721DCF01600EED3ED /* 首页银行卡@2x.png */,
 				16CE4EF821DCF01600EED3ED /* 首页银行卡@3x.png */,
 				AA7D7F642143586000E0D843 /* 报单删除上传图片@2x.png */,
@@ -1068,6 +1089,8 @@
 				16F8DBE1218D854F007674F1 /* HJDPhotoBrowseViewController.m */,
 				169DCD0721D3C93200F41F9B /* HJDHomeBankViewController.h */,
 				169DCD0821D3C93200F41F9B /* HJDHomeBankViewController.m */,
+				16B74D8621E23C6900E3AE6D /* HJDHomeBankOrderListViewController.h */,
+				16B74D8721E23C6900E3AE6D /* HJDHomeBankOrderListViewController.m */,
 			);
 			path = Viewcontrollers;
 			sourceTree = "<group>";
@@ -1269,6 +1292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA7D7FD32143586100E0D843 /* 启动页地球@3x.png in Resources */,
+				16B74D8E21E246D000E3AE6D /* !f@2x.png in Resources */,
 				AA7D7FCD2143586100E0D843 /* 工单详情查看批贷函@3x.png in Resources */,
 				AA7D7FB22143586100E0D843 /* 首页房抵贷@3x.png in Resources */,
 				AA7D7FA12143586100E0D843 /* 订单管理渠道代码@2x.png in Resources */,
@@ -1282,6 +1306,7 @@
 				AA7D7FB52143586100E0D843 /* 订单管理页搜索删除@2x.png in Resources */,
 				AA7D7FCA2143586100E0D843 /* 注册页对勾@2x.png in Resources */,
 				AA7D7FB92143586100E0D843 /* 报单删除上传图片@3x.png in Resources */,
+				16B74D8D21E246D000E3AE6D /* !f@3x.png in Resources */,
 				AA7D7FA02143586100E0D843 /* 底部导航首页选中@2x.png in Resources */,
 				AA7D7FD72143586100E0D843 /* 工单详情拒单@2x.png in Resources */,
 				AA7D7F8F2143586100E0D843 /* 我的页经纪人@3x.png in Resources */,
@@ -1307,6 +1332,7 @@
 				AA7D7FAD2143586100E0D843 /* 启动页logo@2x.png in Resources */,
 				AA7D7FFA2143B7E300E0D843 /* Launch Screen.storyboard in Resources */,
 				AA7D7F7D2143586100E0D843 /* 首页通知@2x.png in Resources */,
+				16B74D9321E246D900E3AE6D /* 矩形1148拷贝@2x.png in Resources */,
 				AA7D7F912143586100E0D843 /* 启动页右下@2x.png in Resources */,
 				AA7D7FAA2143586100E0D843 /* 返回按钮@3x.png in Resources */,
 				AA7D7F7F2143586100E0D843 /* 首页车抵贷@2x.png in Resources */,
@@ -1316,6 +1342,7 @@
 				AA7D7FC12143586100E0D843 /* 工单详情拒单@3x.png in Resources */,
 				AA7D7F7C2143586100E0D843 /* 共党详情已拒单@3x.png in Resources */,
 				AA7D7FB12143586100E0D843 /* 进入@3x.png in Resources */,
+				16B74D9421E246D900E3AE6D /* 矩形1148拷贝@3x.png in Resources */,
 				AA7D7F8C2143586100E0D843 /* 订单进程搜索中的下拉箭头@2x.png in Resources */,
 				AA7D7F972143586100E0D843 /* 邀请码头像@2x.png in Resources */,
 				AA7D7FB42143586100E0D843 /* 我的页客户经理@3x.png in Resources */,
@@ -1335,6 +1362,7 @@
 				AA7D7F792143586100E0D843 /* 底部导航我的未选中@3x.png in Resources */,
 				AA7D7F9C2143586100E0D843 /* 首页底部导航未选中@3x.png in Resources */,
 				AA7D7FB02143586100E0D843 /* 首页底部导航未选中@2x.png in Resources */,
+				16B74D8F21E246D000E3AE6D /* !w@3x.png in Resources */,
 				AA7D7F9E2143586100E0D843 /* 邀请码微信@2x.png in Resources */,
 				AA7D7FD62143586100E0D843 /* 通知删除@3x.png in Resources */,
 				AA7D7FB72143586100E0D843 /* 底部导航首页选中@3x.png in Resources */,
@@ -1350,6 +1378,7 @@
 				AA7D7FBF2143586100E0D843 /* 我的经纪人拨打电话@2x.png in Resources */,
 				AA7D7F8B2143586100E0D843 /* 底部导航我的选中@3x.png in Resources */,
 				AA7D7F8D2143586100E0D843 /* 工单详情查看审查报告@3x.png in Resources */,
+				16B74D9021E246D000E3AE6D /* !w@2x.png in Resources */,
 				AA7D7FA52143586100E0D843 /* 首页还款计算器@3x.png in Resources */,
 				AA7D7FC32143586100E0D843 /* 首页工单审核@3x.png in Resources */,
 				AA7D7F962143586100E0D843 /* 添加证件@2x.png in Resources */,
@@ -1514,6 +1543,7 @@
 				16EDD32D213C2E8900E21AB2 /* HJDHomeOrderListViewController.m in Sources */,
 				16B42D47215E085000DE0D7A /* NSString+HJD.m in Sources */,
 				16908038213EBFD900AA2575 /* HJDOrderListModel.m in Sources */,
+				16B74D8821E23C6900E3AE6D /* HJDHomeBankOrderListViewController.m in Sources */,
 				16EDD318213C06E600E21AB2 /* HJDMyAgentTableViewCell.m in Sources */,
 				16C4E1D52138255B004268C4 /* HJDRegisterViewController.m in Sources */,
 				169C07842141744900E9CDD0 /* HJDMyInviteCodeView.m in Sources */,

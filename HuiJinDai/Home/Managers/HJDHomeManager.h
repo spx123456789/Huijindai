@@ -17,6 +17,8 @@
 
 + (void)getOrderAuditListWithKeyWord:(NSString *)keyWord callBack:(void(^)(NSArray *data, BOOL result))callBack;
 
++ (void)getBankOrderListWithOrderNum:(NSString *)orderNum callBack:(void(^)(NSArray *data, BOOL result))callBack;
+
 + (void)getOrderAuditListChannelOrAgentWithUid:(NSString *)uid keyWord:(NSString *)keyWord page:(NSInteger)page callBack:(void(^)(NSArray *data, BOOL result))callBack;
 
 + (void)getOrderManageListWithKeyWord:(NSString *)keyWord callBack:(void(^)(NSDictionary *data, BOOL result))callBack;

@@ -47,6 +47,25 @@
     }];
 }
 
++ (void)getBankOrderListWithOrderNum:(NSString *)orderNum callBack:(void (^)(NSArray *, BOOL))callBack {
+    NSDictionary *param = nil;
+    if (![NSString hjd_isBlankString:orderNum]) {
+        param = @{ @"search" : orderNum };
+    }
+    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Loan/get_search_loanno") requestParams:param networkMethod:GET callback:^(id data, NSError *error) {
+        if (error) {
+            callBack(nil, NO);
+        } else {
+            NSString *code = [data getObjectByPath:@"code"];
+            if (code.integerValue == 0) {
+                callBack([data getObjectByPath:@"data/list"], YES);
+            } else {
+                callBack(nil, NO);
+            }
+        }
+    }];
+}
+
 + (void)getOrderAuditListChannelOrAgentWithUid:(NSString *)uid keyWord:(NSString *)keyWord page:(NSInteger)page callBack:(void (^)(NSArray *, BOOL))callBack {
     NSMutableDictionary *param = [NSMutableDictionary dictionaryWithDictionary:@{ @"uid" : uid, @"status" : @"100", @"p0" : @(page) }];
     if (![NSString hjd_isBlankString:keyWord]) {

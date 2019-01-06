@@ -21,7 +21,7 @@
 #import "HJDHomeLocationManager.h"
 #import "HJDHomeNavBarButton.h"
 #import "HJDHomeOrderProcessViewController.h"
-#import "HJDHomeBankViewController.h"
+#import "HJDHomeBankOrderListViewController.h"
 
 @interface HJDHomeViewController ()<UITableViewDelegate, UITableViewDataSource, HKScrollViewNetDelegate, HJDHomeTableViewCellDelegate, HJDHomeLocationManagerDelegate>
 @property(strong, nonatomic) UITableView *tableView;
@@ -250,7 +250,7 @@
             [self.navigationController pushViewController:controller animated:YES];
         }
     } else if ([model.title isEqualToString:@"绑定银行卡"]) {
-        HJDHomeBankViewController *bankController = [[HJDHomeBankViewController alloc] init];
+        HJDHomeBankOrderListViewController *bankController = [[HJDHomeBankOrderListViewController alloc] init];
         bankController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:bankController animated:YES];
     } else if ([model.title isEqualToString:@"还款计算器"]) {
@@ -258,7 +258,6 @@
         calcuController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:calcuController animated:YES];
     }
-
 }
 
 #pragma mark - HJDHomeLocationManagerDelegate

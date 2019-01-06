@@ -2,7 +2,7 @@
 //  HJDHomeBankViewController.m
 //  HuiJinDai
 //
-//  Created by 耿笑威 on 2018/12/26.
+//  Created by GXW on 2018/12/26.
 //  Copyright © 2018 shanpx. All rights reserved.
 //
 
@@ -30,7 +30,7 @@
     [super viewDidLoad];
 
     //后面是数字类型的工单id，不是工单编号
-    NSString *str = kAPIURL(@"wap/loan/register_bank");
+    NSString *str = [NSString stringWithFormat:@"%@%@", kAPIMainURL, @"wap/loan/register_bank"];
     
     //NSString *str = @"file:///Users/gengxiaowei/Desktop/test.html";
     
@@ -43,6 +43,10 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
+    //获取当前页面的title
+    NSString *title = [self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    [self setNavTitle:title];
+    
     JSContext *context=[webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
     context[@"close"] = ^{
         

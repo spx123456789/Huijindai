@@ -331,4 +331,18 @@
     _money = money;
     self.moneyLabel_1.text = money;
 }
+
+- (void)setIsCopyNum:(BOOL)isCopyNum {
+    _isCopyNum = isCopyNum;
+    if (!isCopyNum) {
+        self.copyButton.hidden = YES;
+        @weakify(self);
+        [self.copyButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+            @strongify(self);
+            make.left.equalTo(self.numberLabel.mas_right);
+            make.centerY.equalTo(self.numberLabel);
+            make.size.mas_equalTo(CGSizeMake(0, 17));
+        }];
+    }
+}
 @end

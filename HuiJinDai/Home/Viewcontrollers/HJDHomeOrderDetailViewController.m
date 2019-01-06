@@ -15,6 +15,7 @@
 #import "HJDHomeOrderDetailResultViewController.h"
 #import "HJDMyManager.h"
 #import "HJDPhotoBrowseViewController.h"
+#import "HJDHomeBankViewController.h"
 
 @interface HJDHomeOrderDetailViewController ()<UITableViewDelegate, UITableViewDataSource, HJDHomeOrderDetailButtonCellDelegate, HJDHomeOrderDetailPhotoCellDelegate>
 @property(nonatomic, strong) UITableView *tableView;
@@ -34,6 +35,57 @@
         _tableView.showsVerticalScrollIndicator = NO;
     }
     return _tableView;
+}
+
+- (void)tapBankView:(UITapGestureRecognizer *)tap {
+    HJDHomeBankViewController *bankController = [[HJDHomeBankViewController alloc] init];
+    [self.navigationController pushViewController:bankController animated:YES];
+}
+
+- (UIView *)createViewWithStatus:(NSInteger)status frame:(CGRect)frame {
+    UIView *bankView = [[UIView alloc] initWithFrame:frame];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBankView:)];
+    [bankView addGestureRecognizer:tap];
+    
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(16, CGRectGetHeight(frame)/2 - 6, 12, 12)];
+    [bankView addSubview:imgView];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(32, CGRectGetHeight(frame)/2 - 8, CGRectGetWidth(frame) - 32 - 16, 16)];
+    label.font = kFont14;
+    [bankView addSubview:label];
+    
+    switch (status) {
+        case 99: {
+            imgView.image = kImage(@"!w");
+            label.text = @"银行卡绑定中，点击查看银行卡信息";
+            label.textColor = kRGB_Color(0xf5, 0x97, 0x01);
+            bankView.backgroundColor = kRGB_Color(0xfc, 0xf6, 0xd5);
+            break;
+        }
+        case 2: {
+            imgView.image = kImage(@"!f");
+            label.text = @"银行卡绑定失败，点此重新绑定";
+            label.textColor = kRGB_Color(0xff, 0x52, 0x52);
+            bankView.backgroundColor = kRGB_Color(0xff, 0xe1, 0xe1);
+            break;
+        }
+        case 0: {
+            imgView.image = kImage(@"!f");
+            label.text = @"未绑定银行卡，点此重新绑定";
+            label.textColor = kRGB_Color(0xff, 0x52, 0x52);
+            bankView.backgroundColor = kRGB_Color(0xff, 0xe1, 0xe1);
+            break;
+        }
+        default: {
+            imgView.image = kImage(@"矩形1148拷贝");
+            label.text = @"银行卡绑定成功，点击更换银行卡";
+            label.textColor = kRGB_Color(0x0f, 0xc8, 0x6f);
+            bankView.backgroundColor = kRGB_Color(0xd4, 0xfc, 0xe9);
+            break;
+        }
+    }
+    
+    return bankView;
 }
 
 - (void)viewDidLoad {
@@ -82,20 +134,31 @@
     UIView *topView = [[UIView alloc] init];
     topView.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
     
-    UIButton *topBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    topBtn.frame = CGRectMake(16, 10, kScreenWidth - 32, 53);
-    [topView addSubview:topBtn];
+    //是否绑定银行卡信息，0未绑定，1绑定成功/已绑定，2绑定失败,99绑定中
+    NSString *isBank = resultDic[@"register_bank"];
+    UIView *bankView = [self createViewWithStatus:isBank.integerValue frame:CGRectMake(0, 0, kScreenWidth, 50)];
+    [topView addSubview:bankView];
     
-    if ([resultDic[@"credit_type"] integerValue] == 1) { //是否已放款 1是 2否
+    topView.frame = CGRectMake(0, 0, kScreenWidth, 53 + 3 + 5);
+    
+    UIButton *topBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    //topBtn.frame = CGRectMake(16, 10, kScreenWidth - 32, 53);
+    topBtn.frame = CGRectMake(16, 50 + 10 + 3, kScreenWidth - 32, 53);
+    
+    if ([resultDic[@"credit_type"] integerValue] == 2) { //是否已放款 1是 2否
         [topBtn setBackgroundImage:kImage(@"工单详情已放款") forState:UIControlStateNormal];
         [topBtn setBackgroundImage:kImage(@"工单详情已放款") forState:UIControlStateHighlighted];
         [topBtn addTarget:self action:@selector(planButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 + 3 + 5);
+        //topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 + 3 + 5);
+        topView.frame = CGRectMake(0, 0, kScreenWidth, 50 + 10 + 53 + 3 + 5);
+        [topView addSubview:topBtn];
     } else if ([resultDic[@"refuse_type"] integerValue] == 1) { //是否已拒绝
         [topBtn setBackgroundImage:kImage(@"共党详情已拒单") forState:UIControlStateNormal];
         [topBtn setBackgroundImage:kImage(@"共党详情已拒单") forState:UIControlStateHighlighted];
         [topBtn addTarget:self action:@selector(refuseButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 + 3 + 5);
+        //topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 + 3 + 5);
+        topView.frame = CGRectMake(0, 0, kScreenWidth, 50 + 10 + 53 + 3 + 5);
+        [topView addSubview:topBtn];
     } else if ([resultDic[@"letter_type"] integerValue] == 1) { //是否显示批贷函、审查报告
         [topBtn setBackgroundImage:kImage(@"工单详情查看批贷函") forState:UIControlStateNormal];
         [topBtn setBackgroundImage:kImage(@"工单详情查看批贷函") forState:UIControlStateHighlighted];
@@ -107,9 +170,9 @@
 //        [bottomBtn setBackgroundImage:kImage(@"工单详情查看审查报告") forState:UIControlStateHighlighted];
 //        [bottomBtn addTarget:self action:@selector(approvalButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 //        [topView addSubview:bottomBtn];
-//        topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 * 2 + 3 + 5);
-        topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 + 3 + 5);
-
+        topView.frame = CGRectMake(0, 0, kScreenWidth, 50 + 10 + 53 + 3 + 5);
+        //topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 + 3 + 5);
+        [topView addSubview:topBtn];
     }
     
     self.tableView.tableHeaderView = topView;

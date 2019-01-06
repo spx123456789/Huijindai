@@ -21,4 +21,6 @@ typedef enum : NSUInteger {
 @property(nonatomic, copy) NSString *customerName;
 @property(nonatomic, copy) NSString *money;
 @property(nonatomic, copy) NSString *status;
+
+@property(nonatomic, assign) BOOL isCopyNum;
 @end
