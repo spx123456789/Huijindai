@@ -11,4 +11,5 @@
 @interface HJDHomeOrderDetailViewController : HJDBaseViewController
 @property(nonatomic, copy) NSString *order_id;
 @property(nonatomic, copy) NSString *controller_from;
+@property(nonatomic, assign) BOOL isShowBank; //是否显示绑定银行卡，默认NO
 @end

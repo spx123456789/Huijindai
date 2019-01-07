@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1601461321E39278007EF33A /* HJDNetAPIManager2.m in Sources */ = {isa = PBXBuildFile; fileRef = 1601461221E39278007EF33A /* HJDNetAPIManager2.m */; };
 		16095A54216D04F10013D137 /* HJDHomeLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 16095A53216D04F10013D137 /* HJDHomeLocationManager.m */; };
 		162904D42140181300AC151D /* HJDHomeOrderManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 162904D32140181300AC151D /* HJDHomeOrderManageViewController.m */; };
 		1630C1A4215BD9DF004AA211 /* HJDHomeQueryValueDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1630C1A3215BD9DF004AA211 /* HJDHomeQueryValueDetailViewController.m */; };
@@ -235,6 +236,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1601461121E39278007EF33A /* HJDNetAPIManager2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDNetAPIManager2.h; sourceTree = "<group>"; };
+		1601461221E39278007EF33A /* HJDNetAPIManager2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDNetAPIManager2.m; sourceTree = "<group>"; };
 		16095A52216D04F10013D137 /* HJDHomeLocationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeLocationManager.h; sourceTree = "<group>"; };
 		16095A53216D04F10013D137 /* HJDHomeLocationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJDHomeLocationManager.m; sourceTree = "<group>"; };
 		162904D22140181300AC151D /* HJDHomeOrderManageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJDHomeOrderManageViewController.h; sourceTree = "<group>"; };
@@ -716,6 +719,8 @@
 			children = (
 				16BDE869215D2C46008EF899 /* HJDNetAPIManager.h */,
 				16BDE86A215D2C46008EF899 /* HJDNetAPIManager.m */,
+				1601461121E39278007EF33A /* HJDNetAPIManager2.h */,
+				1601461221E39278007EF33A /* HJDNetAPIManager2.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1505,6 +1510,7 @@
 				AAD24F6D21394D8400298386 /* HJDBaseViewController.m in Sources */,
 				16FFC519213973A2008BCABC /* HJDRegisterModel.m in Sources */,
 				1690803C213EC04400AA2575 /* HJDHomeManager.m in Sources */,
+				1601461321E39278007EF33A /* HJDNetAPIManager2.m in Sources */,
 				16EDD330213C318100E21AB2 /* HJDHomeOrderAuditViewController.m in Sources */,
 				AAD24F7021394EA900298386 /* UITableView+HJD.m in Sources */,
 				AA1CECB22145614000249692 /* HJDCalculatorTableViewCell.m in Sources */,

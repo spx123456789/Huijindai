@@ -201,7 +201,7 @@
     [self.numberLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.bgView).offset(16);
         make.top.equalTo(self.bgView);
-        make.width.equalTo(@200);
+        make.width.equalTo(@160);
         make.height.equalTo(@44);
     }];
     
@@ -212,7 +212,7 @@
     }];
     
     [self.copyButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.numberLabel.mas_right);
+        make.left.equalTo(self.numberLabel.mas_right).offset(3);
         make.centerY.equalTo(self.numberLabel);
         make.size.mas_equalTo(CGSizeMake(50, 17));
     }];
@@ -342,6 +342,14 @@
             make.left.equalTo(self.numberLabel.mas_right);
             make.centerY.equalTo(self.numberLabel);
             make.size.mas_equalTo(CGSizeMake(0, 17));
+        }];
+        
+        [self.numberLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            @strongify(self);
+            make.left.equalTo(self.bgView).offset(16);
+            make.top.equalTo(self.bgView);
+            make.width.equalTo(@200);
+            make.height.equalTo(@44);
         }];
     }
 }

@@ -102,6 +102,7 @@
     HJDHomeOrderDetailViewController *controller = [[HJDHomeOrderDetailViewController alloc] init];
     controller.order_id = listModel.order_id;
     controller.controller_from = @"1";
+    controller.isShowBank = YES;
     [self.navigationController pushViewController:controller animated:YES];
 }
 

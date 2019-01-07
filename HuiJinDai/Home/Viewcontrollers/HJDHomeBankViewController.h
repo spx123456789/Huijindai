@@ -9,5 +9,5 @@
 #import "HJDBaseViewController.h"
 
 @interface HJDHomeBankViewController : HJDBaseViewController
-
+@property(nonatomic, copy) NSString *order_id;
 @end

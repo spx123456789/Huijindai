@@ -1,29 +1,24 @@
 //
-//  HJDNetAPIManager.m
+//  HJDNetAPIManager2.m
 //  HuiJinDai
 //
 //  Created by GXW on 2018/9/27.
 //  Copyright © 2018年 shanpx. All rights reserved.
 //
 
-#import "HJDNetAPIManager.h"
+#import "HJDNetAPIManager2.h"
 
 static NSURL *baseurl = nil;
 static NSString *acesstoken = nil;
 
-@implementation HJDNetAPIManager
+@implementation HJDNetAPIManager2
 
-static HJDNetAPIManager *_sharedManager = nil;
+static HJDNetAPIManager2 *_sharedManager = nil;
 + (instancetype)sharedManager {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         baseurl = [NSURL URLWithString:kAPIMainURL];
-        _sharedManager = [[HJDNetAPIManager alloc] initWithBaseURL:baseurl withCer:YES];
-        
-        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration]; /* 保留以设置参数 */
-        
-        //_sharedManager.networkReachability = [Reachability reachabilityForInternetConnection];
-        //[_sharedManager.networkReachability startNotifier];
+        _sharedManager = [[HJDNetAPIManager2 alloc] initWithBaseURL:baseurl withCer:YES];
     });
     return _sharedManager;
 }
@@ -44,7 +39,7 @@ static HJDNetAPIManager *_sharedManager = nil;
     
     [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [self.requestSerializer setValue:url.absoluteString forHTTPHeaderField:@"Referer"];
-
+    
     
     self.securityPolicy.allowInvalidCertificates = YES;
     
@@ -59,8 +54,8 @@ static HJDNetAPIManager *_sharedManager = nil;
     //设置HJD header
     [self.requestSerializer setValue:@"1.0.0" forHTTPHeaderField:@"app-version"];
     [self.requestSerializer setValue:@"IOS" forHTTPHeaderField:@"AppType"];
-    [self.requestSerializer setValue:@"v1.0.0" forHTTPHeaderField:@"api-version"];
-    
+    [self.requestSerializer setValue:@"v1.0.1" forHTTPHeaderField:@"api-version"];
+
     return self;
 }
 
@@ -71,7 +66,7 @@ static HJDNetAPIManager *_sharedManager = nil;
 
 - (NSURLSessionDataTask *)requestWithPath:(NSString *)path
                             requestParams:(NSDictionary *)params
-                            networkMethod:(NetworkMethod)method
+                            networkMethod:(NetworkMethod2)method
                                  callback:(void (^)(id data, NSError *error))block {
     if (!path || path.length <= 0) {
         return nil;
@@ -80,7 +75,7 @@ static HJDNetAPIManager *_sharedManager = nil;
     @weakify(self);
     //    发起请求
     switch (method) {
-        case GET: {
+        case GET2: {
             return [self GET:path
                   parameters:params
                     progress:^(NSProgress * _Nonnull downloadProgress) {
@@ -100,7 +95,7 @@ static HJDNetAPIManager *_sharedManager = nil;
                      }];
             break;
         }
-        case POST: {
+        case POST2: {
             return [self POST:path
                    parameters:params
                      progress:^(NSProgress * _Nonnull downloadProgress) {
@@ -121,7 +116,7 @@ static HJDNetAPIManager *_sharedManager = nil;
                       }];
             break;
         }
-        case PUT: {
+        case PUT2: {
             return [self PUT:path
                   parameters:params
                      success:^(NSURLSessionTask *task, id responseObject) {
@@ -139,7 +134,7 @@ static HJDNetAPIManager *_sharedManager = nil;
                      }];
             break;
         }
-        case DELETE: {
+        case DELETE2: {
             return [self DELETE:path
                      parameters:params
                         success:^(NSURLSessionTask *task, id responseObject) {
@@ -181,56 +176,6 @@ static HJDNetAPIManager *_sharedManager = nil;
         //显示错误信息
     }
     return error;
-}
-
-@end
-
-#pragma mark DownLoadFile -
-@implementation AFHTTPSessionManager (DownLoadData)
-- (NSURLSessionDownloadTask *)downloadWithUrl:(NSString *)url
-                                   tofilePath:(NSString *)file
-                                     progress:(void (^)(NSUInteger bytesRead, long long totalBytesRead,
-                                                        long long totalBytesExpectedToRead))progress
-                                      success:(void (^)(NSURLSessionDownloadTask *task, NSURLResponse *response))success
-                                      failure:(void (^)(NSURLSessionDownloadTask *task, NSError *error))failure {
-    NSURL *remoteUrl;
-    if ([url isKindOfClass:[NSURL class]]) {
-        remoteUrl = (NSURL *)url;
-    } else {
-        remoteUrl = [NSURL URLWithString:url];
-    }
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:remoteUrl];
-    NSString *token = [self.requestSerializer valueForHTTPHeaderField:@"AccessToken"];
-    [request setValue:token forHTTPHeaderField:@"AccessToken"];
-    
-    NSURLSessionDownloadTask *task = [self downloadTaskWithRequest:request
-                                                          progress:nil
-                                                       destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-                                                           return [NSURL fileURLWithPath:file];
-                                                       }
-                                                 completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-                                                     if (!error) {
-                                                         if (success) {
-                                                             success(task, response);
-                                                         }
-                                                     } else {
-                                                         if (failure) {
-                                                             failure(task, error);
-                                                         }
-                                                     }
-                                                 }];
-    if (progress) {
-        NSProgress *downLoadProgress = [self uploadProgressForTask:task];
-        @weakify(downLoadProgress);
-        [RACObserve(downLoadProgress, localizedDescription) subscribeNext:^(NSString *x) {
-            @strongify(downLoadProgress);
-            progress(0, downLoadProgress.completedUnitCount, downLoadProgress.totalUnitCount);
-        }];
-    }
-    [task resume];
-    
-    return task;
 }
 
 @end

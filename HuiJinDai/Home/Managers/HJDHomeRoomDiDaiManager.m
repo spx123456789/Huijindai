@@ -8,7 +8,10 @@
 
 #import "HJDHomeRoomDiDaiManager.h"
 #import "HJDNetAPIManager.h"
+#import "HJDNetAPIManager2.h"
 #import "UIImage+HJD.h"
+#import "HJDUserDefaultsManager.h"
+#import "HJDUserModel.h"
 
 @implementation HJDHomeRoomDiDaiManager
 
@@ -284,7 +287,9 @@
 }
 
 + (void)getOrderDetailWithID:(NSString *)uid from:(NSString *)from callBack:(void (^)(NSDictionary *, BOOL))callback {
-    [[HJDNetAPIManager sharedManager] requestWithPath:kAPIURL(@"/Loan/get_info") requestParams:@{ @"loan_id" : uid, @"loan_from" : from } networkMethod:GET callback:^(id data, NSError *error) {
+    HJDUserModel *userModel = (HJDUserModel *)[[HJDUserDefaultsManager shareInstance] loadObject:kUserModelKey];
+    [[HJDNetAPIManager2 sharedManager] setAuthorization:userModel.token];
+    [[HJDNetAPIManager2 sharedManager] requestWithPath:kAPIURL(@"/Loan/get_info") requestParams:@{ @"loan_id" : uid, @"loan_from" : from } networkMethod:GET callback:^(id data, NSError *error) {
         if (error) {
             callback(nil, NO);
         } else {

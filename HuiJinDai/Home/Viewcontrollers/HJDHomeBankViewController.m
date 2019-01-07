@@ -30,7 +30,7 @@
     [super viewDidLoad];
 
     //后面是数字类型的工单id，不是工单编号
-    NSString *str = [NSString stringWithFormat:@"%@%@", kAPIMainURL, @"wap/loan/register_bank"];
+    NSString *str = [NSString stringWithFormat:@"%@%@%@", kAPIMainURL, @"wap/loan/register_bank/", self.order_id];
     
     //NSString *str = @"file:///Users/gengxiaowei/Desktop/test.html";
     

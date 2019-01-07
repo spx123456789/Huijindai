@@ -39,6 +39,7 @@
 
 - (void)tapBankView:(UITapGestureRecognizer *)tap {
     HJDHomeBankViewController *bankController = [[HJDHomeBankViewController alloc] init];
+    bankController.order_id = self.order_id;
     [self.navigationController pushViewController:bankController animated:YES];
 }
 
@@ -134,31 +135,40 @@
     UIView *topView = [[UIView alloc] init];
     topView.backgroundColor = kRGB_Color(0xf4, 0xf4, 0xf4);
     
-    //是否绑定银行卡信息，0未绑定，1绑定成功/已绑定，2绑定失败,99绑定中
-    NSString *isBank = resultDic[@"register_bank"];
-    UIView *bankView = [self createViewWithStatus:isBank.integerValue frame:CGRectMake(0, 0, kScreenWidth, 50)];
-    [topView addSubview:bankView];
-    
-    topView.frame = CGRectMake(0, 0, kScreenWidth, 53 + 3 + 5);
-    
     UIButton *topBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    //topBtn.frame = CGRectMake(16, 10, kScreenWidth - 32, 53);
-    topBtn.frame = CGRectMake(16, 50 + 10 + 3, kScreenWidth - 32, 53);
     
-    if ([resultDic[@"credit_type"] integerValue] == 2) { //是否已放款 1是 2否
+    if (self.isShowBank) {
+        //是否绑定银行卡信息，0未绑定，1绑定成功/已绑定，2绑定失败,99绑定中
+        NSString *isBank = resultDic[@"register_bank"];
+        UIView *bankView = [self createViewWithStatus:isBank.integerValue frame:CGRectMake(0, 0, kScreenWidth, 50)];
+        [topView addSubview:bankView];
+        
+        topView.frame = CGRectMake(0, 0, kScreenWidth, 53 + 3 + 5);
+        topBtn.frame = CGRectMake(16, 50 + 10 + 3, kScreenWidth - 32, 53);
+    } else {
+        topBtn.frame = CGRectMake(16, 10, kScreenWidth - 32, 53);
+    }
+    
+    if ([resultDic[@"credit_type"] integerValue] == 1) { //是否已放款 1是 2否
         [topBtn setBackgroundImage:kImage(@"工单详情已放款") forState:UIControlStateNormal];
         [topBtn setBackgroundImage:kImage(@"工单详情已放款") forState:UIControlStateHighlighted];
         [topBtn addTarget:self action:@selector(planButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        //topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 + 3 + 5);
-        topView.frame = CGRectMake(0, 0, kScreenWidth, 50 + 10 + 53 + 3 + 5);
         [topView addSubview:topBtn];
+        if (self.isShowBank) {
+            topView.frame = CGRectMake(0, 0, kScreenWidth, 50 + 10 + 53 + 3 + 5);
+        } else {
+            topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 + 3 + 5);
+        }
     } else if ([resultDic[@"refuse_type"] integerValue] == 1) { //是否已拒绝
         [topBtn setBackgroundImage:kImage(@"共党详情已拒单") forState:UIControlStateNormal];
         [topBtn setBackgroundImage:kImage(@"共党详情已拒单") forState:UIControlStateHighlighted];
         [topBtn addTarget:self action:@selector(refuseButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        //topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 + 3 + 5);
-        topView.frame = CGRectMake(0, 0, kScreenWidth, 50 + 10 + 53 + 3 + 5);
         [topView addSubview:topBtn];
+        if (self.isShowBank) {
+            topView.frame = CGRectMake(0, 0, kScreenWidth, 50 + 10 + 53 + 3 + 5);
+        } else {
+            topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 + 3 + 5);
+        }
     } else if ([resultDic[@"letter_type"] integerValue] == 1) { //是否显示批贷函、审查报告
         [topBtn setBackgroundImage:kImage(@"工单详情查看批贷函") forState:UIControlStateNormal];
         [topBtn setBackgroundImage:kImage(@"工单详情查看批贷函") forState:UIControlStateHighlighted];
@@ -170,9 +180,13 @@
 //        [bottomBtn setBackgroundImage:kImage(@"工单详情查看审查报告") forState:UIControlStateHighlighted];
 //        [bottomBtn addTarget:self action:@selector(approvalButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 //        [topView addSubview:bottomBtn];
-        topView.frame = CGRectMake(0, 0, kScreenWidth, 50 + 10 + 53 + 3 + 5);
-        //topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 + 3 + 5);
+        
         [topView addSubview:topBtn];
+        if (self.isShowBank) {
+            topView.frame = CGRectMake(0, 0, kScreenWidth, 50 + 10 + 53 + 3 + 5);
+        } else {
+            topView.frame = CGRectMake(0, 0, kScreenWidth, 10 + 53 + 3 + 5);
+        }
     }
     
     self.tableView.tableHeaderView = topView;
