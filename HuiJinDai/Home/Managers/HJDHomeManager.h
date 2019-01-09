@@ -11,9 +11,7 @@
 
 @interface HJDHomeManager : NSObject
 
-+ (void)getHomeBannerCallBack:(void(^)(NSArray *data, BOOL result))callBack;
-
-+ (void)getHomePageInfoCallBack:(void(^)(NSArray *data, BOOL result))callBack;
++ (void)getHomeBannerCallBack:(void(^)(NSDictionary *data, BOOL result))callBack;
 
 + (void)getOrderAuditListWithKeyWord:(NSString *)keyWord callBack:(void(^)(NSArray *data, BOOL result))callBack;
 

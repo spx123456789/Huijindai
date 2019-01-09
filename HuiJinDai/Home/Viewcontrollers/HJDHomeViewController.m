@@ -59,6 +59,20 @@
     return _netWorkScrollView;
 }
 
+- (NSMutableArray *)imageArray {
+    if (!_imageArray) {
+        _imageArray = [NSMutableArray array];
+    }
+    return _imageArray;
+}
+
+- (NSMutableArray *)dataSource {
+    if (!_dataSource) {
+        _dataSource = [NSMutableArray array];
+    }
+    return _dataSource;
+}
+
 - (instancetype)init {
     self = [super init];
     if (self) {
@@ -76,34 +90,7 @@
     [super viewDidLoad];
     
     [self setNavTitle:@"首页"];
-    self.imageArray = [NSMutableArray new];
-    [self setupSubViews];
-    
-    @weakify(self);
-    [HJDHomeManager getHomeBannerCallBack:^(NSArray *data, BOOL result) {
-        [self.imageArray removeAllObjects];
-        for (NSDictionary * dic in data) {
-            NSString * imageurl = [dic objectForKey:@"src"];
-            [self.imageArray addObject:kHJDImage(imageurl)];
-        }
-        self.tableView.tableHeaderView = self.netWorkScrollView ;
-        [self.tableView reloadData];
-        /*
-         {
-         click = "";
-         src = "../images/banner_default.png";
-         },
-         {
-         click = "http:baidu.com";
-         src = "../images/banner_default_2.png";
-         }
-         */
-    }];
-    
-    [HJDHomeManager getHomePageInfoCallBack:^(NSArray *data, BOOL result) {
-        @strongify(self);
-        
-    }];
+    [self setRightNavigationButton:nil backImage:kImage(@"首页通知") highlightedImage:kImage(@"首页通知") frame:CGRectMake(0, 0, 44, 44)];
     
     if (![CLLocationManager locationServicesEnabled]) {//判断定位操作是否被允许
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"请在设置-->隐私-->定位服务，中开启本应用的位置访问权限！" preferredStyle:UIAlertControllerStyleAlert];
@@ -134,36 +121,143 @@
             } else {
                 self.auditCount = [NSString stringWithFormat:@"%ld", auditCount];
             }
-            self.dataSource = nil;
-            [self.tableView reloadData];
+            
+            [self getPagaData];
         }];
+    } else {
+        [self getPagaData];
     }
 }
 
-- (void)setupSubViews {
-    [self setRightNavigationButton:nil backImage:kImage(@"首页通知") highlightedImage:kImage(@"首页通知") frame:CGRectMake(0, 0, 44, 44)];
-    
-    [self.view addSubview:self.tableView];
-    self.tableView.tableHeaderView = self.netWorkScrollView;
-    
+- (void)getPagaData {
+    [MBProgressHUD showMessage:@"加载中..."];
     @weakify(self);
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    [HJDHomeManager getHomeBannerCallBack:^(NSDictionary *data, BOOL result) {
         @strongify(self);
-        [self refreshData];
+        [MBProgressHUD hideHUD];
+        if (result) {
+            [self setViewData:data];
+            [self setUpViews];
+        } else {
+            [MBProgressHUD showError:@"加载失败"];
+        }
     }];
 }
 
-- (void)refreshData {
-    [HJDHomeManager getHomeBannerCallBack:^(NSArray *data, BOOL result) {
-        [self.imageArray removeAllObjects];
-        for (NSDictionary * dic in data) {
-            NSString * imageurl = [dic objectForKey:@"src"];
-            [self.imageArray addObject:kHJDImage(imageurl)];
+- (void)setViewData:(NSDictionary *)data {
+    /*
+     "data": {
+     "banner": [
+     {
+     "src": "/images/banner_default.png",
+     "click": ""
+     },
+     {
+     "src": "/images/banner_default_2.png",
+     "click": ""
+     }
+     ],
+     "sh_count": "0",
+     "auth": {
+     "service": [
+     "房抵贷",
+     "车抵贷",
+     "信贷"
+     ],
+     "function": [
+     "工单审核",
+     "工单管理",
+     "绑定银行卡",
+     "还款计算器"
+     ]
+     }
+     }
+     */
+    [self.imageArray removeAllObjects];
+    [self.dataSource removeAllObjects];
+    for (NSDictionary *dic in [data getObjectByPath:@"banner"]) {
+        NSString *imageurl = [dic objectForKey:@"src"];
+        [self.imageArray addObject:kHJDImage(imageurl)];
+    }
+    
+    NSArray *serviceArray = [data getObjectByPath:@"auth/service"];
+    NSArray *funcArray = [data getObjectByPath:@"auth/function"];
+    
+    NSMutableArray *mutSerArray = [NSMutableArray array];
+    for (int i = 0; i < serviceArray.count; i++) {
+        NSString *str = serviceArray[i];
+        HJDHomeModel *model = [HJDHomeModel new];
+        if ([str isEqualToString:@"房抵贷"]) {
+            model.title = @"房抵贷";
+            model.imageName = @"首页房抵贷";
+            [mutSerArray addObject:model];
+        } else if ([str isEqualToString:@"车抵贷"]) {
+            model.title = @"车抵贷";
+            model.imageName = @"首页车抵贷";
+            [mutSerArray addObject:model];
+        } else if ([str isEqualToString:@"信贷"]) {
+            model.title = @"信贷";
+            model.imageName = @"首页信贷";
+            [mutSerArray addObject:model];
         }
-        self.tableView.tableHeaderView = self.netWorkScrollView ;
-        [self.tableView reloadData];
-        [self.tableView.mj_header endRefreshing];
-    }];
+    }
+    
+    NSMutableArray *mutFuncArray = [NSMutableArray array];
+    NSMutableArray *mutLastArray = [NSMutableArray array];
+    for (int k = 0; k < funcArray.count; k++) {
+        NSString *str = funcArray[k];
+        HJDHomeModel *model = [HJDHomeModel new];
+        if ([str isEqualToString:@"工单审核"]) {
+            model.title = @"工单审核";
+            model.imageName = @"首页工单审核";
+            model.unreadCount = self.auditCount;
+            [mutFuncArray addObject:model];
+        } else if ([str isEqualToString:@"工单管理"]) {
+            model.title = @"工单管理";
+            model.imageName = @"首页工单管理";
+            model.unreadCount = self.manageCount;
+            [mutFuncArray addObject:model];
+        } else if ([str isEqualToString:@"绑定银行卡"]) {
+            model.title = @"绑定银行卡";
+            model.imageName = @"首页银行卡";
+            [mutFuncArray addObject:model];
+        } else if ([str isEqualToString:@"还款计算器"]) {
+            HJDHomeModel *model6 = [HJDHomeModel new];
+            model6.title = @"还款计算器";
+            model6.imageName = @"首页还款计算器";
+            [mutLastArray addObject:model6];
+        }
+    }
+    
+    if (mutSerArray.count > 0) {
+        NSDictionary *serviceDic = @{ @"sectionValue" : mutSerArray, @"sectionTitle" : @"业务分类"};
+        [self.dataSource addObject:serviceDic];
+    }
+    
+    if (mutFuncArray.count > 0) {
+        NSDictionary *functionDic = @{ @"sectionValue" : mutFuncArray, @"sectionTitle" : @"工单管理"};
+        [self.dataSource addObject:functionDic];
+    }
+    
+    if (mutLastArray.count > 0) {
+        NSDictionary *lastDic = @{ @"sectionValue" : mutLastArray, @"sectionTitle" : @"其他功能"};;
+        [self.dataSource addObject:lastDic];
+    }
+}
+
+- (void)setUpViews {
+    [self.view addSubview:self.tableView];
+    self.tableView.tableHeaderView = self.netWorkScrollView;
+    
+//    @weakify(self);
+//    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//        @strongify(self);
+//        [self refreshData];
+//    }];
+}
+
+- (void)refreshData {
+    
 }
 
 - (void)navigationRightButtonClicked:(UIButton *)sender {
@@ -269,109 +363,4 @@
     self.navigationItem.leftBarButtonItem = leftBar;
 
 }
-
-#pragma mark - getters && setters
-- (NSMutableArray *)dataSource{
-    if (!_dataSource) {
-        _dataSource = [NSMutableArray new];
-        switch (self.userModel.type.integerValue) {
-                case HJDUserTypeAgent: {
-                    HJDHomeModel * model = [HJDHomeModel new];
-                    model.title = @"房抵贷";
-                    model.imageName = @"首页房抵贷";
-                    HJDHomeModel * model1 = [HJDHomeModel new];
-                    model1.title = @"车抵贷";
-                    model1.imageName = @"首页车抵贷";
-                    HJDHomeModel * model2 = [HJDHomeModel new];
-                    model2.title = @"信贷";
-                    model2.imageName = @"首页信贷";
-                    NSArray * array = @[model,model1,model2];
-                    
-                    NSDictionary * dic = [NSDictionary dictionaryWithObjectsAndKeys:array,@"sectionValue",@"业务分类",@"sectionTitle", nil];
-                    
-                    [_dataSource addObject:dic];
-
-                    HJDHomeModel * model4 = [HJDHomeModel new];
-                    model4.title = @"工单管理";
-                    model4.imageName = @"首页工单管理";
-                    HJDHomeModel * model5 = [HJDHomeModel new];
-                    model5.title = @"还款计算器";
-                    model5.imageName = @"首页还款计算器";
-                    NSArray * array2 = @[model4,model5];
-                    
-                    NSDictionary * dic2 = [NSDictionary dictionaryWithObjectsAndKeys:array2,@"sectionValue",@"工单管理",@"sectionTitle", nil];
-                    
-                    [_dataSource addObject:dic2];
-                    
-                    break;
-                }
-                case HJDUserTypeManager: {
-                    HJDHomeModel * model = [HJDHomeModel new];
-                    model.title = @"房抵贷";
-                    model.imageName = @"首页房抵贷";
-                    HJDHomeModel * model1 = [HJDHomeModel new];
-                    model1.title = @"车抵贷";
-                    model1.imageName = @"首页车抵贷";
-                    HJDHomeModel * model2 = [HJDHomeModel new];
-                    model2.title = @"信贷";
-                    model2.imageName = @"首页信贷";
-                    NSArray * array = @[model,model1,model2];
-                    
-                    NSDictionary * dic = [NSDictionary dictionaryWithObjectsAndKeys:array,@"sectionValue",@"业务分类",@"sectionTitle", nil];
-                    
-                    [_dataSource addObject:dic];
-                    
-                    HJDHomeModel * model3 = [HJDHomeModel new];
-                    model3.title = @"工单审核";
-                    model3.imageName = @"首页工单审核";
-                    model3.unreadCount = self.auditCount;
-                    HJDHomeModel * model4 = [HJDHomeModel new];
-                    model4.title = @"工单管理";
-                    model4.imageName = @"首页工单管理";
-                    model4.unreadCount = self.manageCount;
-                    HJDHomeModel * model5 = [HJDHomeModel new];
-                    model5.title = @"绑定银行卡";
-                    model5.imageName = @"首页银行卡";
-                    NSArray * array2 = @[model3,model4,model5];
-                    
-                    NSDictionary * dic2 = [NSDictionary dictionaryWithObjectsAndKeys:array2,@"sectionValue",@"工单管理",@"sectionTitle", nil];
-                    
-                    [_dataSource addObject:dic2];
-                    
-                    HJDHomeModel *model6 = [HJDHomeModel new];
-                    model6.title = @"还款计算器";
-                    model6.imageName = @"首页还款计算器";
-                    NSArray *array3 = @[ model6 ];
-                    
-                    NSDictionary *dic3 = [NSDictionary dictionaryWithObjectsAndKeys:array3, @"sectionValue", @"其他功能", @"sectionTitle", nil];
-                    
-                    [_dataSource addObject:dic3];
-                    break;
-                }
-                case HJDUserTypeChannel: {
-                    
-                    HJDHomeModel * model3 = [HJDHomeModel new];
-                    model3.title = @"工单审核";
-                    model3.imageName = @"首页工单审核";
-                    model3.unreadCount = self.auditCount;
-                    HJDHomeModel * model4 = [HJDHomeModel new];
-                    model4.title = @"工单管理";
-                    model4.imageName = @"首页工单管理";
-                    model4.unreadCount = self.manageCount;
-                    HJDHomeModel * model5 = [HJDHomeModel new];
-                    model5.title = @"还款计算器";
-                    model5.imageName = @"首页还款计算器";
-                    NSArray * array2 = @[model3,model4,model5];
-                    
-                    NSDictionary * dic2 = [NSDictionary dictionaryWithObjectsAndKeys:array2,@"sectionValue",@"工单管理",@"sectionTitle", nil];
-                    
-                    [_dataSource addObject:dic2];
-                    break;
-                }
-            
-        }
-    }
-    return _dataSource;
-}
-
 @end
