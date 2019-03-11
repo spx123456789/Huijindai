@@ -119,7 +119,7 @@
             [MBProgressHUD showSuccess:@"验证码发送成功"];
             NSString * rand_code = [data getObjectByPath:@"data/rand_code"];
             //test
-            if (rand_code) {
+            if (rand_code&&rand_code.length>1) {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     @strongify(self);
                     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"验证码为：%@", [data getObjectByPath:@"data/rand_code"]] preferredStyle:UIAlertControllerStyleAlert];
