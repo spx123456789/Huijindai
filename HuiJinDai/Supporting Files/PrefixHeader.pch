@@ -33,7 +33,7 @@ typedef enum : NSUInteger {
 //登录 1  未登录 2
 #define HJDLoginSuccess @"HJDLoginSuccess"
 
-#define kAPIMainURL @"http://hanhouxiong.hjxd2.xiaoyutab.cn/"
+#define kAPIMainURL @"https://www.hfax-loan.com/"
 #define kAPIURL(url) [NSString stringWithFormat:@"%@api%@", kAPIMainURL, url]
 #define kHJDImage(avatar) [NSString stringWithFormat:@"%@%@", kAPIMainURL, avatar]
 //http://hanhouxiong.hjxd.xiaoyutab.cn/../images/banner_default.png
